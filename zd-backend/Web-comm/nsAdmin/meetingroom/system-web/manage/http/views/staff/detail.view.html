@@ -1,0 +1,125 @@
+ 
+<div class="panel panel-default">
+<div class="panel-body">
+    <div class="col-sm-12">
+            <h4>人员信息</h4>
+    </div>
+    <form class="form-horizontal" method="get">
+        <!--flag-->
+        <div class="line line-dashed b-b line-lg pull-in"></div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">姓名：</label>
+            <label class="control-label">
+                    {{instance.person.personName}}
+            </label>
+        </div>
+        <!--flag-->
+        <div class="line line-dashed b-b line-lg pull-in"></div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">电话：</label>
+            <label class="control-label">
+                {{instance.person.personPhone}}
+            </label>
+        </div>
+        <!--flag-->
+        <div class="line line-dashed b-b line-lg pull-in"></div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">邮箱：</label>
+            <label class="control-label">
+                    {{instance.person.personMail}}
+            </label>
+        </div>
+        <!--flag-->
+        <div class="line line-dashed b-b line-lg pull-in"></div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">权限：</label>
+            <label class="control-label" ng-if="instance.person.power==1">
+                    受理
+            </label>
+            <label class="control-label" ng-if="instance.person.power==2">
+                    分配
+            </label>
+        </div>
+            <!--flag-->
+        <div class="line line-dashed b-b line-lg pull-in"></div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">负责场地：</label>
+            <div class="col-sm-10">
+                
+                <div class="col-sm-6" style="padding:5px;" ng-repeat="it in instance.meetings">
+                    <i class="glyphicon glyphicon-saved"></i>   {{it.name}}  
+                    </div>
+                 
+            </div>
+        </div>
+        
+        <div class="line line-dashed b-b line-lg pull-in"></div>
+        <div class="col-sm-12">
+                <h6>进行中的订单</h6>
+        </div>
+        <table     class="table table-striped b-t b-b b-l b-r">
+            <thead>
+                <tr>                    
+                    <th  style="width:18%">订单编号</th>
+                    <th  style="width:27%">会议室名称</th>
+                    <th  style="width:15%">申请时间</th>            
+                    <th>申请人</th>
+                    <th>总金额</th>
+                    <th>定金支付方式</th>
+                    <th>余额支付方式</th>     
+                    <th>状态</th>
+                    <th>操作</th>                    
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="it in instance.inList">
+                    <td>{{it.orderNo}}</td>
+                    <td>{{it.meetingName}}</td>
+                    <td>{{it.createTime}}</td>
+                    <td>{{it.contactName}}</td>
+                    <td>¥{{it.orderMoney}}</td>
+                    <td>{{it.payType|paytype}}</td>
+                    <td>{{it.lastPayType|paytype}}</td>
+                    <td>{{it.orderStatus|orderstatus}}</td>
+                    <td><a ui-sref="manage.detailorder({id:it.id})">查看</a></td>
+                </tr>
+            </tbody>
+        </table>       
+        <div class="line line-dashed b-b line-lg pull-in"></div>
+        <div class="col-sm-12">
+                <h6>完成的订单</h6>
+        </div> 
+        <table   class="table table-striped b-t b-b b-l b-r">
+            <thead>
+                <tr>
+                    
+                    <th  style="width:18%">订单编号</th>
+                    <th  style="width:27%">会议室名称</th>
+                    <th  style="width:15%">申请时间</th>            
+                    <th>申请人</th>
+                    <th>总金额</th>
+                    <th>定金支付方式</th>
+                    <th>余额支付方式</th>     
+                    <th>状态</th>
+                    <th>操作</th>
+                    
+                </tr>
+            </thead>
+            <tbody>
+                    <tr ng-repeat="it in instance.outList">
+                        <td>{{it.orderNo}}</td>
+                        <td>{{it.meetingName}}</td>
+                        <td>{{it.createTime}}</td>
+                        <td>{{it.contactName}}</td>
+                        <td>¥{{it.orderMoney}}</td>
+                        <td>{{it.payType|paytype}}</td>
+                        <td>{{it.lastPayType|paytype}}</td>
+                        <td>{{it.orderStatus|orderstatus}}</td>
+                        <td><a ui-sref="manage.detailorder({id:it.id})">查看</a></td>
+                    </tr>
+                </tbody>
+        </table>     
+        
+    </form>
+ </div>
+</div>

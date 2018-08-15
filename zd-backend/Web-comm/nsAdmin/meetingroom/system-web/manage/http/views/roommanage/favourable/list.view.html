@@ -1,0 +1,45 @@
+<div class="panel panel-default">            
+    <div class="panel-footer bg-light lter">
+        <form class="form-horizontal" role="form">
+            <div class="form-group" style="margin-bottom:0px;">
+                <label class="col-sm-2 control-label">是否开启优惠管理功能</label>
+                <div class="col-sm-7">
+                    <label class="i-switch i-switch-md bg-success m-t-xs m-r">
+                    <input type="checkbox" checked="" ng-model="instance.opened" ng-click="instance.setOpenStatus()">
+                    <i></i>
+                    </label>                         
+                </div>
+                <div class="col-sm-2" ng-if="instance.opened">
+                    <button class="btn btn-rounded btn-sm btn-info"  ng-click="addNewFav()"><i class="fa fa-fw fa-plus"></i> 新增优惠</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+ 
+<div class="panel panel-default" ng-if="instance.opened">        
+    
+        <div class="table-responsive">       
+            <table class="table"  datatable-directive url="dataUrl"
+            search-params="instance.params"
+            columns="columns" del="del(data)" 
+            edit = "edit(data)"
+            filters="favFilter"
+            indentify-key="engine"  btns="d"  
+            class="table  table-striped b-t b-b table-bordered table-hover">
+            <thead>
+            <tr>
+                <th  style="width:20%">优惠名称</th>
+                <th  style="width:20%">优惠范围</th>
+                <th  style="width:15%">优惠幅度</th>
+                <th  style="width:30%">适用范围</th>                 
+                <th  style="width:15%">操作</th> 
+            </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+        
+    </div>
+   </div>
+   <modal-directive model-id='myModal'  setting="{title:'提示',btnName:'好的',content:'确定删除'}" callback="doYes()"></modal-directive>

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<head>
+	<meta charset="utf-8">
+	<title>百度外卖</title>
+	<script src="common/thrid/libs/jquery/jquery-1.9.1.min.js"></script>
+	<link rel="stylesheet" href="common/thrid/libs/jquery/bootstrap/dist/css/bootstrap.css" type="text/css"/>
+	<link rel="stylesheet" href="common/thrid/src/css/public.css" type="text/css"/>
+  <script src="common/thrid/libs/jquery/layer/layer.js"></script>
+</head>
+<body class="signinLogin">
+	<div  id="login">
+		<div class="row">
+	      	<div class="form-signin">
+	        	<h2 class="form-signin-heading">百度外卖请求园区数据</h2>
+	        	<input type="text" name="mobile" class="input-block-level" value="c6aglwembkslk5y6" placeholder="应用id">
+	        	<input type="text" name="password" class="input-block-level" value="1234567890123456" placeholder="请求加密码(16位)">
+	        	<button class="btn btn-large btn-primary" onclick="login()" type="submit">请求</button>
+	      	</div>
+	    </div> 
+	    <div class="row">
+	    	<div class="form-signin">
+	    		<h5 class="form-signin-heading">请求URL</h5>
+	    		<textarea rows="3" cols="50" id="url"></textarea>
+	    	</div>
+	    </div>
+	    <div class="row">
+	    	<div class="form-signin">
+	    		<h5 class="form-signin-heading">请求返回值</h5>
+	    		<textarea rows="3" cols="50" id="text"></textarea>
+	    	</div>
+	    </div>
+	</div>
+</body>
+<script type="text/javascript">
+
+	function login(){
+		 var mobile = $("input[name='mobile']").val();
+		 var password = $("input[name='password']").val();
+		 var type = "GET";
+		
+		 //parkId, url, type, data
+		 var jsondata = {
+ 			pageNo: 1,
+ 			pageSize: 2
+ 		}
+		 //http://192.168.118.46:3001/baseinfo/open/user/admin?appid=123&code=1234567890lkjhgf
+		 var userId = "1cea56e503d44a6b847b394afb6f3299";
+		 var sendData = {appId:mobile,code:password};
+		 $.ajax({
+			type : "get",
+			url : "../baseinfo/open/user/"+userId,
+			data : sendData,
+			dataType: "json",
+			success : function(data) {
+				
+				$("#url").text("http://192.168.91.103:3001/baseinfo/open/user/"+userId+"?appid="+mobile+"&code="+password)
+				
+				if (data.result) {
+					$("#text").text(JSON.stringify(data));
+					
+				}else{
+					$("#text").text(data);
+				}
+			},
+			error : function(XMLHttpRequest, textStatus, errorThrown) {
+				alert(errorThrown);
+			}
+		});
+		 
+	};
+	
+	login();
+
+</script>
+
+</html>

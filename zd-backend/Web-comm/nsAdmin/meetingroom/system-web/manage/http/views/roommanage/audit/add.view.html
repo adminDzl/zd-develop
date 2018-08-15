@@ -1,0 +1,88 @@
+<div class="panel-body">
+        <div class="col-sm-12">
+                <h4>新增价格</h4>
+        </div>
+<form class="form-horizontal">
+        
+    <!--flag-->
+    <div class="line line-dashed b-b line-lg pull-in"></div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">时长<i class="needred">*</i></label>
+            <div class="col-sm-10">
+                <div class="row">
+                    <div class="col-sm-5">                        
+                        <div class="radio">
+                            <label class="i-checks" > 
+                                <input type="radio" name="priceType" ng-checked="instance.priceModel.priceType=='1'"   ng-click="selectPriceType(1)" >
+                                <i></i>
+                                按小时
+                            </label>
+                        </div>                                                        
+                    </div>
+                    <div class="col-sm-5">                            
+                        <div class="radio">
+                            <label class="i-checks">
+                                <input type="radio" name="priceType" ng-checked="instance.priceModel.priceType=='2'"    ng-click="selectPriceType(2)">
+                                <i></i>
+                                按时段
+                            </label>
+                        </div>                                                        
+                    </div>
+
+                </div>
+                <div class="line line-dashed b-b line-lg pull-in"></div>
+                <div class="row" ng-if="instance.priceModel.priceType=='1'">
+                        <div class="col-sm-12">                     
+                                <div class="input-group m-b">
+                                    <input type="number" class="form-control" ng-model="instance.priceModel.timeLong" placeholder="请输入小时 比如 10">
+                                    <span class="input-group-addon">小时</span>
+                                </div>
+                            </div>
+                </div>
+                <div class="row"  ng-if="instance.priceModel.priceType=='2'">
+                       
+                        <div class="col-sm-6">
+                                <div class="input-group w-md">
+                                        <timepicker-directive class="input-group" model="instance.priceModel.startTime"></timepicker-directive>
+                                    
+                                </div>
+                            </div>                           
+                            <div class="col-sm-6">
+                                <div class="input-group w-md">
+                                        <timepicker-directive class="input-group" model="instance.priceModel.endTime"></timepicker-directive>
+                                </div>
+                            </div>
+                </div>
+                    
+                   
+            </div>  
+            <!---->
+            <div class="line line-dashed b-b line-lg pull-in"></div>
+            <label class="col-sm-2 control-label">价格<i class="needred">*</i></label>
+            <div class="col-sm-10">          
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="input-group m-b">
+                            <input type="number" placeholder="请输入价格 比如 10" class="form-control" ng-model="instance.priceModel.priceMoney"> 
+                            <span ng-if="instance.priceModel.priceType=='1'" class="input-group-addon">元</span>
+                            <span ng-if="instance.priceModel.priceType=='2'" class="input-group-addon">时/元</span>
+                        </div>
+                    </div>
+                    <div class="col-sm-12"  ng-if="instance.priceModel.priceType=='2'">
+                            提示：设置时段时间基础价格为<i style="color:red;font-style:normal">半个小时</i>的价格
+                        </div>
+                </div>
+            </div>
+        </div>
+        
+        
+    
+    <div class="line line-dashed b-b line-lg pull-in"></div>
+    <div class="form-group">
+        <div class="col-sm-10 col-sm-offset-9">
+        <button type="reset" class="btn btn-default" ng-click="cancel()"> 取消</button>
+        <button type="submit" class="btn btn-primary"  ng-click="commit()">保存</button>
+        </div>
+    </div>
+    </form>
+</div>

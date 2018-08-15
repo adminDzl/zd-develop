@@ -1,0 +1,357 @@
+<div class="col">
+	<!-- main header -->
+	<div>
+		<ul class="breadcrumb bg-white customBread">
+			<li>
+				<span><i class="fa fa-briefcase"></i> <span translate="">消息推送</span></span>
+			</li>
+			<li><span translate="">推送用户管理</span></li>
+		</ul>
+	</div>
+	<!-- / main header -->
+	<!-- table -->
+	<div class="wrapper-md" ng-controller="listPushUserController">
+		<div class="row">
+			<div class="col-md-2 panel panel-default">
+				<div class="panel-body">
+					<div class="m-b-sm b-b" style="padding-bottom: 10px;">
+						<span class="text-info font-bold text-lg">用户群组</span>
+						<div class="f_r">
+							<button class="btn btn-sm btn-success glyphicon glyphicon-plus m-t-n-xxs m-l-sm" title="{{ 'tableTitle.add' |  translate}}"  ng-click="addPushGroup()"></button>
+							<button class="btn btn-sm btn-success fa fa-cog m-t-n-xxs m-l-sm" title="{{ 'tableTitle.manage' |  translate}}"  ng-click="toManagePushGroup()"></button>
+						</div>
+					</div>
+					<span ng-if="doing_async">...loading...</span>
+					<abn-tree tree-data="list" tree-control="group_tree" on-select="navSelect(branch)" expand-level="0" initial-selection="Granny Smith" icon-leaf="" icon-expand="fa fa-plus" icon-collapse="fa fa-minus" style="height: 390px;overflow-y: auto;">
+					</abn-tree>
+				</div>
+			</div>
+
+			<div class="col-md-10">
+				<div class="row m-b-sm">
+					<div class="col-sm-2 m-r-n-md">
+    					<input type="text" placeholder="公司名" class="form-control input-sm-h" ng-model="orgName"/>
+    				</div>
+					<div class="col-sm-2 m-r-n-md">
+    					<input type="text" placeholder="真名" class="form-control input-sm-h" ng-model="realname"/>
+    				</div>
+					<div class="col-sm-2 m-r-n-md">
+    					<input type="text" placeholder="昵称" class="form-control input-sm-h" ng-model="nickname"/>
+    				</div>
+					<div class="col-sm-2 m-r-n-md">
+    					<input type="text" placeholder="手机号" class="form-control input-sm-h" ng-model="mobile"/>
+    				</div>
+					<div class="col-sm-2 m-r-n-md">
+    					<input type="text" placeholder="邮箱地址" class="form-control input-sm-h" ng-model="email"/>
+    				</div>
+					
+					<button class="btn btn-sm btn-info icon icon-magnifier m-l" title="搜索" ng-click="query()">搜索</button>
+					<button class="btn btn-sm btn-success glyphicon glyphicon-plus m-t-n-xxs m-l-sm" title="加入群组"  ng-click="userToGroup()">加入群组</button>
+				</div>
+				<div class="panel panel-default">
+					<table class="table table-bordered table-striped orderSueTable">
+						<thead>
+							<tr class="TOPS_th">
+					            <th style="width:2%;" ></th>
+					            <th style="width:3%;" translate="">选择</th>
+					            <!-- <th style="width:5%;"><input  type="checkbox" ng-checked="selectAllPage" ng-model="selectAllPage" ng-click="chkAllPageUser(selectAllPage)"></input>选择</th> -->
+					            <th style="width:7%;" translate="" >姓名</th>
+					            <th style="width:6%;" translate="" >昵称</th>
+					            <th style="width:4%;" translate="" >性别</th>
+					            <th style="width:6%;" translate="" >手机</th>
+					            <th style="width:7%;" translate="" >邮箱</th>
+					            <th style="width:10%;" translate="" >公司</th>
+					            <th style="width:12%;" translate="" >所属组群</th>
+				 	            <th style="width:8%;" translate="" >操作</th>
+					          </tr>
+						</thead>
+						<tbody>
+							<tr ng-repeat="pushUserData in datas.rows">
+								<td>{{ $index+1 }}</td>
+					            <td> <input id={{pushUserData.id }}  type="checkbox"  ng-model="x"  ng-click="chkUser(pushUserData.id,x)"></td>
+								<td>{{ pushUserData.realname }}</td>
+								<td>{{ pushUserData.nickname }}</td>
+								<td>{{ pushUserData.sex | sexStr }}</td>
+								<td>{{ pushUserData.mobile }}</td>
+								<td>{{ pushUserData.email }}</td>
+								<td title="{{ pushUserData.orgName }}">{{ pushUserData.orgName | limitToNum:20 }}</td>
+								<td title="{{ pushUserData.groupName }}">{{ pushUserData.groupName | limitToNum:20 }}</td>
+								<td>
+									<button class="btn btn-sm btn-info glyphicon glyphicon-eye-open m-t-n-xxs"  title="详情" ng-click="viewPushUser(pushUserData)"></button>
+				          			<button class="btn btn-sm btn-danger fa fa-trash-o m-t-n-xxs m-l-xs"  title="移除" ng-if="pushUserData.groupId&&groupId&&groupId!='unGroup'"  ng-click="removeFromGroup(pushUserData)" >移除</button>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+					<div ng-include="'pages/push/page.html'"></div>
+<!-- 					<div ng-include="/page.html"></div> -->
+				</div>
+			</div>
+		</div>
+		<!-- table end -->
+		
+		
+		<!-- 查看用户-->
+	    <div class="modal fade" id="viewPushUser" tabindex="-1" role="dialog">
+		    <div class="modal-dialog" role="document">
+		      <div class="modal-content">
+		         
+		        <div class="modal-header">
+		          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+		            <span aria-hidden="true">&times;</span>
+		          </button>
+		          <h4 class="modal-title" id="exampleRoleLabel" ng-if="userDatas.id">详情</h4>
+		          <h4 class="modal-title" id="exampleRoleLabel" ng-if="!userDatas.id">添加</h4>
+		        </div>
+		        <div class="modal-body">
+		          <form name="myForm" autosize="true" class="bs-example form-horizontal">
+		             <div class="form-group">
+		              <label class="col-lg-2 control-label" translate="">姓名</label>
+		              <div class="col-lg-8">
+		                <input type="text" class="form-control" placeholder="姓名" ng-model="userDatas.realname" readonly="true">
+		              </div>
+		            </div>
+		             <div class="form-group">
+		              <label class="col-lg-2 control-label" translate="">昵称</label>
+		              <div class="col-lg-8">
+		                <input type="text" class="form-control" placeholder="昵称" ng-model="userDatas.nickname" readonly="true">
+		              </div>
+		            </div>
+		            <div class="form-group">
+		              <label class="col-lg-2 control-label" translate="">性别</label>
+		              <div class="col-sm-9">
+							<div class="radio col-sm-4">
+				              <label class="i-checks">
+				                <input type="radio" name="isMan" checked="" value="1" ng-model="userDatas.sex" disabled="disabled" >
+				                <i></i><span translate="" class="m-l-none">男</span>
+				              </label>
+				            </div>
+				            <div class="radio col-sm-4">
+				              <label class="i-checks">
+				              <input type="radio" name="isMan" checked="" value="0" ng-model="userDatas.sex" disabled="disabled">
+				                <i></i><span translate="" class="m-l-none">女</span>
+				              </label>
+				            </div>
+						</div>
+		            </div>
+		             <div class="form-group">
+		              <label class="col-lg-2 control-label" translate="">手机</label>
+		              <div class="col-lg-8">
+		                <input type="text" class="form-control" placeholder="手机" ng-model="userDatas.mobile" readonly="true">
+		              </div>
+		            </div>
+		             <div class="form-group">
+		              <label class="col-lg-2 control-label" translate="">邮箱</label>
+		              <div class="col-lg-8">
+		                <input type="text" class="form-control" placeholder="邮箱" ng-model="userDatas.email" readonly="true">
+		              </div>
+		            </div>
+		             <div class="form-group">
+		              <label class="col-lg-2 control-label" translate="">企业名称</label>
+		              <div class="col-lg-8">
+		                <textarea style="resize:none" class="form-control" placeholder="企业名称" ng-model="userDatas.orgName" readonly="true"></textarea>
+		              </div>
+		            </div>
+		             <div class="form-group">
+		              <label class="col-lg-2 control-label" translate="">所属群组</label>
+		              <div class="col-lg-8">
+		                <textarea style="resize:none" class="form-control" placeholder="所属群组" ng-model="userDatas.groupName" readonly="true"></textarea>
+		              </div>
+		            </div>
+		            
+		          </form>
+		        </div>
+		        <div class="modal-footer">
+		       	 <span class="text-danger app-aside fail-tip t-l"></span>
+		          <button type="button" class="btn btn-sm btn-warning" data-dismiss="modal" id="close" translate="">关闭</button>
+		        </div>
+		      </div>
+		    </div>
+	  	</div>
+	  <!-- 查看用户 end-->
+		
+		
+		
+		
+		
+		<!-- 加入群组列表 -->
+	    <div class="modal fade" id="pushGroups" tabindex="-1" role="dialog">
+		    <div class="modal-dialog modal-userRole" role="document">
+		      <div class="modal-content">
+		         
+		        <div class="modal-header">
+		          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+		            <span aria-hidden="true">&times;</span>
+		          </button>
+		          <h4 class="modal-title" id="exampleRoleLabel">选择群组</h4>
+		        </div>
+		        <div class="modal-body">
+		          <div class="wrapper-md">
+		          	<div class="row m-b-sm">
+	    	</div>
+			    	<div class="panel panel-default" style="max-height: 300px;overflow-y: auto;">
+	    		<table class="table table-bordered table-striped ">
+					<thead>
+		          	  <tr class="TOPS_th">
+			            <th style="width:2%;" ></th>
+			            <th style="width:3%;" translate="">选择</th>
+			            <th style="width:10%;" translate="" >群组名称/成员数量</th>
+			          </tr>
+			        </thead>
+			        <tbody>
+						<tr ng-repeat="pushGroup in pushGroups">
+							<td>{{ $index+1 }}</td>
+							<td> <input id={{pushGroup.id }}  type="checkbox"  ng-model="x" ng-checked="groupIdStr.indexOf(pushGroup.id)!=-1" ng-click="chkGroup(pushGroup.id,x)"></td>
+							<td>{{ pushGroup.label | limitToNum:20 }}</td>
+						</tr>
+					</tbody>
+				</table>
+	    	</div>
+				<div class="modal-footer">
+		       	 <span class="text-danger app-aside fail-tip t-l"></span>
+		          <button type="button" class="btn btn-sm btn-warning" data-dismiss="modal" id="close" translate="">关闭</button>
+		          <button type="button" class="btn btn-sm btn-info ng-scope"  ng-click="joinGroup()" translate="">保存</button>
+		        </div>
+		          </div>
+		        </div>
+		      </div>
+		    </div>
+	  	</div>
+	  <!-- 加入群组列表 end-->
+	  
+	  <!-- 提示框 -->
+	    <div class="modal fade" id="saveTip" tabindex="-1" role="dialog">
+		     <div class="modal-content" style="width: 200px;border-radius: 10px;position: absolute;top: 50%;left: 50%;">
+		        <div class="modal-header" style="border: 0px;">
+		          <h4 class="modal-title" id="exampleRoleLabel" style="text-align: center;height: 40px;line-height: 40px;">{{ tipMessage }}</h4>
+		        </div>
+		      </div>
+	  	</div>
+	  <!-- 提示框 end-->
+		
+		<!-- 群组相关 -->
+    	
+    	 <!-- 群组管理列表 -->
+	    <div class="modal fade" id="pushGroupList" tabindex="-1" role="dialog" ng-controller="listPushGroupController">
+		    <div class="modal-dialog modal-userRole" role="document">
+		      <div class="modal-content">
+		         
+		        <div class="modal-header">
+		          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+		            <span aria-hidden="true">&times;</span>
+		          </button>
+		          <h4 class="modal-title" id="exampleRoleLabel">管理群组</h4>
+		        </div>
+		        <div class="modal-body">
+		          <div class="wrapper-md">
+		          	<div class="row m-b-sm">
+	    		<div class="col-sm-3 m-r-n-md">
+	    			<input type="text" placeholder="" class="form-control input-sm-h" ng-model="searchStr"/>
+	    		</div>
+	    		<button class="btn btn-sm btn-info icon icon-magnifier m-l"  title="搜索"  ng-click="query()">搜索</button>
+	    		<button class="btn btn-sm btn-success glyphicon glyphicon-plus m-t-n-xxs m-l-sm"  title="添加"  ng-click="addPushGroup()" >添加群组</button>
+	    	</div>
+			    	<div class="panel panel-default" style="max-height: 300px;overflow-y: auto;">
+	    		<table class="table table-bordered table-striped ">
+					<thead>
+		          	  <tr class="TOPS_th">
+			            <th style="width:2%;" ></th>
+			            <th style="width:10%;" translate="" >群组名称</th>
+			            <th style="width:8%;" translate="" >创建时间</th>
+			            <th style="width:7%;" translate="" >创建人</th>
+			            <th style="width:4%;" translate="" >用户数</th>
+			            <th style="width:11%;" translate="" >描述</th>
+		 	            <th style="width:8%;" translate="" >操作</th>
+			          </tr>
+			        </thead>
+			        <tbody>
+						<tr ng-repeat="pushGroupData in pushGroupListDatas.rows">
+							<td>{{ $index+1 }}</td>
+							<td>{{ pushGroupData.name | limitToNum:20 }}</td>
+							<td> {{ pushGroupData.createTime }}</td>
+							<td> {{ pushGroupData.createUser }}</td>
+							<td> {{ pushGroupData.userCount }}</td>
+							<td> {{ pushGroupData.simpleDesc | limitToNum:20 }}</td>
+							<td>
+								<button class="btn btn-sm btn-info glyphicon glyphicon-edit m-t-n-xxs"  title="编辑" ng-click="toeditPushGroup(pushGroupData)"></button>
+			          			<button class="btn btn-sm btn-danger fa fa-trash-o m-t-n-xxs m-l-xs"  title="冻结" ng-if="pushGroupData.status!=-1 && pushGroupData.taskCount==0" ng-click="delPushGroup(pushGroupData)" ></button>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+	    	</div>
+		          </div>
+		        </div>
+		      </div>
+		    </div>
+	  	</div>
+	  <!-- 群组管理列表 end-->
+	  
+    	
+    	
+    	
+    	
+    	<!-- 编辑 新增-->
+	    <div class="modal fade" id="editPushGroup" tabindex="-1" role="dialog"   ng-controller="listPushGroupController">
+		    <div class="modal-dialog" role="document">
+		      <div class="modal-content">
+		         
+		        <div class="modal-header">
+		          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+		            <span aria-hidden="true">&times;</span>
+		          </button>
+		          <h4 class="modal-title" id="exampleRoleLabel" ng-if="pushGroupDatas.id">编辑</h4>
+		          <h4 class="modal-title" id="exampleRoleLabel" ng-if="!pushGroupDatas.id">添加</h4>
+		        </div>
+		        <div class="modal-body">
+		          <form name="myForm" novalidate style="height: 280px;" class="bs-example form-horizontal">
+		             <div class="form-group">
+		              <label class="col-lg-2 control-label" translate="">群组名称</label>
+		              <div class="col-lg-8">
+		                <input type="text" class="form-control" maxlength="20" placeholder="请输入群组名称，不超过20个字" ng-model="pushGroupDatas.name">
+		              </div>
+		              <span class="col-lo-1 text-danger">*</span>
+		            </div>
+		             <div class="form-group">
+		              <label class="col-lg-2 control-label" translate="">描述</label>
+		              <div class="col-lg-8">
+		                <input type="text" class="form-control" maxlength="100" placeholder="请输入群组描述，不超过100个字" ng-model="pushGroupDatas.simpleDesc">
+		              </div>
+		            </div>
+		            <div class="form-group">
+						<label class="col-sm-2 control-label" translate="">排序值</label>
+						<div class="col-lg-8">
+		                <input type="number" class="form-control" placeholder="" min="1" ng-model="pushGroupDatas.orderIndex">
+		              </div>
+			        </div>
+			         <div class="form-group" ng-if="pushGroupDatas.id">
+		              <label class="col-lg-2 control-label" translate="">状态</label>
+		              <div class="col-sm-8">
+				           <span class="m-l-none" ng-if="pushGroupDatas.status==-1" style="line-height: 35px;">该群组已冻结，不可冻结！</span>
+				           <span class="m-l-none" ng-if="pushGroupDatas.taskCount>0" style="line-height: 35px;">该群组存在关联数据，不可冻结！</span>
+				           <span class="m-l-none" ng-if="pushGroupDatas.taskCount==0&&pushGroupDatas.status!=-1" style="line-height: 35px;">该群组可冻结！</span>
+						</div>
+		            </div>
+		            
+		          </form>
+		        </div>
+		        <div class="modal-footer">
+		       	 <span class="text-danger app-aside fail-tip t-l"></span>
+		          <button type="button" class="btn btn-sm btn-warning" data-dismiss="modal" id="close" translate="">关闭</button>
+		          <button type="button" class="btn btn-sm btn-info ng-scope"  ng-click="savePushGroup(pushGroupDatas)" translate="">保存</button>
+		        </div>
+		      </div>
+		    </div>
+	  	</div>
+	  <!-- 编辑 end-->
+		
+		
+		
+		
+		
+		
+		
+		
+	</div>
+	
+</div>

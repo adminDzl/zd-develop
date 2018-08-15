@@ -1,0 +1,318 @@
+
+ 
+ 
+<div class="panel panel-default">      
+    <div class="panel-body">
+          <!---->                  
+          <ul class="nav nav-pills nav-sm">
+                
+                <li   ng-class="{true:'active',false:''}[currentTab==0]"><a ng-click="changeTab(0)" >订单状态统计</a></li><!--ui-sref="manage.meetingroom.addroom"-->
+                <li   ng-class="{true:'active',false:''}[currentTab==1]"><a ng-click="changeTab(1)" >场地使用统计</a></li>
+                <li  ng-class="{true:'active',false:''}[currentTab==2]"><a ng-click="changeTab(2)">收入来源统计</a></li>
+                <li  ng-class="{true:'active',false:''}[currentTab==3]"><a ng-click="changeTab(3)">场地收入增长统计</a></li>
+                <li  ng-class="{true:'active',false:''}[currentTab==4]"><a ng-click="changeTab(4)">订单增长统计</a></li>
+                <li ng-class="{true:'active',false:''}[currentTab==5]"><a ng-click="changeTab(5)">财务数据统计</a></li>
+               
+                 
+          </ul>                  
+          <!---->
+          <div ckass="panel bg-white" >
+            <div class="wrapper-md ">
+             <div class="panel panel-default" ng-show="currentTab==0">     
+                    
+                    <div class="row">          
+                        <div class="col-md-6">
+                            <div class="panel no-border">
+                                <div class="panel-heading wrapper b-b b-light">                    
+                                    <h4 class="font-thin m-t-none m-b-none text-muted">订单状态统计</h4>              
+                                </div>
+                                <div class="panel-body">
+                                        <div class="col-md-12">
+                                            <select  class="form-control" ng-model="year" >
+                                                <option value="">请选择</option>
+                                                <option ng-repeat="it in years" value="{{it.value}}">{{it.name}}</option>
+                                            </select> 
+                                        </div>
+                                        <div class="col-md-12">
+                                            
+                                                <div id="statusCount" style="height: 370px; width: 100%;"></div>
+                                        </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6  ">
+                                <table class="table table-striped border table-responsive">
+                                        <thead>
+                                        <tr>
+                                            <th>月份</th>
+                                            <th>已预支付定金</th>
+                                            <th>已支付定金</th>
+                                            <th>已支付尾款</th>
+                                            <th>取消待退款</th>
+                                            <th>已完成</th>
+                                            <th>已关闭</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr ng-repeat="it in statusCountData">
+                                            <td>
+                                            {{it.month}}月
+                                            </td>
+                                            <td ng-repeat="item in  it.data">{{item.num}} </td>
+                                        </tr>
+                                        
+                                        </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            <!------>
+            <div class="panel panel-default"  ng-show="currentTab==1">     
+                    
+                    <div class="row">          
+                        <div class="col-md-6">
+                            <div class="panel no-border">
+                                <div class="panel-heading wrapper b-b b-light">                    
+                                    <h4 class="font-thin m-t-none m-b-none text-muted">场地使用统计</h4>              
+                                </div>
+                                <div class="panel-body">
+                                        <div class="col-md-12">
+                                            <select  class="form-control" ng-model="year1" >
+                                                <option value="">请选择</option>
+                                                <option ng-repeat="it in years" value="{{it.value}}">{{it.name}}</option>
+                                            </select> 
+                                        </div>
+                                        <div class="col-md-12">
+                                            
+                                                <div id="useCount" style="height: 370px; width: 100%;"></div>
+                                        </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6  ">
+                                <table class="table table-striped border table-responsive">
+                                        <thead>
+                                                <tr>
+                                                <th style="width:70px;">月份</th>
+                                                <th ng-if="useCountList.length>0" ng-repeat="it in useCountList[0].data">{{it.name}}</th>
+                                                
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr ng-repeat="it in useCountList">
+                                                <td>
+                                                    {{it.month}}月
+                                                </td>
+                                                <td ng-repeat="item in  it.data">{{item.num}} </td>
+                                                </tr>
+                                                
+                                            </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            <!------>
+            <!------>
+            <div class="panel panel-default"  ng-show="currentTab==2">     
+                    
+                <div class="row">          
+                    <div class="col-md-6">
+                        <div class="panel no-border">
+                            <div class="panel-heading wrapper b-b b-light">                    
+                                <h4 class="font-thin m-t-none m-b-none text-muted">收入来源统计</h4>              
+                            </div>
+                            <div class="panel-body">
+                                    <div class="col-md-12">
+                                        <select  class="form-control" ng-model="year2" >
+                                            <option value="">请选择</option>
+                                            <option ng-repeat="it in years" value="{{it.value}}">{{it.name}}</option>
+                                        </select> 
+                                    </div>
+                                    <div class="col-md-12">
+                                        
+                                            <div id="incomeSource" style="height: 370px; width: 100%;"></div>
+                                    </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6  ">
+                            <table class="table table-striped border table-responsive">
+                                    <thead>
+                                            <tr>
+                                            <th style="width:70px;">月份</th>
+                                            <th>增值服务收入</th>
+                                            <th>物品收入</th>
+                                            <th>场地收入</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr ng-repeat="it in incomeSourceList">
+                                            <td>
+                                                {{it.month}}月
+                                            </td>
+                                            <td>¥{{it.addServiceMoney}}</td>
+                                            <td>¥{{it.thingsMoney}}</td>
+                                            <td>¥{{it.roomMoney}}</td>
+                                            </tr>
+                                            
+                                        </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <!------>
+            <!------>
+            <div class="panel panel-default"  ng-show="currentTab==3">     
+                    
+                <div class="row">          
+                    <div class="col-md-6">
+                        <div class="panel no-border">
+                            <div class="panel-heading wrapper b-b b-light">                    
+                                <h4 class="font-thin m-t-none m-b-none text-muted">场地收入增长统计</h4>              
+                            </div>
+                            <div class="panel-body">
+                                    <div class="col-md-12">
+                                        <select  class="form-control" ng-model="year3" >
+                                            <option value="">请选择</option>
+                                            <option ng-repeat="it in years" value="{{it.value}}">{{it.name}}</option>
+                                        </select> 
+                                    </div>
+                                    <div class="col-md-12">
+                                        
+                                            <div id="incomeAdd" style="height: 370px; width: 100%;"></div>
+                                    </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6  ">
+                            <table class="table table-striped border table-responsive">
+                                    <thead>
+                                            <tr>
+                                            <th style="width:70px;">月份</th>
+                                            <th>增长数量</th>
+                                            <th>同比增长</th>
+                                            <th>环比增长</th>                                   
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr ng-repeat="it in incomeAddList">
+                                            <td>
+                                                {{it.month}}月
+                                            </td>
+                                            <td>¥{{it.addMoney}}</td>
+                                            <td>{{it.tongbi}}</td>
+                                            <td>{{it.huanbi}}</td>
+                                            </tr>
+                                            
+                                        </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <!------>
+            <!------>
+            <div class="panel panel-default"  ng-show="currentTab==4">     
+                    
+                <div class="row">          
+                    <div class="col-md-6">
+                        <div class="panel no-border">
+                            <div class="panel-heading wrapper b-b b-light">                    
+                                <h4 class="font-thin m-t-none m-b-none text-muted">订单增长统计</h4>              
+                            </div>
+                            <div class="panel-body">
+                                    <div class="col-md-12">
+                                        <select  class="form-control" ng-model="year4" >
+                                            <option value="">请选择</option>
+                                            <option ng-repeat="it in years" value="{{it.value}}">{{it.name}}</option>
+                                        </select> 
+                                    </div>
+                                    <div class="col-md-12">
+                                        
+                                            <div id="orderAdd" style="height: 370px; width: 100%;"></div>
+                                    </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6  ">
+                            <table class="table table-striped border table-responsive">
+                                    <thead>
+                                            <tr>
+                                            <th style="width:70px;">月份</th>
+                                            <th>增长数量</th>
+                                            <th>同比增长</th>
+                                            <th>环比增长</th>                                   
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr ng-if="orderAddList.length>0" ng-repeat="it in orderAddList">
+                                                <td>
+                                                    {{it.month}}月
+                                                </td>
+                                                <td>{{it.orderAdd}}</td>
+                                                <td>{{it.tongbi}}</td>
+                                                <td>{{it.huanbi}}</td>
+                                            </tr>   
+                                            <tr>
+                                                <td colspan="4">暂无数据</td>
+                                            </tr>                                         
+                                        </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <!---->
+              <!------>
+              <div class="panel panel-default"  ng-show="currentTab==5">     
+                    
+                    <div class="row">          
+                        <div class="col-md-6">
+                            <div class="panel no-border">
+                                <div class="panel-heading wrapper b-b b-light">                    
+                                    <h4 class="font-thin m-t-none m-b-none text-muted">订单增长统计</h4>              
+                                </div>
+                                <div class="panel-body">
+                                        <div class="col-md-12">
+                                             <div class="col-sm-5">
+                                                    <datepicker-directive class="input-group " model="startTime"></datepicker-directive> 
+                                             </div>
+                                             <div class="col-sm-2"></div>
+                                             <div class="col-sm-5">
+                                                    <datepicker-directive class="input-group  " model="endTime"></datepicker-directive> 
+                                             </div>
+                                        </div>
+                                        <div class="col-md-12">
+                                            
+                                                <div id="finance" style="height: 370px; width: 100%;"></div>
+                                        </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6  ">
+                                <table class="table table-striped border table-responsive">
+                                        <thead>
+                                                <tr>
+                                                <th >日期</th>
+                                                <th>企业月结</th>
+                                                <th>现场支付</th>
+                                                <th>微信支付</th>  
+                                                <th>支付宝支付</th>    
+                                                <th>累计</th>                                 
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr ng-repeat="it in financeStatisticsList">
+                                                <td>
+                                                    {{it.time}}
+                                                </td>
+                                                <td ng-repeat="item in it.data">¥{{item.num}}</td>
+                                                <td>¥{{sumIt(it.data)}}</td>
+                                                </tr>                                                
+                                            </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+        </div>
+    </div>
+</div>
+</div>

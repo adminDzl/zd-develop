@@ -1,0 +1,305 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zshop.car.duty.dao.mapper.DutyInfoMapper">
+
+<!-- **************以下映射必须与数据库一致 不要更改，除非数据库改变**************** -->
+
+	<insert id="insert"  parameterType="com.zshop.car.duty.entity.DutyInfo">
+				
+		insert into duty_info
+		(
+			id,
+			park_id,
+			duty_name,
+			duty_sort,
+			duty_status,
+			remark,
+			create_by,
+			create_time,
+			update_by,
+			update_time,
+			status1,
+			status2,
+			ext1,
+			ext2,
+			ext3,
+			ext4,
+			ext5,
+			ext6
+		)
+		values	
+		(	
+			#{id},
+			#{parkId},
+			#{dutyName},
+			#{dutySort},
+			#{dutyStatus},
+			#{remark},
+			#{createBy},
+			#{createTime},
+			#{updateBy},
+			#{updateTime},
+			#{status1},
+			#{status2},
+			#{ext1},
+			#{ext2},
+			#{ext3},
+			#{ext4},
+			#{ext5},
+			#{ext6}
+		)	
+
+	</insert>
+	
+	<delete id="deleteById" parameterType="java.lang.String">
+		delete from duty_info 	
+		WHERE ID=#{id}
+	</delete>
+	
+	<delete id="deleteByIds" parameterType="java.util.Collection">
+     	delete from duty_info 	
+     	WHERE ID IN
+     	<foreach collection="array" index="index" item="item" open="(" separator="," close=")"> #{item} </foreach> 
+  	 </delete>
+  	 
+  	 <delete id="logicDelete" parameterType="java.lang.String">
+		update duty_info set status1 = '-1' 	
+		WHERE ID=#{id}
+	</delete>
+	
+	<delete id="logicDeleteByIds" parameterType="java.util.Collection">
+     	update duty_info set status1 = '-1' 	
+     	WHERE ID IN
+     	<foreach collection="array" index="index" item="item" open="(" separator="," close=")"> #{item} </foreach> 
+  	 </delete>
+	
+	<update id="update" parameterType="com.zshop.car.duty.entity.DutyInfo" >
+			
+		update duty_info 	
+		<set> 	
+			park_id=#{parkId},
+			duty_name=#{dutyName},
+			duty_sort=#{dutySort},
+			duty_status=#{dutyStatus},
+			remark=#{remark},
+			create_by=#{createBy},
+			create_time=#{createTime},
+			update_by=#{updateBy},
+			update_time=#{updateTime},
+			status1=#{status1},
+			status2=#{status2},
+			ext1=#{ext1},
+			ext2=#{ext2},
+			ext3=#{ext3},
+			ext4=#{ext4},
+			ext5=#{ext5},
+			ext6=#{ext6}
+		</set> 	
+		where 
+		ID=#{id} 	
+
+	</update>
+	
+	<update id="updateWithIf" parameterType="com.zshop.car.duty.entity.DutyInfo" >
+			
+		update duty_info 	
+		<set> 	
+			<if test=" parkId!=null ">	
+				park_id=#{parkId},	
+			</if>	
+			<if test=" dutyName!=null ">	
+				duty_name=#{dutyName},	
+			</if>	
+			<if test=" dutySort!=null ">	
+				duty_sort=#{dutySort},	
+			</if>	
+			<if test=" dutyStatus!=null ">	
+				duty_status=#{dutyStatus},	
+			</if>	
+			<if test=" remark!=null ">	
+				remark=#{remark},	
+			</if>	
+			<if test=" createBy!=null ">	
+				create_by=#{createBy},	
+			</if>	
+			<if test=" createTime!=null ">	
+				create_time=#{createTime},	
+			</if>	
+			<if test=" updateBy!=null ">	
+				update_by=#{updateBy},	
+			</if>	
+			<if test=" updateTime!=null ">	
+				update_time=#{updateTime},	
+			</if>	
+			<if test=" status1!=null ">	
+				status1=#{status1},	
+			</if>	
+			<if test=" status2!=null ">	
+				status2=#{status2},	
+			</if>	
+			<if test=" ext1!=null ">	
+				ext1=#{ext1},	
+			</if>	
+			<if test=" ext2!=null ">	
+				ext2=#{ext2},	
+			</if>	
+			<if test=" ext3!=null ">	
+				ext3=#{ext3},	
+			</if>	
+			<if test=" ext4!=null ">	
+				ext4=#{ext4},	
+			</if>	
+			<if test=" ext5!=null ">	
+				ext5=#{ext5},	
+			</if>	
+			<if test=" ext6!=null ">	
+				ext6=#{ext6},	
+			</if>	
+		</set>	
+		where 	
+		ID=#{id} 	
+
+	</update>
+	
+	<!-- *************************************************************************** -->
+	<!-- **************以下映射根据业务做相应调整**************** -->
+	<!-- *************************************************************************** -->
+  	
+  	<delete id="deleteByMap" parameterType="java.util.Map">
+    	delete from duty_info 	 
+    	<where>
+    		
+    	</where>
+  	</delete>
+	
+	<select id="findById" parameterType="java.lang.String" resultType="com.zshop.car.duty.entity.DutyInfo">
+				
+		select  	
+			a.id id,
+			a.park_id parkId,
+			a.duty_name dutyName,
+			a.duty_sort dutySort,
+			a.duty_status dutyStatus,
+			a.remark remark,
+			a.create_by createBy,
+			a.create_time createTime,
+			a.update_by updateBy,
+			a.update_time updateTime,
+			a.status1 status1,
+			a.status2 status2,
+			a.ext1 ext1,
+			a.ext2 ext2,
+			a.ext3 ext3,
+			a.ext4 ext4,
+			a.ext5 ext5,
+			a.ext6 ext6
+		from duty_info a	
+
+		where a.Id=#{id}	
+	</select>
+
+	<select id="findListByMap" parameterType="java.util.Map" resultType="com.zshop.car.duty.entity.DutyInfo">
+		
+				
+		select  	
+			a.id id,
+			a.park_id parkId,
+			a.duty_name dutyName,
+			a.duty_sort dutySort,
+			a.duty_status dutyStatus,
+			a.remark remark,
+			a.create_by createBy,
+			a.create_time createTime,
+			a.update_by updateBy,
+			a.update_time updateTime,
+			a.status1 status1,
+			a.status2 status2,
+			a.ext1 ext1,
+			a.ext2 ext2,
+			a.ext3 ext3,
+			a.ext4 ext4,
+			a.ext5 ext5,
+			a.ext6 ext6
+		from duty_info a	
+
+		
+		<where>
+			
+		</where>
+
+	</select>
+	
+	<select id="list" parameterType="java.util.Map" resultType="com.zshop.car.duty.entity.DutyInfo">
+		
+		
+				
+		select  	
+			a.id id,
+			a.park_id parkId,
+			a.duty_name dutyName,
+			a.duty_sort dutySort,
+			a.duty_status dutyStatus,
+			a.remark remark,
+			a.create_by createBy,
+			a.create_time createTime,
+			a.update_by updateBy,
+			a.update_time updateTime,
+			a.status1 status1,
+			a.status2 status2,
+			a.ext1 ext1,
+			a.ext2 ext2,
+			a.ext3 ext3,
+			a.ext4 ext4,
+			a.ext5 ext5,
+			a.ext6 ext6
+		from duty_info a	
+
+		
+		<where>
+			<if test="searchKeys!= null ">
+				AND ( 1=2
+				<foreach collection="searchKeys" index="index" item="item" >
+					 OR a.id like #{item}
+				</foreach> 
+				)
+			</if>
+
+			<if test="parkId!=null">
+				and a.park_id = #{parkId}
+			</if>
+		</where>
+	order by a.duty_sort asc
+		
+	</select>
+	
+	<select id="findOneByMap" parameterType="java.util.Map" resultType="com.zshop.car.duty.entity.DutyInfo">
+				
+		select  	
+			a.id id,
+			a.park_id parkId,
+			a.duty_name dutyName,
+			a.duty_sort dutySort,
+			a.duty_status dutyStatus,
+			a.remark remark,
+			a.create_by createBy,
+			a.create_time createTime,
+			a.update_by updateBy,
+			a.update_time updateTime,
+			a.status1 status1,
+			a.status2 status2,
+			a.ext1 ext1,
+			a.ext2 ext2,
+			a.ext3 ext3,
+			a.ext4 ext4,
+			a.ext5 ext5,
+			a.ext6 ext6
+		from duty_info a	
+
+		<where>
+		
+		</where>
+		limit 1
+	</select>
+</mapper>
+	

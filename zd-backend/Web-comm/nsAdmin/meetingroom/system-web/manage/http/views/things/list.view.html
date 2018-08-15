@@ -1,0 +1,54 @@
+<div class="panel panel-default">            
+    <div class="panel-footer bg-light lter">
+        <form class="form-horizontal" role="form">
+            <div class="form-group" style="margin-bottom:0px;">
+                <label class="col-sm-1 control-label">类型</label>
+                <div class="col-sm-2">
+                    <select name="account" class="form-control m-b" ng-model="searchParams.freeType">
+                        <option value="">全部</option>
+                        <option value="1">免费</option>
+                        <option value="2">付费</option>                    
+                    </select>       
+                </div>
+                <div class="col-sm-2">
+                        <input type="text" class="form-control" placeholder="请输入物品名称" ng-model="searchParams.name"/>         
+                </div>
+                <div class="col-sm-2">
+                    <button class="btn btn-rounded btn-sm btn-info"  ng-click="search()"><i class="fa fa-fw fa-plus"></i> 查询</button>
+                </div>
+                <div class="col-sm-1">
+                    &nbsp;
+                </div>
+                <div class="col-sm-2">
+                    <button class="btn btn-rounded btn-sm btn-info"  ng-click="addNewGoods()"><i class="fa fa-fw fa-plus"></i> 新增物品</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+ 
+<div class="panel panel-default">        
+     
+        <div class="table-responsive">       
+        <table  datatable-directive url="dataUrl" search-params="searchParams" columns="columns" del="del(data)" 
+            filters="thingsFilter"
+            edit="edit(data)" indentify-key="engine"  btns="d-e" 
+            class="table  table-striped b-t b-b table-bordered table-hover">
+            <thead>
+            <tr>
+                <th  style="width:30%">物品名称</th>
+                <th  style="width:12%">参数</th>
+                <th  style="width:12%">配置数量</th>
+                <th  style="width:15%">类型</th>
+                <th  style="width:8%">单价</th>
+                <th  style="width:8%">单位</th>
+                <th  style="width:15%">操作</th> 
+            </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+        
+    </div>
+   </div>
+   <modal-directive model-id='myModal'  setting="{title:'提示',btnName:'好的',content:'确定删除'}" callback="doYes()"></modal-directive>

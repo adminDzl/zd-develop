@@ -1,0 +1,344 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zshop.car.leader.dao.mapper.CarLeaderMapper">
+
+<!-- **************以下映射必须与数据库一致 不要更改，除非数据库改变**************** -->
+
+	<insert id="insert"  parameterType="com.zshop.car.leader.entity.CarLeader">
+				
+		insert into car_leader
+		(
+			id,
+			park_id,
+			leader_name,
+			leader_phone,
+			leader_duty_id,
+			leader_sort,
+			leader_status,
+			user_id,
+			remark,
+			create_by,
+			create_time,
+			update_by,
+			update_time,
+			status1,
+			status2,
+			ext1,
+			ext2,
+			ext3,
+			ext4,
+			ext5,
+			ext6
+		)
+		values	
+		(	
+			#{id},
+			#{parkId},
+			#{leaderName},
+			#{leaderPhone},
+			#{leaderDutyId},
+			#{leaderSort},
+			#{leaderStatus},
+			#{userId},
+			#{remark},
+			#{createBy},
+			#{createTime},
+			#{updateBy},
+			#{updateTime},
+			#{status1},
+			#{status2},
+			#{ext1},
+			#{ext2},
+			#{ext3},
+			#{ext4},
+			#{ext5},
+			#{ext6}
+		)	
+
+	</insert>
+	
+	<delete id="deleteById" parameterType="java.lang.String">
+		delete from car_leader 	
+		WHERE ID=#{id}
+	</delete>
+	
+	<delete id="deleteByIds" parameterType="java.util.Collection">
+     	delete from car_leader 	
+     	WHERE ID IN
+     	<foreach collection="array" index="index" item="item" open="(" separator="," close=")"> #{item} </foreach> 
+  	 </delete>
+  	 
+  	 <delete id="logicDelete" parameterType="java.lang.String">
+		update car_leader set status1 = '-1' 	
+		WHERE ID=#{id}
+	</delete>
+	
+	<delete id="logicDeleteByIds" parameterType="java.util.Collection">
+     	update car_leader set status1 = '-1' 	
+     	WHERE ID IN
+     	<foreach collection="array" index="index" item="item" open="(" separator="," close=")"> #{item} </foreach> 
+  	 </delete>
+	
+	<update id="update" parameterType="com.zshop.car.leader.entity.CarLeader" >
+			
+		update car_leader 	
+		<set> 	
+			park_id=#{parkId},
+			leader_name=#{leaderName},
+			leader_phone=#{leaderPhone},
+			leader_duty_id=#{leaderDutyId},
+			leader_sort=#{leaderSort},
+			leader_status=#{leaderStatus},
+			user_id=#{userId},
+			remark=#{remark},
+			create_by=#{createBy},
+			create_time=#{createTime},
+			update_by=#{updateBy},
+			update_time=#{updateTime},
+			status1=#{status1},
+			status2=#{status2},
+			ext1=#{ext1},
+			ext2=#{ext2},
+			ext3=#{ext3},
+			ext4=#{ext4},
+			ext5=#{ext5},
+			ext6=#{ext6}
+		</set> 	
+		where 
+		ID=#{id} 	
+
+	</update>
+	
+	<update id="updateWithIf" parameterType="com.zshop.car.leader.entity.CarLeader" >
+			
+		update car_leader 	
+		<set> 	
+			<if test=" parkId!=null ">	
+				park_id=#{parkId},	
+			</if>	
+			<if test=" leaderName!=null ">	
+				leader_name=#{leaderName},	
+			</if>	
+			<if test=" leaderPhone!=null ">	
+				leader_phone=#{leaderPhone},	
+			</if>	
+			<if test=" leaderDutyId!=null ">	
+				leader_duty_id=#{leaderDutyId},	
+			</if>	
+			<if test=" leaderSort!=null ">	
+				leader_sort=#{leaderSort},	
+			</if>	
+			<if test=" leaderStatus!=null ">	
+				leader_status=#{leaderStatus},	
+			</if>	
+			<if test=" userId!=null ">	
+				user_id=#{userId},	
+			</if>	
+			<if test=" remark!=null ">	
+				remark=#{remark},	
+			</if>	
+			<if test=" createBy!=null ">	
+				create_by=#{createBy},	
+			</if>	
+			<if test=" createTime!=null ">	
+				create_time=#{createTime},	
+			</if>	
+			<if test=" updateBy!=null ">	
+				update_by=#{updateBy},	
+			</if>	
+			<if test=" updateTime!=null ">	
+				update_time=#{updateTime},	
+			</if>	
+			<if test=" status1!=null ">	
+				status1=#{status1},	
+			</if>	
+			<if test=" status2!=null ">	
+				status2=#{status2},	
+			</if>	
+			<if test=" ext1!=null ">	
+				ext1=#{ext1},	
+			</if>	
+			<if test=" ext2!=null ">	
+				ext2=#{ext2},	
+			</if>	
+			<if test=" ext3!=null ">	
+				ext3=#{ext3},	
+			</if>	
+			<if test=" ext4!=null ">	
+				ext4=#{ext4},	
+			</if>	
+			<if test=" ext5!=null ">	
+				ext5=#{ext5},	
+			</if>	
+			<if test=" ext6!=null ">	
+				ext6=#{ext6},	
+			</if>	
+		</set>	
+		where 	
+		ID=#{id} 	
+
+	</update>
+	
+	<!-- *************************************************************************** -->
+	<!-- **************以下映射根据业务做相应调整**************** -->
+	<!-- *************************************************************************** -->
+  	
+  	<delete id="deleteByMap" parameterType="java.util.Map">
+    	delete from car_leader 	 
+    	<where>
+    		
+    	</where>
+  	</delete>
+	
+	<select id="findById" parameterType="java.lang.String" resultType="com.zshop.car.leader.entity.CarLeader">
+				
+		select  	
+			a.id id,
+			a.park_id parkId,
+			a.leader_name leaderName,
+			a.leader_phone leaderPhone,
+			a.leader_duty_id leaderDutyId,
+			a.leader_sort leaderSort,
+			a.leader_status leaderStatus,
+			a.user_id userId,
+			a.remark remark,
+			a.create_by createBy,
+			a.create_time createTime,
+			a.update_by updateBy,
+			a.update_time updateTime,
+			a.status1 status1,
+			a.status2 status2,
+			a.ext1 ext1,
+			a.ext2 ext2,
+			a.ext3 ext3,
+			a.ext4 ext4,
+			a.ext5 ext5,
+			a.ext6 ext6
+		from car_leader a	
+
+		where a.Id=#{id}	
+	</select>
+
+	<select id="findListByMap" parameterType="java.util.Map" resultType="com.zshop.car.leader.entity.CarLeader">
+		
+				
+		select  	
+			a.id id,
+			a.park_id parkId,
+			a.leader_name leaderName,
+			a.leader_phone leaderPhone,
+			a.leader_duty_id leaderDutyId,
+			a.leader_sort leaderSort,
+			a.leader_status leaderStatus,
+			a.user_id userId,
+			a.remark remark,
+			a.create_by createBy,
+			a.create_time createTime,
+			a.update_by updateBy,
+			a.update_time updateTime,
+			a.status1 status1,
+			a.status2 status2,
+			a.ext1 ext1,
+			a.ext2 ext2,
+			a.ext3 ext3,
+			a.ext4 ext4,
+			a.ext5 ext5,
+			a.ext6 ext6
+		from car_leader a	
+
+		
+		<where>
+			
+		</where>
+
+	</select>
+	
+	<select id="list" parameterType="java.util.Map" resultType="com.zshop.car.leader.entity.CarLeader">
+		
+		
+				
+		select  	
+			a.id id,
+			a.park_id parkId,
+			a.leader_name leaderName,
+			a.leader_phone leaderPhone,
+			a.leader_duty_id leaderDutyId,
+			a.leader_sort leaderSort,
+			a.leader_status leaderStatus,
+			a.user_id userId,
+			a.remark remark,
+			a.create_by createBy,
+			a.create_time createTime,
+			a.update_by updateBy,
+			a.update_time updateTime,
+			a.status1 status1,
+			a.status2 status2,
+			a.ext1 ext1,
+			a.ext2 ext2,
+			a.ext3 ext3,
+			a.ext4 ext4,
+			a.ext5 ext5,
+			a.ext6 ext6,
+			b.duty_name leaderDuty,
+			b.duty_sort dutySort
+		from car_leader a
+		left join duty_info b on a.leader_duty_id = b.id
+
+
+		
+		<where>
+			<if test="searchKeys!= null ">
+				AND ( 1=2
+				<foreach collection="searchKeys" index="index" item="item" >
+					 OR a.leader_name like #{item} OR a.leader_phone like #{item} OR b.duty_name like #{item}
+				</foreach> 
+				)
+			</if>
+			<if test="status1!=null">
+				and a.status1 = #{status1}
+			</if>
+			<if test="parkId!=null">
+				and a.park_id = #{parkId}
+			</if>
+		</where>
+
+		order by b.duty_sort asc , a.leader_sort asc
+		
+	</select>
+	
+	<select id="findOneByMap" parameterType="java.util.Map" resultType="com.zshop.car.leader.entity.CarLeader">
+				
+		select  	
+			a.id id,
+			a.park_id parkId,
+			a.leader_name leaderName,
+			a.leader_phone leaderPhone,
+			a.leader_duty_id leaderDutyId,
+			a.leader_sort leaderSort,
+			a.leader_status leaderStatus,
+			a.user_id userId,
+			a.remark remark,
+			a.create_by createBy,
+			a.create_time createTime,
+			a.update_by updateBy,
+			a.update_time updateTime,
+			a.status1 status1,
+			a.status2 status2,
+			a.ext1 ext1,
+			a.ext2 ext2,
+			a.ext3 ext3,
+			a.ext4 ext4,
+			a.ext5 ext5,
+			a.ext6 ext6
+		from car_leader a	
+
+		<where>
+			<if test="userId!=null">
+				and a.user_id = #{userId}
+			</if>
+		</where>
+		limit 1
+	</select>
+</mapper>
+	

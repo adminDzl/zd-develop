@@ -1,0 +1,16 @@
+<style>
+	.c-dft{
+		cursor:default;
+	}
+</style>
+<div class="padder-md padder-v bg-white b-b">
+	<ul class="m-b-none bg-white no-padder">
+	    <li ng-repeat="t in titles track by $index" style="display: inline-block" ng-click="drump(t.url)" ng-class="{'c-dft':url == t.url}">
+	    	<span ng-show="$index != 0"><b style="padding:0 5px;color:#ccc;">/</b>{{t.name}}</span>
+	    	<span ng-show="$index == 0"><i class="glyphicon glyphicon-tasks m-r-sm"></i>{{t.name}}</span>
+	    </li>
+	</ul>
+</div>
+<!-- <span class="m-n font-thin h4" style="vertical-align:middle;" ng-repeat="t in titles track by $index" ng-click="drump(t.url)">
+    <span ng-class="{$index != 0}"><i ng-show="$index == 0" class="glyphicon glyphicon-tasks m-r-sm"></i>{{t.name}}</span><b ng-if="$index<titles.length-1"> / </b>
+</span> -->

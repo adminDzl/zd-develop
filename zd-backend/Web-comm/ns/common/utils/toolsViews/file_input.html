@@ -1,0 +1,19 @@
+<div class="panel panel-warning relative">
+	<div class="panel-heading relative" style="padding: 0px;">
+    	<label class="fullAll">添加文件</label>
+		<input style="display: none;" class="inputFull" id="fileInput" type="file" multiple="multiple" ng-model="myFile"/>
+	</div>
+    <div class="panel-body form-horizontal">
+    	<ul class="imgs">
+	        <li ng-repeat="file in files" class="pull-left">
+	        	<div class="imgParent">
+	        		<span>
+	        			{{file.name}}
+	        		</span>
+	        		<button class="btn deleteBtnS" ng-click="delete($index)">&times;</button>
+	        	</div>
+	        </li>
+	    </ul>
+    </div>
+	<div class="coverOn" ng-show="cover()"></div>
+</div>

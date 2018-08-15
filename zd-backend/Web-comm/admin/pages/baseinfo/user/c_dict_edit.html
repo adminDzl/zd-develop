@@ -1,0 +1,60 @@
+<div class="modal-header">
+    <button type="button" class="close" ng-click="mm.close()"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+    <h4 class="modal-title">{{mm.site.title}}</h4>
+</div>
+<div class="modal-body">
+   		<div class="wrapper-md ng-scope">
+		    <form name="Form"  class="form-horizontal form-validation" novalidate>
+		   		 <div class="form-group">
+		            <label class="col-sm-3 control-label">父项:</label>
+		             <div class="col-sm-9">
+						 <select  class="form-control" ng-model="mm.form.parentId" ng-options="row.id as row.keyName for row in mm.site.allParentItems"></select>
+		            </div>
+		        </div>
+		        <div class="line line-dashed b-b line-lg"></div>
+		        <div class="form-group">
+		            <label class="col-sm-3 control-label"><span class="text-danger">*</span>选项名称:</label>
+		             <div class="col-sm-9">
+		            	<input type="text" class="form-control" ng-model="mm.form.keyName" required ></input>
+		            </div>
+		        </div>
+		        <div class="line line-dashed b-b line-lg"></div>
+		        <div class="form-group">
+		            <label class="col-sm-3 control-label">选项值:</label>
+		             <div class="col-sm-9">
+		            	<input type="text" class="form-control" ng-model="mm.form.value" ></input>
+		            </div>
+		        </div>
+		        <div class="form-group">
+		            <label class="col-sm-3 control-label">选项Code:</label>
+		             <div class="col-sm-9">
+		            	<input type="text" class="form-control" ng-model="mm.form.keyCode" ></input>
+		            </div>
+		        </div>
+		        <div class="form-group">
+		            <label class="col-sm-3 control-label">排序值:</label>
+		             <div class="col-sm-9">
+		            	<input type="number" class="form-control" min="0"  ng-model="mm.form.orderIndex" required></input>
+		            </div>
+		        </div>
+		        <div class="form-group">
+		            <label class="col-sm-3 control-label"><span class="text-danger">*</span>数据库是否使用:</label>
+		             <div class="col-sm-9">
+						 <select class="form-control" ng-model="mm.form.dbUsed" ng-options="row.value as row.name for row in mm.site.dbUsed" required></select>
+					 </div>
+		        </div>
+		        <div class="line line-dashed b-b line-lg"></div>
+		        <div class="form-group">
+		            <label class="col-sm-3 control-label">备注:</label>
+		             <div class="col-sm-9">
+		            	<input type="text" class="form-control" ng-model="mm.form.remark"  ></input>
+		            </div>
+		        </div>
+		    </form>
+	    </div>
+		
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-default" ng-click="mm.close()">取消</button>
+    <button type="button" class="btn btn-info" ng-disabled="Form.$invalid" ng-click="mm.addSave()">提交</button>
+</div>

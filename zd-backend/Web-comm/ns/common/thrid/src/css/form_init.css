@@ -1,0 +1,490 @@
+#components {
+    min-height: 600px;
+}
+
+#target {
+    min-height: 200px;
+    border: 1px solid #ccc;
+    padding: 5px;
+}
+
+#target .component {
+    border: 1px solid #fff;
+}
+
+#temp {
+    width: 500px;
+    background: white;
+    border: 1px dotted #ccc;
+    border-radius: 10px;
+}
+
+.popover-content form {
+    margin: 0 auto;
+    width: 213px;
+}
+
+.popover-content form .btn {
+    margin-right: 10px
+}
+
+#source {
+    min-height: 500px;
+}
+
+.form-horizontal .my-title {
+    border: 1px solid #d2d2d2;
+    background: #ffffff;
+    padding: 4px 8px;
+    margin-left: 0;
+}
+
+.my-title > input {
+    border: none;
+    outline: none;
+    background: #ffffff;
+    color: #484848;
+    line-height: 24px;
+    box-shadow: none;
+    padding: 0;
+    width: 100%;
+    height: 24px;
+}
+
+/* reset */
+
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+p,
+dl,
+dd,
+ul,
+ol,
+form,
+input,
+textarea,
+th,
+td,
+select {
+    margin: 0;
+    padding: 0;
+    font-family: "微软雅黑";
+}
+
+em {
+    font-style: normal;
+}
+
+li {
+    list-style: none;
+}
+
+a {
+    text-decoration: none;
+}
+
+img {
+    border: none;
+    vertical-align: top;
+}
+
+table {
+    border-collapse: collapse;
+}
+
+input,
+textarea,
+select {
+    outline: none;
+}
+
+textarea {
+    resize: none;
+    overflow: auto;
+}
+
+/* end reset */
+
+.clear:after {
+    content: '';
+    display: block;
+    clear: both;
+    width: 0;
+    height: 0;
+}
+
+.fl {
+    float: left;
+}
+
+.fr {
+    float: right;
+}
+
+.userInfoTop {
+    height: 32px;
+    line-height: 32px;
+    background: #f5f5f5;
+    font-size: 16px;
+    color: #484848;
+    padding-left: 16px;
+}
+
+.userInfoTop > input {
+    border: none;
+    outline: none;
+    background: transparent;
+    line-height: 32px;
+    height: 32px;
+    padding: 0;
+    border-radius: 0;
+    width: 100%;
+    box-shadow: none;
+    display: block;
+}
+
+.userInfo {
+}
+
+.soloInfo input{
+    position: relative !important;
+}
+
+.soloInfo span {
+    float: left;
+    width: 124px !important;
+    height: 32px;
+    text-align: right;
+    line-height: 30px;
+    color: #959595;
+    font-size: 14px;
+    margin-right: 30px;
+    padding-top: 0 !important;
+}
+
+.soloInfo > input {
+    float: left;
+    width: 238px;
+    height: 30px;
+    margin: 0 14px 0 0;
+    padding: 0 10px;
+    color: #959595;
+    font-size: 14px;
+    border: 1px solid #d3d3d3;
+}
+
+.soloInfo > textarea {
+    float: left;
+    height: 70px;
+    margin: 0 14px 0 0;
+    padding: 10px;
+    color: #959595;
+    font-size: 14px;
+    border: 1px solid #d3d3d3;
+}
+
+.soloInfo > select {
+    border: 1px solid #d3d3d3;
+    width: 238px;
+    float: left;
+}
+
+.soloInfo em {
+    float: left;
+    color: #ff0000;
+    line-height: 30px;
+}
+
+.soloInfo label {
+    padding: 0px !important;
+    float: left;
+    line-height: 30px;
+    margin-right: 30px;
+    height: 30px;
+    color: #959595;
+    position: relative;
+}
+
+.soloInfo label .i1,.soloInfo label .i2,.soloInfo label .ico,.soloInfo label .ico2 {
+    position: absolute;
+    left: 0;
+    top: 0;
+    display: block;
+    width: 30px;
+    height: 30px;
+}
+
+.soloInfo label .i1 {
+    background: url("../img/radioIco.png") no-repeat;
+}
+
+.soloInfo label .i2 {
+    background: url("../img/checkbox1.png") no-repeat;
+}
+
+.soloInfo label .ico {
+    background: url("../img/radioChecked.png") no-repeat;
+}
+
+.soloInfo label .ico2 {
+    background: url("../img/checkbox2.png") no-repeat;
+}
+
+.soloInfo .choose,
+.soloInfo input[type='checkbox'],
+.soloInfo input[type='radio'] {
+    margin: 0px !important;
+    padding: 0px !important;
+    width: 30px !important;
+    height: 30px !important;
+    margin-right: 8px !important;
+    opacity: 0 !important;
+}
+
+.soloInfo .upload {
+    position: relative;
+    margin-left: 125px;
+    overflow: hidden;
+}
+
+.soloInfo .addFile {
+    width: 137px !important;
+    height: 138px;
+    border: 1px dashed #dadada;
+    background: url("../img/addFile.gif") no-repeat;
+    cursor: pointer;
+}
+
+.soloInfo .fileBtn {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 137px;
+    height: 138px;
+    opacity: 0;
+}
+
+.soloInfo .explain {
+    color: #959595;
+    margin-left: 170px;
+}
+
+.fl-div {
+    float: left;
+}
+
+.soloInfo .explain strong {
+    line-height: 36px;
+}
+
+.soloInfo .explain p {
+    line-height: 18px;
+}
+
+.radio.inline,
+.checkbox.inline {
+    padding-top: 0;
+}
+
+.soloInfo .submitBtn {
+    float: left;
+    width: 200px;
+    height: 38px;
+    text-align: center;
+    line-height: 38px;
+    background: #31b1d4;
+    color: #fff;
+    font-size: 18px;
+    border-radius: 4px;
+}
+
+.attachment {
+    margin-top: 30px;
+}
+
+.attachment .title {
+    color: #484848;
+    font-size: 18px;
+    height: 51px;
+    border-bottom: 2px solid #ebebeb;
+    line-height: 51px;
+}
+
+.attachment .files {
+}
+
+.attachment .files a {
+    display: inline-block;
+    width: 174px;
+    margin: 20px 20px 0 0;
+    position: relative;
+    color: #484848;
+    text-align: center;
+}
+
+.attachment .files a i {
+    position: absolute;
+    top: 20px;
+    left: -5px;
+}
+
+.clear {
+    zoom: 1;
+}
+
+.userInfoTop {
+    height: 32px;
+    line-height: 32px;
+    background: #f5f5f5;
+    margin: 25px 0;
+    font-size: 14px;
+    color: #484848;
+    padding-left: 16px;
+}
+
+.soloInfo span {
+    float: left;
+    width: 124px;
+    text-align: right;
+    line-height: 30px;
+    color: #959595;
+    font-size: 14px;
+    margin-right: 30px;
+}
+
+.infoTable {
+    border: 1px solid #ebebeb;
+    border-bottom: none;
+}
+
+#formZone .userInfoTop {
+    margin: 0;
+    background: #fff;
+    height: 56px;
+    line-height: 56px;
+    border-bottom: 1px solid #ebebeb;
+}
+
+#formZone .soloInfo {
+    margin-bottom: 0;
+    border-bottom: 1px solid #ebebeb;
+    /*height: 48px;*/
+    /* display: none; */
+}
+
+#formZone > div:last-child, #formZone .upload {
+    display: none;
+}
+
+#formZone .soloInfo span {
+    height: 48px;
+    line-height: 48px;
+    background: #f9f9f9;
+    width: 16em !important;
+    padding-right: 34px;
+}
+
+#formZone .soloInfo input{
+    height: 48px !important;
+    line-height: 48px;
+    border: none;
+    color: #494848;
+    resize: none;
+    background: #ffffff;
+    padding: 0 !important;
+    display: block;
+    padding-left: 50px;
+    /*width: 70%;*/
+}
+
+#formZone .soloInfo textarea{  
+    height: 96px !important;
+    width: 60%;
+    margin-top: 15px;
+    line-height: 18px;
+    border: none;
+    color: #494848;
+    resize: none;
+    background: #ffffff;
+    padding: 0 !important;
+    display: block;
+    padding-left: 50px;
+}
+
+#formZone .soloInfo em, #formZone .soloInfo label i, #formZone input[type='checkbox'], #formZone input[type='radio'] {
+    display: none;
+}
+
+#formZone .checkbox, #formZone .radio {
+    display: none;
+}
+
+#formZone .soloInfo label {
+    height: 48px;
+    line-height: 48px;
+}
+
+.add-detail {
+    padding: 30px 0;
+    border-bottom: 1px solid #ebebeb;
+}
+
+.add-detail > p {
+    color: #31b1d4;
+    font-size: 16px;
+    line-height: 32px;
+}
+
+.add-detail > span {
+    color: #484848;
+    font-size: 14px;
+    line-height: 28px;
+}
+
+.need-zl-detail {
+    padding-bottom: 20px;
+}
+
+.need-zl-detail > div {
+    margin-top: 26px;
+}
+
+.need-zl-detail > div > p {
+    font-size: 14px;
+    color: #484848;
+    font-weight: bold;
+    line-height: 28px;
+}
+
+.zl-list-li > li {
+    color: #484848;
+    font-size: 14px;
+    line-height: 28px;
+}
+
+.inline-service-zone {
+    border: 1px solid #ebebeb;
+    background: #f9f9f9;
+    padding: 10px 50px;
+    margin-bottom: 20px;
+}
+
+.leipiplugins-orgvalue{
+    line-height: 48px;
+    color: #484848 !important;
+}
+.sel-span{
+    color: #484848 !important;
+}
+
+.color-gray{
+    color:#959595;
+}
+
+.color-black{
+    color: #484848;
+}

@@ -1,0 +1,41 @@
+  <style>
+  .JColResizer{table-layout:fixed;} 
+  .JColResizer > tbody > tr > td, 
+  .JColResizer > tbody > tr > th{padding-left:0!important; padding-right:0!important;}  
+  .JCLRgrips{ height:0px; position:relative;} 
+  .JCLRgrip{margin-left:-5px; position:absolute; z-index:5; } 
+  .JCLRgrip .JColResizer{position:absolute;background-color:red;filter:alpha(opacity=1);opacity:0;width:10px;height:100%;cursor: e-resize;top:0px} 
+  .JCLRLastGrip{position:absolute; width:1px; } 
+  .JCLRgripDrag{ border-left:1px dotted black;	} 
+  .JCLRFlex{width:auto!important;} 
+  .JCLRgrip.JCLRdisabledGrip .JColResizer{cursor:default; display:none;}
+</style>
+  <!-- navbar -->
+  <div data-ng-include=" 'common/home/header.html' " class="app-header navbar">
+  </div>
+  <!-- / navbar -->
+
+  <!-- menu -->
+  <div data-ng-include=" 'common/home/aside.html' " class="app-aside hidden-xs {{app.settings.asideColor}}">
+  </div>
+  <!-- / menu -->
+
+  <!-- content -->
+  <div class="app-content">
+    <!--<div ui-butterbar></div>-->
+    <ui-loading></ui-loading>
+    <a href class="off-screen-toggle hide" ui-toggle-class="off-screen" data-target=".app-aside" ></a>
+    <div class="app-content-body fade-in-up" ui-view></div>
+  </div>
+  <!-- /content -->
+
+  <!-- footer -->
+  <div class="app-footer wrapper b-t bg-light">
+    <span class="pull-right">{{app.version}} <a href ui-scroll-to="app" class="m-l-sm text-muted"><i class="fa fa-long-arrow-up"></i></a></span>
+    &copy; 2018 深圳智慧园区技术有限公司.
+  </div>
+  <!-- / footer -->
+  
+	<!-- 主题设计 -->
+  <!-- <div data-ng-include=" 'common/home/settings.html' " class="settings panel panel-default"> -->
+  </div>

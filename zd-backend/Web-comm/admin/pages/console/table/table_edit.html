@@ -1,0 +1,116 @@
+
+
+<crumb title="新增图表"></crumb>
+<div class="wrapper-md ng-scope" ng-controller="TTableEdit">
+
+	<div class="modal-body">
+	    <div class="wrapper-md ng-scope">
+		    <form name="Form"  class="form-horizontal form-validation" novalidate>
+		        <div class="form-group">
+		            <label class="col-sm-1 control-label"><span class="text-danger">*</span>所属业务:</label>
+		            <div class="col-sm-2">
+		            	<select class="form-control" ng-change="selectType()" required ng-model="form.dataType" ng-options="en.id as en.text for en in dataType">
+						</select>
+		            </div>
+		        </div>
+		        <div ng-show=" isshowYW " >
+			        <div class="line line-dashed b-b line-lg"></div>
+			        <div class="form-group">
+			            <label class="col-sm-1 control-label"><span class="text-danger">*</span>统计业务:</label>
+			            <div class="col-sm-9">
+			            	<label class="checkbox-inline" ng-repeat="en in datanameList">
+			            		<input type="radio"  name="form.statisticsName" ng-model="form.statisticsName" value="{{en.id}}" required >{{en.text}}
+			            	</label>
+			            </div>
+			        </div>
+		        </div>
+		        
+		        <div class="line line-dashed b-b line-lg"></div>
+		        <div class="form-group">
+		            <label class="col-sm-1 control-label"><span class="text-danger">*</span>选择园区:</label>
+		            <div class="col-sm-9">
+	            		<label class="checkbox-inline">
+	            			<input type="radio"  name="form.parkType" ng-model="form.parkType" value="local" required >本地园区
+	            		</label>
+	            		<label class="checkbox-inline">
+	            			<input type="radio"  name="form.parkType" ng-model="form.parkType" value="saas" required >多园区
+	            		</label>
+	          		</div>
+		        </div>
+		        
+		        <div ng-show="form.parkType == 'saas' ">
+			        <div class="line line-dashed b-b line-lg"></div>
+			        <div class="form-group">
+			            <label class="col-sm-1 control-label"><span class="text-danger">*</span>下属园区:</label>
+			            <div class="col-sm-9">
+			            	<label class="checkbox-inline" ng-repeat="en in parkList">
+			            		<input type="checkbox" ng-model="en.check" >{{en.text}}
+			            	</label>
+			            </div>
+			        </div>
+		        </div>
+				
+		        <div class="line line-dashed b-b line-lg"></div>
+		        <div class="form-group">
+		            <label class="col-sm-1 control-label">时间纬度:</label>
+		            <div class="col-sm-9">
+		            	<label class="checkbox-inline" ng-repeat="en in timeList">
+		            		<input type="radio"  name="form.time" ng-model="form.time" value="{{en.id}}" >{{en.text}}
+		            	</label>
+		            </div>
+		        </div>
+		        <div ng-show=" isshowWD " >
+			        <div class="line line-dashed b-b line-lg"></div>
+			        <div class="form-group">
+			            <label class="col-sm-1 control-label">类别纬度:</label>
+			            <div class="col-sm-9">
+			            	<label class="checkbox-inline" ng-repeat="en in typeList">
+			            		<input type="checkbox" ng-model="en.check" >{{en.text}}
+			            	</label>
+			            </div>
+			        </div>
+			    </div>
+		        
+		        <div class="line line-dashed b-b line-lg"></div>
+		        <div class="form-group">
+		            <label class="col-sm-1 control-label"><span class="text-danger">*</span>图表类型:</label>
+		            <div class="col-sm-9">
+		            	<label class="checkbox-inline" ng-repeat="en in tableList">
+		            		<input type="radio"  name="form.tableType" ng-model="form.tableType" value="{{en.id}}" ng-click="checkTableType(en.id)" required >{{en.text}}
+		            	</label>
+		            </div>
+		        </div>
+		        
+		        <div class="line line-dashed b-b line-lg"></div>
+		        <div class="form-group">
+		            <label class="col-sm-1 control-label"><span class="text-danger">*</span>图表名称:</label>
+		             <div class="col-sm-2">
+		            	<input type="text" class="form-control" ng-model="form.name" required ></input>
+		            </div>
+		        </div>
+		        <div class="line line-dashed b-b line-lg"></div>
+		        <div class="form-group">
+		            <label class="col-sm-1 control-label"></label>
+		             <div class="col-sm-2">
+		            	<button type="button" class="btn btn-info" ng-click="showTable()">图表展示</button>
+		            </div>
+		        </div>
+		        <div class="row" ng-show="isshowTB" >
+				 	<div class="col-md-6">
+				 		<div class="panel panel-default">
+						 	<div class="panel-heading font-bold">图表示例</div>
+						 	<div class="panel-body" >
+						 		<ng-echarts ec-config="yearConfig" ec-option="statusNumOption" style="width: 600px;height:400px;"></ng-echarts>
+						 	</div>
+						 </div>
+				 	</div>
+				 </div>
+		        
+		    </form>
+	    </div>
+	</div>
+	<div class="modal-footer">
+	    <button type="button" class="btn btn-default" ng-click="close()">取消</button>
+	    <button type="button" class="btn btn-info" ng-disabled="Form.$invalid" ng-click="addSave()">提交</button>
+	</div>
+</div>

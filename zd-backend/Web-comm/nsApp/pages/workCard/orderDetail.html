@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+	<meta content="yes" name="apple-mobile-web-app-capable">
+	<meta content="black" name="apple-mobile-web-app-status-bar-style">
+	<meta content="telephone=no" name="format-detection">
+	<meta content="email=no" name="format-detection">
+	<meta name="hotcss" content="max-width=640">
+	<title>订单详情</title>
+	<link rel="stylesheet" href="../../css/common.css" />
+	<link rel="stylesheet" href="../../css/style.css" />
+	<link rel="stylesheet" href="../../css/common/swiper.min.css" />
+	<script type="text/javascript" src="../../js/common/hotcss.js"></script>
+</head>
+
+<body ng-app="myApp" ng-controller="AppCtrl"  class="bottomBtnFixBody">
+	<div class="container m-t-40">
+		<p class="f-s-40 f-c-494848 p-l-r-40">服务订单：
+			<span>{{ orderInfo.orderNo }}</span>
+		</p>
+	</div>
+
+	<div class="container m-t-40">
+		<div class="textBox fix">
+			<p class="f-l">申请单位：</p>
+			<p class="f-r" ng-bind="orderInfo.applyUnitName"></p>
+		</div>
+		<div class="textBox fix">
+			<p class="f-l">申请人：</p>
+			<p class="f-r" ng-bind="orderInfo.applyName"></p>
+		</div>
+		<div class="textBox fix">
+			<p class="f-l">申请人电话：</p>
+			<p class="f-r" ng-bind="orderInfo.applyPhone"></p>
+		</div>
+		<div class="textBox fix">
+			<p class="f-l">申请人科室：</p>
+			<p class="f-r" ng-bind="orderInfo.userDeptName"></p>
+		</div>
+		<div class="textBox fix">
+			<p class="f-l">编制类型：</p>
+			<p class="f-r" ng-bind="orderInfo.weaveTypeName"></p>
+		</div>
+		<div class="textBox fix">
+			<p class="f-l">办卡年限：</p>
+			<p class="f-r" ng-bind="orderInfo.applyDeadlineName"></p>
+		</div>
+		<div class="textBox fix">
+			<p class="f-l">门禁房号：</p>
+			<p class="f-r" ng-bind="orderInfo.guardRoomNo"></p>
+		</div>
+		
+	</div>
+
+	<div class="container m-t-40" ng-if="orderInfo.fileList.length > 0">
+		<div class="textBox fix">
+			<p>附件：</p>
+			<div class="selectRepairsFile showFileImgBox">
+				<ul class="fix">
+					<li style="background: url({{item}}) center no-repeat; background-size: cover;" data-imgurl="{{ item }}" data-index="{{ $index+1 }}"
+					 ng-repeat="item in orderInfo.fileList"></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+
+	<!-- 订单状态 -->
+	<div class="container m-t-40">
+		<p class="defaultP">订单状态</p>
+		<div class="orderStateBox workCardStatus">
+			<div>
+				<div>
+					<em></em>
+				</div>
+			</div>
+			<ul class="fix">
+				<li>    <!--class="select current"-->
+					<em></em>
+					<p>已提交</p>
+				</li>
+				<li class="course">    <!--ng-if="processState=='1'"-->
+					<em></em>
+					<p>科室负责人审核</p>
+				</li>
+				<li class="course">     <!--ng-if="processState=='2'"-->
+					<em></em>
+					<p>分管领导审核</p>
+				</li>
+				<li class="course">     <!--ng-if="processState=='3'"-->
+					<em></em>
+					<p>事务局审核</p>
+				</li>
+				<li class="course">
+					<em></em>
+					<p>完成</p>
+				</li>
+				<li ng-class="{'check1':processState=='2','check2':processState=='3','check3':processState=='4','check4':curOperationType=='2'}" ng-show="curOperationType=='2' || curOperationType=='5'">
+					<em></em>
+					<p ng-bind-template="{{ curOperationType=='2' ? '已取消' : '已驳回' }}"></p>
+				</li>
+			</ul>
+		</div>
+		
+	</div>
+	
+	<div class="container m-t-40" ng-show="curOperationType=='1'||curOperationType=='3'" style="background: transparent;">
+		<div class="inputBox" ng-show="processState=='1'">
+			<p class="f-c-51a87c" power-key="service:onecard:kscheck">驳回理由:</p>
+			<input type="text" power-key="service:onecard:kscheck" placeholder="若驳回请输入驳回原因" ng-model="rejectResaon"/>
+		</div>
+		<div class="inputBox" ng-show="processState=='2'">
+			<p class="f-c-51a87c" power-key="service:onecard:fgcheck">驳回理由:</p>
+			<input type="text" power-key="service:onecard:fgcheck" placeholder="若驳回请输入驳回原因" ng-model="rejectResaon"/>
+		</div>
+		<div class="inputBox" ng-show="processState=='3'">
+			<p class="f-c-51a87c" power-key="service:onecard:swjcheck">驳回理由:</p>
+			<input type="text" power-key="service:onecard:swjcheck" placeholder="若驳回请输入驳回原因" ng-model="rejectResaon"/>
+		</div>
+	</div>
+	
+	<!-- 审核 -->
+	<div class="bottomBtnTwo fix bottomBtnFix rejectOrPass" ng-if="curOperationType=='1'||curOperationType=='3'">
+		<!--科室负责人审核-->
+		<div ng-if="processState=='1'">
+			<button class="cancel" ng-click="getOprateState(2)" power-key="service:onecard:kscheck">驳回</button>
+			<button class="confirm" ng-click="getOprateState(1)" power-key="service:onecard:kscheck">通过</button>
+		</div>
+			
+		<!--分管领导审核-->
+		<div ng-if="processState=='2'">
+			<button class="cancel" ng-click="getOprateState(2)" power-key="service:onecard:fgcheck">驳回</button>
+			<button class="confirm" ng-click="getOprateState(1)" power-key="service:onecard:fgcheck">通过</button>
+		</div>
+		
+		<!--事务局审核-->
+		<div ng-if="processState=='3'">
+			<button class="cancel" ng-click="getOprateState(2)" power-key="service:onecard:swjcheck">驳回</button>
+			<button class="confirm" ng-click="getOprateState(1)" power-key="service:onecard:swjcheck">通过</button>
+		</div>			
+	</div>
+
+	<!-- 取消订单 -->
+	<a href="javascript:;" class="fill-btn confirm cancelBtn" ng-if="processState=='1' && isMyOrder && curOperationType!=2" ng-click="getOprateState(3)">取消订单</a>
+
+	<!-- 蒙版 -->
+	<div class="masking"></div>
+
+	
+	
+	<script type="text/javascript" src="../../js/common/angular.js"></script>
+	<script type="text/javascript" src="../../js/common/jquery-1.8.3.min.js"></script>
+	<script type="text/javascript" src="../../js/common/jquery.form.js" ></script>
+	<script type="text/javascript" src="../../js/common/swiper.min.js"></script>
+	<script type="text/javascript" src="../../js/common/mobileFix.mini.js"></script>
+	<script type="text/javascript" src="../../js/common/exif.js"></script>
+	<script type="text/javascript" src="../../js/common/lrz.js"></script>
+	<script type="text/javascript" src="../../js/common/util.js"></script>
+	<script type="text/javascript" src="../../js/workCard/orderDetail.js" ></script>
+	<script src="../../js/common/ngStorage.js"></script>
+	<script src="../../js/common/pagePower.js"></script>
+	
+</body>
+
+</html>

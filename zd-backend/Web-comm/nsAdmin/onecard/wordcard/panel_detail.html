@@ -1,0 +1,134 @@
+<div class="modal-header">
+    <button type="button" class="close" ng-click="close()"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+    <h4 class="modal-title">{{site.title}}</h4>
+</div>
+<!-- 订单状态 -->
+<div class="containers">
+	<p class="defaultP">订单状态</p>
+	<div class="orderStateBox workCardStatus">
+		<div>
+			<div>
+				<em></em>
+			</div>
+		</div>
+		<ul>
+			<li>
+				<em></em>
+				<p>已提交</p>
+			</li>
+			<li class="course">
+				<em></em>
+				<p>科室负责人审核</p>
+			</li>
+			<li class="course">
+				<em></em>
+				<p>分管领导审核</p>
+			</li>
+			<li class="course">
+				<em></em>
+				<p>事务局审核</p>
+			</li>
+			<li class="course">
+				<em></em>
+				<p>完成</p>
+			</li>
+			<li ng-class="{'check1':site.processState=='2','check2':site.processState=='3','check3':site.processState=='4','check4':site.curOperationType=='2'}" ng-show="site.curOperationType=='2' || site.curOperationType=='5'">
+				<em></em>
+				<p ng-bind-template="{{ site.curOperationType=='2' ? '已取消' : '已驳回' }}"></p>
+			</li>
+		</ul>
+	</div>	
+</div>
+<div class="modal-body">
+    <div class="wrapper-md ng-scope">
+	    <form name="Form"  class="form-horizontal form-validation" novalidate>
+	        <div class="form-group">
+	            <label class="col-sm-3 control-label">订单编号:</label>
+	             <div class="col-sm-6">
+					<p class="form-control" ng-bind="form.orderNo"></p>
+				</div>
+	        </div>
+	        <div class="form-group">
+	            <label class="col-sm-3 control-label">订单状态:</label>
+	             <div class="col-sm-9">
+					<p class="form-control" ng-bind-template="{{form.orderStatus | orderStatus}}"></p>
+	            </div>
+	        </div>
+			<div class="form-group">
+				<label class="col-sm-3 control-label">申请单位:</label>
+				<div class="col-sm-9">
+					<p class="form-control" ng-bind="form.applyUnitName"></p>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-3 control-label">申请姓名:</label>
+				<div class="col-sm-9">
+					<p class="form-control" ng-bind="form.applyName"></p>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-3 control-label">申请电话:</label>
+				<div class="col-sm-9">
+					<p class="form-control" ng-bind="form.applyPhone"></p>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-3 control-label">申请科室:</label>
+				<div class="col-sm-9">
+					<p class="form-control" ng-bind="form.userDeptName"></p>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-3 control-label">编制类型:</label>
+				<div class="col-sm-9">
+					<p class="form-control" ng-bind="form.weaveTypeName"></p>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-3 control-label">办卡期限:</label>
+				<div class="col-sm-9">
+					<p class="form-control" ng-bind="form.applyDeadlineName"></p>
+				</div>
+			</div>
+			
+			<div class="form-group" ng-if="form.file.length > 0">
+				<label class="col-sm-3 control-label">附件:</label>
+				<div class="col-sm-9">
+					<ul >
+						<li ng-repeat="item in form.fileList" style="background: url({{item.filePath}}) center no-repeat; background-size: contain; height: 100px; float: left; width: 100px; margin-right: 100px;"></li>
+					</ul>
+				</div>
+			</div>
+	    </form>
+    </div>
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-info"  ng-click="close()">关闭</button>
+</div>
+<style>
+	.orderStateBox{ padding: 10px; width: 100%; height: 80px; box-sizing: border-box; position: relative; overflow: hidden; }   
+    .orderStateBox div{ width: 82%; height: 4px; position: absolute; left: 6%; top: 10px; z-index: 1; }
+    .orderStateBox div div{ width: 90%; height: 100%; background-color: #dcdcdc; position: relative; }
+    .orderStateBox div div em{ display: inline-block; width: 0; max-width: 100%; height: 100%; background-color: #5be3e3; position: absolute; }
+    .orderStateBox ul{ width: calc(100% - 20px);  position: absolute; z-index: 2;overflow: hidden;}
+    .workCardStatus ul li{ width: 11%; margin-left: 8%;float: left;text-align: center;}
+    .workCardStatus ul li:first-child{ margin-left: 20px; }
+    .workCardStatus ul li em{ display: inline-block; width: 24px; height: 24px; border-radius: 50%; background-color: #dcdcdc; }
+    .workCardStatus ul li.select em{ background-color: #5be3e3; }
+    .workCardStatus ul li p{ font-size: $defaultFontSize; color: #8997a5; }
+    .workCardStatus ul li.select.current p{ color: #5be3e3; }
+    .workCardStatus ul li.reject{ display: none; }
+    .rejectOrder div div em{ width: 100%; }
+    .rejectOrder ul li.course{ display: none; }
+    .rejectOrder ul li.reject{ margin-left: 72%; display: block; }
+    .rejectOrder ul li em{ background-color: #5be3e3; }
+    .rejectOrder ul li:last-child p{ color: #5be3e3; } 
+    .workCardStatus li.check1{margin-left: 68%!important;}
+    .workCardStatus li.check2{margin-left: 28%!important;}
+    .workCardStatus li.check3{margin-left:14%!important;}
+    .workCardStatus li.check4{margin-left:68%!important;}
+    .defaultP{margin: 20px;}
+</style>
+<script>
+	
+</script>

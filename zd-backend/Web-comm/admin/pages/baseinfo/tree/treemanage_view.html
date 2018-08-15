@@ -1,0 +1,94 @@
+<div class="modal-header">
+    <button type="button" class="close" ng-click="mm.close()"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+    <h4 class="modal-title">{{mm.site.title}}</h4>
+</div>
+<div class="modal-body">
+	<div class="row">
+			<div class="col-md-3 panel panel-default">
+				<div class="panel-body">
+				<abn-tree tree-data="mm.site.dataList" tree-control="my_tree"  on-select="mm.navSelect(branch)"  expand-level="3" initial-selection="Granny Smith" icon-leaf="fa fa-file-o" icon-expand="fa fa-plus" icon-collapse="fa fa-minus"></abn-tree>
+				</div>
+			</div>
+			<div class="col-md-9">
+			<form name="Form"  class="form-horizontal form-validation" novalidate ng-if="mm.site.currentItem.name">
+	        <div class="form-group">
+	            <label class="col-sm-3 control-label"><span class="text-danger">*</span>名称:</label>
+	             <div class="col-sm-9">
+	            		<input type="text" class="form-control" ng-model="mm.site.currentItem.name" required></input>
+	            </div>
+	        </div>
+	        
+	        
+	        <div class="line line-dashed b-b line-lg"></div>
+	        <div class="form-group">
+	            <label class="col-sm-3 control-label">上级名称:</label>
+	             <div class="col-sm-9">
+	            		<select class="form-control input-sm-h small"   ng-model = "mm.site.currentItem.parentId" ng-options = "a.id as a.name  for a in mm.site.parentList"  ng-change="mm.site.selectChange(mm.site.currentItem.parentId);" readonly></select>
+	            </div>
+	        </div>
+
+
+			<div class="line line-dashed b-b line-lg"></div>
+			
+			<div class="form-group" ng-if="!mm.site.currentItem.parentId">
+				<label class="col-sm-3 control-label">类型编码:</label>
+				<div class="col-sm-9">
+	            		<input type="text" class="form-control" ng-model="mm.site.currentItem.treeCode" ></input>
+				</div>
+			</div>
+			<div class="form-group" ng-if="mm.site.currentItem.parentId">
+				<label class="col-sm-3 control-label">类型编码:</label>
+				<div class="col-sm-9">
+	            		<input type="text" class="form-control" ng-model="mm.site.currentItem.treeCode" ></input>
+				</div>
+			</div>
+
+			<div class="line line-dashed b-b line-lg"></div>
+			<div class="form-group">
+				<label class="col-sm-3 control-label"><span class="text-danger">*</span>创建人:</label>
+				<div class="col-sm-9">
+	            		<input type="text" class="form-control" ng-model="mm.site.currentItem.createBy" disabled></input>
+				</div>
+			</div>
+
+
+			<div class="line line-dashed b-b line-lg"></div>
+			<div class="form-group">
+				<label class="col-sm-3 control-label"><span class="text-danger">*</span>状态:</label>
+				<div class="col-sm-9">
+						<select   class="form-control" ng-model="mm.site.currentItem.status1" ng-options="row.value as row.name for row in mm.site.statusList" required ></select>
+				</div>
+			</div>
+
+
+			<div class="line line-dashed b-b line-lg"></div>
+	        <div class="form-group">
+	            <label class="col-sm-3 control-label">展示类型:</label>
+	             <div class="col-sm-9">
+	            		<input type="text" class="form-control" ng-model="mm.site.currentItem.displayType" ></input>
+	            </div>
+	        </div>
+			
+			<div class="line line-dashed b-b line-lg"></div>
+	        <div class="form-group">
+	            <label class="col-sm-3 control-label">备注:</label>
+	             <div class="col-sm-9">
+	            		<input type="text" class="form-control" ng-model="mm.site.currentItem.remark"></input>
+	            </div>
+	        </div>
+	        <div class="line line-dashed b-b line-lg"></div>
+	        <div class="form-group">
+	            <label class="col-sm-3 control-label">排序:</label>
+	             <div class="col-sm-9">
+	            		<input type="number" class="form-control" ng-model="mm.site.currentItem.orderIndex"></input>
+	            </div>
+	        </div>
+	    </form>
+			</div>
+	</div>
+</div>
+<div class="modal-footer">
+    <button type="button" ng-if="mm.site.code != 3" class="btn btn-default" ng-click="mm.close()">取消</button>
+    <button type="button" ng-if="mm.site.code == 3" class="btn btn-default" ng-click="mm.close()">关闭</button>
+    <button type="button" ng-if="mm.site.code != 3" class="btn btn-info" ng-disabled="Form.$invalid" ng-click="mm.site.editSave(mm.site.currentItem)">提交</button>
+</div>

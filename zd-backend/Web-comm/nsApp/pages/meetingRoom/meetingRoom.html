@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+	    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+	    <meta content="yes" name="apple-mobile-web-app-capable">
+	    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+	    <meta content="email=no" name="format-detection">
+	    <meta name="hotcss" content="max-width=640">
+		<meta name="format-detection" content="telephone=yes"/>
+		<title>选择会议室</title>
+		<link rel="stylesheet" href="../../css/common.css" />
+		<link rel="stylesheet" href="../../css/style.css" />
+		<script type="text/javascript" src="../../js/common/hotcss.js"></script>
+	</head>
+	<body ng-app="myApp" ng-controller="meetingRoomCtrl" class="meetingPage">
+		<div class="meetingBox">
+			<div class="parkCallList">
+				<div class="meetingListBox">
+					<div class="headMeetingBox">
+						<!--<div class="attendance-select" ng-click="showAttendList()"><i></i>参会人数：<span ng-bind="selectPerson"></span></div>-->
+						<div class="attendance-list">
+							<ul class="fix">
+								<li class="select" ng-click="getMeetingRoom($event)">全部人数</li>
+								<li ng-click="getMeetingRoom($event,0,50)">50及以下</li>
+								<li ng-click="getMeetingRoom($event,51,100)">51-100</li>
+								<li ng-click="getMeetingRoom($event,101,150)">101-150</li>
+								<li ng-click="getMeetingRoom($event,151,300)">151-300</li>
+								<li ng-click="getMeetingRoom($event,300)">300及以上</li>
+							</ul>
+						</div>
+					</div>
+					
+					<div class="meeting-list" ng-show="meetingList.length>0">
+						<ul>
+							<li ng-repeat="item in meetingList" ng-click="openReserve(item.id)" class="libox">
+								<img src="{{ item.picList[0] }}" ng-if="item.picList"/>
+								<div class="roomdoc">
+									<div>
+										<span>{{ item.name }}</span>
+									</div>
+									<div>
+										<img src="../../img/location.png" />
+										<span>{{ item.address }}</span>
+									</div>
+									<div>
+										<img src="../../img/person.png" />
+										<span>{{ item.layTypeNum }}人以内</span>
+									</div>
+								</div>							
+							</li>
+						</ul>
+					</div>
+					<div ng-show="meetingList.length==0" class="nodata">
+						<img src="../../img/nodata.png"/>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<div class="meetingTel fix">
+			<a href="tel:{{ meetingMobile }}" class="f-l"><img src="../../img/phone.png" /></a>		
+		</div>
+		
+		<!-- 蒙版 -->
+		<div class="masking"></div>
+		
+		<script type="text/javascript" src="../../js/common/jquery-1.8.3.min.js"></script>
+		<script src="../../js/common/angular.js"></script>
+		<script src="../../js/common/public.js"></script>
+		<script src="../../js/common/util.js"></script>
+		<script src="../../js/meetingRoom/meetingRoom.js"></script>
+				
+	</body>
+</html>

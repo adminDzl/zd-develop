@@ -1,0 +1,29 @@
+<div class="modal-header">
+    <button type="button" class="close" ng-click="mm.close()"><span aria-hidden="true">×</span><span class="sr-only">Close</span>
+    </button>
+    <h4 class="modal-title">{{mm.site.title}}</h4>
+</div>
+<div class="modal-body">
+    <div class="wrapper-md ng-scope" style="padding-bottom: 0px;">
+        <div class="row">
+            <div class="col-lg-12">
+                 <form class="form-horizontal">
+                     <div class="form-group">
+                         <div class="col-sm-12">
+                             <textarea class="form-control" style="height:108px;" ng-model="mm.form.remark" placeholder="请输入备注内容"></textarea>
+                         </div>
+                     </div>
+                     <div class="form-group">
+	                     <div class="col-sm-12" style="padding-left: 11px;">
+	                     	<img-choose action="mm.getImgs(datas)"></img-choose>
+                     	 </div>
+                     </div>
+                 </form>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-default" ng-click="mm.close()">取消</button>
+    <button type="button" class="btn btn-info" ng-click="mm.addSave(mm.form)">保存</button>
+</div>

@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<meta content="yes" name="apple-mobile-web-app-capable">
+		<meta content="black" name="apple-mobile-web-app-status-bar-style">
+		<meta content="telephone=no" name="format-detection">
+		<meta content="email=no" name="format-detection">
+		<meta name="hotcss" content="max-width=640">
+		<title>晚餐预订</title>
+		<link rel="stylesheet" href="../../css/common.css" />
+		<link rel="stylesheet" href="../../css/style.css" />
+		<script type="text/javascript" src="../../js/common/hotcss.js" ></script>
+	</head>
+	<body ng-app="myApp" ng-controller="AppCtrl">
+		<div class="restaurantBox top" style="background: url(../../img/back/restaurantTop.png) center no-repeat; background-size: cover; padding-top: 0">
+			<span class="left" ng-click="navOperate('lunch')">午餐菜单</span><span class="center">晚餐预订</span><span class="right" ng-click="navOperate('takeOut')">外卖预订</span>
+			<em class="centers"></em>
+		</div>
+		<div class="dinnerMenuBox">
+			<ul class="fix">
+				<li class="{{item.choose == '1' ? 'select' : ''}}" data-index="{{$index+1}}" data-id="{{item.id}}" data-price="{{item.price}}" ng-click="selectCombo($event,item)" ng-repeat="item in dinnerMealList">
+					<div class="dinnerFoodImg" style="background: url({{item.imgUrl}}) center no-repeat; background-size: cover;">
+						<div class="weekTip">{{item.ext1 | gowek}}</div>
+					</div>
+					<div class="fix dinnerFoodInfo">
+						<p class="f-l foodName fellipsis">{{item.foodDesc}}</p>
+						<p class="f-r foodPrice fellipsis">￥{{item.price}}</p>
+					</div>
+				</li>
+			</ul>
+		</div>
+		
+		<div class="container">
+			<div class="inputBox">
+				<p ng-bind-template="{{ selectSetMeal.packName }}(套餐明细):"></p>
+				<p class="m-t-35 desc" ng-bind-template="{{ selectSetMeal.foodDesc }}"></p>
+			</div>
+			<div class="selectBox">
+				<p>预定类别(必填):</p>
+				<div>
+					<select class="bookingType" ng-change="changeType()" ng-model="bookingType">
+						<option value="2" ng-if="unitbuydinner">单位</option>
+						<option value="1">个人</option>
+					</select>
+				</div>
+			</div>
+			<div class="selectBox" ng-show="bookingType==2">
+				<p>单位名称(必填):</p>
+				<div>
+					<select ng-model="typeName" ng-options="item.id as item.name for item in typeNameList">
+						<!-- <option ng-repeat="(key , value) in typeNameList" value="{{key}}">{{value}}</option> -->
+					</select>
+				</div>
+			</div>
+			<div class="inputBox">
+				<p>取餐时间:</p>
+				<input type="text" placeholder="取餐时间" ng-model="time" disabled="true"/>
+			</div>
+			<div class="inputBox">
+				<p>数量(必填):</p>
+				<input type="number" class="dinnerCount" placeholder="请输入预定份数" ng-model="number" />
+			</div>
+			<div class="inputBox">
+				<p>总价:</p>
+				<input type="text" disabled="disabled" value="" ng-model="amount" />
+			</div>
+			<div class="inputBoxHasRadio">
+				<div class="fix radioBox">
+					<p class="f-l f-s-40 f-c-494848">饭盒</p>
+					<div class="f-r radioBtn" ng-click="selectLunchBox($event)"></div>
+				</div>
+			</div>
+		</div>
+		
+		<div class="container m-t-40 tip">
+			<p class="m-b-40"><em></em>说明：</p>
+			<p ng-if="bookingType==2">1.单位预定晚餐为月结方式；</p>
+			<p ng-if="bookingType==1">1.个人预定晚餐为微信支付方式；</p>
+			<p>2.请与用餐当日17:30~18:30之间去餐厅取餐；</p>
+			<p class="m-b-40">3.饭盒押金为100元/个，需取餐时，现金支付！</p>
+			
+			<!-- <a href="{{ bookingType | goHref }}" class="fill-btn confirm">确定</a> -->
+			<a href="javascript:;" class="fill-btn confirm" ng-click="createOrder()">确定</a>
+		</div>
+		
+		<!-- 蒙版 -->
+		<div class="masking"></div>
+
+		<!-- 提交成功 -->
+		<div class="successfulBox t-c">
+			<div class="successHeader">
+				<div class="successIcon"></div>
+				<em class="successClose" ng-click="closeOrOpenTipBox('close')"></em>
+			</div>
+			<p class="f-s-50 f-b l-h-116 m-t-33">支付成功</p>
+			<p class="f-s-40">订单支付成功，请在我的订单查看状态。</p>
+			<div class="f-s-40">(<span class="countDown" ng-bind-template="{{ countDown }}"></span>s)请等待</div>
+		</div>
+		
+		<script type="text/javascript" src="../../js/common/angular.js" ></script>
+		<script type="text/javascript" src="../../js/common/jquery-1.8.3.min.js" ></script>
+		<script type="text/javascript" src="../../js/common/jccplus-1.2.js"></script>
+		<script type="text/javascript" src="../../js/common/util.js" ></script>
+		<script type="text/javascript" src="../../js/restaurantBooking/dinnerBooking.js"></script>
+	</body>
+</html>

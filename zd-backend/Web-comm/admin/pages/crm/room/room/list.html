@@ -1,0 +1,135 @@
+<crumb title="房间管理" head="true"></crumb>
+<div class="wrapper-md" ng-controller="CrmRoomGrid">
+
+<div class="col-md-3" style="padding:0px;">
+<div class="panel panel-default">
+		<div class="panel-body">
+			<abn-tree tree-data="schemaObjList" tree-control="schemaObjTree" on-select="onNodeSelect(branch)" expand-level="2" initial-selection="Granny Smith" icon-leaf="fa fa-file-o" icon-expand="fa fa-plus" icon-collapse="fa fa-minus">
+			</abn-tree>
+		</div>
+</div>
+</div>
+<div class="col-md-9" style="padding:0px;">
+	 <div class="panel panel-default">
+	 	
+	 	<div class="panel-heading">
+            <div class="form-group">
+              <label class="control-label col-md-6" ng-if="schemaObj.name!=null">{{schemaObj.name}} - {{schemaObj.code}}</label>
+	        </div>
+        </div>
+        
+        <div class="panel-heading">
+            <button class="btn m-b-xs btn-sm btn-info btn-addon" power-key="user:add" ng-show="mode=='grid'" ng-click="addNew()">
+            	<i class="fa fa-plus"></i>新增
+            </button>
+        	<button title="导入数据" class="btn m-b-xs btn-sm btn-info btn-addon" ng-show="mode=='grid'"  power-key="user:add" ng-click="toDataImport()">
+            	导入数据
+            </button>
+        	<button title="下载模板" class="btn m-b-xs btn-sm btn-info btn-addon" ng-show="mode=='grid'"  power-key="user:add" ng-click="toDataDownload()">
+            	下载模板
+            </button>
+	        <button class="btn btn-sm btn-danger" power-key="user:add" ng-show="mode=='move'" ng-click="gridMode()">取消移动</button>
+            <span ng-show="mode=='move'">点击左侧层级移动选中的房间</span>
+        </div>
+        <div class="panel-heading">
+          <form class="form-inline ng-pristine ng-valid" role="form">
+            <div class="form-group">
+	          <input type="text" class="form-control" placeholder="请输入名称" ng-model="searchKeys" ng-keypress="search($event)"/>
+	        </div>
+	        <button type="submit" class="btn btn-info" ng-show="mode=='grid'" ng-click="search()">搜索</button>
+		  </form>
+		  
+        </div>
+        <div class="table-responsive">
+        	<table class="table table-striped b-t b-b">
+        		<thead>
+	                <tr>
+	                    <th style="width:5%" class="text-center" data-breakpoints="xs">No.</th>
+	                    <th style="width:15%" class="text-center">名称</th>
+	                    <th style="width:5%" class="text-center">类型</th>
+	                    <th style="width:10%" class="text-center">编号 </th>
+	                    <th style="width:10%" class="text-center">状态</th>
+	                    <th style="width:10%" class="text-center">租售说明</th>
+	                    <th style="width:10%" class="text-center">套内面积</th>
+	                    <th style="width:10%" class="text-center">销售价格</th>
+	                    <th style="width:10%" class="text-center">租赁价格</th>
+	                    <th style="width:15%" class="text-center" data-breakpoints="xs" >操作</th>
+	                </tr>
+                </thead>
+                <tbody>
+	                <tr data-expanded="true" ng-repeat="row in rows">
+	                    <td > {{paginationConf.currentPage ? paginationConf.pageSize*(paginationConf.currentPage-1)+$index+1 : $index+1}}</td>
+	                    <td > {{row.name}}</td>
+	                    <td > {{row.estateTypeName}}</td>
+	                    <td > {{row.fullCode}}</td>
+	                    <td ng-switch="row.useStatus">
+						    <span ng-switch-when="0">冻结</span>
+						    <span ng-switch-when="1">开放</span>
+						    <span ng-switch-when="2">已出租</span>
+						    <span ng-switch-when="3">已出售</span>
+					    </td>
+	                    <td>
+	                    	<span ng-switch="row.rentFlag">
+						        <span ng-switch-when="0"></span>
+						        <span ng-switch-when="1">可租</span>
+					        </span>
+	                    	<span ng-switch="row.saleFlag">
+						        <span ng-switch-when="0"></span>
+						        <span ng-switch-when="1">可售 </span>
+					        </span>
+					    </td>
+	                    <td > {{row.roomArea}}</td>
+	                    <td > {{row.salePrice}}</td>
+	                    <td > {{row.rentPrice}}</td>
+	                    <td>
+	                        <div class="buttons">
+	                            <button class="btn btn-sm btn-info" power-key="user:add" ng-show="mode=='grid'" ng-click="update(row.id)">修改</button>
+	                            <button class="btn btn-sm btn-info" power-key="user:add" ng-show="mode=='grid'" ng-click="moveMode(row.id)">移动</button>
+	                            <button class="btn btn-sm btn-danger" power-key="user:add" ng-show="mode=='move'" ng-click="gridMode()">取消移动</button>
+	                            <button class="btn btn-sm btn-danger" power-key="user:add" ng-show="mode=='grid'" ng-if="row.useStatus==1" ng-click="updateSwitch(row.id)">冻结</button>
+	                            <button class="btn btn-sm btn-info" power-key="user:add" ng-show="mode=='grid'" ng-if="row.useStatus==0" ng-click="updateSwitch(row.id)">开放</button>
+	                            <button class="btn btn-sm btn-danger" power-key="user:add" ng-show="mode=='grid'" ng-if="row.useStatus==0" ng-click="deleteById(row.id)">删除</button>
+	                        </div>
+	                    </td>
+	                </tr>
+                </tbody>
+        	</table>
+        	<tmpagination conf="paginationConf"></tmpagination>
+        </div>
+	 </div>
+</div>
+
+
+
+	  <!-- 数据导入 -->
+	    <div class="modal fade" id="dataImport" tabindex="-1" role="dialog"  >
+		    <div class="modal-dialog" role="document">
+		      <div class="modal-content">
+		         
+		        <div class="modal-header">
+		          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+		            <span aria-hidden="true">&times;</span>
+		          </button>
+		          <h4 class="modal-title" id="exampleRoleLabel">数据导入</h4>
+		        </div>
+		        <div class="modal-body">
+		          <form name="dataImportForm" id="dataImportForm" novalidate style="height: 150px;" class="bs-example form-horizontal" >
+		             <div class="form-group">
+		              <label class="col-lg-3 control-label" translate="">上传文件</label>
+		              <div class="col-lg-9">
+		                <input type="file" name="file" id="fileInput" accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/vnd.ms-excel">
+		              </div>
+		            </div>
+		          </form>
+		        </div>
+		        <div class="modal-footer">
+		        	<span class="text-danger app-aside fail-tip t-l"></span>
+		        	<span class="text-success app-aside success-tip t-l"></span>
+		          <button type="button" class="btn btn-sm btn-warning" data-dismiss="modal" id="close" translate="">关闭</button>
+		          <button type="button" class="btn btn-sm btn-info ng-scope" ng-click="dataImport()" translate="">提交</button>
+		        </div>
+		      </div>
+		    </div>
+	  	</div>
+	  <!-- 数据导入 end-->
+</div>

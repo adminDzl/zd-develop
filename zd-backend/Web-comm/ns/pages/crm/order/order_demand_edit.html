@@ -1,0 +1,142 @@
+<div class="modal-header">
+    <button type="button" class="close" ng-click="mm.close()"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+    <h4 class="modal-title">{{mm.site.title}}</h4>
+</div>
+<div class="modal-body">
+    <div class="wrapper-md ng-scope">
+	    <form name="Form"  class="form-horizontal form-validation" novalidate>
+	        
+	        <div class="form-group">
+	            <label class="col-sm-2 control-label">客户:</label>
+	             <div class="col-sm-7">
+	             	<input type="text" class="form-control" ng-model="mm.custimerName" disabled></input>
+	            </div>
+	            <div class="col-sm-2">
+		            <button class="btn btn-sm btn-success glyphicon glyphicon-plus m-t-n-xxs m-l-sm"    ng-click="mm.toCustomer()"></button>
+		        </div>
+	        </div>
+	        
+	        <div class="form-group">
+	            <label class="col-sm-3 control-label"><span class="text-danger">*</span>联系人:</label>
+	             <div class="col-sm-9">
+	             	<span ng-if="mm.site.code == 1 || mm.site.code == 2">
+	            		<input type="text" class="form-control" ng-model="mm.form.custimerName" required></input>
+	             	</span>
+	             	<span ng-if="mm.site.code == 3">
+	            		<input type="text" class="form-control" ng-model="mm.form.custimerName" disabled ></input>
+	             	</span>
+	            </div>
+	        </div>
+	       <div class="line line-dashed b-b line-lg"></div>
+	       <div class="form-group">
+	            <label class="col-sm-3 control-label"><span class="text-danger">*</span>联系电话:</label>
+	             <div class="col-sm-9">
+	             	<span ng-if="mm.site.code == 1 || mm.site.code == 2">
+	            		<input type="text" class="form-control" ng-model="mm.form.linkPhone" required></input>
+	             	</span>
+	             	<span ng-if="mm.site.code == 3">
+	            		<input type="text" class="form-control" ng-model="mm.form.linkPhone" disabled ></input>
+	             	</span>
+	            </div>
+	        </div>
+	        <div class="line line-dashed b-b line-lg"></div>
+	        <div class="form-group">
+	            <label class="col-sm-3 control-label">户型:</label>
+	             <div class="col-sm-9">
+	             	<span ng-if="mm.site.code == 1 || mm.site.code == 2">
+	            		<input type="text" class="form-control" ng-model="mm.form.houseType"></input>
+	             	</span>
+	             	<span ng-if="mm.site.code == 3">
+	            		<input type="text" class="form-control" ng-model="mm.form.houseType" disabled ></input>
+	             	</span>
+	            </div>
+	        </div>
+	        <div class="line line-dashed b-b line-lg"></div>
+	        <div class="form-group">
+	            <label class="col-sm-3 control-label">价格范围:</label>
+	             <div class="col-sm-9">
+	             	<span ng-if="mm.site.code == 1 || mm.site.code == 2">
+	            		<input type="text" class="form-control" ng-model="mm.form.priceScope"></input>
+	             	</span>
+	             	<span ng-if="mm.site.code == 3">
+	            		<input type="text" class="form-control" ng-model="mm.form.priceScope" disabled ></input>
+	             	</span>
+	            </div>
+	        </div>
+	        <div class="line line-dashed b-b line-lg"></div>
+	        <div class="form-group">
+	            <label class="col-sm-3 control-label">楼层:</label>
+	             <div class="col-sm-9">
+	             	<span ng-if="mm.site.code == 1 || mm.site.code == 2">
+	            		<input type="text" class="form-control" ng-model="mm.form.floorScope"></input>
+	             	</span>
+	             	<span ng-if="mm.site.code == 3">
+	            		<input type="text" class="form-control" ng-model="mm.form.floorScope" disabled ></input>
+	             	</span>
+	            </div>
+	        </div>
+	        <div class="line line-dashed b-b line-lg"></div>
+	        <div class="form-group">
+	            <label class="col-sm-3 control-label">面积范围:</label>
+	             <div class="col-sm-9">
+	             	<span ng-if="mm.site.code == 1 || mm.site.code == 2">
+	            		<input type="text" class="form-control" ng-model="mm.form.areaScope"></input>
+	             	</span>
+	             	<span ng-if="mm.site.code == 3">
+	            		<input type="text" class="form-control" ng-model="mm.form.areaScope" disabled ></input>
+	             	</span>
+	            </div>
+	        </div>
+	        
+	        <div class="line line-dashed b-b line-lg"></div>
+	        <div class="form-group">
+	            <label class="col-sm-3 control-label">房间朝向:</label>
+	             <div class="col-sm-9">
+	             	<span ng-if="mm.site.code == 1 || mm.site.code == 2">
+	            		<input type="text" class="form-control" ng-model="mm.form.orientation"></input>
+	             	</span>
+	             	<span ng-if="mm.site.code == 3">
+	            		<input type="text" class="form-control" ng-model="mm.form.orientation" disabled ></input>
+	             	</span>
+	            </div>
+	        </div>
+	        
+	        <div class="line line-dashed b-b line-lg"></div>
+	        <div class="form-group">
+	            <label class="col-sm-3 control-label"><span class="text-danger">*</span>入驻日期:</label>
+	             <div class="col-sm-9">
+	             	<span ng-if="mm.site.code == 1 || mm.site.code == 2">
+	            		<input type="text" class="form-control selectTime" ng-model="mm.form.joinDate" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd',onpicked: function(){$(this).trigger('change')}})" readonly="readonly" required></input>
+	             	</span>
+	             	<span ng-if="mm.site.code == 3">
+	            		<input type="text" class="form-control" ng-model="mm.form.joinDate" disabled ></input>
+	             	</span>
+	            </div>
+	        </div>   
+	        
+	        <div class="line line-dashed b-b line-lg"></div>
+	        <div class="form-group">
+	            <label class="col-sm-3 control-label">备注:</label>
+	             <div class="col-sm-9">
+	             	<span ng-if="mm.site.code == 1 || mm.site.code == 2">
+	            		<textarea type="text" rows="5" class="form-control" ng-model="mm.form.remark"></textarea>
+	             	</span>
+	             	<span ng-if="mm.site.code == 3">
+	            		<textarea type="text" rows="5" class="form-control" ng-model="mm.form.remark" disabled ></textarea>
+	             	</span>
+	            </div>
+	        </div>
+	        
+	    </form>
+	    
+    </div>
+</div>
+<div class="modal-footer">
+    <span ng-if="mm.site.code == 1 || mm.site.code == 2">
+    	<button type="button" class="btn btn-default" ng-click="mm.close()">取消</button>
+    	<button type="button" class="btn btn-info" ng-disabled="Form.$invalid" ng-click="mm.addSave()">提交</button>
+   	</span>
+   	<span ng-if="mm.site.code == 3">
+    	<button type="button" class="btn btn-default" ng-click="mm.close()">关闭</button>
+   	</span>
+</div>

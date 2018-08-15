@@ -1,0 +1,164 @@
+﻿<!DOCTYPE html>
+<html lang="en" id="ng-app" ng-app="app">
+<head>
+  <meta charset="utf-8" />
+  <title>CC+架构平台</title>
+  <link rel="icon" href="img/logo.ico"/>
+  <meta name="description" content="Angularjs, Html5, Music, Landing, 4 in 1 ui kits package" />
+  <meta name="keywords" content="AngularJS, angular, bootstrap, admin, dashboard, panel, app, charts, components,flat, responsive, layout, kit, ui, route, web, app, widgets" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <link rel="stylesheet" href="common/thrid/libs/assets/animate.css/animate.css" type="text/css"/>
+  <link rel="stylesheet" href="common/thrid/libs/assets/font-awesome/css/font-awesome.min.css"/>
+  <!--<link rel="stylesheet" href="common/thrid/libs/assets/simple-line-icons/css/simple-line-icons.css" type="text/css"/>-->
+  <link rel="stylesheet" href="common/thrid/libs/jquery/bootstrap/dist/css/bootstrap.css" type="text/css"/>
+  <link rel="stylesheet" href="common/thrid/libs/angular/angular-bootstrap-nav-tree/dist/abn_tree.css" type="text/css"/>
+
+  <!--[if lte IE 7]>
+  <script src="common/thrid/libs/json2.js"></script>
+  <![endif]-->
+  <!--[if lte IE 9]>
+  <script>
+    document.createElement('ng-include');
+    document.createElement('ng-pluralize');
+    document.createElement('ng-view');
+    document.createElement('input-imgs');
+    document.createElement('input-files');
+    document.createElement('ui-loading');
+    document.createElement('form-deal');
+    document.createElement('tmpagination');
+    document.createElement('wise-tree');
+    document.createElement('ui-loading');
+
+    // Optionally these for CSS
+    document.createElement('ng:include');
+    document.createElement('ng:pluralize');
+    document.createElement('ng:view');
+  </script>
+  <![endif]-->
+  <!-- build:css css/app.min.css -->
+  <link rel="stylesheet" href="common/thrid/src/css/font.css" type="text/css"/>
+  <link rel="stylesheet" href="common/thrid/src/css/app.css" type="text/css"/>
+  <link rel="stylesheet" href="common/thrid/src/css/user_defined.css" type="text/css"/>
+  <link rel="stylesheet" href="common/thrid/src/css/file_input.css" type="text/css"/>
+  <link rel="stylesheet" href="common/thrid/src/css/form_init.css" type="text/css"/>
+  <link rel="stylesheet" href="common/thrid/src/css/wise_loading.css" type="text/css"/>
+  <link rel="stylesheet" href="common/thrid/src/css/public.css" type="text/css"/>
+  <!-- endbuild -->
+
+</head>
+<body ng-controller="AppCtrl">
+  <div class="app" id="app" ng-class="{'app-header-fixed':app.settings.headerFixed, 'app-aside-fixed':app.settings.asideFixed, 'app-aside-folded':app.settings.asideFolded, 'app-aside-dock':app.settings.asideDock, 'container':app.settings.container}" ui-view></div>
+<!-- build:js js/app.angular.js -->
+  <!-- jQuery -->
+  <script src="common/thrid/libs/jquery/jquery/dist/jquery.js"></script>
+  <script src="common/thrid/libs/jquery/jquery.jqprint-0.3.js"></script>
+  <script src="common/thrid/libs/jquery/jquery-migrate-1.2.1.min.js"></script>
+  
+  <!-- Bootstrap -->
+  <script src="common/thrid/libs/jquery/bootstrap/dist/js/bootstrap.js"></script>
+
+  <!-- Angular -->
+  <script src="common/thrid/libs/angular/angular/angular.js"></script>
+  
+  <script src="common/thrid/libs/angular/angular-animate/angular-animate.js"></script>
+  <script src="common/thrid/libs/angular/angular-aria/angular-aria.js"></script>
+  <script src="common/thrid/libs/angular/angular-cookies/angular-cookies.js"></script>
+  <script src="common/thrid/libs/angular/angular-messages/angular-messages.js"></script>
+  <script src="common/thrid/libs/angular/angular-resource/angular-resource.js"></script>
+  <script src="common/thrid/libs/angular/angular-sanitize/angular-sanitize.js"></script>
+  <script src="common/thrid/libs/angular/angular-touch/angular-touch.js"></script>
+  
+  <script src="common/thrid/libs/angular/angular-ui-router/release/angular-ui-router.js"></script>
+  <script src="common/thrid/libs/angular/ngstorage/ngStorage.js"></script>
+  <script src="common/thrid/libs/angular/angular-ui-utils/ui-utils.js"></script>
+  
+  <!-- ng-file-upload -->
+  <script src="common/thrid/libs/angular/ng-file-upload/ng-file-upload.min.js"></script>
+  <script src="common/thrid/libs/angular/ng-file-upload/ng-file-upload-shim.min.js"></script>
+    
+  <!-- bootstrap -->
+  <script src="common/thrid/libs/angular/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+  <script src="common/thrid/libs/angular/angular-bootstrap-nav-tree/dist/abn_tree_directive.js"></script>
+  <!-- lazyload -->
+  <script src="common/thrid/libs/angular/oclazyload/dist/ocLazyLoad.js"></script>
+  <!-- translate -->
+  <script src="common/thrid/libs/angular/angular-translate/angular-translate.js"></script>
+  <script src="common/thrid/libs/angular/angular-translate-loader-static-files/angular-translate-loader-static-files.js"></script>
+  <script src="common/thrid/libs/angular/angular-translate-storage-cookie/angular-translate-storage-cookie.js"></script>
+  <script src="common/thrid/libs/angular/angular-translate-storage-local/angular-translate-storage-local.js"></script>
+  <script src="common/thrid/libs/angular/angular-translate-storage-local/angular-translate-storage-local.js"></script>
+
+<!-- ueditor -->
+  <script type="text/javascript" charset="utf-8" src="common/thrid/ueditor/jquery.form.js"> </script>
+<!-- ueditor -->
+  <!-- App -->
+  <script src="common/thrid/src/js/app.js"></script>
+  <script src="common/thrid/src/js/config.js"></script>
+  <script src="common/thrid/src/js/config.lazyload.js"></script>
+  <script src="common/thrid/src/js/services/ui-load.js"></script>
+  <script src="common/thrid/src/js/filters/fromNow.js"></script>
+
+  <script src="common/thrid/src/js/directives/setnganimate.js"></script>
+  <script src="common/thrid/src/js/directives/ui-butterbar.js"></script>
+  <script src="common/thrid/src/js/directives/ui-focus.js"></script>
+  <script src="common/thrid/src/js/directives/ui-fullscreen.js"></script>
+  <script src="common/thrid/src/js/directives/ui-jq.js"></script>
+  <script src="common/thrid/src/js/directives/ui-module.js"></script>
+  <script src="common/thrid/src/js/directives/ui-nav.js"></script>
+  <script src="common/thrid/src/js/directives/ui-scroll.js"></script>
+  <script src="common/thrid/src/js/directives/ui-shift.js"></script>
+  <script src="common/thrid/src/js/directives/ui-toggleclass.js"></script>
+  <script src="common/thrid/src/js/controllers/bootstrap.js"></script>
+<!--   <script src="common/thrid/src/js/controller.js"></script> -->
+  <script type="text/javascript" src="common/thrid/src/js/colResizable-1.6.min.js"></script>
+  <script src="common/thrid/src/js/My97DatePicker/WdatePicker.js"></script>
+
+  <!-- 自定义app -->
+  <script src="common/utils/factorys/loading.js"></script>
+  <script src="common/utils/factorys/httpUtils.js"></script>
+  <script src="common/utils/factorys/modalCtrl.js"></script>
+  <script src="common/utils/factorys/run.js"></script>
+  <script src="common/utils/directives/pagination.js"></script>
+  <script src="common/utils/directives/uploadFile.js"></script>
+  <script src="common/utils/directives/formDeal.js"></script>
+  <script src="common/utils/filters/keepMax.js"></script>
+  <script src="common/utils/factorys/projectPath.js"></script>
+  <script src="common/utils/directives/crumbs.js"></script>
+  <script src="common/utils/directives/pagePower.js"></script>
+  <!--省市县-->
+  <script src="common/utils/directives/area.js"></script>
+  <!--HTML转义-->
+  <script src="common/utils/filters/toHtml.js"></script>
+  <!--树-->
+  <script src="common/utils/directives/treeView.js"></script>
+  
+  <!-- 工具类js -->
+  <script src="common/utils/factorys/dataUtils.js"></script>
+    <!-- 附件相关js -->
+  <script src="common/utils/fileserver/util.js"></script>
+  <!-- 应用路由配置 -->
+  <script src="common/home/controller/config.router.js"></script>
+  <script src="pages/baseinfo/baseinfo.router.js"></script>
+  <script src="pages/deploy/deploy.router.js"></script>
+  <script src="pages/log/log.router.js"></script>
+  <script src="pages/crm/crm.router.js"></script>
+  <script src="pages/synchronize/synchronize.router.js"></script>
+  <script src="pages/thirdparty/thirdparty.router.js"></script>
+  <script src="pages/console/console.router.js"></script>
+  <script src="pages/push/push.router.js"></script>
+  <script src="pages/ccplus/ccplus.router.js"></script>
+  <!-- 南山后勤 -->
+  <script src="../nsAdmin/nshq.router.js"></script>
+  <!-- 首页控制器 -->
+  <script src="common/home/controller/appCtrl.js"></script>
+
+  <!--nav控制器-->
+  <script src="pages/navCtrl.js"></script>
+   <!--时间控件-->
+  <script src="common/My97DatePicker/WdatePicker.js"></script>
+   
+
+  <!-- endbuild -->
+  <!-- Lazy loading -->
+</body>
+</html>

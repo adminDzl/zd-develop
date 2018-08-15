@@ -1,0 +1,57 @@
+<div class="form-group">
+    <label class="col-sm-2 control-label">File input</label>
+    <div class="col-sm-10">
+        <input name=“file”  filestyle-directive multiple type="file" class="file">
+    </div>
+  </div>
+
+   
+  <div class="panel panel-default">
+        
+     <div class="panel-body">
+         <form class="form-inline" role="form">
+           <div class="form-group">
+             <label class="sr-only" for="exampleInputEmail2">Email address</label>
+             <input type="email" class="form-control" id="exampleInputEmail2" placeholder="Enter email">
+           </div>
+           <div class="form-group">
+             <label class="sr-only" for="exampleInputPassword2">Password</label>
+             <input type="password" class="form-control" id="exampleInputPassword2" placeholder="Password">
+           </div>
+           
+           <span  >                   
+             <a class="btn btn-success" ng-click="open()">Form in a modal</a>
+           </span>
+         </form>
+       </div>
+     <div class="table-responsive">
+        
+       <table uijq="dataTable" datatable-directive columns="columns" del="del()" edit="edit()" view="view()"   class="table table-striped b-t b-b">
+         <thead>
+           <tr>
+             <th  style="width:20%">Rendering engine</th>
+             <th  style="width:25%">Browser</th>
+             <th  style="width:25%">Platform(s)</th>
+             <th  style="width:15%">Engine version</th>
+             <th  style="width:15%">CSS grade</th>
+             <th  style="width:15%">CSS grade</th>
+           </tr>
+         </thead>
+         <tbody>
+         </tbody>
+       </table>
+     </div>
+   </div>
+  
+ <!--
+ <a class="btn btn-success" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">Form in a modal</a>
+ <modal-directive model-id='myModal'  setting="{title:'提示',btnName:'好的',content:'确定删除'}" callback="doYes()"></modal-directive>
+--> <p class="form-group" style="width:200px"><datepicker-directive class="input-group"></datepicker-directive></p> 
+
+--> <p class="form-group" style="width:200px"><timepicker-directive class="input-group"></timepicker-directive></p>
+   
+ 
+<div class="bootstrap-timepicker">
+   <input id="timepicker4" type="text" timepicker-directive value="10:35 AM" class="input-group">
+   <i class="icon-time"></i>
+</div>

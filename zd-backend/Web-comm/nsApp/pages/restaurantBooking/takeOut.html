@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<meta content="yes" name="apple-mobile-web-app-capable">
+		<meta content="black" name="apple-mobile-web-app-status-bar-style">
+		<meta content="telephone=no" name="format-detection">
+		<meta content="email=no" name="format-detection">
+		<meta name="hotcss" content="max-width=640">
+		<title>外卖预订</title>
+		<link rel="stylesheet" href="../../css/common.css" />
+		<link rel="stylesheet" href="../../css/style.css" />
+		<script type="text/javascript" src="../../js/common/hotcss.js" ></script>
+	</head>
+	<body ng-app="myApp" ng-controller="AppCtrl" class="takeOutPage">
+		<div class="restaurantBox top" style="background: url(../../img/back/restaurantTop.png) center no-repeat; background-size: cover; padding-top: 0">
+			<span class="left" ng-click="navOperate('lunch')">午餐菜单</span><span class="center" ng-click="navOperate('dinner')">晚餐预订</span><span class="right">外卖预订</span>
+			<em class="right"></em>
+		</div>
+		<div class="container m-t-40">
+			<div class="radioBox3">
+				<p>预定类别(必填):</p>
+				<div class="selectBox">
+					<span ng-click="selectTakeOutType($event)" data-type="{{ item.foodName =='包子' ? '0':'1'}}" data-price="{{item.price}}" data-max ="{{item.maxTakeout}}" data-id ="{{item.id}}" ng-repeat="item in takeOutInfo"><i></i>{{item.foodName}}</span>
+					<span ng-click="selectTakeOutType($event)" data-type="all"><i></i>全部</span>
+				</div>
+			</div>
+			<div class="inputBox" ng-show="foodType=='0' || foodType=='all'">
+				<p class="fix">
+					<span class="f-l">包子数量(必填):</span>
+					<span class="f-r" ng-repeat="item in takeOutInfo" ng-if="item.foodName == '包子'">当前剩余{{ item.surplusCount }}日</span>
+				</p>
+				<div class="morePlaceHolder">
+					<input type="number" placeholder="请输入包子数量 " ng-model="bun" />
+					<p>最多10个</p>
+				</div>
+			</div>
+			<div class="inputBox" ng-show="foodType=='1' || foodType=='all'">
+				<p class="fix">
+					<span class="f-l">馒头数量(必填):</span>
+					<span class="f-r" ng-repeat="item in takeOutInfo" ng-if="item.foodName == '馒头'">当前剩余{{ item.surplusCount }}个</span>
+				</p>
+				<div class="morePlaceHolder">
+					<input type="number" placeholder="请输入馒头数量" ng-model="maddo"/>
+					<p>最多10个</p>
+				</div>
+			</div>
+			<div class="inputBox">
+				<p>总价:</p>
+				<input type="text" disabled="disabled" ng-model="priceAll" />
+			</div>
+		</div>
+		
+		<div class="container m-t-40 tip">
+			<p class="m-b-40"><em></em>备注：</p>
+			<p>1.外卖预定为微信支付方式；</p>
+			<p>2.<span ng-repeat="item in takeOutInfo">{{item.foodName}}￥{{item.price}}元/个</span>;</p>
+			<p>3.请于用餐当日12:00~13:00之间去餐厅取餐！</p>
+			<p class="m-b-40">4.周三供应包子，周五供应馒头！</p>
+			
+			<a href="javascript:;" class="fill-btn confirm" ng-click="creatOrder()">确定</a>
+		</div>
+		
+		<!-- 蒙版 -->
+		<div class="masking"></div>
+
+		<!-- 提交成功 -->
+		<div class="successfulBox t-c">
+			<div class="successHeader">
+				<div class="successIcon"></div>
+				<em class="successClose" ng-click="closeOrOpenTipBox('close')"></em>
+			</div>
+			<p class="f-s-50 f-b l-h-116 m-t-33">提交成功</p>
+			<p class="f-s-40">订单提交成功，请在我的订单查看状态。</p>
+			<a class="f-s-40">(<span class="countDown" ng-bind-template="{{ countDown }}"></span>s)返回首页</a>
+		</div>
+		
+		<script type="text/javascript" src="../../js/common/angular.js" ></script>
+		<script type="text/javascript" src="../../js/common/jquery-1.8.3.min.js" ></script>
+		<script type="text/javascript" src="../../js/common/jccplus-1.2.js"></script>
+		<script type="text/javascript" src="../../js/common/util.js" ></script>
+		<script type="text/javascript" src="../../js/restaurantBooking/takeOut.js"></script>
+	</body>
+</html>

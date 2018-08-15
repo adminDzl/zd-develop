@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div style="float: left;height: 0px;">
+    <div id="div" style="overflow:hidden;"></div>
+</div>
+</body>
+<script src="js/vue-resource.js"></script>
+<script src="js/vue.min.js"></script>
+<script type="text/javascript">
+    new Vue({
+
+        el:"#div",
+        methods:{
+            get:function(){
+                this.$http.get('http://localhost:8080/cms/addata/list',{
+                    a:10,
+                    b:1
+                }).then(function(res){
+                    // alert(res.data);
+                    console.log(res.data);
+
+                },function(res){
+                    alert(res.status)
+                });
+            }
+        }
+
+    })
+get();
+
+</script>
+</html>

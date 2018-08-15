@@ -1,0 +1,206 @@
+<div class="modal-header">
+    <button type="button" class="close" ng-click="mm.close()"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+    <h4 class="modal-title">{{mm.site.title}}</h4>
+</div>
+<div class="modal-body">
+    <div class="wrapper-md ng-scope">
+	    <form name="Form"  class="form-horizontal form-validation" novalidate>
+	        <div class="form-group"   ng-repeat="row in mm.selected.roomList">
+	            <label class="col-sm-4 control-label">单位编号:{{row.fullCode}}</label>
+	            <label class="col-sm-4 control-label">建筑面积:{{row.constructionArea}}㎡</label>
+	            <label class="col-sm-4 control-label">价格:{{row.rentPrice}}￥/㎡</label>
+	             <div class="col-sm-3">
+	            <button class="btn btn-sm btn-danger fa fa-trash-o m-t-n-xxs m-l-xs" ng-click="mm.delRoom($index)"></button>
+	            </div>
+	        </div>
+	        <div class="form-group"   ng-repeat="row in mm.form.order.roomList">
+	            <label class="col-sm-4 control-label">单位编号:{{row.fullCode}}</label>
+	            <label class="col-sm-4 control-label">建筑面积:{{row.roomArea}}㎡</label>
+	            <label class="col-sm-4 control-label">价格:{{row.roomPrice}}￥/㎡</label>
+	        </div>
+	        <div class="form-group" ng-if="mm.site.code == 1">
+	            <label class="col-sm-2 control-label"><span class="text-danger">*</span>房源 :</label>
+	             <div class="col-sm-3" ng-repeat="row in mm.layerSelects" >
+	            	<select class="form-control" ng-model="row.selected" ng-options="layer.id as layer.name for layer in row.layers" ng-change="mm.getRoom($index,row.selected)"></select>
+	            </div>
+	            
+	            <div class="col-sm-3">
+	            	<select class="form-control" ng-model="mm.roomId" ng-options="r.id as r.name for r in mm.roomList" ng-change="mm.selectRoom(r)">
+	            	</select>
+	            </div>
+	             <div class="col-sm-3">
+	               <button class="btn btn-sm btn-success glyphicon glyphicon-plus m-t-n-xxs m-l-sm" ng-click="mm.addRoom()"></button>
+	             </div>
+	        </div>
+	        <div class="form-group" ng-if="mm.site.code == 1">
+	            <label class="col-sm-2 control-label"><span class="text-danger">*</span>客户:</label>
+	             <div class="col-sm-7">
+	             	<input type="text" class="form-control" ng-model="mm.custimerName" disabled></input>
+	            </div>
+	            <div class="col-sm-2">
+		            <button class="btn btn-sm btn-success glyphicon glyphicon-plus m-t-n-xxs m-l-sm"    ng-click="mm.toCustomer()"></button>
+		        </div>
+	        </div>
+	        
+	        <div class="form-group" ng-if="mm.site.code == 1">
+	            <label class="col-sm-2 control-label">意向单:</label>
+	             <div class="col-sm-7">
+	             	<input type="text" class="form-control" ng-model="mm.demandCustimerName" disabled></input>
+	            </div>
+	            <div class="col-sm-2">
+		            <button class="btn btn-sm btn-success glyphicon glyphicon-plus m-t-n-xxs m-l-sm"    ng-click="mm.toDemand()"></button>
+		        </div>
+	        </div>
+	        <div class="line line-dashed b-b line-lg"></div>
+	        <div class="form-group">
+	            <label class="col-sm-2 control-label">付款方式:</label>
+	             <div class="col-sm-9">
+	             	<div class="radio col-sm-5" ng-repeat="row in mm.rentPays">
+		              <label class="i-checks">
+		                <input type="radio"   value="{{row.id}}" ng-model="mm.form.order.payType">
+		                <i></i><span class="m-l-none">{{row.keyName}}</span>
+		              </label>
+		            </div>
+	            </div>
+	        </div>
+	        
+	         <div class="line line-dashed b-b line-lg"></div>
+	        <div class="form-group">
+	            <label class="col-sm-2 control-label">折扣:</label>
+	             <div class="col-sm-9">
+	             	<span ng-if="mm.site.code == 1 || mm.site.code == 2">
+	            		<input type="number" class="form-control" ng-model="mm.form.order.discount"></input>
+	             	</span>
+	             	<span ng-if="mm.site.code == 3">
+	            		<input type="number" class="form-control" ng-model="mm.form.order.discount" disabled ></input>
+	             	</span>
+	            </div>
+	        </div>
+	        
+	         <div class="line line-dashed b-b line-lg"></div>
+	        <div class="form-group">
+	            <label class="col-sm-2 control-label">免租期:</label>
+	             <div class="col-sm-4">
+	          
+	             	<span>
+	                   <input type="text" class="input-block-level col-md-5 form-control" ng-model="mm.form.orderRent.freeStartDate" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd',onpicked: function(){$(this).trigger('change')}})" readonly="readonly"></input>
+	             	</span>
+	             		
+	            </div>
+	            <label class="col-sm-1">至</label>
+	             <div class="col-sm-4">
+	                <input type="text" class="input-block-level col-md-5 form-control" ng-model="mm.form.orderRent.freeEndDate" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd',onpicked: function(){$(this).trigger('change')}})" readonly="readonly"></input>
+	             </div>
+	        </div>
+	        
+	        <div class="line line-dashed b-b line-lg"></div>
+	        <div class="form-group">
+	            <label class="col-sm-2 control-label">租期:</label>
+	             <div class="col-sm-4">
+	          
+	             	<span>
+	                   <input type="text" class="input-block-level col-md-5 form-control" ng-model="mm.form.orderRent.periodStartDate" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd',onpicked: function(){$(this).trigger('change')}})" readonly="readonly"></input>
+	             	</span>
+	             		
+	            </div>
+	            <label class="col-sm-1">至</label>
+	             <div class="col-sm-4">
+	                <input type="text" class="input-block-level col-md-5 form-control" ng-model="mm.form.orderRent.periodEndDate" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd',onpicked: function(){$(this).trigger('change')}})" readonly="readonly"></input>
+	             </div>
+	        </div>
+	        
+	        <div class="line line-dashed b-b line-lg"></div>
+	        <div class="form-group">
+	            <label class="col-sm-2 control-label">入伙时间:</label>
+	             <div class="col-sm-4">
+	             	<span>
+	                   <input type="text" class="input-block-level col-md-5 form-control" ng-model="mm.form.order.joinDate" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd',onpicked: function(){$(this).trigger('change')}})" readonly="readonly"></input>
+	             	</span>
+	            </div>
+	            <label class="col-sm-2">交付日期：</label>
+	             <div class="col-sm-4">
+	                <input type="text" class="input-block-level col-md-5 form-control" ng-model="mm.form.order.deliveryDate" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd',onpicked: function(){$(this).trigger('change')}})" readonly="readonly"></input>
+	             </div>
+	        </div>
+	        
+	        <div class="line line-dashed b-b line-lg"></div>
+	        <div class="form-group">
+	            <label class="col-sm-2 control-label">租赁保证金:</label>
+	             <div class="col-sm-4">
+	             	<span>
+	                   <input type="number" class="input-block-level col-md-5 form-control" ng-model="mm.form.orderRent.rentCaution"></input>
+	             	</span>
+	            </div>
+	            <label class="col-sm-2">履约保证金：</label>
+	             <div class="col-sm-4">
+	                <input type="number" class="input-block-level col-md-5 form-control" ng-model="mm.form.orderRent.keepCaution"></input>
+	             </div>
+	        </div>
+	        <div class="line line-dashed b-b line-lg"></div>
+	        <div class="form-group">
+	            <label class="col-sm-2 control-label">租金（含税）:</label>
+	             <div class="col-sm-4">
+	             	<span>
+	                   <input type="number" class="input-block-level col-md-5 form-control" ng-model="mm.form.order.unitPrice"></input>
+	             	</span>
+	            </div>
+	            <label class="col-sm-2">管理费:</label>
+	             <div class="col-sm-4">
+	                <input type="number" class="input-block-level col-md-5 form-control" ng-model="mm.form.order.manageFee"></input>
+	             </div>
+	        </div>
+	        <div class="line line-dashed b-b line-lg"></div>
+	        <div class="form-group">
+	            <label class="col-sm-2 control-label">续租方式 :</label>
+	             <div class="col-sm-4">
+	             	<select class="form-control input-sm-h small"  ng-model = "mm.form.orderRent.reletWay" ng-options = "a.id as a.keyName  for a in mm.reletWays">
+	              </select>
+	            </div>
+	            <label class="col-sm-2">用途：</label>
+	             <div class="col-sm-4">
+	                <input type="text" class="input-block-level col-md-5 form-control" ng-model="mm.form.order.useWay"></input>
+	             </div>
+	        </div>
+	        <div class="line line-dashed b-b line-lg"></div>
+	        <div class="form-group" ng-repeat="row in mm.form.orderRent.rentalList">
+	            <label class="col-sm-2 control-label">租金涨幅:</label>
+	             <div class="col-sm-3">
+	             	<span>
+	                   <input type="text"  class="input-block-level col-md-5 form-control" placeholder="自开始年" ng-model="row.fromyear" onfocus="WdatePicker({dateFmt:'yyyy',onpicked: function(){$(this).trigger('change')}})"></input>
+	             	</span>
+	            </div>
+	             <div class="col-sm-3">
+	                <input type="number" class="input-block-level col-md-5 form-control" placeholder="每几年" ng-model="row.everyfewyear"></input>
+	             </div>
+	             <div class="col-sm-3">
+	                <input type="number"  class="input-block-level col-md-5 form-control" placeholder="涨幅" ng-model="row.growingRate"></input>
+	               
+	             </div>
+	              <label class="col-sm-1 control-label">%</label>
+	              <div class="col-sm-2">
+	                 <button class="btn btn-sm btn-success glyphicon glyphicon-plus m-t-n-xxs m-l-sm" ng-if="$index==0" ng-click="mm.addRental()"></button>
+	                 <button class="btn btn-sm btn-danger fa fa-trash-o m-t-n-xxs m-l-xs" ng-if="$index!=0" ng-click="mm.delRental($index)"></button>
+	              </div>
+	        </div>
+	        
+	         <div class="line line-dashed b-b line-lg"></div>
+	        <div class="form-group">
+	            <label class="col-sm-2 control-label">其他事项:</label>
+	             <div class="col-sm-9">
+	             	<input type="text" class="form-control" ng-model="mm.form.order.remark"></input>
+	            </div>
+	        </div>
+	        
+	    </form>
+	    
+    </div>
+</div>
+<div class="modal-footer">
+    <span ng-if="mm.site.code == 1 || mm.site.code == 2">
+    	<button type="button" class="btn btn-default" ng-click="mm.close()">取消</button>
+    	<button type="button" class="btn btn-info" ng-disabled="Form.$invalid" ng-click="mm.addRent()">提交</button>
+   	</span>
+   	<span ng-if="mm.site.code == 3">
+    	<button type="button" class="btn btn-default" ng-click="mm.close()">关闭</button>
+   	</span>
+</div>

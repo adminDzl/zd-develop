@@ -1,0 +1,96 @@
+ 
+<div class="panel-body"> 
+    <form class="form-horizontal" method="get"></form>
+        <div class="col-sm-12">
+                <h4>展示信息</h4>
+        </div>    
+        <!--flag-->
+        <div class="line line-dashed b-b line-lg pull-in"></div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">主题名称<i class="needred">*</i></label>
+            <div class="col-sm-10">
+                <input type="text" ng-model="instance.showInfoModel.showTopic" class="form-control" placeholder="请输入主题名称">
+            </div>
+        </div>
+         <!--flag-->
+         <div class="line line-dashed b-b line-lg pull-in"></div>
+         <div class="form-group">
+             <label class="col-sm-2 control-label">展示日期<i class="needred">*</i></label>
+             <div class="col-sm-10">
+                 <div class="input-group w-md">
+                        <datepicker-directive model="instance.showInfoModel.date" class="input-group"></datepicker-directive>
+                     
+                 </div>
+             </div>
+              
+         </div>
+        <!--flag-->
+        <div class="line line-dashed b-b line-lg pull-in"></div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">展示时间<i class="needred">*</i></label>
+            <div class="col-sm-4">
+                <div class="input-group w-md">
+                    <timepicker-directive class="input-group" model="instance.showInfoModel.startTime"></timepicker-directive>
+                </div>
+            </div>
+            <div class="col-sm-1">__</div>
+            <div class="col-sm-4">
+                <div class="input-group w-md">
+                    <timepicker-directive class="input-group" model="instance.showInfoModel.endTime"></timepicker-directive>
+                </div>
+            </div>
+        </div>
+          <!--flag-->   
+        <div class="line line-dashed b-b line-lg pull-in"></div>
+          <!--flag-->   
+        <div class="col-sm-12">
+                <h4>轮播内容</h4>
+        </div>
+        <div class="col-sm-12">
+            <div class="col-sm-1" ng-repeat="it in instance.detail">
+               <img ng-src="{{it.picUrl}}" class="cols-sm-2" width="50" height="50"/>
+               <a ng-click="instance.delPic(it)">删除</a>
+            </div>
+        </div>
+        <div class="cos-sm-12" >
+                <div class="line line-dashed b-b line-lg pull-in"></div>
+                <div class="form-group" >
+                    <label class="col-sm-2 control-label">轮播展示图片</label>
+                    <div class="col-sm-10">
+                        <div class="file-loading">
+                            <input  filestyle-directive  type="file" filetype="5" multiple on-success="onSuccess(data)" extention="['jpg', 'gif', 'png','jpeg']" class="file">
+                        </div>
+                        <span class="help-block m-b-none">
+                            上传图片说明：
+                            图片最好为jpg，png，bmp等图片类型文件 可以多图 文件大小不能超过3MB    
+                        </span>
+                    </div>
+                   
+
+                    <div class="line line-dashed b-b line-lg pull-in"></div>
+                    <label class="col-sm-2 control-label">轮播展示时间</label>
+                    <div class="col-sm-2">
+                            <input type="text" ng-model="instance.times" class="form-control" style="width:120px;" placeholder="请输入时间">
+                    </div>
+                    <label class="col-sm-1 control-label">分钟</label>
+                 </div>
+        </div>
+       
+         <!-- <div class="line line-dashed b-b line-lg pull-in"></div>
+         <div class="form-group">
+            <div class="col-sm-12">
+                <a href="javascript:void(0);" ng-click="addMore()" class="col-sm-offset-2 btn btn-success btn-rounded font-bold"> 添加轮播图 </a>
+            </div>
+         </div> -->
+       
+        <div class="line line-dashed b-b line-lg pull-in"></div>
+        <div class="form-group">
+            <div class="col-sm-4 col-sm-offset-9">
+                <button type="reset" class="btn btn-default" ng-click="cancel()"> 取消</button>
+                <button type="submit" class="btn btn-primary"  ng-click="commit()">保存</button>
+            </div>
+        </div>
+    </form>
+         
+         
+</div>

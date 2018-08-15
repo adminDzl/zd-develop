@@ -1,0 +1,274 @@
+<div class="panel-body">
+    <form class="form-horizontal" method="get">
+         <div class="line line-dashed b-b line-lg pull-in"></div>
+         <div class="form-group">
+          <label class="col-sm-2 control-label">场地名称<i class="needred">*</i></label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" ng-model="instance.roomModal.name" placeholder="如需描述具体情况，请详细填写" ng-model="meeetingroom.name">            
+          </div>
+        </div>
+        <!-- <div class="line line-dashed b-b line-lg pull-in"></div>
+        <div class="form-group">
+          <label class="col-sm-2 control-label">区域<i class="needred">*</i></label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" id="input-id-1" ng-model="instance.roomModal.area" placeholder="请填写场地所在区域">
+          </div>
+        </div> -->
+        <div class="line line-dashed b-b line-lg pull-in"></div>
+        <div class="form-group">
+          <label class="col-sm-2 control-label">地址<i class="needred">*</i></label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" ng-model="instance.roomModal.address" placeholder="请填写场地地址">
+          </div>
+        </div>
+        <div class="line line-dashed b-b line-lg pull-in"></div>
+        <div class="form-group">
+          <label class="col-sm-2 control-label">场地类型<i class="needred">*</i></label>
+          <div class="col-sm-10">
+             <select class="form-control m-b" ng-model="instance.roomModal.roomType">
+               <option value="">请选择场地类型</option>
+               <option ng-repeat="it in  instance.roomTypes" value="{{it.id}}">{{it.name}}</option>
+             </select>
+          </div>
+        </div>
+
+       
+        <div class="line line-dashed b-b line-lg pull-in"></div>
+        <div class="form-group">
+          <label class="col-sm-2 control-label">用途<i class="needred">*</i></label>
+          <div class="col-sm-1" ng-repeat="it in instance.useTypes">
+            <label class="radio-inline i-checks">
+              <input type="checkbox" ng-model="it.select" ><i></i>{{it.name}}
+            </label>
+          </div> 
+           
+        </div>
+        <div class="line line-dashed b-b line-lg pull-in"></div>
+        <div class="form-group">
+         <label class="col-sm-2 control-label">场地面积<i class="needred">*</i></label>
+         <div class="col-sm-4">
+          <div class="input-group bootstrap-touchspin">
+            <span class="input-group-btn"></span><input ng-model="instance.roomModal.acreage" type="text" value="0" class="form-control" style="display: block;">
+            <span class="input-group-addon bootstrap-touchspin-postfix">/㎡</span><span class="input-group-btn"></span>
+          </div>
+         </div>         
+       </div>
+       <div class="line line-dashed b-b line-lg pull-in"></div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">摆放形式<i class="needred">*</i></label>
+           
+           <!---->
+           <div class="col-sm-2" ng-repeat="it in instance.layTypes" style="width:210px;padding:0px;">
+              <div class="col-sm-6"  style="width:100px;padding:0px;">
+                <label class="radio-inline i-checks">
+                  <input type="radio"  name=“laytype” ng-model="instance.roomModal.layType"  ng-click="selectRadio(it,instance.layTypes)" value="{{it.id}}"><i></i>{{it.name}}
+                </label>
+              </div>
+              <div class="col-sm-6" style="width:110px;padding-left:0px;">
+                  <div class="input-group bootstrap-touchspin" style="padding-left:0px;">
+                      <span class="input-group-btn"></span><input type="text" value="0" ng-disabled="!it.checked" ng-model="it.number" class="form-control" style="display: block;">
+                      <span class="input-group-addon bootstrap-touchspin-postfix">人</span><span class="input-group-btn"></span>
+                  </div>
+              </div>             
+           </div>
+            
+              <!---->
+              <!-- <div class="col-sm-1" style="width:100px;">
+                  <label class="checkbox-inline i-checks">
+                    <input type="checkbox" value="option1"><i></i>自定义
+                  </label>
+                </div>                  -->
+        </div>
+        <!--flag-->
+        <div class="line line-dashed b-b line-lg pull-in"></div>
+          <div class="form-group">
+            <label class="col-sm-2 control-label">开放时间<i class="needred">*</i></label>
+            <div class="col-sm-3">
+              <div class="input-group w-md">
+                <timepicker-directive class="input-group" model="instance.roomModal.openStartTime"></timepicker-directive>
+              </div>
+            </div>
+            <div class="col-sm-1">__</div>
+            <div class="col-sm-3">
+                <div class="input-group w-md">
+                  <timepicker-directive class="input-group" model="instance.roomModal.openEndTime"></timepicker-directive>
+                </div>
+            </div>
+          </div>
+          <!--flag-->
+          <div class="line line-dashed b-b line-lg pull-in"></div>
+          
+          <div class="form-group">            
+            <label class="col-sm-2 control-label">场地图片<i class="needred">*</i></label>
+            <div class="col-sm-10">
+                <div class="file-loading">
+                    <input   on-success="roomImg(data)" filetype="1" extention=" ['jpg', 'gif', 'png','jpeg']" filestyle-directive multiple type="file" class="file">
+                </div>
+                <span class="help-block m-b-none">
+                    上传图片说明：
+                    上传的图片最好为jpg，png，bmp等图片类型文件
+                    文件大小不能超过3MB
+
+                </span>
+            </div>
+            <label  class="col-sm-2 control-label"  ng-if="instance.forEditRoomImgs.length>0"></label>
+            <div class="col-sm-6" ng-if="instance.forEditRoomImgs.length>0">
+                <div class="panel panel-info"  >                    <label>已有图片</label>
+                    <div class="list-group bg-white">                      
+                      <p href="" class="list-group-item"  ng-repeat="it in instance.forEditRoomImgs">
+                      <img ng-src="{{it.storagePath}}" width="50" height="50">
+                       <a ng-click="delRoomImg(it,1)">删除</a>
+                      </p>                       
+                    </div>
+                  </div>
+            </div>
+          </div>
+           
+           <!--flag-->
+           <div class="line line-dashed b-b line-lg pull-in"></div>
+           <div class="form-group">
+              <label class="col-sm-2 control-label">显示屏展示图片<i class="needred">*</i></label>
+              <div class="col-sm-10">
+                   <div class="col-sm-12">
+                    <div class="form-group">
+                      <label class="col-sm-2 control-label">是否开启显示屏功能</label>
+                      <div class="col-sm-10">
+                        <label class="i-switch m-t-xs m-r">
+                          <input type="checkbox" ng-click="isShow()" ng-model="isDisplay">
+                          <i></i>
+                        </label>                        
+                      </div>
+                    </div>
+                   </div>
+                   <div class="col-sm-12"  ng-show="isDisplay">
+                      <div class="file-loading">
+                          <input filestyle-directive multiple   on-success="showImg(data)" filetype="2" extention=" ['jpg', 'gif', 'png','jpeg']"  type="file" class="file">
+                      </div>
+                      <span class="help-block m-b-none">
+                          上传图片说明： 
+                          上传的图片最好为jpg，png，bmp等图片类型文件
+                          文件大小不能超过3MB
+      
+                      </span>
+                   </div>
+                   
+              </div>
+              <label  class="col-sm-2 control-label"  ng-if="instance.forEditShowImgs.length>0"></label>
+              <div class="col-sm-6" ng-if="instance.forEditShowImgs.length>0">
+                  <div class="panel panel-info"  >            <label> 已有图片</label>       
+                    <div class="list-group bg-white">                      
+                      <p href="" class="list-group-item"  ng-repeat="it in instance.forEditShowImgs">
+                      <img ng-src="{{it.storagePath}}" width="50" height="50">
+                       <a ng-click="delRoomImg(it,2)">删除</a>
+                      </p>                       
+                    </div>
+                  </div>
+              </div>
+            </div>
+          <!--flag-->
+          <div class="line line-dashed b-b line-lg pull-in"></div>
+          <div class="form-group">
+            <label class="col-sm-2 control-label">场地介绍信息<i class="needred">*</i></label>
+            <div class="col-sm-10">
+              <textarea  ng-model="instance.roomModal.description" class="form-control" ></textarea>
+                <!-- <wysiwyge get-text="getText(text)" model="instance.roomModal.description">
+                      
+                </wysiwyge> -->
+                  
+            </div>
+          </div>
+             <!--flag-->
+             <div class="line line-dashed b-b line-lg pull-in"></div>
+           <div class="form-group">
+              <label class="col-sm-2 control-label">附件上传</label>
+              <div class="col-sm-10">
+  
+                  <div class="file-loading">
+                      <input   filestyle-directive multiple on-success="attach(data)" filetype="3"  type="file" class="file">
+                  </div>
+                   <span class="help-block m-b-none">
+                      上传文档说明：
+                      上传的附件最好为jpg，png，bmp，word等类型文件
+                      文件大小不能超过3MB
+                   </span>
+              </div>
+            </div>
+            <!--flag-->
+            <div class="line line-dashed b-b line-lg pull-in"></div>
+            <div class="form-group">
+              <label class="col-sm-2 control-label">场地状态<i class="needred">*</i></label>
+              <div class="col-sm-10">
+                  <select ng-model="instance.roomModal.isDisplay" class="form-control m-b" >
+                      <option value="">请选择</option>
+                      <option ng-selected="instance.roomModal.isDisplay==1" value="1">展示</option>
+                      <option ng-selected="instance.roomModal.isDisplay==2" value="2">隐藏</option>                    
+                  </select>                    
+              </div>
+            </div>
+            
+            <div class="line line-dashed b-b line-lg pull-in"></div>
+            <div class="form-group">
+              <label class="col-sm-2 control-label">时间预定类型<i class="needred">*</i></label>
+              <div class="col-sm-10">
+              		
+          		 <label class="radio-inline i-checks">
+                  <input type="radio"  name="timeType" ng-selected="instance.roomModal.timeType==1" ng-model="instance.roomModal.timeType" value="1" ng-checked="true" /><i></i>上午、下午
+                 </label>
+                 <label class="radio-inline i-checks">
+                  <input type="radio"  name="timeType" ng-selected="instance.roomModal.timeType==2" ng-model="instance.roomModal.timeType" value="2" /><i></i>时间段
+                 </label>
+                              
+                              
+              </div>
+            </div>
+            
+            <div class="line line-dashed b-b line-lg pull-in"></div>
+            <div class="form-group">
+              <label class="col-sm-2 control-label">是否开启审核<i class="needred">*</i></label>
+              <div class="col-sm-10">
+              	
+              	 <label class="radio-inline i-checks">
+                  <input type="radio"  name="isAuditManage" ng-selected="instance.roomModal.isAuditManage==1" ng-model="instance.roomModal.isAuditManage" value="1" ng-checked="true" /><i></i>是
+                 </label>
+                 <label class="radio-inline i-checks">
+                  <input type="radio"  name="isAuditManage" ng-selected="instance.roomModal.isAuditManage==0" ng-model="instance.roomModal.isAuditManage" value="0" /><i></i>否
+                 </label>
+                 
+                 <!--<select ng-model="instance.roomModal.isAuditManage" class="form-control m-b" >
+                      <option ng-selected="instance.roomModal.isAuditManage==1" value="1" ng-checked="true">是</option>
+                      <option ng-selected="instance.roomModal.isAuditManage==0" value="0">否</option>                    
+                  </select>
+                  -->
+                  
+                  
+              </div>
+            </div>
+            
+            
+         
+            <div class="line line-dashed b-b line-lg pull-in"></div>
+            <div class="form-group">
+              <label class="col-sm-2 control-label">联系电话<i class="needred">*</i></label>
+              <div class="col-sm-10">
+                <input type="text" class="form-control" ng-model="instance.roomModal.tel" placeholder="请填写联系电话">
+              </div>
+            </div>
+            <div class="line line-dashed b-b line-lg pull-in"></div>
+            <div class="form-group">
+              <label class="col-sm-2 control-label">请填写联系微信号<i class="needred">*</i></label>
+              <div class="col-sm-10">
+                <input type="text" class="form-control" ng-model="instance.roomModal.weChat" placeholder="请填写联系微信号">
+              </div>
+            </div>
+                
+        <div class="line line-dashed b-b line-lg pull-in"></div>
+        <div class="form-group">
+          <div class="col-sm-4 col-sm-offset-2">
+            <button type="reset" class="btn btn-default" ng-click="cancel()"> 取消</button>
+            <button type="submit" class="btn btn-primary"  ng-click="commit()">保存</button>
+          </div>
+        </div>
+      </form>
+         
+         
+      </div>

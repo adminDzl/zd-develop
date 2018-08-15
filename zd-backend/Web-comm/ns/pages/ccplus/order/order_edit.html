@@ -1,0 +1,147 @@
+<div class="modal-header">
+    <button type="button" class="close" ng-click="mm.close()"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+    <h4 class="modal-title">{{mm.site.title}}</h4>
+</div>
+<div class="modal-body">
+    <div class="wrapper-md ng-scope">
+	    <form name="Form"  class="form-horizontal form-validation" novalidate>
+	        <div class="form-group">
+	            <label class="col-sm-3 control-label"><span class="text-danger">*</span>订单名称:</label>
+	             <div class="col-sm-9">
+	             	<span ng-if="mm.site.code == 1 || mm.site.code == 2">
+	            		<input type="text" class="form-control" ng-model="mm.form.orderName" required ></input>
+	             	</span>
+	             	<span ng-if="mm.site.code == 3">
+	            		<input type="text" class="form-control" ng-model="mm.form.orderName" disabled ></input>
+	             	</span>
+	            </div>
+	        </div>
+	        <div class="line line-dashed b-b line-lg"></div>
+	        <div class="form-group">
+	            <label class="col-sm-3 control-label"><span class="text-danger">*</span>订单号:</label>
+	             <div class="col-sm-9">
+	             	<span ng-if="mm.site.code == 1 || mm.site.code == 2">
+	            		<input type="text" class="form-control" ng-model="mm.form.orderNum" required ></input>
+	             	</span>
+	             	<span ng-if="mm.site.code == 3">
+	            		<input type="text" class="form-control" ng-model="mm.form.orderNum" disabled ></input>
+	             	</span>
+	            </div>
+	        </div>
+	        <div class="line line-dashed b-b line-lg"></div>
+	        
+	        <div class="form-group">
+	            <label class="col-sm-3 control-label"><span class="text-danger">*</span>一级分类:</label>
+	             <div class="col-sm-9">
+	             	<span ng-if="mm.site.code == 1 || mm.site.code == 2">
+	            		<select class="form-control input-sm-h small"  ng-model = "mm.form.orderType" ng-options = "a.value as a.name  for a in mm.site.orderTypeList"   required></select>
+	             	</span>
+	             	<span ng-if="mm.site.code == 3">
+	            		<select class="form-control input-sm-h small"  ng-model = "mm.form.orderType" ng-options = "a.value as a.name  for a in mm.site.orderTypeList"   disabled></select>
+	             	</span>
+	            </div>
+	        </div>
+	        <div class="form-group">
+	            <label class="col-sm-3 control-label"><span class="text-danger">*</span>二级分类:</label>
+	             <div class="col-sm-9">
+	             	<span ng-if="mm.site.code == 1 || mm.site.code == 2">
+	            		<select class="form-control input-sm-h small"  ng-model = "mm.form.orderTypeDetail" ng-options = "a.value as a.name  for a in mm.site.orderTypeDetailList"  required ></select>
+	             	</span>
+	             	<span ng-if="mm.site.code == 3">
+	            		<select class="form-control input-sm-h small"  ng-model = "mm.form.orderTypeDetail" ng-options = "a.value as a.name  for a in mm.site.orderTypeDetailList"   disabled></select>
+	             	</span>
+	            </div>
+	        </div>
+	        
+	        
+	        <div class="form-group">
+	            <label class="col-sm-3 control-label"><span class="text-danger">*</span>订单内容:</label>
+	             <div class="col-sm-9">
+	             	<span ng-if="mm.site.code == 1 || mm.site.code == 2">
+	            		<input type="text" class="form-control" ng-model="mm.form.content" required ></input>
+	             	</span>
+	             	<span ng-if="mm.site.code == 3">
+	            		<input type="text" class="form-control" ng-model="mm.form.content" disabled ></input>
+	             	</span>
+	            </div>
+	        </div>
+	        <div class="line line-dashed b-b line-lg"></div>
+	        <div class="form-group">
+	            <label class="col-sm-3 control-label"><span class="text-danger">*</span>用户类型:</label>
+	             <div class="col-sm-9">
+	             	<span ng-if="mm.site.code == 1 || mm.site.code == 2">
+	            		<select class="form-control input-sm-h small"  ng-model = "mm.form.orderUserType" ng-options = "a.value as a.name  for a in mm.site.orderUserTypeList"  required></select>
+	             	</span>
+	             	<span ng-if="mm.site.code == 3">
+	            		<select class="form-control input-sm-h small"  ng-model = "mm.form.orderUserType" ng-options = "a.value as a.name  for a in mm.site.orderUserTypeList"   disabled></select>
+	             	</span>
+	            </div>
+	        </div>
+	        <div class="line line-dashed b-b line-lg"></div>
+	        <div class="form-group">
+	            <label class="col-sm-3 control-label"><span class="text-danger">*</span>联系电话:</label>
+	             <div class="col-sm-9">
+	             	<span ng-if="mm.site.code == 1 || mm.site.code == 2">
+	            		<input type="text" class="form-control" ng-model="mm.form.orderUserMobile" required ></input>
+	             	</span>
+	             	<span ng-if="mm.site.code == 3">
+	            		<input type="text" class="form-control" ng-model="mm.form.orderUserMobile" disabled ></input>
+	             	</span>
+	            </div>
+	        </div>
+	         <div class="line line-dashed b-b line-lg"  ng-if="mm.site.code == 2 || mm.site.code == 3"></div>
+	        <div class="form-group"  ng-if="mm.site.code == 2 || mm.site.code == 3">
+	            <label class="col-sm-3 control-label"><span class="text-danger">*</span>下单人姓名:</label>
+	             <div class="col-sm-9">
+	             	<span>
+	            		<input type="text" class="form-control" ng-model="mm.form.orderUserName" disabled ></input>
+	             	</span>
+	            </div>
+	        </div>
+	        <!-- <div class="line line-dashed b-b line-lg"></div>
+	        <div class="form-group">
+	            <label class="col-sm-3 control-label"><span class="text-danger">*</span>负责人:</label>
+	             <div class="col-sm-9">
+	             	<span ng-if="mm.site.code == 1 || mm.site.code == 2">
+	            		<input type="text" class="form-control" ng-model="mm.form.manageBy"  ></input>
+	             	</span>
+	             	<span ng-if="mm.site.code == 3">
+	            		<input type="text" class="form-control" ng-model="mm.form.manageBy" disabled ></input>
+	             	</span>
+	            </div>
+	        </div> -->
+	        <div class="line line-dashed b-b line-lg"></div>
+	        <div class="form-group">
+	            <label class="col-sm-3 control-label"><span class="text-danger">*</span>备注:</label>
+	             <div class="col-sm-9">
+	             	<span ng-if="mm.site.code == 1 || mm.site.code == 2">
+	            		<input type="text" class="form-control" ng-model="mm.form.remark" required ></input>
+	             	</span>
+	             	<span ng-if="mm.site.code == 3">
+	            		<input type="text" class="form-control" ng-model="mm.form.remark" disabled ></input>
+	             	</span>
+	            </div>
+	        </div>
+	        <div class="line line-dashed b-b line-lg" ng-if="mm.site.code == 3"></div>
+	        <div class="form-group" ng-if="mm.site.code == 3">
+	            <label class="col-sm-3 control-label"><span class="text-danger">*</span>订单轨迹:</label>
+	             <div class="col-sm-9">
+	             	<ul  ng-repeat="orderTrace in mm.form.orderTraceList">
+			            <li>
+			             <span>{{orderTrace.operationPerson}}</span> <span>{{orderTrace.createTime}}</span><span>{{orderTrace.operationContent}}</span>
+			            </li>
+	            	</ul>
+	            </div>
+	        </div>
+	    </form>
+    </div>
+</div>
+<div class="modal-footer">
+    <span ng-if="mm.site.code == 1 || mm.site.code == 2">
+    	<button type="button" class="btn btn-default" ng-click="mm.close()">取消</button>
+    	<button type="button" class="btn btn-info" ng-disabled="Form.$invalid" ng-click="mm.addSave()">提交</button>
+   	</span>
+   	<span ng-if="mm.site.code == 3">
+    	<button type="button" class="btn btn-default" ng-click="mm.close()">关闭</button>
+   	</span>
+</div>

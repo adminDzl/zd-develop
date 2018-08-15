@@ -1,0 +1,556 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zshop.car.order.dao.mapper.CarOrderMapper">
+
+<!-- **************以下映射必须与数据库一致 不要更改，除非数据库改变**************** -->
+
+	<insert id="insert"  parameterType="com.zshop.car.order.entity.CarOrder">
+				
+		insert into car_order
+		(
+			id,
+			park_id,
+			order_no,
+			reason,
+			start_time,
+			end_time,
+			start_address,
+			end_address,
+			is_samll_car,
+			small_car_num,
+			is_mid_car,
+			mid_car_num,
+			use_type,
+			order_status,
+			order_by,
+			order_time,
+			order_dept,
+			file_url,
+			remark,
+			create_by,
+			create_time,
+			update_by,
+			update_time,
+			status1,
+			status2,
+			ext1,
+			ext2,
+			ext3,
+			ext4,
+			ext5,
+			ext6
+		)
+		values	
+		(	
+			#{id},
+			#{parkId},
+			#{orderNo},
+			#{reason},
+			#{startTime},
+			#{endTime},
+			#{startAddress},
+			#{endAddress},
+			#{isSamllCar},
+			#{smallCarNum},
+			#{isMidCar},
+			#{midCarNum},
+			#{useType},
+			#{orderStatus},
+			#{orderBy},
+			#{orderTime},
+			#{orderDept},
+			#{fileUrl},
+			#{remark},
+			#{createBy},
+			#{createTime},
+			#{updateBy},
+			#{updateTime},
+			#{status1},
+			#{status2},
+			#{ext1},
+			#{ext2},
+			#{ext3},
+			#{ext4},
+			#{ext5},
+			#{ext6}
+		)	
+
+	</insert>
+	
+	<delete id="deleteById" parameterType="java.lang.String">
+		delete from car_order 	
+		WHERE ID=#{id}
+	</delete>
+	
+	<delete id="deleteByIds" parameterType="java.util.Collection">
+     	delete from car_order 	
+     	WHERE ID IN
+     	<foreach collection="array" index="index" item="item" open="(" separator="," close=")"> #{item} </foreach> 
+  	 </delete>
+  	 
+  	 <delete id="logicDelete" parameterType="java.lang.String">
+		update car_order set status1 = '-1' 	
+		WHERE ID=#{id}
+	</delete>
+	
+	<delete id="logicDeleteByIds" parameterType="java.util.Collection">
+     	update car_order set status1 = '-1' 	
+     	WHERE ID IN
+     	<foreach collection="array" index="index" item="item" open="(" separator="," close=")"> #{item} </foreach> 
+  	 </delete>
+	
+	<update id="update" parameterType="com.zshop.car.order.entity.CarOrder" >
+			
+		update car_order 	
+		<set> 	
+			park_id=#{parkId},
+			order_no=#{orderNo},
+			reason=#{reason},
+			start_time=#{startTime},
+			end_time=#{endTime},
+			start_address=#{startAddress},
+			end_address=#{endAddress},
+			is_samll_car=#{isSamllCar},
+			small_car_num=#{smallCarNum},
+			is_mid_car=#{isMidCar},
+			mid_car_num=#{midCarNum},
+			use_type=#{useType},
+			order_status=#{orderStatus},
+			order_by=#{orderBy},
+			order_time=#{orderTime},
+			order_dept=#{orderDept},
+			file_url=#{fileUrl},
+			remark=#{remark},
+			create_by=#{createBy},
+			create_time=#{createTime},
+			update_by=#{updateBy},
+			update_time=#{updateTime},
+			status1=#{status1},
+			status2=#{status2},
+			ext1=#{ext1},
+			ext2=#{ext2},
+			ext3=#{ext3},
+			ext4=#{ext4},
+			ext5=#{ext5},
+			ext6=#{ext6}
+		</set> 	
+		where 
+		ID=#{id} 	
+
+	</update>
+	
+	<update id="updateWithIf" parameterType="com.zshop.car.order.entity.CarOrder" >
+			
+		update car_order 	
+		<set> 	
+			<if test=" parkId!=null ">	
+				park_id=#{parkId},	
+			</if>	
+			<if test=" orderNo!=null ">	
+				order_no=#{orderNo},	
+			</if>	
+			<if test=" reason!=null ">	
+				reason=#{reason},	
+			</if>	
+			<if test=" startTime!=null ">	
+				start_time=#{startTime},	
+			</if>	
+			<if test=" endTime!=null ">	
+				end_time=#{endTime},	
+			</if>	
+			<if test=" startAddress!=null ">	
+				start_address=#{startAddress},	
+			</if>	
+			<if test=" endAddress!=null ">	
+				end_address=#{endAddress},	
+			</if>	
+			<if test=" isSamllCar!=null ">	
+				is_samll_car=#{isSamllCar},	
+			</if>	
+			<if test=" smallCarNum!=null ">	
+				small_car_num=#{smallCarNum},	
+			</if>	
+			<if test=" isMidCar!=null ">	
+				is_mid_car=#{isMidCar},	
+			</if>	
+			<if test=" midCarNum!=null ">	
+				mid_car_num=#{midCarNum},	
+			</if>	
+			<if test=" useType!=null ">	
+				use_type=#{useType},	
+			</if>	
+			<if test=" orderStatus!=null ">	
+				order_status=#{orderStatus},	
+			</if>	
+			<if test=" orderBy!=null ">	
+				order_by=#{orderBy},	
+			</if>	
+			<if test=" orderTime!=null ">	
+				order_time=#{orderTime},	
+			</if>	
+			<if test=" orderDept!=null ">	
+				order_dept=#{orderDept},	
+			</if>	
+			<if test=" fileUrl!=null ">	
+				file_url=#{fileUrl},	
+			</if>	
+			<if test=" remark!=null ">	
+				remark=#{remark},	
+			</if>	
+			<if test=" createBy!=null ">	
+				create_by=#{createBy},	
+			</if>	
+			<if test=" createTime!=null ">	
+				create_time=#{createTime},	
+			</if>	
+			<if test=" updateBy!=null ">	
+				update_by=#{updateBy},	
+			</if>	
+			<if test=" updateTime!=null ">	
+				update_time=#{updateTime},	
+			</if>	
+			<if test=" status1!=null ">	
+				status1=#{status1},	
+			</if>	
+			<if test=" status2!=null ">	
+				status2=#{status2},	
+			</if>	
+			<if test=" ext1!=null ">	
+				ext1=#{ext1},	
+			</if>	
+			<if test=" ext2!=null ">	
+				ext2=#{ext2},	
+			</if>	
+			<if test=" ext3!=null ">	
+				ext3=#{ext3},	
+			</if>	
+			<if test=" ext4!=null ">	
+				ext4=#{ext4},	
+			</if>	
+			<if test=" ext5!=null ">	
+				ext5=#{ext5},	
+			</if>	
+			<if test=" ext6!=null ">	
+				ext6=#{ext6},	
+			</if>	
+		</set>	
+		where 	
+		ID=#{id} 	
+
+	</update>
+	
+	<!-- *************************************************************************** -->
+	<!-- **************以下映射根据业务做相应调整**************** -->
+	<!-- *************************************************************************** -->
+  	
+  	<delete id="deleteByMap" parameterType="java.util.Map">
+    	delete from car_order 	 
+    	<where>
+    		
+    	</where>
+  	</delete>
+	
+	<select id="findById" parameterType="java.lang.String" resultType="com.zshop.car.order.entity.CarOrder">
+				
+		select  	
+			a.id id,
+			a.park_id parkId,
+			a.order_no orderNo,
+			a.reason reason,
+			a.start_time startTime,
+			a.end_time endTime,
+			a.start_address startAddress,
+			a.end_address endAddress,
+			a.is_samll_car isSamllCar,
+			a.small_car_num smallCarNum,
+			a.is_mid_car isMidCar,
+			a.mid_car_num midCarNum,
+			a.use_type useType,
+			a.order_status orderStatus,
+			a.order_by orderBy,
+			a.order_time orderTime,
+			a.order_dept orderDept,
+			a.file_url fileUrl,
+			a.remark remark,
+			a.create_by createBy,
+			a.create_time createTime,
+			a.update_by updateBy,
+			a.update_time updateTime,
+			a.status1 status1,
+			a.status2 status2,
+			a.ext1 ext1,
+			a.ext2 ext2,
+			a.ext3 ext3,
+			a.ext4 ext4,
+			a.ext5 ext5,
+			a.ext6 ext6
+		from car_order a
+
+		where a.Id=#{id}	
+	</select>
+
+	<select id="findListByMap" parameterType="java.util.Map" resultType="com.zshop.car.order.entity.CarOrder">
+		
+				
+		select  	
+			a.id id,
+			a.park_id parkId,
+			a.order_no orderNo,
+			a.reason reason,
+			a.start_time startTime,
+			a.end_time endTime,
+			a.start_address startAddress,
+			a.end_address endAddress,
+			a.is_samll_car isSamllCar,
+			a.small_car_num smallCarNum,
+			a.is_mid_car isMidCar,
+			a.mid_car_num midCarNum,
+			a.use_type useType,
+			a.order_status orderStatus,
+			a.order_by orderBy,
+			a.order_time orderTime,
+			a.order_dept orderDept,
+			a.file_url fileUrl,
+			a.remark remark,
+			a.create_by createBy,
+			a.create_time createTime,
+			a.update_by updateBy,
+			a.update_time updateTime,
+			a.status1 status1,
+			a.status2 status2,
+			a.ext1 ext1,
+			a.ext2 ext2,
+			a.ext3 ext3,
+			a.ext4 ext4,
+			a.ext5 ext5,
+			a.ext6 ext6
+		from car_order a
+
+
+		
+		<where>
+
+		</where>
+
+	</select>
+	
+	<select id="list" parameterType="java.util.Map" resultType="com.zshop.car.order.entity.CarOrder">
+		
+		
+				
+		select  	
+			a.id id,
+			a.park_id parkId,
+			a.order_no orderNo,
+			a.reason reason,
+			a.start_time startTime,
+			a.end_time endTime,
+			a.start_address startAddress,
+			a.end_address endAddress,
+			a.is_samll_car isSamllCar,
+			a.small_car_num smallCarNum,
+			a.is_mid_car isMidCar,
+			a.mid_car_num midCarNum,
+			a.use_type useType,
+			a.order_status orderStatus,
+			a.order_by orderBy,
+			a.order_time orderTime,
+			a.order_dept orderDept,
+			a.file_url fileUrl,
+			a.remark remark,
+			a.create_by createBy,
+			a.create_time createTime,
+			a.update_by updateBy,
+			a.update_time updateTime,
+			a.status1 status1,
+			a.status2 status2,
+			a.ext1 ext1,
+			a.ext2 ext2,
+			a.ext3 ext3,
+			a.ext4 ext4,
+			a.ext5 ext5,
+			a.ext6 ext6
+		from car_order a	
+
+		
+		<where>
+			<if test="searchKeys!= null ">
+				AND ( 1=2
+				<foreach collection="searchKeys" index="index" item="item" >
+					 OR a.id like #{item}
+				</foreach> 
+				)
+			</if>
+		</where>
+
+		
+	</select>
+	
+	<select id="findOneByMap" parameterType="java.util.Map" resultType="com.zshop.car.order.entity.CarOrder">
+				
+		select  	
+			a.id id,
+			a.park_id parkId,
+			a.order_no orderNo,
+			a.reason reason,
+			a.start_time startTime,
+			a.end_time endTime,
+			a.start_address startAddress,
+			a.end_address endAddress,
+			a.is_samll_car isSamllCar,
+			a.small_car_num smallCarNum,
+			a.is_mid_car isMidCar,
+			a.mid_car_num midCarNum,
+			a.use_type useType,
+			a.order_status orderStatus,
+			a.order_by orderBy,
+			a.order_time orderTime,
+			a.order_dept orderDept,
+			a.file_url fileUrl,
+			a.remark remark,
+			a.create_by createBy,
+			a.create_time createTime,
+			a.update_by updateBy,
+			a.update_time updateTime,
+			a.status1 status1,
+			a.status2 status2,
+			a.ext1 ext1,
+			a.ext2 ext2,
+			a.ext3 ext3,
+			a.ext4 ext4,
+			a.ext5 ext5,
+			a.ext6 ext6,
+			<if test="userId!=null">
+			b.reception_status receptionStatus,
+			</if>
+			u.mobile orderPhone
+		from car_order a
+		<if test="userId!=null">
+		left join (
+			select order_id,reception_status from car_reception
+				where car_driver_id in (select id from car_driver where user_id = #{userId})
+				and order_id = #{id}
+		) b on a.id = b.order_id
+		</if>
+		left join bas_user u on u.id = a.create_by
+
+		<where>
+			<if test="id!=null">
+				a.id = #{id}
+			</if>
+		</where>
+		limit 1
+	</select>
+
+
+	<select id="orderList" parameterType="java.util.Map" resultType="com.zshop.car.order.entity.CarOrder">
+
+
+
+		select
+		a.id id,
+		a.park_id parkId,
+		a.order_no orderNo,
+		a.reason reason,
+		a.start_time startTime,
+		a.end_time endTime,
+		a.start_address startAddress,
+		a.end_address endAddress,
+		a.is_samll_car isSamllCar,
+		a.small_car_num smallCarNum,
+		a.is_mid_car isMidCar,
+		a.mid_car_num midCarNum,
+		a.use_type useType,
+		a.order_status orderStatus,
+		a.order_by orderBy,
+		a.order_time orderTime,
+		a.order_dept orderDept,
+		a.file_url fileUrl,
+		a.remark remark,
+		a.create_by createBy,
+		a.create_time createTime,
+		a.update_by updateBy,
+		a.update_time updateTime,
+		a.status1 status1,
+		a.status2 status2,
+		a.ext1 ext1,
+		a.ext2 ext2,
+		a.ext3 ext3,
+		a.ext4 ext4,
+		a.ext5 ext5,
+		a.ext6 ext6,
+		b.realname realname,
+		b.mobile orderPhone
+		from car_order a
+		left join bas_user as b on b.id = a.create_by
+
+		<where>
+			<if test="searchKeys!= null ">
+				AND ( 1=2
+				<foreach collection="searchKeys" index="index" item="item" >
+					OR a.order_no like #{item} or b.realname like #{item} or b.mobile like #{item}
+				</foreach>
+				)
+			</if>
+			<if test="parkId!=null">
+				and a.park_id = #{parkId}
+			</if>
+			<if test="orderStatus!=null">
+				and a.order_status = #{orderStatus}
+			</if>
+			<if test="orderTimeBegin!=null">
+				and a.order_time >= #{orderTimeBegin}
+			</if>
+			<if test="orderTimeEnd!=null">
+				and a.order_time <![CDATA[ <= ]]> #{orderTimeEnd}
+			</if>
+		</where>
+
+		order by a.create_time desc
+
+
+	</select>
+
+
+	<select id="orderInfo" parameterType="java.util.Map" resultType="com.zshop.car.order.entity.CarOrder">
+
+		select
+			a.id id,
+			a.park_id parkId,
+			a.order_no orderNo,
+			a.reason reason,
+			a.start_time startTime,
+			a.end_time endTime,
+			a.start_address startAddress,
+			a.end_address endAddress,
+			a.is_samll_car isSamllCar,
+			a.small_car_num smallCarNum,
+			a.is_mid_car isMidCar,
+			a.mid_car_num midCarNum,
+			a.use_type useType,
+			a.order_status orderStatus,
+			a.order_by orderBy,
+			a.order_time orderTime,
+			a.order_dept orderDept,
+			a.file_url fileUrl,
+			a.remark remark,
+			a.create_by createBy,
+			a.create_time createTime,
+			a.update_by updateBy,
+			a.update_time updateTime,
+			a.status1 status1,
+			a.status2 status2,
+			a.ext1 ext1,
+			a.ext2 ext2,
+			a.ext3 ext3,
+			a.ext4 ext4,
+			a.ext5 ext5,
+			a.ext6 ext6
+		from car_order a
+
+
+	</select>
+
+</mapper>
+	

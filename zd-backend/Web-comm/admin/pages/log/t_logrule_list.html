@@ -1,0 +1,53 @@
+<crumb title="日志记录接口管理" head="true"></crumb>
+<div class="wrapper-md" ng-controller="TLogRuleGrid">
+	 <div class="panel panel-default">
+	 	
+        <div class="panel-heading">
+            <button class="btn m-b-xs btn-sm btn-info btn-addon" ng-click="addNew()">
+            	<i class="fa fa-plus"></i>新增
+            </button>
+        </div>
+        <div class="panel-heading">
+          <form class="form-inline ng-pristine ng-valid" role="form">
+            <div class="form-group">
+	          <input type="text" class="form-control" placeholder="名称，请求" ng-model="keyword" ng-keypress="search(keyword,$event)"/>
+	        </div>
+	        <button type="submit" class="btn btn-info" ng-click="search(keyword)">Search</button>
+		  </form>
+        </div>
+        <div class="table-responsive">
+        	<table class="table table-striped b-t b-b">
+        		<thead>
+	                <tr>
+	                    <th style="width:5%" data-breakpoints="xs">ID</th>
+	                    <th style="width:10%" class="text-center">请求URL</th>
+	                    <th style="width:10%" class="text-center">请求名称</th>
+	                    <th style="width:10%" class="text-center">编码(缩写)</th>
+						<th style="width:15%" class="text-center">请求类型</th>
+	                    <th style="width:10%" class="text-center">备注</th>
+						<th style="width:10%" class="text-center">状态 </th>
+						<th style="width:15%" class="text-center" data-breakpoints="xs" >操作</th>
+	                </tr>
+                </thead>
+                <tbody>
+	                <tr data-expanded="true" ng-repeat="row in rows">
+	                    <td > {{paginationConf.currentPage ? paginationConf.pageSize*(paginationConf.currentPage-1)+$index+1 : $index+1}}</td>
+	                    <td > {{row.url}}</td>
+	                    <td > {{row.name}}</td>
+	                    <td > {{row.code}}</td>
+						<td > {{row.type}}</td>
+	                    <td > {{row.remark}}</td>
+						<td > {{row.status == '1' ? '正常' : '已删除'}}</td>
+	                    <td>
+	                        <div class="buttons">
+	                            <button class="btn btn-sm btn-info" power-key="logrule:update" ng-click="update(row.id)">修改</button>
+	                            <button class="btn btn-sm btn-danger" ng-click="deleteById(row.id,row.status)">{{row.status == '1' ? '删除' : '恢复'}}</button>
+	                        </div>
+	                    </td>
+	                </tr>
+                </tbody>
+        	</table>
+        	<tmpagination conf="paginationConf"></tmpagination>
+        </div>
+	 </div>
+</div>

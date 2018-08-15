@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<meta content="yes" name="apple-mobile-web-app-capable">
+		<meta content="black" name="apple-mobile-web-app-status-bar-style">
+		<meta content="telephone=no" name="format-detection">
+		<meta content="email=no" name="format-detection">
+		<meta name="hotcss" content="max-width=640">
+		<title>提交订单</title>
+		<link rel="stylesheet" href="../../css/common.css" />
+		<link rel="stylesheet" href="../../css/style.css" />
+		<script type="text/javascript" src="../../js/common/hotcss.js" ></script>
+	</head>
+	<body ng-app="myApp" ng-controller="AppCtrl">
+		
+		<div class="meetingRoomBox">
+			<ul>
+				<li class="border-b">
+					<div>
+						<div class="meetingRoomImg" style="background: url(../../img/back/meetingRoom.jpg) center no-repeat; background-size: cover;"></div>
+						<div class="meetingRoomInfo">
+							<p class="fellipsis">A2217</p>
+							<div>
+								<p class="fellipsis"><i class="location"></i>南山区政府·A座22楼·85平米</p>
+								<p class="fellipsis"><i class="person"></i>54人以内    会议主桌15个席位</p>
+							</div>
+						</div>
+					</div>
+				</li>
+			</ul>
+		</div>
+		
+		<div class="container m-t-40">
+			<p class="f-s-40 f-c-494848 p-l-r-40">服务订单：45889555424</p>
+		</div>
+		
+		<div class="container m-t-40">
+			<div class="textBox fix">
+				<p class="f-l">主题：</p>
+				<p class="f-r">区领导莅临指导</p>
+			</div>
+			<div class="textBox fix">
+				<p class="f-l">人数：</p>
+				<p class="f-r">40人</p>
+			</div>
+			<div class="textBox fix">
+				<p class="f-l">会议级别：</p>
+				<p class="f-r">副部级别</p>
+			</div>
+			<div class="textBox fix">
+				<p class="f-l">时间：</p>
+				<p class="f-r">2018-03-18 上午</p>
+			</div>
+			<div class="textBox fix">
+				<p class="f-l">会议起止时间：</p>
+				<p class="f-r">2018-03-18 9:00~12:00</p>
+			</div>
+			<div class="textBox fix">
+				<p class="f-l">设备：</p>
+				<p class="f-r">投影、电脑</p>
+			</div>
+		</div>
+		
+		<div class="container m-t-40" ng-if="hasCarInfo=='1' || hasCarInfo=='2'">
+			<div class="textBox fix">
+				<p class="f-l">设备工程师姓名：</p>
+				<p class="f-r">王小二</p>
+			</div>
+			<div class="textBox fix">
+				<p class="f-l">设备工程师电话：</p>
+				<p class="f-r">13254654125</p>
+			</div>
+		</div>
+		
+		<div class="container m-t-40">
+			<p class="f-s-40 f-c-494848 p-l-r-40">电子横幅内容：</p>
+			<p class="f-s-40 f-c-8997a5 p-l-r-40 m-t-40">欢迎市领导莅临指导工作会议</p>
+		</div>
+		
+		<div class="container m-t-40">
+			<div class="textBox fix">
+				<p class="f-l">预订人名：</p>
+				<p class="f-r">许词</p>
+			</div>
+			<div class="textBox fix">
+				<p class="f-l">预订人部门：</p>
+				<p class="f-r">车管科</p>
+			</div>
+			<div class="textBox fix">
+				<p class="f-l">预订人电话：</p>
+				<p class="f-r">13541236541</p>
+			</div>
+		</div>
+		
+		<div class="container m-t-40">
+			<div class="textBox fix">
+				<p class="f-l">附件：</p>
+				<a href="javascript:;" class="f-r">xxx.word</a>
+			</div>
+			<div class="textBox fix">
+				<p class="f-l">备注信息：</p>
+				<p class="f-r">车管科车管科车管科车管科车管科车管科车管科车管科车管科车管科车管科车管科车管科车管科车管科车管科</p>
+			</div>
+		</div>
+		
+		<div class="container m-t-40" ng-if="hasCarInfo=='2' || hasCarInfo=='3'">
+			<div>
+				<p class="defaultP">评价：</p>
+				<div class="evaluateBox {{ hasCarInfo=='2' ? 'defaultEvaluate' : '' }}">
+					<textarea placeholder="请评价或提出建议！" ng-if="hasCarInfo=='2'"></textarea>
+					<p ng-if="hasCarInfo=='3'">建议建议</p>
+					<ul class="fix">
+						<li ng-if="hasCarInfo=='2'"><input type="file" /></li>
+						<li ng-if="hasCarInfo=='3'" style="background: url(../../img/back/uploadImg.jpg) center no-repeat; background-size: contain;"></li>
+					</ul>
+				</div>
+			</div>
+			<div class="gradeBox fix">
+				<p class="f-l">对会场服务评分：</p>
+				<div class="f-r">
+					<ul class="fix">
+						<li data-start = "5" class="{{ hasCarInfo=='3' ? 'select' : '' }}" ng-click="selectStart($event)"></li>
+						<li data-start = "4" class="{{ hasCarInfo=='3' ? 'select' : '' }}" ng-click="selectStart($event)"></li>
+						<li data-start = "3" class="{{ hasCarInfo=='3' ? 'select' : '' }}" ng-click="selectStart($event)"></li>
+						<li data-start = "2" class="{{ hasCarInfo=='3' ? 'select' : '' }}" ng-click="selectStart($event)"></li>
+						<li data-start = "1" class="{{ hasCarInfo=='3' ? 'select' : '' }}" ng-click="selectStart($event)"></li>
+					</ul>
+				</div>
+			</div>
+			<div class="border-b m-t-40 m-b-40"></div>
+			<div class="gradeBox fix">
+				<p class="f-l">对设备服务评分：</p>
+				<div class="f-r">
+					<ul class="fix">
+						<li data-start = "5" class="{{ hasCarInfo=='3' ? 'select' : '' }}" ng-click="selectStart($event)"></li>
+						<li data-start = "4" class="{{ hasCarInfo=='3' ? 'select' : '' }}" ng-click="selectStart($event)"></li>
+						<li data-start = "3" class="{{ hasCarInfo=='3' ? 'select' : '' }}" ng-click="selectStart($event)"></li>
+						<li data-start = "2" class="{{ hasCarInfo=='3' ? 'select' : '' }}" ng-click="selectStart($event)"></li>
+						<li data-start = "1" class="{{ hasCarInfo=='3' ? 'select' : '' }}" ng-click="selectStart($event)"></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		
+		
+		<!-- 订单状态 -->
+		<div class="container m-t-40">
+			<p class="defaultP">订单状态</p>
+			<div class="orderStateBox">
+				<div><div><em></em></div></div>
+				<ul class="fix">
+					<li>
+						<em></em>
+						<p>待审核</p>
+					</li>
+					<li class="course">
+						<em></em>
+						<p>已审核</p>
+					</li>
+					<li class="course">
+						<em></em>
+						<p>待评价</p>
+					</li>
+					<li class="course">
+						<em></em>
+						<p>已评价</p>
+					</li>
+					<li class="reject">
+						<em></em>
+						<p ng-bind-template="{{ hasCarInfo=='4' ? '已取消' : '已驳回' }}"></p>
+					</li>
+				</ul>
+			</div>
+			<a href="javascript:;" class="fill-btn confirm" ng-if="hasCarInfo=='0'" ng-click="cancelOrder()">取消订单</a>
+			<a href="javascript:;" class="fill-btn confirm" ng-if="hasCarInfo=='2'" ng-click="getComment()">提交评价</a>
+		</div>
+		
+		<!-- 蒙版 -->
+		<div class="masking"></div>
+		
+		
+		<script type="text/javascript" src="../../js/common/angular.min.js" ></script>
+		<script type="text/javascript" src="../../js/common/jquery-1.8.3.min.js" ></script>
+		<script type="text/javascript" src="../../js/meetingRoom/meetingOrder.js"></script>
+	</body>
+</html>

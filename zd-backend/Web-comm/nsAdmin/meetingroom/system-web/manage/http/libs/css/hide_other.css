@@ -1,0 +1,16 @@
+/** 隐藏头部 导航 尾部  **/
+#app .app-header, #app .app-aside, #app .settings, #app .app-footer {
+    display: none !important;
+}
+
+#app {
+    padding-top: 0px !important;
+}
+
+#app .app-content {
+    margin-left: 0px !important;
+}
+
+#app .app-content .app-content-body {
+    padding-bottom: 0px !important;
+}

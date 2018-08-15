@@ -1,0 +1,75 @@
+<crumb title="用车订单列表" head="true"></crumb>
+<div class="wrapper-md" ng-controller="orderlist">
+	<div class="panel panel-default">
+
+		<div class="panel-heading">
+			<form class="form-inline ng-pristine ng-valid">
+				<div class="form-group" style="margin-right: 30px; margin-bottom: 20px;">
+					<label class="control-label">预定时间：</label>
+					<input id="searchDates" ui-jq="daterangepicker" ui-options="dateRangeOptions" style="min-width: 325px;vertical-align: initial;height: 30px;"
+					 placeholder="请输入日期范围" ng-model="orderTime" aria-invalid="false" class="form-control ng-pristine ng-valid ng-touched"
+					/>
+				</div>
+				
+				<div class="form-group" style="margin-right: 30px; margin-bottom: 20px;">
+					<label class="control-label">状态：</label>
+					<select class="form-control ng-pristine ng-valid ng-touched m-b-xs" ng-model="orderStatus" ng-change="search()">
+						<option value="">全部</option>
+						<option value="0">待审核</option>
+						<option value="1">已审核</option>
+						<option value="2">已驳回</option>
+						<option value="3">已派单</option>
+						<option value="4">已接单</option>
+						<option value="5">已到出发地</option>
+						<option value="6">用车完成</option>
+						<option value="7">已评价</option>
+						<option value="8">已取消</option>
+					</select>
+				</div>
+				
+				<div class="form-group" style="margin-right: 30px; margin-bottom: 20px;">
+					<input type="text" class="form-control" placeholder="输入订单编号/姓名/电话/申请部门" ng-model="keyword" ng-keypress="search(keyword,$event)" />
+					<button type="submit" class="btn btn-info" ng-click="search(keyword)">搜索</button>
+				</div>
+
+				
+			</form>
+		</div>
+		<div class="table-responsive">
+			<table class="table table-striped b-t b-b">
+				<thead>
+					<tr>
+						<th style="width:5%" class="text-center" data-breakpoints="xs">No.</th>
+						<th style="width:10%" class="text-center">订单编号</th>
+						<th style="width:5%" class="text-center">申请人</th>
+						<th style="width:10%" class="text-center">申请人电话</th>
+						<th style="width:5%" class="text-center">小车数量</th>
+						<th style="width:5%" class="text-center">中巴数量</th>
+						<th style="width:10%" class="text-center">订单状态</th>
+						<th style="width:10%" class="text-center">预定时间</th>
+						<th style="width:10%" class="text-center" data-breakpoints="xs">操作</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr data-expanded="true" ng-repeat="row in rows">
+						<td> {{paginationConf.currentPage ? paginationConf.pageSize*(paginationConf.currentPage-1)+$index+1 : $index+1}}</td>
+						<td> {{row.orderNo}}</td>
+						<td> {{row.realname}}</td>
+						<td> {{row.orderPhone}}</td>
+						<td> {{row.smallCarNum ==null ? 0:row.smallCarNum}}</td>
+						<td> {{row.midCarNum ==null ? 0:row.midCarNum}}</td>
+						<!--<td> {{row.orderStatus =='0' ?'待审核':(row.orderStatus =='1'? '已审核':(row.orderStatus =='2'? '已驳回':'已派单'))}}</td>-->
+						<td> {{row.orderStatus | orderStatus}}</td>
+						<td> {{row.orderTime}}</td>
+						<td>
+							<div class="buttons">
+								<button class="btn btn-sm btn-info" ng-click="set(row.id)">查看详情</button>
+							</div>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+			<tmpagination conf="paginationConf"></tmpagination>
+		</div>
+	</div>
+</div>

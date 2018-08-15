@@ -1,0 +1,87 @@
+ 
+  <div class="panel panel-default">
+     
+    <div class="panel-body">
+      <!---main-->
+        <!--condition-form-->
+        <div class="panel panel-default">
+            <div class="panel-heading">筛选</div>
+             
+                <table class="table">
+                    <tr style="vertical-align:middle">
+                        <td style="width:80px;vertical-align:middle">时间：</td>
+                        <td style="width:160px;"><datepicker-directive no-min="true" class="input-group w-md" style="width:150px;" model="instance.params.bTime"></datepicker-directive>                         </td>
+                        <td style="width:10px;vertical-align:middle">至</td>
+                        <td style="width:160px;"> <datepicker-directive no-min="true" class="input-group w-md" style="width:150px;" model="instance.params.eTime"></datepicker-directive> </td>
+                        <td style="width:140px;vertical-align:middle">增值服务类别：</td>
+                        <td style="width:160px;">
+                          <select class="form-control" ng-model="instance.params.serviceId"><option value="">请选择</option><option value="{{it.id}}" ng-repeat="it in instance.addsList">{{it.serviceTypeName}}</option></select>
+                        </td>
+                        <td style="width:80px;vertical-align:middle">状态：</td>
+                        <td  style="width:160px;">  
+                          <select class="form-control" ng-model="instance.params.orderStatus"><option value="">请选择</option><option ng-repeat="it in instance.statusMap" value="{{it.v}}">{{it.n}}</option></select></td>
+                        <td></td>
+                      </tr>
+                      <!-- <tr>
+                         <td>场地状态：</td>
+                         <td>
+                             <label class="radio-inline" ng-repeat="it in instance.placeStatuses"><input type="radio" ng-model="instance.params.isDisplay" value="{{it.isDisplay}}">{{it.name}}</label>                            
+                         </td>
+                       </tr> -->
+                   <tr>
+                     <td colspan="7">
+                        <div class="input-group" style="width:390px;">
+                            <input type="text" class="form-control"  ng-model="instance.params.companyName" placeholder="请输入公司名称">
+                            <span class="input-group-btn">
+                              <button class="btn btn-info" ng-click="search()" type="button">查询</button>
+                            </span>
+                          </div>
+                       
+                     </td>
+                     <td>
+                        <button class="btn btn-rounded btn-sm btn-info"  ui-sref="manage.addorder"><i class="fa fa-fw fa-plus"></i> 新增订单</button>  
+                     </td>
+                     <td></td>
+                   </tr>
+                 
+                </table>
+             
+        </div>
+        <!--condition-form-->
+        <!--list-->
+        <div class="panel panel-default">  
+              <div class="table-responsive">       
+                <table  datatable-directive url="dataUrl"  
+                 search-params="instance.params"
+                 filters="payStatus"
+                 columns="columns"                   
+                 view="view(data)" 
+                 fen="fen(data)"
+                 indentify-key="engine"  btns="v-f"  
+                 class="table table-striped b-t b-b" style="width: 100%">
+                    <thead>
+                    <tr>
+                        <th style="width: 130px;">订单编号</th>
+                        <th style="width: 130px;">会议室名称</th>
+                        <th style="width: 180px;">使用时间</th>
+                        <th style="width: 100px;">申请人</th>                     
+                        <th style="width: 90px;">总金额</th>
+                        <th style="width: 180px;">定金支付方式</th>
+                        <th style="width: 180px;">余额支付方式</th>
+                        <th style="width: 80px;">状态</th>
+                        <th style="width: 90px;">处理人</th>
+                        <th style="width: 80px;">操作</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+              </div>
+         
+        </div>
+        <!--list-->
+      <!---main-->
+    </div>
+  </div>
+
+  <modal-directive model-id='myModal'  setting="{title:'提示',btnName:'确定',content:'确定删除'}" callback="doYes()"></modal-directive>

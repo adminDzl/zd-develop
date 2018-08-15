@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<meta content="yes" name="apple-mobile-web-app-capable">
+		<meta content="black" name="apple-mobile-web-app-status-bar-style">
+		<meta content="telephone=no" name="format-detection">
+		<meta content="email=no" name="format-detection">
+		<meta name="hotcss" content="max-width=640">
+		<title>餐饮预订</title>
+		<link rel="stylesheet" href="../../css/common.css" />
+		<link rel="stylesheet" href="../../css/style.css" />
+		<link rel="stylesheet" href="../../css/common/dropload.css" />
+		<script type="text/javascript" src="../../js/common/hotcss.js" ></script>
+	</head>
+	<body ng-app="myApp" ng-controller="AppCtrl" class="bottomBtnFixBody">
+		<div class="restaurantBox top" style="background: url(../../img/back/restaurantTop.png) center no-repeat; background-size: cover; padding-top: 0">
+			<span class="left">午餐点评</span><span class="center" ng-click="navOperate('dinner')">晚餐预订</span><span class="right" ng-click="navOperate('takeOut')">外卖预订</span>
+			<em></em>
+		</div>
+		<div class="restaurantBox content">
+			<ul class="fix">
+				<li ng-repeat="item in menuData">
+					<div class="foodImg" data-url="{{item.ext1}}" data-cal="{{item.foodCalories}}" style="background: url({{item.foodImg}}) center no-repeat; background-size: cover;" ng-click="selectFood($event)"></div>
+					<div class="foodInfo">
+						<p class="foodName m-b-20 fellipsis" ng-bind="item.foodName"></p>
+						<div class="foodCalBox m-b-20">
+							<p class="foodCal fellipsis">每百克卡路里含量</p>
+							<p class="foodCal fellipsis" ><span ng-bind="item.foodCalories"></span>cal</p>
+						</div>
+						<div class="fix">
+							<div class="f-l foodAttr highGlucose" ng-bind="item.foodLabel" ng-if="item.foodLabel"></div>
+							<p class="f-r foodLike {{item.likeId != null?'select':''}}" ng-click="setFoodLike($event)" data-id="{{item.id}}"><i></i><span ng-bind="item.starCount"></span></p>
+						</div>
+					</div>
+				</li>
+			</ul>
+		</div>
+		
+		<!-- 蒙版 -->
+		<div class="masking"></div>
+
+		<!--点击方法图-->
+		<div class="detailFoodBox t-c">
+			<div class="detailFoodHeader">
+				<div class="successIcon" style="background: url({{url}}) center no-repeat; background-size: contain">
+				</div>
+				<em class="detailFoodClose" ng-click="closeOrOpenFoodBox('close')"></em>
+			</div>
+			<p class="f-s-50 f-b l-h-116 refer">{{tipOne}}</p>
+			<p class="f-s-40 cal">{{tipTwo}}</p>
+		</div>
+		
+		<script type="text/javascript" src="../../js/common/angular.js" ></script>
+		<script type="text/javascript" src="../../js/common/jquery-1.8.3.min.js" ></script>
+		<script type="text/javascript" src="../../js/common/dropload.min.js" ></script>
+		<script type="text/javascript" src="../../js/common/util.js" ></script>
+		<script type="text/javascript" src="../../js/restaurantBooking/index.js"></script>
+	</body>
+</html>

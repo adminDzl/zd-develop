@@ -1,0 +1,127 @@
+<crumb title="新增图表"></crumb>
+<div class="wrapper-md ng-scope">
+
+	<div class="modal-body">
+	    <div class="wrapper-md ng-scope">
+		    <form name="Form"  class="form-horizontal form-validation" novalidate>
+				<div class="form-group" ng-show="false">
+					<label class="col-sm-3 control-label"><span class="text-danger">*</span>id:</label>
+					<div class="col-sm-9">
+						<input type="text" class="form-control" ng-model="mm.form.id"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-sm-3 control-label"><span class="text-danger">*</span>图表名称:</label>
+					<div class="col-sm-9">
+						<input type="text" class="form-control" ng-model="mm.form.title" required/>
+					</div>
+				</div>
+				<div class="line line-dashed b-b line-lg"></div>
+				<div class="form-group">
+					<label class="col-sm-3 control-label"><span class="text-danger">*</span>图表类型:</label>
+					<div class="col-sm-9">
+						<select class="form-control" ng-model="mm.form.defType" ng-options="row.value as row.name for row in mm.site.allTypes" required></select>
+					</div>
+				</div>
+		        <div class="line line-dashed b-b line-lg"></div>
+				<div class="form-group">
+					<label class="col-sm-3 control-label"><span class="text-danger">*</span>业务类型(表名):</label>
+					<div class="col-sm-9">
+						<input type="text" class="form-control" ng-model="mm.form.bussTb" required/>
+					</div>
+				</div>
+				<div class="line line-dashed b-b line-lg"></div>
+				<div class="form-group">
+					<label class="col-sm-3 control-label"><span class="text-danger">*</span>是否计算总和:</label>
+					<div class="col-sm-9">
+						<select class="form-control" ng-model="mm.form.isSum" ng-options="row.value as row.name for row in mm.site.yesOrNo" required></select>
+					</div>
+				</div>
+				<div class="line line-dashed b-b line-lg"></div>
+				<div class="form-group">
+					<label class="col-sm-3 control-label"><span class="text-danger">*</span>是否统计条数:</label>
+					<div class="col-sm-9">
+						<select class="form-control" ng-model="mm.form.isCount" ng-options="row.value as row.name for row in mm.site.yesOrNo" required></select>
+					</div>
+				</div>
+				<div ng-show="mm.form.defType != 'pie'">
+					<div class="line line-dashed b-b line-lg"></div>
+					<div class="form-group">
+						<label class="col-sm-3 control-label"><span class="text-danger">*</span>分类字段:</label>
+						<div class="col-sm-9">
+							<input type="text" class="form-control" ng-model="mm.form.category"/>
+						</div>
+					</div>
+					<div class="line line-dashed b-b line-lg"></div>
+					<div class="form-group">
+						<label class="col-sm-3 control-label"><span class="text-danger">*</span>分类字段是否日期时间:</label>
+						<div class="col-sm-9">
+							<select class="form-control" ng-model="mm.form.isCategoryDatetime"
+									ng-options="row.value as row.name for row in mm.site.yesOrNo"
+							ng-change="mm.handleCategary()"></select>
+						</div>
+					</div>
+					<div class="line line-dashed b-b line-lg"></div>
+					<div class="form-group" ng-show="(mm.form.isCategoryDatetime==='Y')">
+						<label class="col-sm-3 control-label"><span class="text-danger">*</span>统计日期时间格式:</label>
+						<div class="col-sm-9">
+							<select class="form-control" ng-model="mm.form.categoryDtFormat"
+									ng-options="row.value as row.name for row in mm.site.dOrMorY"></select>
+						</div>
+					</div>
+				</div>
+				<div class="line line-dashed b-b line-lg"></div>
+				<div class="form-group">
+					<label class="col-sm-3 control-label"><span class="text-danger">*</span>图例字段:</label>
+					<div class="col-sm-9">
+						<input type="text" class="form-control" ng-model="mm.form.legend" required/>
+					</div>
+				</div>
+				<div class="line line-dashed b-b line-lg"></div>
+				<div class="form-group">
+					<label class="col-sm-3 control-label"><span class="text-danger">*</span>图例字段是否日期时间:</label>
+					<div class="col-sm-9">
+						<select class="form-control" ng-model="mm.form.isLegendDatetime"
+								ng-options="row.value as row.name for row in mm.site.yesOrNo" required onchange="mm.handleLegendDatetime()"></select>
+					</div>
+				</div>
+				<div class="line line-dashed b-b line-lg"></div>
+				<div class="form-group" ng-show="(mm.from.showLegendDateformat === 'Y')">
+					<label class="col-sm-3 control-label"><span class="text-danger">*</span>图例统计日期时间格式:</label>
+					<div class="col-sm-9">
+						<select class="form-control" ng-model="mm.form.legendDtFormat" ng-options="row.value as row.name for row in mm.site.dOrMorY"></select>
+					</div>
+				</div>
+				<div class="line line-dashed b-b line-lg"></div>
+				<div class="form-group">
+					<label class="col-sm-3 control-label"><span class="text-danger">*</span>是否默认显示:</label>
+					<div class="col-sm-9">
+						<select class="form-control" ng-model="mm.form.defaultDis" ng-options="row.value as row.name for row in mm.site.isDefaultDis" required></select>
+					</div>
+				</div>
+		        <div class="line line-dashed b-b line-lg"></div>
+		        <div class="form-group">
+		            <label class="col-sm-1 control-label"></label>
+		             <div class="col-sm-2">
+		            	<button type="button" class="btn btn-info" ng-click="mm.showTable()">图表展示</button>
+		            </div>
+		        </div>
+		        <div class="row" ng-show="isshowTB" >
+				 	<div class="col-md-6">
+				 		<div class="panel panel-default">
+						 	<div class="panel-heading font-bold">图表示例</div>
+						 	<div class="panel-body" >
+						 		<ng-echarts ec-config="ecConfig" ec-option="ecOption" style="width: 600px;height:400px;"></ng-echarts>
+						 	</div>
+						 </div>
+				 	</div>
+				 </div>
+		        
+		    </form>
+	    </div>
+	</div>
+	<div class="modal-footer">
+	    <button type="button" class="btn btn-default" ng-click="mm.close()">取消</button>
+	    <button type="button" class="btn btn-info" ng-disabled="Form.$invalid" ng-click="mm.addSave()">提交</button>
+	</div>
+</div>

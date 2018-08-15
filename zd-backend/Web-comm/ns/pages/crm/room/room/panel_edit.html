@@ -1,0 +1,117 @@
+<div class="modal-header">
+    <button type="button" class="close" ng-click="close()"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+    <h4 class="modal-title">{{site.title}}</h4>
+</div>
+<div class="modal-body">
+    <div class="wrapper-md ng-scope">
+	    <form name="Form"  class="form-horizontal form-validation" novalidate>
+	        <div class="form-group">
+	            <label class="col-sm-3 control-label"><span class="text-danger">*</span>名称:</label>
+	             <div class="col-sm-9">
+	            	<input type="text" class="form-control" ng-model="form.name" required ></input>
+	            </div>
+	        </div>
+	        <div class="line line-dashed b-b line-lg"></div>
+	        <div class="form-group">
+	            <label class="col-sm-3 control-label">户型:</label>
+	             <div class="col-sm-9">
+	            	<select class="form-control" ng-model="form.roomType" ng-options="row.id as row.keyName for row in roomTypes" ></select>
+	            </div>
+	        </div>
+	        <div class="form-group">
+	            <label class="col-sm-3 control-label"><span class="text-danger">*</span>地产类型:</label>
+	             <div class="col-sm-9">
+	            	<select class="form-control" ng-model="form.estateType" ng-options="row.id as row.keyName for row in estateTypes" required ></select>
+	            </div>
+	        </div>
+	        <div class="form-group">
+	            <label class="col-sm-3 control-label"><span class="text-danger">*</span>编号:</label>
+	             <div class="col-sm-9">
+	            	<input type="text" class="form-control" ng-model="form.code" required ></input>
+	            </div>
+	        </div>
+	        <div class="form-group">
+	            <label class="col-sm-3 control-label"><span class="text-danger">*</span>编号格式类型:</label>
+	             <div class="col-sm-9">
+	            	<select class="form-control" ng-model="form.codeType" ng-options="row.id as row.keyName for row in codeTypes" required ></select>
+	            </div>
+	        </div>
+	        <div class="form-group">
+	            <label class="col-sm-3 control-label"><span class="text-danger">*</span>建筑面积:</label>
+	             <div class="col-sm-9">
+	            	<input type="text" class="form-control" ng-model="form.constructionArea" required/>
+	            </div>
+	        </div>
+	        <div class="form-group">
+	            <label class="col-sm-3 control-label"><span class="text-danger">*</span>使用面积:</label>
+	             <div class="col-sm-9">
+	            	<input type="text" class="form-control" ng-model="form.roomArea" required/>
+	            </div>
+	        </div>
+	        <div class="form-group">
+	            <label class="col-sm-3 control-label">套内面积:</label>
+	             <div class="col-sm-9">
+	            	<input type="text" class="form-control" ng-model="form.roomArea"/>
+	            </div>
+	        </div>
+	        <div class="form-group">
+	            <label class="col-sm-3 control-label">状态:</label>
+	             <div class="col-sm-9">
+	            	<select class="form-control" ng-model="form.useStatus" readonly="true">
+	            		<option value="0">冻结</option>
+	            		<option value="1">开放</option>
+	            		<option value="2">已出租</option>
+	            		<option value="3">已出售</option>
+	            	</select>
+	            </div>
+	        </div>
+	        <div class="form-group">
+	            <label class="col-sm-3 control-label"><span class="text-danger">*</span>可出租:</label>
+	             <div class="col-sm-9">
+	            	<select class="form-control" ng-model="form.rentFlag">
+	            		<option value="1">是</option>
+	            		<option value="0">否</option>
+	            	</select>
+	            </div>
+	        </div>
+	        <div class="form-group">
+	            <label class="col-sm-3 control-label">租赁价格:</label>
+	             <div class="col-sm-9">
+	            	<input type="text" class="form-control" ng-model="form.rentPrice"></input>
+	            </div>
+	        </div>
+	        <div class="form-group">
+	            <label class="col-sm-3 control-label"><span class="text-danger">*</span>可出售:</label>
+	            <div class="col-sm-9">
+	            	<select class="form-control" ng-model="form.saleFlag">
+	            		<option value="1">是</option>
+	            		<option value="0">否</option>
+	            	</select>
+	            </div>
+	        </div>
+	        <div class="form-group">
+	            <label class="col-sm-3 control-label">租金押付类型:</label>
+	             <div class="col-sm-9">
+	            	<select class="form-control" ng-model="form.rentType" ng-options="row.id as row.keyName for row in rentTypes" ></select>
+	            </div>
+	        </div>
+	        <div class="form-group">
+	            <label class="col-sm-3 control-label">销售价格:</label>
+	             <div class="col-sm-9">
+	            	<input type="text" class="form-control" ng-model="form.rentPrice"></input>
+	            </div>
+	        </div>
+	        <div class="line line-dashed b-b line-lg"></div>
+	        <div class="form-group">
+	            <label class="col-sm-3 control-label">备注:</label>
+	             <div class="col-sm-9">
+	            	<textarea type="text" class="form-control" ng-model="form.remark" ></textarea>
+	            </div>
+	        </div>
+	    </form>
+    </div>
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-default" ng-click="close()">取消</button>
+    <button type="button" class="btn btn-info" ng-disabled="Form.$invalid" ng-click="addSave()">提交</button>
+</div>

@@ -1,0 +1,70 @@
+<crumb title="角色管理" head="true"></crumb>
+<div class="wrapper-md" ng-controller="TRoleGrid">
+	 <div class="panel panel-default">
+	 	
+	 	<!-- <div class="panel-heading">
+          <form class="form-inline ng-pristine ng-valid" role="form">
+            <div class="form-group" >
+         		<label class="control-label">可管理园区：</label>
+                <select class="form-control" ng-model="parkId" ng-change="seletePark()" ng-options="en.id as en.name for en in parkList">
+                    <option value="" >--本园区--</option>
+                </select>
+            </div>
+		  </form>
+		  
+        </div> -->
+        
+        <div class="panel-heading clearfix">
+          <div class="pull-left">
+          <form class="form-inline ng-pristine ng-valid" role="form">
+            <div class="form-group">
+	          <input type="text" class="form-control" placeholder="请输入角色名称" ng-model="keyword" ng-keypress="search(keyword,$event)"/>
+	        </div>
+	        <button type="submit" class="btn btn-info" ng-click="search(keyword)">搜索</button>
+		  </form>
+		  </div>
+		  <div class="pull-right">
+            <button class="btn m-b-xs btn-sm btn-info btn-addon"  ng-click="addNew()">
+            	<i class="fa fa-plus"></i>新增
+            </button>
+        </div>
+        </div>
+        <div class="table-responsive">
+        	<table class="table table-striped b-t b-b">
+        		<thead>
+	                <tr>
+	                    <th style="width:5%" data-breakpoints="xs" class="text-center">ID</th>
+	                    <th style="width:25%" class="text-center">角色名称</th>
+	                    <th style="width:20%" class="text-center">角色编码</th>
+	                    <th style="width:20%" class="text-center">备注 </th>
+	                    <th style="width:20%" class="text-center">创建时间</th>
+	                    <th style="width:10%" class="text-center" data-breakpoints="xs" >操作</th>
+	                </tr>
+                </thead>
+                <tbody>
+	                <tr data-expanded="true" ng-repeat="row in rows">
+	                    <td > {{paginationConf.currentPage ? paginationConf.pageSize*(paginationConf.currentPage-1)+$index+1 : $index+1}}</td>
+	                    <td > {{row.name}}</td>
+	                    <td > {{row.code}}</td>
+	                    <td > {{row.remark | limitToNum:20 }}</td>
+	                    <td > {{row.createTime}}</td>
+	                    <td>
+	                    	<div class="btn-group" dropdown>
+		                    	<button type="button" class="btn btn-default" dropdown-toggle>
+					             	操作 <span class="caret"></span>
+					            </button>
+					            <ul class="dropdown-menu dropdown_menu" role="menu">
+					              <li><a class="btn btn-sm" ng-if="row.deletable == 1" ng-hide="isRemote" power-key="role:update" ng-click="update(row.id)">修改</a></li>
+	                              <li><a class="btn btn-sm"  ng-click="userlist(row.id)">用户</a></li>
+	                              <li><a class="btn btn-sm" ng-click="resourcelist(row.id,row.relation.relationTypeExt!='basic'?true:false)">权限</a></li>
+	                              <li><a class="btn btn-sm" ng-if="row.deletable == 1" ng-hide="isRemote" power-key="role:delete" ng-click="deleteById(row.id)">删除</a></li>
+					            </ul>
+					    	</div>
+	                    </td>
+	                </tr>
+                </tbody>
+        	</table>
+        	<tmpagination conf="paginationConf"></tmpagination>
+        </div>
+	 </div>
+</div>

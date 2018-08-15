@@ -1,0 +1,17 @@
+<div class="cityLinkage" class="container-fluid">  
+    <div class="col-sm-4 row" >
+    	<select ng-model="province" ng-options="item.name  for item in cityData" ng-change="getSelectProvince()" class="form-control ">
+    		<option value="">-请选择-</option>
+    	</select>
+    </div>
+    <div class="col-sm-4 ">
+    	<select ng-model="city" ng-options="city.name for city in province.child" ng-change="getSelectCity()" class="form-control  ">
+    		<option value="">-请选择-</option>
+    	</select>
+    </div>
+    <div class="col-sm-4 row">
+    	<select ng-model="district" ng-options="dis.value  for dis in city.child" ng-change="getSelectDistrict()" class="form-control ">
+    		<option value="">-请选择-</option>
+    	</select>
+    </div>  
+</div>  

@@ -1,0 +1,33 @@
+<crumb title="登录日志" head="true"></crumb>
+<div class="wrapper-md" ng-controller="TLogLoginGrid">
+	 <div class="panel panel-default">
+	 	
+        <div class="panel-heading">
+            <button class="btn m-b-xs btn-sm btn-info btn-addon" ng-click="search()">
+            	<i class="fa fa-plus"></i>刷新
+            </button>
+        </div>
+        
+        <div class="table-responsive">
+        	<table class="table table-striped b-t b-b">
+        		<thead>
+	                <tr>
+	                    <th style="width:5%" data-breakpoints="xs">ID</th>
+	                    <th style="width:10%" class="text-center">用户名</th>
+	                    <th style="width:10%" class="text-center">登入时间</th>
+	                    <th style="width:10%" class="text-center">登录人IP</th>
+	                </tr>
+                </thead>
+                <tbody>
+	                <tr data-expanded="true" ng-repeat="row in rows">
+	                    <td > {{paginationConf.currentPage ? paginationConf.pageSize*(paginationConf.currentPage-1)+$index+1 : $index+1}}</td>
+	                    <td > {{row.userName}}</td>
+	                    <td > {{row.optDate}}</td>
+	                    <td > {{row.loginIp}}</td>
+	                </tr>
+                </tbody>
+        	</table>
+        	<tmpagination conf="paginationConf"></tmpagination>
+        </div>
+	 </div>
+</div>

@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<meta content="yes" name="apple-mobile-web-app-capable">
+		<meta content="black" name="apple-mobile-web-app-status-bar-style">
+		<meta content="telephone=no" name="format-detection">
+		<meta content="email=no" name="format-detection">
+		<meta name="hotcss" content="max-width=640">
+		<title>订单详情</title>
+		<link rel="stylesheet" href="../../css/common.css" />
+		<link rel="stylesheet" href="../../css/style.css" />
+		<link rel="stylesheet" href="../../css/common/swiper.min.css" />
+		<script type="text/javascript" src="../../js/common/hotcss.js" ></script>
+	</head>
+	<body ng-app="myApp" ng-controller="AppCtrl">
+		<div class="container m-t-40">
+			<p class="f-s-40 f-c-494848 p-l-r-40">服务订单：<span ng-bind="orderInfo.orderNo"></span></p>
+		</div>
+		
+		<div class="container m-t-40">
+			<div class="textBox fix">
+				<p class="f-l">事由：</p>
+				<p class="f-r" ng-bind="orderInfo.reason"></p>
+			</div>
+			<div class="textBox fix">
+				<p class="f-l">领导：</p>
+				<p class="f-r" ng-bind="orderInfo.leader"></p>
+			</div>
+			<div class="textBox fix">
+				<p class="f-l">接待时间：</p>
+				<p class="f-r" ng-bind="time"></p>
+			</div>
+			<div class="textBox fix">
+				<p class="f-l">出发地：</p>
+				<p class="f-r" ng-bind="orderInfo.startAddress"></p>
+			</div>
+			<div class="textBox fix">
+				<p class="f-l">目的地：</p>
+				<p class="f-r" ng-bind="orderInfo.endAddress"></p>
+			</div>
+			<div class="textBox fix" ng-if="orderInfo.smallCarNum">
+				<p class="f-l">小车数量：</p>
+				<p class="f-r" ng-bind="orderInfo.smallCarNum"></p>
+			</div>
+			<div class="textBox fix" ng-if="orderInfo.midCarNum">
+				<p class="f-l">中巴数量：</p>
+				<p class="f-r" ng-bind="orderInfo.midCarNum"></p>
+			</div>
+			<div class="textBox fix">
+				<p class="f-l">用车类型：</p>
+				<p class="f-r" ng-bind="orderInfo.useType"></p>
+			</div>
+		</div>
+		
+		
+		<div class="container m-t-40">
+			<div class="textBox fix">
+				<p class="f-l">预订人名：</p>
+				<p class="f-r" ng-bind="orderInfo.orderBy"></p>
+			</div>
+			<div class="textBox fix">
+				<p class="f-l">预订人部门：</p>
+				<p class="f-r" ng-bind="orderInfo.orderDept"></p>
+			</div>
+			<div class="textBox fix">
+				<p class="f-l">预订人电话：</p>
+				<p class="f-r" ng-bind="orderInfo.orderPhone"></p>
+			</div>
+		</div>
+		
+		<div class="container m-t-40">
+			<div class="textBox fix" ng-if="orderInfo.fileUrlList.length > '0'">
+				<p>附件：</p>
+				<div class="selectRepairsFile showFileImgBox">
+					<ul class="fix">
+						<li style="background: url({{item}}) center no-repeat; background-size: cover;" data-imgurl="{{ item }}" data-index="{{ $index+1 }}" ng-repeat="item in orderInfo.fileUrlList"></li>
+					</ul>
+				</div>
+			</div>
+			<div class="textBox fix" ng-if="orderInfo.remark">
+				<p class="f-l">备注信息：</p>
+				<p class="f-r" ng-bind="orderInfo.remark"></p>
+			</div>
+		</div>
+		
+		<div class="container m-t-40" ng-show="orderInfo.curOperationType==1">
+			<div class="inputBox">
+				<p>驳回理由:</p>
+				<input type="text" placeholder="若驳回请输入驳回原因"  ng-model="rejectResaon"/>
+			</div>
+		</div>
+		
+		<div class="bottomBtnTwo fix">
+			<button  class="cancel" ng-click="rejectOrPass('reject')" ng-show="orderInfo.curOperationType==1">驳回</button>
+			<button  class="confirm" ng-click="rejectOrPass('pass')" ng-show="orderInfo.curOperationType==1">通过</button>
+		</div>
+		
+		<!-- 蒙版 -->
+		<div class="masking"></div>
+		
+		
+		<script type="text/javascript" src="../../js/common/angular.js" ></script>
+		<script type="text/javascript" src="../../js/common/jquery-1.8.3.min.js" ></script>
+		<script type="text/javascript" src="../../js/common/swiper.min.js" ></script>
+		<script type="text/javascript" src="../../js/common/util.js" ></script>
+		<script type="text/javascript" src="../../js/officialCars/orderReject.js" ></script>
+	</body>
+</html>

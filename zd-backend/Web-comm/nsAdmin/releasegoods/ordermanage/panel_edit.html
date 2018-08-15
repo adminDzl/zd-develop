@@ -1,0 +1,99 @@
+<div class="modal-header">
+    <button type="button" class="close" ng-click="close()"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+    <h4 class="modal-title">{{site.title}}</h4>
+</div>
+<div class="modal-body">
+    <div class="wrapper-md ng-scope">
+	    <form name="Form"  class="form-horizontal form-validation" novalidate>
+	        <div class="form-group">
+	            <label class="col-sm-3 control-label">订单编号:</label>
+	             <div class="col-sm-6">
+					<p class="form-control" ng-bind="form.orderNo"></p>
+				</div>
+	        </div>
+	        <div class="form-group">
+	            <label class="col-sm-3 control-label">订单状态:</label>
+	             <div class="col-sm-9">
+					<p class="form-control" ng-bind-template="{{form.orderStatus | orderStatus}}"></p>
+	            </div>
+	        </div>
+	        <div class="form-group" ng-if="orderStatus == '1'">
+	            <label class="col-sm-3 control-label">放行时间:</label>
+				<div class="col-sm-9">
+	            	<p class="form-control" ng-bind="form.factPassDatetime"></p>
+	            </div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-3 control-label">放行处理人:</label>
+				<div class="col-sm-9">
+					<p class="form-control" ng-bind="form.checkUserName"></p>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-3 control-label">携物者类别:</label>
+				<div class="col-sm-9">
+					<p class="form-control" ng-bind-template="{{form.takeType == 0 ?'本人':'其它'}}"></p>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-3 control-label">需放行人姓名:</label>
+				<div class="col-sm-9">
+					<p class="form-control" ng-bind-template="{{form.takeType == 0 ? form.createUserName : form.needPassPersonnelName}}"></p>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-3 control-label">需放行人电话:</label>
+				<div class="col-sm-9">
+					<p class="form-control" ng-bind-template="{{form.takeType == 0 ? form.createUserMobile : form.needPassPersonnelMobile}}"></p>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-3 control-label">需放行人单位:</label>
+				<div class="col-sm-9">
+					<p class="form-control" ng-bind-template="{{form.takeType == 0 ? form.createUserDeptName :form.needPassPersonnelDept}}"></p>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-3 control-label">物品名称和数量:</label>
+				<div class="col-sm-9">
+					<p class="form-control" ng-bind="form.goodsNumber"></p>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-3 control-label">物品类别:</label>
+				<div class="col-sm-9">
+					<p class="form-control" ng-bind="form.goodsTypeName"></p>
+				</div>
+			</div>
+			<div class="form-group" ng-if="form.file.length > 0">
+				<label class="col-sm-3 control-label">附件:</label>
+				<div class="col-sm-9">
+					<ul >
+						<li ng-repeat="item in form.file" style="background: url({{item.filePath}}) center no-repeat; background-size: contain; height: 100px; float: left; width: 100px; margin-right: 100px;"></li>
+					</ul>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-3 control-label">申请人行人姓名:</label>
+				<div class="col-sm-9">
+					<p class="form-control" ng-bind="form.createUserName"></p>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-3 control-label">申请人部门:</label>
+				<div class="col-sm-9">
+					<p class="form-control" ng-bind="form.createUserDeptName"></p>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-3 control-label">申请人电话:</label>
+				<div class="col-sm-9">
+					<p class="form-control" ng-bind="form.createUserMobile"></p>
+				</div>
+			</div>
+	    </form>
+    </div>
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-info"  ng-click="close()">关闭</button>
+</div>

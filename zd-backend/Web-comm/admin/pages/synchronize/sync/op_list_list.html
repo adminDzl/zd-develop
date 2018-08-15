@@ -1,0 +1,55 @@
+<crumb title="业务任务管理" head="true"></crumb>
+<div class="wrapper-md" ng-controller="SyncOpLlistGrid">
+	 <div class="panel panel-default">
+	 	
+        <div class="panel-heading">
+            <button class="btn m-b-xs btn-sm btn-info btn-addon" power-key="transacttask:add" ng-click="addNew()">
+            	<i class="fa fa-plus"></i>新增
+            </button>
+        </div>
+        <div class="panel-heading">
+          <form class="form-inline ng-pristine ng-valid" role="form">
+            <div class="form-group">
+	          <input type="text" class="form-control" placeholder="接收方" ng-model="acceptor" ng-keypress="search(acceptor,$event)"/>
+	        </div>
+	        <button type="submit" class="btn btn-info" ng-click="search(acceptor)">搜索</button>
+		  </form>
+        </div>
+        <div class="table-responsive">
+        	<table class="table table-striped b-t b-b">
+        		<thead>
+	                <tr>
+	                    <th style="width:5%" data-breakpoints="xs">ID</th>
+	                    <th style="width:10%" class="text-center">发送方</th>
+	                    <th style="width:10%" class="text-center">接收方</th>
+	                    <th style="width:5%" class="text-center">业务类型</th>
+	                    <th style="width:10%" class="text-center">接收接口</th>
+	                    <th style="width:10%" class="text-center">创建时间</th>
+	                    <th style="width:10%" class="text-center">更新时间</th>
+	                    <th style="width:10%" class="text-center">状态</th>
+	                    <th style="width:15%" class="text-center" data-breakpoints="xs" >操作</th>
+	                </tr>
+                </thead>
+                <tbody>
+	                <tr data-expanded="true" ng-repeat="row in rows">
+	                    <td > {{paginationConf.currentPage ? paginationConf.pageSize*(paginationConf.currentPage-1)+$index+1 : $index+1}}</td>
+	                    <td > {{row.resource}}</td>
+	                    <td > {{row.acceptor}}</td>
+	                    <td > {{row.typeName}}</td>
+	                    <td > {{row.acceptorUrl}}</td>
+	                    <td > {{row.createTime}}</td>
+	                    <td > {{row.updateTime}}</td>
+	                    <td > {{row.status == 1 ? '启用' : '未启用'}}</td>
+	                    <td>
+	                        <div class="buttons">
+	                            <button class="btn btn-sm btn-info"  power-key="transacttask:update"  ng-click="update(row.id)">编辑</button>
+	                            <button class="btn btn-sm btn-danger"  power-key="transacttask:delete"  ng-click="deleteById(row.id)">删除</button>
+	                        </div>
+	                    </td>
+	                </tr>
+                </tbody>
+        	</table>
+        	<tmpagination conf="paginationConf"></tmpagination>
+        </div>
+	 </div>
+</div>

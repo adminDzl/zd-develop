@@ -1,0 +1,82 @@
+<crumb title="应用接口查询" head="true"></crumb>
+<div class="wrapper-md" ng-controller="TRoleGrid">
+	 <div class="panel panel-default">
+	 	
+	 	<div class="panel-heading">
+          <form class="form-inline ng-pristine ng-valid" role="form">
+            <div class="form-group" >
+         		<!-- <label class="control-label">选择园区：</label> -->
+                <select class="form-control" ng-model="appInfo.microServiceName" ng-change="initList()" ng-options="en as en for en in data_microservice">
+                    <option value="" >--选择微服务--</option>
+                </select>
+                <select class="form-control" ng-model="appInfo.groupName" ng-change="initList()" ng-options="en as en for en in data_group">
+                    <option value="" >--选择分组--</option>
+                </select>
+                <select class="form-control" ng-model="appInfo.tagName" ng-change="initList()" ng-options="en as en for en in data_tag">
+                    <option value="" >--选择对象--</option>
+                </select>
+            </div>
+		  </form>
+		  
+        </div>
+        <!-- <div class="panel-heading">
+            <button class="btn m-b-xs btn-sm btn-info btn-addon" power-key="user:add" ng-click="addNew()">
+            	<i class="fa fa-plus"></i>新增
+            </button>
+        </div> -->
+        <div class="panel-heading">
+          <form class="form-inline ng-pristine ng-valid" role="form">
+            <div class="form-group">
+	          <input type="text" class="form-control" placeholder="请输入名称" ng-model="searchKeys" ng-keypress="search($event)"/>
+	        </div>
+	        <button type="submit" class="btn btn-info" ng-click="search()">搜索</button>
+		  </form>
+		  
+        </div>
+        <div class="table-responsive">
+        	<table class="table table-striped b-t b-b">
+        		<thead>
+	                <tr>
+	                    <th style="width:5%" class="text-center" data-breakpoints="xs">No.</th>
+	                    <th style="width:10%" class="text-center">接口名称</th>
+	                    <th style="width:15%" class="text-center">接口地址</th>
+						<th style="width:10%" class="text-center">微服务名</th>
+	                    <th style="width:5%" class="text-center">请求类型</th>
+	                    <th style="width:5%" class="text-center">使用范围</th>
+	                    <th style="width:5%" class="text-center">验证类型</th>
+						<th style="width:10%" class="text-center">更新时间</th>
+						<th style="width:5%" class="text-center">状态</th>
+						<th style="width:10%" class="text-center">备注</th>
+	                    <th style="width:15%" class="text-center" data-breakpoints="xs" >操作</th>
+	                </tr>
+                </thead>
+                <tbody>
+	                <tr data-expanded="true" ng-repeat="row in rows">
+	                    <td > {{paginationConf.currentPage ? paginationConf.pageSize*(paginationConf.currentPage-1)+$index+1 : $index+1}}</td>
+	                    <td class="text-left"> {{row.apiName}}</td>
+	                    <td > {{row.apiUrl}}</td>
+	                    <td > {{row.microServiceName}}</td>
+	                    <td > {{row.requestType}}</td>
+	                    <td ng-switch="row.apiScope">
+							<!--这里也可以这样写 ng-switch on="person.name" -->
+					        <span ng-switch-default></span>
+					        <span ng-switch-when="0">内外</span>
+					        <span ng-switch-when="1">外部</span>
+					        <span ng-switch-when="2">内部</span>
+					    </td>
+	                    <td > {{row.verificationType}}</td>
+						<td > {{row.updateTime}}</td>
+						<td > {{row.status1}}</td>
+						<td > {{row.remark}}</td>
+	                    <td>
+	                        <div class="buttons">
+	                            <button class="btn btn-sm btn-info" power-key="user:add" ng-click="view(row)">详情</button>
+	                        </div>
+	                    </td>
+	                </tr>
+                </tbody>
+        	</table>
+        	<tmpagination conf="paginationConf"></tmpagination>
+        </div>
+	 </div>
+</div>

@@ -1,0 +1,56 @@
+<div class="panel-body">
+        <div class="col-sm-12">
+                <h4>新增物品</h4>
+        </div>
+        <form class="form-horizontal" method="get">
+            <!---->
+            <div class="line line-dashed b-b line-lg pull-in"></div>
+            <div class="form-group" style="margin-bottom:0px;">
+                <label class="col-sm-1 control-label">类型</label>
+                <div class="col-sm-2">
+                    <select name="account" ng-model="instance.params1.freeType" class="form-control m-b">
+                        <option value="">全部</option>
+                        <option value="1">免费</option>
+                        <option value="2">付费</option>                    
+                    </select>       
+                </div>
+                <div class="col-sm-4">
+                        <input type="text" ng-model="instance.params1.name" class="form-control" placeholder="请输入物品名称"/>         
+                </div>
+                <div class="col-sm-3">
+                    <button class="btn btn-rounded btn-sm btn-info"  ng-click="search()"><i class="fa fa-fw fa-plus"></i> 查询</button>
+                </div>
+                
+            </div>
+            <!---->
+            <div class="line line-dashed b-b line-lg pull-in"></div>
+                
+                    <table  datatable-directive url="otherDataUrl" columns="otherColumns" btns='i' output="getInputVal(data,val)" filters="goodsFilter"  search-params="instance.params1" indentify-key="engine"   
+                     class="table table-striped b-t b-b">
+                        <thead>
+                            <tr>
+                                <th><input type="checkbox" ng-model="isSelectAll" ng-click="selectAll()"/></th>
+                                <th  style="width:24%">物品名称</th>
+                                <th  style="width:12%">参数</th>
+                                <th  style="width:12%">类型</th>
+                                <th  style="width:15%">库存数量</th>
+                               
+                                <th  style="width:8%">单价</th>
+                                <th  style="width:8%">单位</th>
+                                <th  style="width:18%">配置数量</th> 
+                            </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>            
+                
+             
+            <div class="line line-dashed b-b line-lg pull-in"></div>
+            <div class="form-group">
+                <div class="col-sm-4 col-sm-offset-2">
+                <button type="reset" class="btn btn-default" ng-click="cancel()"> 取消</button>
+                <button type="submit" class="btn btn-primary"  ng-click="commit()">保存</button>
+                </div>
+            </div>
+            </form>
+     </div>

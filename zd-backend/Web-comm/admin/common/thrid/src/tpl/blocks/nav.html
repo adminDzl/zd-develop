@@ -1,0 +1,365 @@
+<!-- list -->
+<ul class="nav">
+  <li class="hidden-folded padder m-t m-b-sm text-muted text-xs">
+    <span >企业服务</span>
+  </li>
+  <!-- <li>
+    <a href class="auto" ui-sref="app.manage">
+      <i class="glyphicon glyphicon-tasks icon"></i>
+      <span class="font-bold" >项目管理</span>
+    </a>
+  </li> -->
+  <!--<li>-->
+    <!--<a href class="auto" ui-sref="app.version">-->
+      <!--<i class="glyphicon glyphicon-tasks icon"></i>-->
+      <!--<span class="font-bold" >版本管理</span>-->
+    <!--</a>-->
+  <!--</li>-->
+  <!-- <li>
+    <a href class="auto" ui-sref="app.module">
+      <i class="glyphicon glyphicon-tasks icon"></i>
+      <span class="font-bold" >模块管理</span>
+    </a>
+  </li>
+  <li>
+    <a href class="auto" ui-sref="app.dictionary">
+      <i class="glyphicon glyphicon-tasks icon"></i>
+      <span class="font-bold" >数据字典</span>
+    </a>
+  </li> -->
+  <li>
+    <a href class="auto">
+      <span class="pull-right text-muted">
+        <i class="fa fa-fw fa-angle-right text"></i>
+        <i class="fa fa-fw fa-angle-down text-active"></i>
+      </span>
+      <i class="glyphicon glyphicon-tasks icon"></i>
+      <span class="font-bold" >服务管理</span>
+    </a>
+    <ul class="nav nav-sub dk">
+      <li class="nav-sub-header">
+        <a href>
+          <span>服务管理</span>
+        </a>
+      </li>
+      <li ui-sref-active="active">
+        <a ui-sref="app.sm_form_list">
+          <span>自定义表单</span>
+        </a>
+      </li>
+      <li ui-sref-active="active">
+        <a ui-sref="app.sm_flow_list">
+          <span>自定义流程状态</span>
+        </a>
+      </li>
+      <li ui-sref-active="active">
+        <a ui-sref="app.sm_sort_list">
+          <span>服务类别列表</span>
+        </a>
+      </li>
+      <li ui-sref-active="active">
+        <a ui-sref="app.sm_service_list">
+          <span>服务列表</span>
+        </a>
+      </li>
+      <li ui-sref-active="active">
+        <a ui-sref="app.sm_addr_list">
+          <span>服务地点管理</span>
+        </a>
+      </li>
+    </ul>
+  </li>  
+  <li>
+    <a href class="auto">
+      <span class="pull-right text-muted">
+        <i class="fa fa-fw fa-angle-right text"></i>
+        <i class="fa fa-fw fa-angle-down text-active"></i>
+      </span>
+      <i class="glyphicon glyphicon-file icon"></i>
+      <span class="font-bold">服务单管理</span>
+    </a>
+    <ul class="nav nav-sub dk">
+      <li class="nav-sub-header">
+        <a href>
+          <span>服务单管理</span>
+        </a>
+      </li>
+      <li ui-sref-active="active">
+        <a ui-sref="app.om_order_new">
+          <span>新增</span>
+        </a>
+      </li>
+      <li ui-sref-active="active">
+        <a ui-sref="app.om_order_all">
+          <span>全部服务单</span>
+        </a>
+      </li>
+      <li ui-sref-active="active">
+        <a ui-sref="app.om_my_order_list">
+          <span>我的服务单</span>
+        </a>
+      </li>
+    </ul>
+  </li>
+   <!--
+  <li>
+    <a href class="auto">
+      <span class="pull-right text-muted">
+        <i class="fa fa-fw fa-angle-right text"></i>
+        <i class="fa fa-fw fa-angle-down text-active"></i>
+      </span>
+      <i class="glyphicon glyphicon-comment icon"></i>
+      <span class="font-bold">问答管理</span>
+    </a>
+    <ul class="nav nav-sub dk">
+      <li class="nav-sub-header">
+        <a href>
+          <span>问答管理</span>
+        </a>
+      </li>
+      <li ui-sref-active="active">
+        <a ui-sref="app.todo">
+          <span>问题列表</span>
+        </a>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <a href class="auto">
+      <span class="pull-right text-muted">
+        <i class="fa fa-fw fa-angle-right text"></i>
+        <i class="fa fa-fw fa-angle-down text-active"></i>
+      </span>
+      <i class="glyphicon glyphicon-question-sign icon"></i>
+      <span class="font-bold">帮助中心</span>
+    </a>
+    <ul class="nav nav-sub dk">
+      <li class="nav-sub-header">
+        <a href>
+          <span>帮助中心</span>
+        </a>
+      </li>
+      <li ui-sref-active="active">
+        <a href>
+          <span>文章分类列表</span>
+        </a>
+      </li>
+      <li ui-sref-active="active">
+        <a ui-sref="app.todo">
+          <span>文章列表</span>
+        </a>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <a href class="auto">
+      <span class="pull-right text-muted">
+        <i class="fa fa-fw fa-angle-right text"></i>
+        <i class="fa fa-fw fa-angle-down text-active"></i>
+      </span>
+      <i class="glyphicon glyphicon-home icon"></i>
+      <span class="font-bold">首页设置</span>
+    </a>
+    <ul class="nav nav-sub dk">
+      <li class="nav-sub-header">
+        <a href>
+          <span>首页设置</span>
+        </a>
+      </li>
+       <li ui-sref-active="active">
+        <a href>
+          <span>首页轮播图</span>
+        </a>
+      </li>
+      <li ui-sref-active="active">
+        <a href>
+          <span>服务类别推荐</span>
+        </a>
+      </li>
+      <li ui-sref-active="active">
+        <a ui-sref="app.todo">
+          <span>快捷服务设置</span>
+        </a>
+      </li>
+      <li ui-sref-active="active">
+        <a ui-sref="apps.note">
+          <span>合作机构列表</span>
+        </a>
+      </li>
+      <li ui-sref-active="active">
+        <a ui-sref="apps.note">
+          <span>页脚超链列表</span>
+        </a>
+      </li>
+    </ul>
+  </li>
+  
+  <li class="line dk"></li>
+
+  <li class="hidden-folded padder m-t m-b-sm text-muted text-xs">
+    <span>物业服务</span>
+  </li>
+  <li>
+    <a href class="auto">      
+      <span class="pull-right text-muted">
+        <i class="fa fa-fw fa-angle-right text"></i>
+        <i class="fa fa-fw fa-angle-down text-active"></i>
+      </span>
+      <i class="glyphicon glyphicon-tasks"></i>
+      <span>服务管理</span>
+    </a>
+    <ul class="nav nav-sub dk">
+      <li class="nav-sub-header">
+        <a href>
+          <span>服务管理</span>
+        </a>
+      </li>
+      <li ui-sref-active="active">
+        <a ui-sref="layout.app">
+          <span>入伙服务管理</span>
+        </a>
+      </li>
+      <li ui-sref-active="active">
+        <a ui-sref="layout.fullwidth">
+          <span>装修服务管理</span>
+        </a>
+      </li>
+      <li ui-sref-active="active">
+        <a ui-sref="layout.mobile">
+          <span>报修服务管理</span>
+        </a>
+      </li>
+      <li ui-sref-active="active">
+        <a ui-sref="layout.mobile">
+          <span>物品放行管理</span>
+        </a>
+      </li>
+      <li ui-sref-active="active">
+        <a ui-sref="layout.mobile">
+          <span>会议室服务管理</span>
+        </a>
+      </li>
+      <li ui-sref-active="active">
+        <a ui-sref="layout.mobile">
+          <span>场地申请管理</span>
+        </a>
+      </li>
+      <li ui-sref-active="active">
+        <a ui-sref="layout.mobile">
+          <span>广告位申请管理</span>
+        </a>
+      </li>       
+    </ul>
+  </li>
+  <li>
+    <a href class="auto">      
+      <span class="pull-right text-muted">
+        <i class="fa fa-fw fa-angle-right text"></i>
+        <i class="fa fa-fw fa-angle-down text-active"></i>
+      </span>
+      <i class="glyphicon glyphicon-file"></i>
+      <span>服务单管理</span>
+    </a>
+    <ul class="nav nav-sub dk">
+      <li class="nav-sub-header">
+        <a href>
+          <span>服务单管理</span>
+        </a>
+      </li>
+      <li ui-sref-active="active">
+        <a ui-sref="layout.app">
+          <span>入伙预约申请单</span>
+        </a>
+      </li>
+      <li ui-sref-active="active">
+        <a ui-sref="layout.fullwidth">
+          <span>装修预约审单</span>
+        </a>
+      </li>
+      <li ui-sref-active="active">
+        <a ui-sref="layout.mobile">
+          <span>报修申请单</span>
+        </a>
+      </li>
+      <li ui-sref-active="active">
+        <a ui-sref="layout.mobile">
+          <span>物品放行申请单</span>
+        </a>
+      </li>
+      <li ui-sref-active="active">
+        <a ui-sref="layout.mobile">
+          <span>会议室申请单</span>
+        </a>
+      </li>
+      <li ui-sref-active="active">
+        <a ui-sref="layout.mobile">
+          <span>场地申请单</span>
+        </a>
+      </li>
+      <li ui-sref-active="active">
+        <a ui-sref="layout.mobile">
+          <span>广告位申请单</span>
+        </a>
+      </li>       
+    </ul>
+  </li>
+  <li>
+    <a href class="auto">      
+      <span class="pull-right text-muted">
+        <i class="fa fa-fw fa-angle-right text"></i>
+        <i class="fa fa-fw fa-angle-down text-active"></i>
+      </span>
+      
+      <i class="glyphicon glyphicon-bookmark"></i>
+      <span>服务授权</span>
+    </a>
+    <ul class="nav nav-sub dk">
+      <li class="nav-sub-header">
+        <a href>
+          <span>服务授权</span>
+        </a>
+      </li>
+      <li ui-sref-active="active">
+        <a ui-sref="layout.app">
+          <span>服务授权管理</span>
+        </a>
+      </li>
+    </ul>
+  </li>
+  
+  <li class="line dk"></li>
+
+  <li class="hidden-folded padder m-t m-b-sm text-muted text-xs">
+    <span>企业月结</span>
+  </li>
+  <li>
+    <a href class="auto">      
+      <span class="pull-right text-muted">
+        <i class="fa fa-fw fa-angle-right text"></i>
+        <i class="fa fa-fw fa-angle-down text-active"></i>
+      </span>
+      <i class="glyphicon glyphicon-usd"></i>
+      <span>企业月结</span>
+    </a>
+    <ul class="nav nav-sub dk">
+      <li class="nav-sub-header">
+        <a href>
+          <span>企业月结</span>
+        </a>
+      </li>
+      <li ui-sref-active="active">
+        <a ui-sref="layout.app">
+          <span>服务授权管理</span>
+        </a>
+      </li>
+      <li ui-sref-active="active">
+        <a ui-sref="layout.app">
+          <span>企业月结客户</span>
+        </a>
+      </li>
+    </ul>
+  </li> -->
+
+  
+</ul>
+<!-- / list -->

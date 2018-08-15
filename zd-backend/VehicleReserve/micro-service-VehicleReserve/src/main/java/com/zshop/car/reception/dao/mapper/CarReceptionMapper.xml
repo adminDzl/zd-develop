@@ -1,0 +1,485 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+		"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zshop.car.reception.dao.mapper.CarReceptionMapper">
+
+	<!-- **************以下映射必须与数据库一致 不要更改，除非数据库改变**************** -->
+
+	<insert id="insert"  parameterType="com.zshop.car.reception.entity.CarReception">
+				
+		insert into car_reception
+		(
+			id,
+			park_id,
+			order_id,
+			operation_id,
+			car_driver_id,
+			driver_name,
+			driver_phone,
+			car_number,
+			car_type,
+			reception_status,
+			remark,
+			create_by,
+			create_time,
+			update_by,
+			update_time,
+			status1,
+			status2,
+			ext1,
+			ext2,
+			ext3,
+			ext4,
+			ext5,
+			ext6
+		)
+		values	
+		(	
+			#{id},
+			#{parkId},
+			#{orderId},
+			#{operationId},
+			#{carDriverId},
+			#{driverName},
+			#{driverPhone},
+			#{carNumber},
+			#{carType},
+			#{receptionStatus},
+			#{remark},
+			#{createBy},
+			#{createTime},
+			#{updateBy},
+			#{updateTime},
+			#{status1},
+			#{status2},
+			#{ext1},
+			#{ext2},
+			#{ext3},
+			#{ext4},
+			#{ext5},
+			#{ext6}
+		)
+
+	</insert>
+
+	<delete id="deleteById" parameterType="java.lang.String">
+		delete from car_reception
+		WHERE ID=#{id}
+	</delete>
+
+	<delete id="deleteByIds" parameterType="java.util.Collection">
+		delete from car_reception
+		WHERE ID IN
+		<foreach collection="array" index="index" item="item" open="(" separator="," close=")"> #{item} </foreach>
+	</delete>
+
+	<delete id="logicDelete" parameterType="java.lang.String">
+		update car_reception set status1 = '-1'
+		WHERE ID=#{id}
+	</delete>
+
+	<delete id="logicDeleteByIds" parameterType="java.util.Collection">
+		update car_reception set status1 = '-1'
+		WHERE ID IN
+		<foreach collection="array" index="index" item="item" open="(" separator="," close=")"> #{item} </foreach>
+	</delete>
+
+	<update id="update" parameterType="com.zshop.car.reception.entity.CarReception" >
+
+		update car_reception
+		<set>
+			id=#{id},
+			park_id=#{parkId},
+			order_id=#{orderId},
+			operation_id=#{operationId},
+			car_driver_id=#{carDriverId},
+			driver_name=#{driverName},
+			driver_phone=#{driverPhone},
+			car_number=#{carNumber},
+			car_type=#{carType},
+			reception_status=#{receptionStatus},
+			remark=#{remark},
+			create_by=#{createBy},
+			create_time=#{createTime},
+			update_by=#{updateBy},
+			update_time=#{updateTime},
+			status1=#{status1},
+			status2=#{status2},
+			ext1=#{ext1},
+			ext2=#{ext2},
+			ext3=#{ext3},
+			ext4=#{ext4},
+			ext5=#{ext5},
+			ext6=#{ext6}
+		</set>
+		where
+		ID=#{id}
+
+	</update>
+
+	<update id="updateWithIf" parameterType="com.zshop.car.reception.entity.CarReception" >
+
+		update car_reception
+		<set>
+			<if test=" id!=null ">
+				id=#{id},
+			</if>
+			<if test=" parkId!=null ">
+				park_id=#{parkId},
+			</if>
+			<if test=" orderId!=null ">
+				order_id=#{orderId},
+			</if>
+			<if test=" operationId!=null ">
+				operation_id=#{operationId},
+			</if>
+			<if test=" carDriverId!=null ">
+				car_driver_id=#{carDriverId},
+			</if>
+			<if test=" driverName!=null ">
+				driver_name=#{driverName},
+			</if>
+			<if test=" driverPhone!=null ">
+				driver_phone=#{driverPhone},
+			</if>
+			<if test=" carNumber!=null ">
+				car_number=#{carNumber},
+			</if>
+			<if test=" carType!=null ">
+				car_type=#{carType},
+			</if>
+			<if test=" receptionStatus!=null ">
+				reception_status=#{receptionStatus},
+			</if>
+			<if test=" remark!=null ">
+				remark=#{remark},
+			</if>
+			<if test=" createBy!=null ">
+				create_by=#{createBy},
+			</if>
+			<if test=" createTime!=null ">
+				create_time=#{createTime},
+			</if>
+			<if test=" updateBy!=null ">
+				update_by=#{updateBy},
+			</if>
+			<if test=" updateTime!=null ">
+				update_time=#{updateTime},
+			</if>
+			<if test=" status1!=null ">
+				status1=#{status1},
+			</if>
+			<if test=" status2!=null ">
+				status2=#{status2},
+			</if>
+			<if test=" ext1!=null ">
+				ext1=#{ext1},
+			</if>
+			<if test=" ext2!=null ">
+				ext2=#{ext2},
+			</if>
+			<if test=" ext3!=null ">
+				ext3=#{ext3},
+			</if>
+			<if test=" ext4!=null ">
+				ext4=#{ext4},
+			</if>
+			<if test=" ext5!=null ">
+				ext5=#{ext5},
+			</if>
+			<if test=" ext6!=null ">
+				ext6=#{ext6},
+			</if>
+		</set>
+		where
+		ID=#{id}
+
+	</update>
+
+	<!-- *************************************************************************** -->
+	<!-- **************以下映射根据业务做相应调整**************** -->
+	<!-- *************************************************************************** -->
+
+	<delete id="deleteByMap" parameterType="java.util.Map">
+		delete from car_reception
+		<where>
+
+		</where>
+	</delete>
+
+	<select id="findById" parameterType="java.lang.String" resultType="com.zshop.car.reception.entity.CarReception">
+				
+		select  	
+			a.id id,
+			a.park_id parkId,
+			a.order_id orderId,
+			a.operation_id operationId,
+			a.car_driver_id carDriverId,
+			a.driver_name driverName,
+			a.driver_phone driverPhone,
+			a.car_number carNumber,
+			a.car_type carType,
+			a.reception_status receptionStatus,
+			a.remark remark,
+			a.create_by createBy,
+			a.create_time createTime,
+			a.update_by updateBy,
+			a.update_time updateTime,
+			a.status1 status1,
+			a.status2 status2,
+			a.ext1 ext1,
+			a.ext2 ext2,
+			a.ext3 ext3,
+			a.ext4 ext4,
+			a.ext5 ext5,
+			a.ext6 ext6
+		from car_reception a	
+
+		where a.Id=#{id}	
+	</select>
+
+	<select id="findListByMap" parameterType="java.util.Map" resultType="com.zshop.car.reception.entity.CarReception">
+
+
+		select
+		a.id id,
+		a.park_id parkId,
+		a.order_id orderId,
+		a.operation_id operationId,
+		a.car_driver_id carDriverId,
+		a.driver_name driverName,
+		a.driver_phone driverPhone,
+		a.car_number carNumber,
+		a.car_type carType,
+		a.reception_status receptionStatus,
+		a.remark remark,
+		a.create_by createBy,
+		a.create_time createTime,
+		a.update_by updateBy,
+		a.update_time updateTime,
+		a.status1 status1,
+		a.status2 status2,
+		a.ext1 ext1,
+		a.ext2 ext2,
+		a.ext3 ext3,
+		a.ext4 ext4,
+		a.ext5 ext5,
+		a.ext6 ext6
+		from car_reception a
+
+
+		<where>
+			1=1
+			<if test="orderId!= null ">
+				AND a.order_id = #{orderId}
+			</if>
+			<if test="operationId!= null ">
+				AND a.operation_id = #{operationId}
+			</if>
+			<if test="receptionStatus!= null ">
+				AND a.reception_status = #{receptionStatus}
+			</if>
+			<if test="status1!= null ">
+				AND a.status1 = #{status1}
+			</if>
+
+		</where>
+
+	</select>
+
+	<select id="list" parameterType="java.util.Map" resultType="com.zshop.car.reception.entity.CarReception">
+
+
+
+		select
+		a.id id,
+		a.park_id parkId,
+		a.order_id orderId,
+		a.operation_id operationId,
+		a.car_driver_id carDriverId,
+		a.driver_name driverName,
+		a.driver_phone driverPhone,
+		a.car_number carNumber,
+		a.car_type carType,
+		a.reception_status receptionStatus,
+		a.remark remark,
+		a.create_by createBy,
+		a.create_time createTime,
+		a.update_by updateBy,
+		a.update_time updateTime,
+		a.status1 status1,
+		a.status2 status2,
+		a.ext1 ext1,
+		a.ext2 ext2,
+		a.ext3 ext3,
+		a.ext4 ext4,
+		a.ext5 ext5,
+		a.ext6 ext6
+		from car_reception a
+
+
+		<where>
+			1=1
+			<if test="searchKeys!= null ">
+				AND ( 1=2
+				<foreach collection="searchKeys" index="index" item="item" >
+					OR a.id like #{item}
+				</foreach>
+				)
+			</if>
+			<if test="orderId!= null ">
+				AND a.order_id = #{orderId}
+			</if>
+			<if test="operationId!= null ">
+				AND a.operation_id = #{operationId}
+			</if>
+		</where>
+
+
+	</select>
+
+	<select id="findOneByMap" parameterType="java.util.Map" resultType="com.zshop.car.reception.entity.CarReception">
+
+		select
+		a.id id,
+		a.park_id parkId,
+		a.order_id orderId,
+		a.operation_id operationId,
+		a.car_driver_id carDriverId,
+		a.driver_name driverName,
+		a.driver_phone driverPhone,
+		a.car_number carNumber,
+		a.car_type carType,
+		a.reception_status receptionStatus,
+		a.remark remark,
+		a.create_by createBy,
+		a.create_time createTime,
+		a.update_by updateBy,
+		a.update_time updateTime,
+		a.status1 status1,
+		a.status2 status2,
+		a.ext1 ext1,
+		a.ext2 ext2,
+		a.ext3 ext3,
+		a.ext4 ext4,
+		a.ext5 ext5,
+		a.ext6 ext6
+		from car_reception a
+
+		<where>
+
+		</where>
+		limit 1
+	</select>
+
+
+	<update id="updateWithIfByMap" parameterType="com.zshop.car.reception.entity.CarReception" >
+
+		update car_reception
+		<set>
+			<if test=" id!=null ">
+				id=#{id},
+			</if>
+			<if test=" parkId!=null ">
+				park_id=#{parkId},
+			</if>
+			<if test=" orderId!=null ">
+				order_id=#{orderId},
+			</if>
+			<if test=" operationId!=null ">
+				operation_id=#{operationId},
+			</if>
+			<if test=" carDriverId!=null ">
+				car_driver_id=#{carDriverId},
+			</if>
+			<if test=" driverName!=null ">
+				driver_name=#{driverName},
+			</if>
+			<if test=" driverPhone!=null ">
+				driver_phone=#{driverPhone},
+			</if>
+			<if test=" carNumber!=null ">
+				car_number=#{carNumber},
+			</if>
+			<if test=" carType!=null ">
+				car_type=#{carType},
+			</if>
+			<if test=" receptionStatus!=null ">
+				reception_status=#{receptionStatus},
+			</if>
+			<if test=" remark!=null ">
+				remark=#{remark},
+			</if>
+			<if test=" createBy!=null ">
+				create_by=#{createBy},
+			</if>
+			<if test=" createTime!=null ">
+				create_time=#{createTime},
+			</if>
+			<if test=" updateBy!=null ">
+				update_by=#{updateBy},
+			</if>
+			<if test=" updateTime!=null ">
+				update_time=#{updateTime},
+			</if>
+			<if test=" status1!=null ">
+				status1=#{status1},
+			</if>
+			<if test=" status2!=null ">
+				status2=#{status2},
+			</if>
+			<if test=" ext1!=null ">
+				ext1=#{ext1},
+			</if>
+			<if test=" ext2!=null ">
+				ext2=#{ext2},
+			</if>
+			<if test=" ext3!=null ">
+				ext3=#{ext3},
+			</if>
+			<if test=" ext4!=null ">
+				ext4=#{ext4},
+			</if>
+			<if test=" ext5!=null ">
+				ext5=#{ext5},
+			</if>
+			<if test=" ext6!=null ">
+				ext6=#{ext6},
+			</if>
+		</set>
+		where
+		1=1
+		<if test="orderId!= null ">
+			AND order_id = #{orderId}
+		</if>
+		<if test="carDriverId!= null ">
+			AND car_driver_id = #{carDriverId}
+		</if>
+		<if test="operationId!= null ">
+			AND operation_id = #{operationId}
+		</if>
+		<if test="driverId!= null ">
+			AND car_driver_id = (select id from car_driver where user_id = #{driverId})
+		</if>
+		<if test="notDriverIdList!= null ">
+			AND car_driver_id not in
+			<foreach collection="notDriverIdList" index="index" item="notDriverIdList" open="(" separator="," close=")">
+				#{notDriverIdList}
+			</foreach>
+		</if>
+		<if test="driverIdList!= null ">
+			AND car_driver_id in
+			<foreach collection="driverIdList" index="index" item="driverIdList" open="(" separator="," close=")">
+				#{driverIdList}
+			</foreach>
+		</if>
+		<if test="carTypeList!= null ">
+			AND car_type in
+			<foreach collection="carTypeList" index="index" item="carTypeList" open="(" separator="," close=")">
+				#{carTypeList}
+			</foreach>
+		</if>
+
+	</update>
+</mapper>
+	

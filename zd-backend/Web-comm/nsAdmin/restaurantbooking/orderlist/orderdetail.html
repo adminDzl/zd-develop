@@ -1,0 +1,170 @@
+﻿<div class="modal-header">
+	<button type="button" class="close" ng-click="close()">
+		<span aria-hidden="true">×</span>
+		<span class="sr-only">Close</span>
+	</button>
+	<h4 class="modal-title">{{site.title}}</h4>
+</div>
+<div class="modal-body">
+	<div class="wrapper-md ng-scope">
+		<form name="Form" class="form-horizontal form-validation" ng-if="form.ext4 =='2'" novalidate>
+			<div class="form-group">
+				<label class="col-sm-3 control-label">订单编号:</label>
+				<div class="col-sm-6">
+					<p class="form-control" ng-bind="form.orderNo"></p>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-3 control-label">预订类别:</label>
+				<div class="col-sm-9">
+					<p class="form-control" ng-bind="form.orderDetails[0].type"></p>
+				</div>
+			</div>
+			<div class="form-group" ng-if="orderStatus == '1'">
+				<label class="col-sm-3 control-label">预订时间:</label>
+				<div class="col-sm-9">
+					<p class="form-control" ng-bind="form.orderTime"></p>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-3 control-label">套餐名称:</label>
+				<div class="col-sm-9">
+					<p class="form-control" ng-bind="form.packName"></p>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-3 control-label">预订数量:</label>
+				<div class="col-sm-9">
+					<p class="form-control" ng-bind="form.orderDetails[0].orderCount"></p>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-3 control-label">合计总价:</label>
+				<div class="col-sm-9">
+					<p class="form-control" ng-bind-template="{{form.priceAll+'元'}}"></p>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-3 control-label">预订人姓名:</label>
+				<div class="col-sm-9">
+					<p class="form-control" ng-bind="form.orderBy"></p>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-3 control-label">预订人部门:</label>
+				<div class="col-sm-9">
+					<p class="form-control" ng-bind="form.orderDept[0].deptName"></p>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-3 control-label">预订人电话:</label>
+				<div class="col-sm-9">
+					<p class="form-control" ng-bind="form.orderMobile"></p>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-3 control-label">结算方式:</label>
+				<div class="col-sm-9">
+					<p class="form-control" ng-bind-template="{{form.orderDetails[0].type == '个人'?'微信支付':'月结'}}"></p>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-3 control-label">订单状态:</label>
+				<div class="col-sm-9">
+					<p class="form-control" ng-bind="form.orderStatus"></p>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-3 control-label">取餐时间:</label>
+				<div class="col-sm-9">
+					<p class="form-control" ng-bind="form.createUserName"></p>
+				</div>
+			</div>
+		</form>
+		<form name="Form" class="form-horizontal form-validation" ng-if="form.ext4 =='3'" novalidate>
+			<div class="form-group">
+				<label class="col-sm-3 control-label">订单编号:</label>
+				<div class="col-sm-6">
+					<p class="form-control" ng-bind="form.orderNo"></p>
+				</div>
+			</div>
+			<div ng-repeat="item in form.orderDetails">
+				<div class="form-group">
+					<label class="col-sm-3 control-label">预订类别:</label>
+					<div class="col-sm-9">
+						<p class="form-control" ng-bind="item.type"></p>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-sm-3 control-label">{{item.type}}数量:</label>
+					<div class="col-sm-9">
+						<p class="form-control" ng-bind="item.orderCount"></p>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-sm-3 control-label">包子总价:</label>
+					<div class="col-sm-9">
+						<p class="form-control" ng-bind="item.price"></p>
+					</div>
+				</div>
+				<div class="form-group" ng-if="orderStatus == '1'">
+					<label class="col-sm-3 control-label">预订时间:</label>
+					<div class="col-sm-9">
+						<p class="form-control" ng-bind="item.orderTime"></p>
+					</div>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-3 control-label">合计总价:</label>
+				<div class="col-sm-9">
+					<p class="form-control" ng-bind-template="{{form.priceAll+'元'}}"></p>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-3 control-label">预订人姓名:</label>
+				<div class="col-sm-9">
+					<p class="form-control" ng-bind="form.orderBy"></p>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-3 control-label">预订人部门:</label>
+				<div class="col-sm-9">
+					<p class="form-control" ng-bind="form.orderDept[0].deptName"></p>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-3 control-label">预订人电话:</label>
+				<div class="col-sm-9">
+					<p class="form-control" ng-bind="form.orderMobile"></p>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-3 control-label">结算方式:</label>
+				<div class="col-sm-9">
+					<p class="form-control">微信支付</p>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-3 control-label">订单状态:</label>
+				<div class="col-sm-9">
+					<p class="form-control" ng-bind="form.orderStatus"></p>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-3 control-label">包子提取时间:</label>
+				<div class="col-sm-9">
+					<p class="form-control" ng-bind-template="{{form.baoziTime+' 12:00~13:00'}}"></p>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-3 control-label">馒头提取时间:</label>
+				<div class="col-sm-9">
+					<p class="form-control" ng-bind-template="{{form.mantouTime+' 12:00~13:00'}}"></p>
+				</div>
+			</div>
+		</form>
+	</div>
+</div>
+<div class="modal-footer">
+	<button type="button" class="btn btn-info" ng-click="close()">关闭</button>
+</div>

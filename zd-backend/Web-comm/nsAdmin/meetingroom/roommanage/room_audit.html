@@ -1,0 +1,41 @@
+<div class="panel panel-default">            
+    <div class="panel-footer bg-light lter">
+        <form class="form-horizontal" role="form">
+            <!--<div class="form-group" style="margin-bottom:0px;">
+                <div class="col-sm-2">
+                    <button class="btn btn-rounded btn-sm btn-info"  ng-click="addNewGoods()"><i class="fa fa-fw fa-plus"></i> 新增用户</button>
+                </div>
+            </div>-->
+        </form>
+    </div>
+</div>
+ 
+<div class="panel panel-default">  
+        <div class="table-responsive">       
+            <table  datatable-directive url="dataUrl" columns="columns" del="del(data)" edit="edit(data)"  filters="goodsFilter" search-params="instance.params" indentify-key="engine"  btns="d" 
+            class="table  table-striped b-t b-b table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <th  style="width:10%">状态</th>
+                        <th  style="width:8%">操作</th> 
+                    </tr>
+                </thead>
+                <tbody>
+                	<tr>
+						<td>审核人员</td>
+						<td><button type="submit" class="btn btn-primary"  ng-click="">用户</button></td>
+					</tr>
+					<tr>
+						<td>派单人员</td>
+						<td><button type="submit" class="btn btn-primary"  ng-click="">用户</button></td>
+					</tr>
+					<tr>
+						<td>设备人员</td>
+						<td><button type="submit" class="btn btn-primary"  ng-click="">用户</button></td>
+					</tr>
+					
+                </tbody>
+            </table>            
+        </div>
+</div>
+<modal-directive model-id='myModal'  setting="{title:'提示',btnName:'好的',content:'确定删除'}" callback="doYes()"></modal-directive>

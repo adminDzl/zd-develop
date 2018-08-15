@@ -1,0 +1,36 @@
+ 
+<div class="panel panel-default">        
+    <div class="panel-body">  
+        <div class="col-sm-12">
+            <h4>添加增值服务</h4>
+        </div>
+        <form class="form-horizontal" method="get">
+            <table class="table table-striped m-b-none" style="max-height:480px;overflow:auto"> 
+                <thead>
+                    <tr>
+                        <td style="width:60px">选择</td>
+                        <td>服务名称</td>
+                        <td>服务价格</td>
+                        
+                    </tr>
+                </thead>                         
+                <tbody>                             
+                    <tr ng-repeat="it in instance.sysServs" ng-if="!it.filter">    
+                    <td ><input type="checkbox" ng-model="it.select" ></td>       
+                                     
+                    <td>{{it.serviceName}}</td>                  
+                    <td>{{it.servicePrice}}元</td>                    
+                    </tr>
+                </tbody>
+            </table>
+            <div class="line line-dashed b-b line-lg pull-in"></div>
+            <div class="form-group">
+                <div class="col-sm-4 col-sm-offset-9">
+                    <button type="reset" class="btn btn-default" ng-click="cancel()"> 取消</button>
+                    <button type="submit" class="btn btn-primary"  ng-click="commitNewAddSer()">保存</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+ 

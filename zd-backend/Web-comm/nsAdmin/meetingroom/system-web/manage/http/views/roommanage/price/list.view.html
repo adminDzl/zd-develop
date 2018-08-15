@@ -1,0 +1,42 @@
+<div class="panel panel-default">            
+    <div class="panel-footer bg-light lter">
+        <form class="form-horizontal" role="form">
+            <div class="form-group" style="margin-bottom:0px;">
+                <label class="col-sm-2 control-label">是否开启价格管理功能</label>
+                <div class="col-sm-7">
+                    <label class="i-switch i-switch-md bg-success m-t-xs m-r">
+                    <input type="checkbox" ng-checked="instance.opened" ng-model="instance.opened" ng-click="instance.setOpenStatus()">
+                    <i></i>
+                    </label>                         
+                </div>
+                <div class="col-sm-2" ng-if="instance.opened">
+                    <button class="btn btn-rounded btn-sm btn-info"  ng-click="addNewPrice()"><i class="fa fa-fw fa-plus"></i> 新增价格</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+ 
+<div class="panel panel-default" ng-if="instance.opened">        
+         
+            
+        <table    datatable-directive url="dataUrl" filters="priceStatus" 
+                search-params="instance.params"
+                columns="columns" del="del(data)" 
+            
+                indentify-key="engine"  btns="d"  
+                class="table  table-striped b-t b-b table-bordered table-hover" >
+            <thead class="text-center">
+                <tr>
+                    <th  style="width:40%">时长/时段</th>
+                    <th  style="width:45%">价格（单价）</th>
+                    <th  style="width:15%">操作</th> 
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+    
+   </div>
+
+   <modal-directive model-id='myModal'  setting="{title:'提示',btnName:'好的',content:'确定删除'}" callback="doYes()"></modal-directive>

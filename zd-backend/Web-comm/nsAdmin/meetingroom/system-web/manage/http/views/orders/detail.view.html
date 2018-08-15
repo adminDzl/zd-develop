@@ -1,0 +1,327 @@
+<div class="panel panel-default">        
+        <div class="panel-body">  
+            <div class="col-sm-12">
+                <h4>订单信息</h4>
+            </div>
+            <form class="form-horizontal" method="get">
+                <!--s-->
+                <div class="line line-dashed b-b line-lg pull-in"></div>
+                <div class="form-group">
+                    <label class="col-sm-1 control-label">订单号：</label>
+                     <label for="" class="col-sm-2 control-label">{{instance.model.orderNo}}</label>
+                     <label for="" class="col-sm-1 control-label">状态：</label>
+                     <label for="" class="col-sm-1 control-label">{{instance.model.orderStatus|orderstatus}}</label>
+                     <label for="" class="col-sm-2 control-label"  ng-if="instance.model.orderStatus==1">
+                            <button class="btn btn-rounded btn-sm btn-info"  ng-click="instance.payAllMoney()"><i class="fa fa-fw fa-plus"></i> 支付定金</button>
+                     </label>
+                     <label for="" class="col-sm-2 control-label"  ng-if="instance.model.orderStatus==2 &&(instance.model.payType!=1 && instance.mode.payType!=2)">
+                        <button class="btn btn-rounded btn-sm btn-info" ng-click="instance.payAllMoney()"><i class="fa fa-fw fa-plus"></i> 支付尾款</button> </label>
+                     <label for="" class="col-sm-2 control-label">
+                            <button class="btn btn-rounded btn-sm btn-info" ng-if="instance.model.orderStatus!=6&&instance.model.orderStatus!=5" ng-click="instance.endOrder()"><i class="fa fa-fw fa-plus"></i> 完成订单</button>
+                     </label>
+                     <label for="" class="col-sm-2 control-label">
+                            <button class="btn btn-rounded btn-sm btn-info" ng-if="instance.model.orderStatus!=6&&instance.model.orderStatus!=5" ng-click="closeOrder()"><i class="fa fa-fw fa-plus"></i> 关闭订单</button>
+                     </label>
+                     
+                </div>
+                  <!--e-->
+                  <div class="line line-dashed b-b line-lg pull-in"></div>
+                <!-- e -->
+                <div class="form-group">
+                    <div class="row text-center">
+                            <div class="col-sm-2"></div>
+                            <div class="col-sm-8">
+                                <div class="col-sm-12">
+                                    <div class="col-sm-3" ng-repeat="it in instance.orderPayMent">
+                                        <a class=" thumb-sm avatar m-l-n-md" style="background:#fff;">
+                                            <img src="../../libs/img/right.png" alt="...">
+                                        </a> 
+                                    </div>
+                                    <!-- <div class="col-sm-3">
+                                        <a class="  thumb-sm avatar m-l-n-md">
+                                            <img src="../../libs/img/fail.png" alt="...">
+                                        </a> 
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <a class="  thumb-sm avatar m-l-n-md">
+                                            <img src="../../libs/img/a3.jpg" alt="...">
+                                        </a> 
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <a class="  thumb-sm avatar m-l-n-md">
+                                            <img src="../../libs/img/a3.jpg" alt="...">
+                                        </a> 
+                                    </div> -->
+                                    <div style="border-top:1px solid green;margin-top:20px;z-index:1"></div>
+                              </div>
+                              <div class="col-sm-12">
+                                  <div class="col-sm-3" ng-repeat="it in instance.orderPayMent">{{it.orderStatus|orderstatus}}</div>
+                                  <!-- <div class="col-sm-3">支付定金</div>
+                                  <div class="col-sm-3">支付全款</div>
+                                  <div class="col-sm-3">已关闭</div> -->
+                              </div>
+                              <div class="col-sm-12">
+                                    <div class="col-sm-3"  ng-repeat="it in instance.orderPayMent">{{it.createTime}}</div>
+                                    <!-- <div class="col-sm-3">支付定金</div>
+                                    <div class="col-sm-3">支付全款</div>
+                                    <div class="col-sm-3">已关闭</div> -->
+                                </div>
+                            </div>
+                            <div class="col-sm-2"></div>
+                    </div>
+                     
+                </div>
+                <!-- s -->
+                <div class="line line-dashed b-b line-lg pull-in"></div>
+                <div class="panel panel-default ">
+                    <table class="table table-striped m-b-none"> 
+                        <thead>
+                                <tr>                                
+                                    <th>处理时间</th>
+                                    <th>处理信息</th>
+                                    <th>操作时间</th>                                    
+                                </tr>
+                                </thead>
+                        <tbody>
+                            
+                            <tr  ng-repeat="it in instance.orderPayMent">
+                            
+                                <td>{{it.createTime}}</td>
+                                <td><span ng-if="it.payMoney">支付¥{{it.payMoney}}</span></td>
+                                <td>{{it.orderStatus|orderstatus}}</td>
+                            
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <!-- e -->
+                <!-- e -->
+                <div class="line line-dashed b-b line-lg pull-in"></div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <!-- ls -->
+                        <div class="panel panel-default ">
+                                <div class="panel-heading">
+                                 订单信息
+                                </div>
+                                <table class="table table-striped m-b-none">                                  
+                                  <tbody>
+                                    <tr>
+                                        <td colspan="2">{{instance.meeting.name}}</td>
+                                    </tr>
+                                    <tr>
+                                       <td style="width:120px;">地址：</td>
+                                       <td>{{instance.meeting.address}}</td>                                       
+                                    </tr>
+                                    <tr>
+                                        <td  >开放时间:</td>
+                                        <td>
+                                            {{instance.meeting.openStartTime}}~{{instance.meeting.openEndTime}}
+                                        </td>
+                                    </tr>
+                                     
+                                    <tr>
+                                        <td>面积：</td>
+                                        <td>{{instance.meeting.acreage}}㎡</td>
+                                    </tr>
+                                    <tr>
+                                        <td>容纳人数：</td>
+                                        <td>{{instance.meeting.layTypeNum}}人</td>
+                                    </tr>
+                                  </tbody>
+                                </table>
+                              </div>
+                        <!-- le -->
+                    </div>
+                    <div class="col-sm-6">
+                        <!-- ls -->
+                        <div class="panel panel-default ">
+                            <div class="panel-heading">
+                            预定信息
+                            </div>
+                            <table class="table table-striped m-b-none ">                                  
+                                <tbody>
+                                    <tr>
+                                        <td colspan="4">{{instance.model.companyName}}-{{instance.meeting.useTypeName}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td  >主题：</td>
+                                        <td colspan="3">{{instance.model.meetingTopic}}</td>
+                                    </tr>   
+                                    <tr>
+                                        <td>预订人：</td>
+                                        <td>{{instance.model.contactName}}</td>
+                                        <td>电话：</td>
+                                        <td>{{instance.model.contactPhone}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>摆放方式：</td>
+                                        <td>{{instance.meeting.layTypeName}}</td>
+                                        <td>预定时段</td>
+                                        <td>
+                                            <span ng-repeat="it in instance.orderTime">
+                                                    {{it.orderDate}}  {{it.orderStartTime}}~{{it.orderEndTime}}  </br>                                    
+                                            </span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>类型：</td>
+                                        <td>{{instance.meeting.roomTypeName}}</td>
+                                        <td>人数：</td>
+                                        <td>{{instance.model.numbers}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>价格：</td>
+                                        <td>¥{{instance.model.orderMoney}}</td>
+                                        <td>支付方式：</td>
+                                        <td>{{instance.model.payType|paytype}},{{instance.model.lastPayType|paytype}}</td>
+                                    </tr>
+                                    <tr>
+                                         
+                                         
+                                        <td>附件：</td>
+                                        <td colspan="3">
+                                            <a href="{{it.storagePath}}" target="_blank" ng-repeat="it in instance.attachList">{{it.fileName}}</a>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <!-- le -->
+                    </div>
+                </div>
+                <!-- s -->
+                <div class="line line-dashed b-b line-lg pull-in"></div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="panel panel-default ">
+                            <div class="panel-heading">
+                            免费物品
+                            </div>
+                            <table class="table table-striped m-b-none ">     
+                                <thead>
+                                    <tr>
+                                        <th>名称</th>
+                                        <th>数量</th>
+                                    </tr>
+                                </thead>                             
+                                <tbody>                                    
+                                    <tr ng-repeat="it in instance.frees">
+                                        <td>{{it.name}}</td>
+                                        <td>{{it.thingsCount}}{{it.unit}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="panel panel-default ">
+                            <div class="panel-heading">
+                            收费物品
+                            </div>
+                            <table class="table table-striped m-b-none ">      
+                                <thead>
+                                   <tr>
+                                       <th>名称</th>
+                                       <th>数量</th>
+                                       <th>单位</th>
+                                       <th>单价</th>
+                                      
+                                       <th>总计</th>
+                                   </tr>
+                                </thead>                            
+                                <tbody>                                    
+                                    <tr ng-repeat="it in instance.unfrees">
+                                        <td>{{it.name}}</td>
+                                        <td>{{it.thingsCount}}</td>
+                                        <td>{{it.unit}}</td>
+                                        <td>{{it.price}}元</td>                                        
+                                        <td>{{it.thingsMoney}}元</td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="4" style="text-align:right">物品费：</td>
+                                        <td>{{instance.unfreemoney}}元</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <!-- ss -->
+                <div class="line line-dashed b-b line-lg pull-in"></div>
+                <div class="form-group">
+                    <div class="col-sm-12 col-sm-offset-8">                    
+                        <button type="button" class="btn btn-info"  ng-click="editGoods()" ng-if="instance.model.orderStatus!=6&&instance.model.orderStatus!=5&&instance.model.orderStatus!=3" >添加/编辑物品</button>
+                    </div>
+                </div>
+                 <!-- s -->
+                 <div class="line line-dashed b-b line-lg pull-in"></div>
+                 <div class="panel panel-default ">
+                    <div class="panel-heading"> 增值服务</div>
+                     <table class="table table-striped m-b-none">            
+                         <thead>
+                             <tr>
+                                 <td>服务名称</td>
+                                 <td>价格</td>
+                                 <td>人数</td>
+                             </tr>
+                         </thead>              
+                         <tbody>                             
+                             <tr ng-repeat="it in instance.orderAddservice">                             
+                                <td>{{it.serviceName}}</td>
+                                <td>{{it.servicePrice}}元</td>
+                                <td>{{it.addServiceCount}}</td>                             
+                             </tr>
+                             <tr>
+                                    <td colspan="2" style="text-align:right">服务费：</td>
+                                    <td>{{instance.sermoney}}元</td>
+                                </tr>
+                         </tbody>
+                     </table>
+                 </div>
+                    <!-- ss -->
+                <div class="line line-dashed b-b line-lg pull-in"></div>
+                <div class="form-group">
+                    <div class="col-sm-12 col-sm-offset-8" ng-if="instance.model.orderStatus!=6&&instance.model.orderStatus!=5&&instance.model.orderStatus!=3">                    
+                        <button type="button" class="btn btn-info"  ng-click="addServ()" >添加服务</button>
+                        <button type="button" class="btn btn-info"  ng-click="editServ()"  >编辑信息</button>
+                    </div>
+                </div>
+                 <!-- e -->
+                 <div class="line line-dashed b-b line-lg pull-in"></div>
+                 <div class="panel panel-default ">
+                        <div class="panel-heading"> 明细</div>
+                         <table class="table table-striped m-b-none">            
+                             <thead>
+                                 <tr>
+                                     <td>总金额</td>
+                                     <td>场地租赁金额</td>
+                                     <td>收费物品费用</td>
+                                     <td>增值服务金额</td>
+                                     <td>定金</td>
+                                     <td>已支付</td>
+                                     <td>还需支付</td>
+                                 </tr>
+                             </thead>              
+                             <tbody>                             
+                                  <td>¥{{instance.model.orderMoney+instance.unfreemoney+instance.sermoney}}</td>
+                                  <td>¥{{instance.model.orderMoney}}</td>
+                                  <td>¥{{instance.unfreemoney}}</td>
+                                  <td>¥{{instance.sermoney}}</td>
+                                  <td>¥{{instance.model.firstMoney}}</td>
+                                  <td>¥{{instance.firstMoney}}</td>
+                                  <td>¥{{instance.model.orderMoney+instance.unfreemoney+instance.sermoney-instance.firstMoney}}</td>
+                             </tbody>
+                         </table>
+                     </div>
+               
+                <!-- s -->
+                  <div class="line line-dashed b-b line-lg pull-in"></div>
+                  <div class="form-group">
+                        <div class="col-sm-4 col-sm-offset-2">                    
+                        <!-- <button type="button" class="btn btn-primary"  ng-click="instance.commit()">保存</button> -->
+                        </div>
+                    </div>
+            </form>
+        </div>
+    </div>

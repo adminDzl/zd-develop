@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<meta content="yes" name="apple-mobile-web-app-capable">
+		<meta content="black" name="apple-mobile-web-app-status-bar-style">
+		<meta content="telephone=no" name="format-detection">
+		<meta content="email=no" name="format-detection">
+		<meta name="hotcss" content="max-width=640">
+		<title>工卡申请</title>
+		<link rel="stylesheet" href="../../css/common.css" />
+		<link rel="stylesheet" href="../../css/style.css" />
+		<script type="text/javascript" src="../../js/common/hotcss.js" ></script>
+	</head>
+	<body ng-app="myApp" ng-controller="AppCtrl">
+		<div class="container m-t-40">
+			<div class="inputBox">
+				<p>申请人电话(必填):</p>
+				<input type="text" placeholder="请输入申请人注册APP的电话号码" ng-model="applyMobile" ng-blur="blur($event)"/>
+			</div>
+			<div class="inputBox">
+				<p>申请单位(必填):</p>
+				<input type="text" placeholder="请输入申请单位" ng-model="deptInfo.defaultDeptParent.name"/>
+			</div>
+			<div class="inputBox">
+				<p>申请人(必填):</p>
+				<input type="text" placeholder="请输入申请人姓名" ng-model="wordCardInfo.realname"/>
+			</div>
+			<div class="inputBox">
+				<p>申请人科室(必填):</p>
+				<input type="text" placeholder="请输入申请人科室" ng-model="deptInfo.defaultDept.name"/>
+			</div>
+		</div>
+		
+		<div class="container m-t-40">
+			<div class="selectBox">
+				<p>编制类型:</p>
+				<div>
+					<select id="selectType" ng-model="authType" ng-options="item.id as item.keyName for item in authTypes"></select>
+				</div>
+			</div>
+			
+			<div class="selectBox">
+				<p>办卡年限:</p>
+				<div>
+					<select id="selectTime" ng-model="cardTime" ng-options="item.id as item.keyName for item in cardTimes"></select>
+				</div>
+			</div>
+			
+			<div class="inputBox">
+				<p>门禁房号(必填):</p>
+				<input type="text" placeholder="请输入门禁房号" ng-model="roomNumber"/>
+			</div>
+			
+			<div class="inputBox selectRepairsFile">
+				<p>附件</p>
+				<ul class="fix main" id="commentPicture">
+					<li>
+						<form id="registration" name="registration" method="post" enctype="multipart/form-data" novalidate>
+							<input type="file" name="file" id="choose" accept="image/*" />
+						</form>
+					</li>
+				</ul>
+			</div>
+						
+			<div class="fill-btn confirm" ng-click="submit()">确认</div>
+		</div>
+		
+		<!-- 蒙版 -->
+		<div class="masking"></div>
+		
+		<!-- 领导选择 -->
+		<div class="selectLeaderBox">
+			<div class="selectLeader">
+				<div class="selectHeader">
+					<p>领导
+						<em class="closeSelect" ng-click="operationFn('close')"></em>
+					</p>
+				</div>
+				<div class="leaderContent">
+					<div class="selctPeopleBox border-b fix" ng-repeat="(key,value) in LeaderInfo track by $index">
+						<div>{{key}}</div>
+						<ul>
+							<li ng-click="selectLeader($event)" ng-repeat="item in value" data-id="{{item.id}}">{{item.leaderName}}</li>
+						</ul>
+					</div>
+				</div>
+				<div class="selctOthderPeopleBox fix">
+					<div class="f-l"><a href="javascript:;" ng-click="addOthderLeader()">其他</a></div>
+					<ul class="f-l"></ul>
+				</div>
+				<div class="addOtherLeaderBox">
+					<textarea placeholder="请输入领导名称+职务" ng-model="currentInfo.otherLeader"></textarea>
+				</div>
+				<div class="fix btn">
+					<span href="javascript:;" class="cancel" ng-click="operationFn('close')">取消</span>
+					<span href="javascript:;" class="confirm" ng-click="operationFn('confirm')">确定</span>
+				</div>
+			</div>
+		</div>
+
+		<!-- 提交成功 -->
+		<div class="successfulBox t-c">
+			<div class="successHeader">
+				<div class="successIcon"></div>
+				<em class="successClose" ng-click="closeOrOpenTipBox('close')"></em>
+			</div>
+			<p class="f-s-50 f-b l-h-116 m-t-33">提交成功</p>
+			<p class="f-s-40">订单提交成功，请在我的订单查看状态。</p>
+			<div class="f-s-40">(<span class="countDown" ng-bind-template="{{ countDown }}"></span>s)请等待</div>
+		</div>
+		
+		<script type="text/javascript" src="../../js/common/angular.js" ></script>
+		<script type="text/javascript" src="../../js/common/jquery-1.8.3.min.js" ></script>
+		<script type="text/javascript" src="../../js/common/jquery.form.js" ></script>
+		<script type="text/javascript" src="../../js/common/mobileFix.mini.js"></script>
+		<script type="text/javascript" src="../../js/common/exif.js"></script>
+		<script type="text/javascript" src="../../js/common/lrz.js"></script>
+		<script type="text/javascript" src="../../js/common/util.js" ></script>
+		<script type="text/javascript" src="../../js/workCard/index.js" ></script>
+	</body>
+</html>

@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+	<meta content="yes" name="apple-mobile-web-app-capable">
+	<meta content="black" name="apple-mobile-web-app-status-bar-style">
+	<meta content="telephone=no" name="format-detection">
+	<meta content="email=no" name="format-detection">
+	<meta name="hotcss" content="max-width=640">
+	<title>订单详情</title>
+	<link rel="stylesheet" href="../../css/common.css" />
+	<link rel="stylesheet" href="../../css/style.css" />
+	<link rel="stylesheet" href="../../css/common/swiper.min.css" />
+	<script type="text/javascript" src="../../js/common/hotcss.js"></script>
+</head>
+
+<body ng-app="myApp" ng-controller="AppCtrl">
+	<div class="container m-t-40">
+		<p class="f-s-40 f-c-494848 p-l-r-40">服务订单：
+			<span ng-bind="orderInfo.orderNo"></span>
+		</p>
+	</div>
+
+	<div class="container m-t-40">
+		<div class="textBox fix">
+			<p class="f-l">事由：</p>
+			<p class="f-r" ng-bind="orderInfo.reason"></p>
+		</div>
+		<div class="textBox fix">
+			<p class="f-l">领导：</p>
+			<p class="f-r" ng-bind="orderInfo.leader"></p>
+		</div>
+		<div class="textBox fix">
+			<p class="f-l">接待时间：</p>
+			<p class="f-r" ng-bind="time"></p>
+		</div>
+		<div class="textBox fix">
+			<p class="f-l">出发地：</p>
+			<p class="f-r" ng-bind="orderInfo.startAddress"></p>
+		</div>
+		<div class="textBox fix">
+			<p class="f-l">目的地：</p>
+			<p class="f-r" ng-bind="orderInfo.endAddress"></p>
+		</div>
+		<div class="textBox fix" ng-if="orderInfo.smallCarNum">
+			<p class="f-l">小车数量：</p>
+			<p class="f-r" ng-bind="orderInfo.smallCarNum"></p>
+		</div>
+		<div class="textBox fix" ng-if="orderInfo.midCarNum">
+			<p class="f-l">中巴数量：</p>
+			<p class="f-r" ng-bind="orderInfo.midCarNum"></p>
+		</div>
+		<div class="textBox fix">
+			<p class="f-l">用车类型：</p>
+			<p class="f-r" ng-bind="orderInfo.useType"></p>
+		</div>
+	</div>
+
+	<!-- 车辆信息 -->
+	<div class="container m-t-40" ng-if="hasCarInfo!='0'">
+		<div class="border-b" ng-if="orderInfo.driverMap.smallCarList.length !== 0">
+			<div ng-repeat="item in orderInfo.driverMap.smallCarList">
+				<div class="textBox fix">
+					<p class="f-l">小车司机姓名：</p>
+					<p class="f-r" ng-bind="item.driverName"></p>
+				</div>
+				<div class="textBox fix">
+					<p class="f-l">小车司机电话：</p>
+					<p class="f-r" ng-bind="item.driverPhone"></p>
+				</div>
+				<div class="textBox fix">
+					<p class="f-l">小车车牌号：</p>
+					<p class="f-r" ng-bind="item.carNumber"></p>
+				</div>
+			</div>
+		</div>
+		<div ng-if="orderInfo.driverMap.midCarList.length !== 0">
+			<div ng-repeat="items in orderInfo.driverMap.midCarList">
+				<div class="textBox fix">
+					<p class="f-l">中巴司机姓名：</p>
+					<p class="f-r" ng-bind="items.driverName"></p>
+				</div>
+				<div class="textBox fix">
+					<p class="f-l">中巴司机电话：</p>
+					<p class="f-r" ng-bind="items.driverPhone"></p>
+				</div>
+				<div class="textBox fix">
+					<p class="f-l">中巴车车牌号：</p>
+					<p class="f-r" ng-bind="items.carNumber"></p>
+				</div>
+			</div>
+
+		</div>
+	</div>
+	<!-- 车辆信息 -->
+
+	<div class="container m-t-40">
+		<div class="textBox fix">
+			<p class="f-l">预订人名：</p>
+			<p class="f-r" ng-bind="orderInfo.orderBy"></p>
+		</div>
+		<div class="textBox fix">
+			<p class="f-l">预订人部门：</p>
+			<p class="f-r" ng-bind="orderInfo.orderDept"></p>
+		</div>
+		<div class="textBox fix">
+			<p class="f-l">预订人电话：</p>
+			<p class="f-r" ng-bind="orderInfo.orderPhone"></p>
+		</div>
+	</div>
+
+	<div class="container m-t-40">
+		<div class="textBox fix" ng-if="orderInfo.fileUrlList.length > '0'">
+			<p>附件：</p>
+			<div class="selectRepairsFile showFileImgBox">
+				<ul class="fix">
+					<li style="background: url({{item}}) center no-repeat; background-size: cover;" data-imgurl="{{ item }}" data-index="{{ $index+1 }}"
+					 ng-repeat="item in orderInfo.fileUrlList"></li>
+				</ul>
+			</div>
+		</div>
+		<div class="textBox fix" ng-if="orderInfo.remark">
+			<p class="f-l">备注信息：</p>
+			<p class="f-r" ng-bind="orderInfo.remark"></p>
+		</div>
+	</div>
+
+	<div class="container m-t-40" ng-show="(hasCarInfo=='2' && orderInfo.curOperationType=='7') || hasCarInfo=='3'">
+		<div>
+			<p class="defaultP">评价：</p>
+			<div class="evaluateBox {{ hasCarInfo=='2' ? 'defaultEvaluate' : '' }}">
+				<textarea placeholder="请评价或提出建议！" ng-show="hasCarInfo=='2' && orderInfo.curOperationType=='7'" ng-model="describe"></textarea>
+				<p ng-if="hasCarInfo=='3'" ng-bind="orderInfo.commRating.ratingDesc"></p>
+				<ul class="fix main" id="commentPicture">
+					<li ng-if="hasCarInfo=='2'  && orderInfo.curOperationType=='7'">
+						<form id="registration" name="registration" method="post" enctype="multipart/form-data" novalidate>
+							<input type="file" name="file" id="choose" accept="image/*" capture="camera" />
+						</form>
+					</li>
+					<li ng-if="hasCarInfo=='3'" style="background: url({{item}}) center no-repeat; background-size: cover;" data-imgurl="{{ item }}" data-index="{{ $index+1 }}" ng-repeat="item in orderInfo.ratingFileUrlList"></li>
+				</ul>
+			</div>
+		</div>
+		<div class="gradeBox fix">
+			<p class="f-l">评分：</p>
+			<div class="f-r">
+				<ul class="fix">
+					<li data-start="5" ng-click="selectStart($event)"></li>
+					<li data-start="4" ng-click="selectStart($event)"></li>
+					<li data-start="3" ng-click="selectStart($event)"></li>
+					<li data-start="2" ng-click="selectStart($event)"></li>
+					<li data-start="1" ng-click="selectStart($event)"></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+
+
+	<!-- 订单状态 -->
+	<div class="container m-t-40">
+		<p class="defaultP">订单状态</p>
+		<div class="orderStateBox carStatusList">
+			<div>
+				<div>
+					<em></em>
+				</div>
+			</div>
+			<ul class="fix">
+				<li>
+					<em></em>
+					<p>待审核</p>
+				</li>
+				<li class="course">
+					<em></em>
+					<p>已审核</p>
+				</li>
+				<li class="course">
+					<em></em>
+					<p>待评价</p>
+				</li>
+				<li class="course">
+					<em></em>
+					<p>已评价</p>
+				</li>
+				<li class="reject">
+					<em></em>
+					<p ng-bind-template="{{ hasCarInfo=='4' ? '已取消' : '已驳回' }}"></p>
+				</li>
+			</ul>
+		</div>
+		
+		
+		<div class="textBox fix" ng-if="orderInfo.orderStatus=='2'" style="border-top: 1px solid #e2e2e2;">
+			<p class="f-l">驳回理由：</p>
+			<p class="f-r" ng-bind-template="{{ orderInfo.repulseReason }}" ></p>
+		</div>
+		
+		<a href="javascript:;" class="fill-btn confirm" ng-if="orderInfo.curOperationType=='0'" ng-click="cancelOrder()">取消订单</a>
+		<a href="javascript:;" class="fill-btn confirm" ng-if="orderInfo.curOperationType=='7'" ng-click="getComment()">提交评价</a>
+	</div>
+	
+
+	<!-- 蒙版 -->
+	<div class="masking"></div>
+
+
+	<script type="text/javascript" src="../../js/common/angular.js"></script>
+	<script type="text/javascript" src="../../js/common/jquery-1.8.3.min.js"></script>
+	<script type="text/javascript" src="../../js/common/jquery.form.js" ></script>
+	<script type="text/javascript" src="../../js/common/mobileFix.mini.js"></script>
+	<script type="text/javascript" src="../../js/common/exif.js"></script>
+	<script type="text/javascript" src="../../js/common/lrz.js"></script>
+	<script type="text/javascript" src="../../js/common/util.js"></script>
+	<script type="text/javascript" src="../../js/common/swiper.min.js" ></script>
+	<script type="text/javascript" src="../../js/officialCars/orderDetail.js"></script>
+</body>
+
+</html>

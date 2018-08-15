@@ -1,0 +1,152 @@
+<style>
+	.add_title {
+		background: url('../../common/img/sanjiao.png') no-repeat;
+		background-position: 97% 50%;
+		height: 15px;
+		line-height: 15px;
+		text-align: center;
+		cursor: pointer;
+		font-size: 15px;
+	}
+
+	.quote_select {
+		text-align: center;
+	}
+
+	.quote_select>a {
+		display: inline-block;
+		width: 30%;
+		height: 40px;
+		line-height: 40px;
+		border: 1px solid #E2E2E2;
+		border-radius: 5px;
+		text-align: center;
+		color: #6e6e6e;
+		margin: 8px;
+		cursor: pointer;
+		float: left;
+	}
+
+	.entry-select-color {
+		position: relative;
+		border: 1px solid #fff!important;
+	}
+
+	.entry-select-color>.td-contenter {
+		border-color: #23b7e5;
+	}
+
+	.td-contenter {
+		width: 100%;
+		height: 100%;
+		line-height: 34px;
+		border-top: 2px solid #fff;
+		border-left: 2px solid #fff;
+		border-bottom: 2px solid #fff;
+		border-right: 2px solid #fff;
+		border-radius: 5px;
+	}
+
+	.entry-select-color>.td-contenter>i {
+		position: absolute;
+		display: block;
+		right: 1px;
+		top: 0px;
+		color: #23b7e5;
+		font: normal normal normal 14px/1 FontAwesome;
+		font-size: inherit;
+		text-rendering: auto;
+		-webkit-font-smoothing: antialiased;
+	}
+</style>
+<div>
+	<crumb title="新建报事单" head="true"></crumb>
+	<div class="wrapper-md" style="background: #fff;" ng-controller="QuoteAddCtrl">
+		<div class="row">
+			<div class="col-lg-12">
+				<form name="Form" class="form-horizontal form-validation" novalidate>
+					<div class="form-group">
+						<label class="col-sm-2 control-label">
+							<span class="text-danger m-r">*</span>报事类型</label>
+						<div class="col-sm-10">
+							<div class="form-control" style="height: auto;border: none;">
+
+								<accordion close-others="true">
+									<accordion-group class="panel-info" ng-repeat="en in site.sortDataList" is-open="en.isOpen">
+										<accordion-heading>
+											<div class="add_title">{{en.sortChiefName}}</div>
+										</accordion-heading>
+										<div class="panel panel-default" style="overflow:hidden;">
+											<div ng-if="en.subList.length>0">
+												<div class="quote_select">
+													<a ng-class="{true:'entry-select-color'}[ch.isChoose]" ng-repeat="ch in en.subList" ng-click="choose(ch,en.sortChiefId)">
+														<div class="td-contenter">
+															<i ng-class="{true:'fa-check-square'}[ch.isChoose]"></i>
+															{{ch.sortSubName}}
+														</div>
+													</a>
+												</div>
+											</div>
+											<div class="no-items" ng-show="en.subList.length <= 0">暂无数据</div>
+										</div>
+									</accordion-group>
+								</accordion>
+							</div>
+						</div>
+					</div>
+
+					<div class="line line-dashed b-b line-lg" ng-model="moveUrl"></div>
+
+					<div class="form-group">
+						<label class="col-sm-2 control-label">
+							<span class="text-danger m-r">*</span>问题描述</label>
+						<div class="col-sm-10">
+							<textarea class="form-control" ng-model="form.supplementText" rows="6" required placeholder="描述具体情况，请详细填写"></textarea>
+						</div>
+					</div>
+
+					<div class="line line-dashed b-b line-lg"></div>
+
+
+					<div class="form-group">
+						<label class="col-sm-2 control-label">
+							<span class="text-danger m-r">*</span>维修区域</label>
+						<div class="col-sm-10">
+
+							<select ng-model="form.areaChiefId" class="form-control" required ng-options="en.areaChiefId as en.areaName for en in site.areaList">
+								<option value="">请选择区域</option>
+							</select>
+						</div>
+					</div>
+					<div class="line line-dashed b-b line-lg"></div>
+					<div class="form-group">
+						<label class="col-sm-2 control-label">
+							<span class="text-danger m-r">*</span>具体位置</label>
+						<div class="col-sm-10">
+							<textarea class="form-control" rows="6" ng-model="form.areaDetail" required placeholder="请描述具体位置，如 15层 卫生间或1503室等。。。"></textarea>
+						</div>
+					</div>
+					<div class="line line-dashed b-b line-lg"></div>
+					<div class="form-group">
+						<label class="col-sm-2 control-label">附件:</label>
+						<div class="col-sm-9">
+							<div preview-container>
+								<img width=100 height=100 border=0 src="{{ form.foodImg | imgUrl }}">
+							</div>
+							<input type="file" name="file" onchange="Utils.previewImage(this)" accept="image/*" class="m-t m-b" />
+							<input type="text" style="display: none;" name="foodImg" file-path-container ng-model="form.foodImg" />
+							<span class="col-lo-1 text-danger">（建议选择尺寸为120*120px，大小不超过300k的 jpg/png图片）</span>
+						</div>
+						<span class="col-lo-1 text-danger">*</span>
+					</div>
+					<div class="panel-footer" style="height: 40px;">
+						<div class="form-group" style="margin-left: 208px;">
+							<button type="submit" class="btn btn-info padder-lg" ng-disabled="Form.$invalid" ng-click="addSave()">保存</button>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+<style>.d-n{ display: none; }</style>

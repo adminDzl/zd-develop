@@ -1,0 +1,114 @@
+/** Login Page **/
+body.signinLogin {
+    height: auto;
+    /* background: url(../img/login-background.jpg) no-repeat center fixed;  */
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    /* color: rgba(255,255,255,.95); */
+    color: #7793a7;
+    background-color: #1c2b36;
+}
+#login {
+    width: 450px;
+    margin: 0 auto;
+    height: 300px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-top: -250px;
+    margin-left: -225px;
+}
+#login {
+    padding-top: 40px;
+    padding-bottom: 40px;
+}
+
+#login .form-signin {
+    max-width: 450px;
+    padding: 19px 29px 29px;
+    margin: 0 auto 20px;
+    background-color: #fff;
+    border: 1px solid #e5e5e5;
+    -webkit-border-radius: 5px;
+       -moz-border-radius: 5px;
+            border-radius: 5px;
+    -webkit-box-shadow: 0 1px 2px rgba(0,0,0,.05);
+       -moz-box-shadow: 0 1px 2px rgba(0,0,0,.05);
+            box-shadow: 0 1px 2px rgba(0,0,0,.05);
+    
+}
+#login .form-signin .form-signin-heading,
+#login .form-signin .checkbox {
+    margin-bottom: 10px;
+}
+#login .form-signin .form-signin-heading{
+	text-align: center;
+	margin-bottom: 20px;
+	    color: #494949;
+}
+#login .form-signin input[type="text"],
+#login .form-signin input[type="password"] {
+    font-size: 16px;
+    height: auto;
+    margin-bottom: 15px;
+    background-color: #FFF;
+    background-image: none;
+    border: 1px solid #e5e6e7;
+    border-radius: 1px;
+    color: inherit;
+    display: block;
+    padding: 8px 12px;
+    -webkit-transition: border-color .15s ease-in-out 0s,box-shadow .15s ease-in-out 0s;
+    transition: border-color .15s ease-in-out 0s,box-shadow .15s ease-in-out 0s;
+    width: 100%;
+    font-size: 14px;
+    color: #494949;
+}
+
+#login .form-signin .btn {
+	width: 100%;
+    height: 45px;
+    font-size: 18px;
+    margin-top:20px;
+    background-color: #0a578e;
+    border-color: #0a578e;
+}
+
+#login .form-signin input[type="text"][name="imageCode"],#login .form-signin input[type="text"][name="verifyCode"]{width: 66%;float:left;}
+.login-imageCode{float: right;height: 36px;}
+.getCodeBtn{float:right;width:  120px;height:  37px;border: none;background-color: #f2f2f2;}
+
+.dropdownOver{max-height: 350px;overflow: auto;}
+
+.table-layot{table-layout: fixed;}
+.table-layot > tbody > tr > th,
+.table-layot > tfoot > tr > th,
+.table-layot > tbody > tr > td,
+.table-layot > tfoot > tr > td {
+    padding: 8px 8px;
+    border-top: 1px solid #eaeff0;
+      text-align: center;
+  vertical-align: middle;
+   white-space: inherit;
+	text-overflow: ellipsis;
+	word-break: break-all; word-wrap:break-word;
+}
+.treeView_ul{padding:15px 15px;}
+.treeView_ul .treeView_ul_li{padding:0 25px;}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

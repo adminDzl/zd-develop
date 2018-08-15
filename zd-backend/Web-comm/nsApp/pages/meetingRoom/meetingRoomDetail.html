@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<meta content="yes" name="apple-mobile-web-app-capable">
+		<meta content="black" name="apple-mobile-web-app-status-bar-style">
+		<meta content="telephone=no" name="format-detection">
+		<meta content="email=no" name="format-detection">
+		<meta name="hotcss" content="max-width=640">
+		<title>订单详情</title>
+		<link rel="stylesheet" href="../../css/common.css" />
+		<link rel="stylesheet" href="../../css/style.css" />
+		<link rel="stylesheet" href="../../css/common/swiper.min.css" />
+		<script type="text/javascript" src="../../js/common/hotcss.js" ></script>
+	</head>
+	<body ng-app="myApp" ng-controller="AppCtrl" style="overflow-x: hidden;" class="meetingDetailPage">
+		
+		<div class="meeting-list meetingDetails">
+			<ul>
+				<li class="libox">
+					<img src="{{ orderInfo.picList }}"/>
+					<div class="roomdoc">
+						<div>
+							<span>{{ orderInfo.meetingName }}</span>
+						</div>
+						<div>
+							<img src="../../img/location.png" />
+							<span>{{ orderInfo.meetingAddress }}</span>
+						</div>
+						<div>
+							<img src="../../img/person.png" />
+							<span>{{ orderInfo.layTypeNum }}人以内</span>
+						</div>
+					</div>							
+				</li>
+			</ul>
+		</div>
+		<div class="container m-t-40">
+			<div class="textBox fix">
+				<p class="f-l">主题</p>
+				<p class="f-r" ng-bind="orderInfo.meetingTopic"></p>
+			</div>
+			<div class="textBox fix">
+				<p class="f-l">人数</p>
+				<p class="f-r" ng-bind="orderInfo.numbers"></p>
+			</div>
+			<div class="textBox fix">
+				<p class="f-l">会议级别</p>
+				<p class="f-r" ng-bind="orderInfo.meetingLevel"></p>
+			</div>
+			<div class="textBox fix">
+				<p class="f-l">会议时间</p>
+				<p class="f-r" ng-bind="meetingStartTime"></p>
+			</div>
+			<div class="textBox fix">
+				<p class="f-l">会议起止时间</p>
+				<!--<p class="f-r" ng-bind="meetingTime"></p>-->
+				<ul>
+					<li ng-repeat="item in orderInfo.orderTimeList track by $index" class="f-r">
+						{{ item }}
+					</li>
+				</ul>
+			</div>
+			<div class="textBox fix">
+				<p class="f-l">设备</p>
+				<p class="f-r" ng-bind="orderInfo.things"></p>
+			</div>
+		</div>
+		<div class="container m-t-40" ng-if='orderInfo.banner'>
+			<div class="textBox fix">
+				<p class="f-l">电子横幅内容</p>
+				<p class="f-r" ng-bind="orderInfo.banner"></p>
+			</div>
+		</div>
+		<div class="container m-t-40">
+			<div class="textBox fix">
+				<p class="f-l">预订人名</p>
+				<p class="f-r" ng-bind="orderInfo.contactName"></p>
+			</div>
+			<div class="textBox fix">
+				<p class="f-l">预订人部门</p>
+				<p class="f-r" ng-bind="orderInfo.companyName"></p>
+			</div>
+			<div class="textBox fix">
+				<p class="f-l">预订人电话</p>
+				<p class="f-r" ng-bind="orderInfo.contactPhone"></p>
+			</div>
+		</div>
+		
+		<div class="container m-t-40">
+			<div class="textBox fix" ng-if="orderInfo.fileUrlList.length > 0">
+				<p>附件：</p>
+				<div class="selectRepairsFile showFileImgBox">
+					<ul class="fix">
+						<li style="background: url({{item}}) center no-repeat; background-size: cover;" data-imgurl="{{ item }}" data-index="{{ $index+1 }}"
+						 ng-repeat="item in orderInfo.fileUrlList"></li>
+					</ul>
+				</div>
+			</div>
+			<div class="textBox fix" ng-if="orderInfo.remark">
+				<p class="f-l">备注信息：</p>
+				<p class="f-r" ng-bind="orderInfo.remark"></p>
+			</div>
+		</div>
+
+		<div class="inputBox pos-rel"  ng-if="orderInfo.curOperationType == '2' || orderInfo.curOperationType == '3'">
+			<p>维修工程师姓名:</p>
+			<div class="inputDropdown" ng-click="selectDriver($event,'open')">
+				<input type="text" class="inputDropdown" placeholder="请选择维修工程师" disabled="disabled" ng-model="engineerName" />
+				<em></em>
+			</div>
+			<div class="selectCarBox repairsCarBox">
+				<ul class="fix">
+					<li ng-repeat="item in repairsInfo" ng-click="selectDriver($event,'select')" data-id="{{item.operatorId}}" data-phone= "{{item.operatorMobile}}">{{item.operatorName}}</li>
+				</ul>
+			</div>
+		</div>
+		<div class="inputBox"  ng-if="orderInfo.curOperationType == '2' || orderInfo.curOperationType == '3'">
+			<p>维修工程师电话:</p>
+			<input type="text" ng-model="engineerTel" />
+		</div>
+		<div class="container m-t-40" ng-if="engineerId">
+			<div class="textBox fix">
+				<p class="f-l">维修工程师姓名:</p>
+				<p class="f-r" ng-bind="engineerName"></p>
+			</div>
+			<div class="textBox fix">
+				<p class="f-l">维修工程师电话:</p>
+				<p class="f-r" ng-bind="engineerTel"></p>
+			</div>
+		</div>
+
+		<div class="container m-t-40" ng-show="((processState=='2'||processState=='4') && orderInfo.curOperationType=='4')||processState=='3'">
+			<div>
+				<p class="defaultP">评价：</p>
+				<div class="evaluateBox {{ processState=='3' ? 'defaultEvaluate' : '' }}" style="height: auto;min-height: 5rem;">
+					<textarea placeholder="请评价或提出建议！" ng-show="((processState=='2'||processState=='4') && orderInfo.curOperationType=='4')" ng-model="describe"></textarea>
+					<p ng-if="processState=='3'" ng-bind="orderInfo.ratingDesc"></p>
+					<ul class="fix main" id="commentPicture">    <!--ng-if="orderInfo.ratingFileUrlList.length > 0"-->
+						<li ng-show="((processState=='2'||processState=='4') && orderInfo.curOperationType=='4')">
+							<form id="registration" name="registration" method="post" enctype="multipart/form-data" novalidate>
+								<input type="file" name="file" id="choose" accept="image/*" capture="camera" />
+							</form>
+						</li>
+						<li ng-if="processState=='3'" style="background: url({{item}}) center no-repeat; background-size: cover;" data-imgurl="{{ item }}" data-index="{{ $index+1 }}" ng-repeat="item in orderInfo.ratingFileUrlList"></li>
+					</ul>
+				</div>
+			</div>
+			<div class="gradeBox fix gradeBox1" ng-show="((processState=='2'||processState=='4') && orderInfo.curOperationType=='4')">
+				<p class="f-l">对会场服务评分：</p>
+				<div class="f-r">
+					<ul class="fix">
+						<li data-start="5" ng-click="meetingStart($event)"></li>
+						<li data-start="4" ng-click="meetingStart($event)"></li>
+						<li data-start="3" ng-click="meetingStart($event)"></li>
+						<li data-start="2" ng-click="meetingStart($event)"></li>
+						<li data-start="1" ng-click="meetingStart($event)"></li>
+					</ul>
+				</div>
+			</div>
+			<div class="gradeBox fix gradeBox2" ng-show="((processState=='2'||processState=='4') && orderInfo.curOperationType=='4')">
+				<p class="f-l">对设备服务评分：</p>
+				<div class="f-r">
+					<ul class="fix">
+						<li data-start="5" ng-click="devicesStart($event)"></li>
+						<li data-start="4" ng-click="devicesStart($event)"></li>
+						<li data-start="3" ng-click="devicesStart($event)"></li>
+						<li data-start="2" ng-click="devicesStart($event)"></li>
+						<li data-start="1" ng-click="devicesStart($event)"></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		
+		<div class="container m-t-40" ng-show="processState=='3'">
+			<div ng-show="orderInfo.ratingDesc">
+				<p class="defaultP">行政科评价</p>
+				<div class="evaluateBox">
+					<p ng-bind="orderInfo.ratingDesc"></p>
+					<ul class="fix">
+						<li style="background: url({{item}}) center no-repeat; background-size: cover;" data-imgurl="{{ item }}" data-index="{{ $index+1 }}" ng-repeat="item in orderInfo.adminUser.appraiseURL"></li>
+					</ul>
+				</div>
+			</div>
+			<div class="gradeBox fix xin1 gradeBox2">
+				<p class="f-l">对会场服务评分：</p>
+				<div class="f-r">
+					<ul class="fix">
+						<li data-start="5"></li>
+						<li data-start="4"></li>
+						<li data-start="3"></li>
+						<li data-start="2"></li>
+						<li data-start="1"></li>
+					</ul>
+				</div>
+			</div>
+			<div class="gradeBox fix xin2 gradeBox2">
+				<p class="f-l">对设备服务评分：</p>
+				<div class="f-r">
+					<ul class="fix">
+						<li data-start="5"></li>
+						<li data-start="4"></li>
+						<li data-start="3"></li>
+						<li data-start="2"></li>
+						<li data-start="1"></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	
+	
+		<!-- 订单状态 -->
+		<div class="container m-t-40">
+			<p class="defaultP">订单状态</p>
+			<div class="orderStateBox meetingStatus">
+				<div>
+					<div>
+						<em></em>
+					</div>
+				</div>
+				<ul class="fix">
+					<li>
+						<em></em>
+						<p>待审核</p>
+					</li>
+					<li class="course">
+						<em></em>
+						<p>已审核</p>
+					</li>
+					<!--<li class="course">
+						<em></em>
+						<p>已派单</p>
+					</li>-->
+					<li class="course">
+						<em></em>
+						<p>已派单</p>
+					</li>
+					<li class="course">
+						<em></em>
+						<p>已评价</p>
+					</li>
+					<li class="reject">
+						<em></em>
+						<p ng-bind-template="{{ processState=='6' ? '已取消' : '已驳回' }}"></p>
+					</li>
+				</ul>
+			</div>
+			<a href="javascript:;" class="fill-btn confirm" ng-click="cancelOrder()" ng-if="orderInfo.curOperationType == 0 && processState==0">取消订单</a>
+			<a href="javascript:;" class="fill-btn confirm" ng-click="sendOrder()" ng-if="orderInfo.curOperationType == 2">派单</a>
+			<a href="javascript:;" class="fill-btn confirm" ng-click="sendOrder()" ng-if="orderInfo.curOperationType == 3">改派</a>
+			<a href="javascript:;" class="fill-btn confirm" ng-click="getComment()" ng-if="orderInfo.curOperationType == 4">提交评价</a>
+			<!--<a href="javascript:;" class="fill-btn confirm" ng-click="repairOperate('accept')" ng-if="orderInfo.curOperationType == 4">接单</a>
+			<a href="javascript:;" class="fill-btn confirm" ng-click="repairOperate('done')" ng-if="orderInfo.curOperationType == 6">维修完成</a>-->
+	    </div>
+	    
+	    <div class="container m-t-40" ng-show="orderInfo.curOperationType==1">
+	        <div class="inputBox">
+	            <p>驳回理由:</p>
+	            <input type="text" placeholder="若驳回请输入驳回原因"  ng-model="rejectResaon"/>
+	        </div>
+	    </div>
+	    
+	    <div class="bottomBtnTwo fix">
+	        <button  class="cancel" ng-click="getOprateState(9)" ng-show="orderInfo.curOperationType==1">驳回</button>
+	        <button  class="confirm" ng-click="getOprateState(8)" ng-show="orderInfo.curOperationType==1">通过</button>
+	    </div>
+		
+		<!--<div class="container m-t-40" ng-if="processState==1">
+			<div class="qrCodeBox">
+				<img src="http://qr.topscan.com/api.php?text={{ orderDetail.qrCodeUrl }}" />
+			</div>
+			<div class="showQrCodeBox">
+				<p>分享二维码</p>
+				<div>
+					<em class="wechat" ng-click="share('weixin')"></em>
+					<em class="qq" ng-click="share('qq')"></em>
+					<em class="message" ng-click="share('message')"></em>
+					<em class="save" ng-click="share('save')"></em>
+				</div>
+			</div>
+		</div>-->
+		
+		<div class="notifications">
+			<p>提交成功！</p>
+		</div>
+		
+		<!-- 蒙版 -->
+		<div class="masking"></div>
+		
+		<script type="text/javascript" src="../../js/common/angular.min.js" ></script>
+		<script type="text/javascript" src="../../js/common/jquery-1.8.3.min.js" ></script>
+		<script type="text/javascript" src="../../js/common/jquery.form.js"></script>
+    	<script type="text/javascript" src="../../js/common/mobileFix.mini.js"></script>
+    	<script type="text/javascript" src="../../js/common/exif.js"></script>
+    	<script type="text/javascript" src="../../js/common/lrz.js"></script>
+    	<script type="text/javascript" src="../../js/common/util.js"></script>
+    	<script type="text/javascript" src="../../js/common/swiper.min.js" ></script>
+		<script type="text/javascript" src="../../js/meetingRoom/meetingRoomDetail.js"></script>
+	</body>
+</html>

@@ -1,0 +1,68 @@
+<div class="modal-header">
+    <button type="button" class="close" ng-click="mm.close()"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+    <h4 class="modal-title">{{mm.site.title}}</h4>
+</div>
+<div class="modal-body">
+    <div class="wrapper-md ng-scope">
+	    <form name="Form"  class="form-horizontal form-validation" novalidate>
+	        <div class="form-group">
+	            <label class="col-sm-3 control-label"><span class="text-danger">*</span>姓名:</label>
+	             <div class="col-sm-9">
+	            	<input type="text" ng-change="mm.checkExist($event)" class="form-control" ng-model="mm.form.realname" required ></input>
+	            </div>
+	        </div>
+	        <div class="line line-dashed b-b line-lg"></div>
+	        <div class="form-group">
+	            <label class="col-sm-3 control-label"><span class="text-danger">*</span>昵称:</label>
+	             <div class="col-sm-9">
+	            	<input type="text" class="form-control" ng-model="mm.form.nickname" required ></input>
+	            </div>
+	        </div>
+	        <div class="line line-dashed b-b line-lg"></div>
+	        <div class="form-group">
+              <label class="col-sm-3 control-label">* 上传头像:</label>
+              <div class="col-sm-9">
+				<div preview-container>
+					<img width=100 height=100 border=0 src="{{ mm.form.photoUrl | imgUrl}}">  
+				</div>
+				<input type="file" name="file" onchange="Utils.previewImage(this)" accept="image/*" class="m-t m-b"/>
+				<input type="text" style="display: none;" name="photoUrl" file-path-container ng-model="mm.form.photoUrl"/>
+              	<span class="col-lo-1 text-danger">（建议选择尺寸为500*500px，大小不超过300k的 jpg/png图片）</span>
+              </div>
+            </div>
+	        <div class="line line-dashed b-b line-lg"></div>
+	        <div class="form-group">
+	            <label class="col-sm-3 control-label"><span class="text-danger">*</span>手机号码:</label>
+	             <div class="col-sm-9">
+	            	<input type="text" ng-change="mm.checkExist($event)" class="form-control" ng-model="mm.form.mobile" required></input>
+	            </div>
+	        </div>
+	        <div class="line line-dashed b-b line-lg"></div>
+	        <div class="form-group">
+	            <label class="col-sm-3 control-label">邮箱:</label>
+	             <div class="col-sm-9">
+	            	<input type="text" class="form-control" ng-model="mm.form.email"  ></input>
+	            </div>
+	        </div> 
+	        <div class="line line-dashed b-b line-lg"></div>
+	        <div class="form-group">
+	            <label class="col-sm-3 control-label">身份证号码:</label>
+	             <div class="col-sm-9">
+	            	<input type="text" class="form-control" ng-model="mm.form.idCard"  ></input>
+	            </div>
+	        </div> 
+	        <div class="line line-dashed b-b line-lg"></div>
+	        <div class="form-group">
+	            <label class="col-sm-3 control-label">备注:</label>
+	             <div class="col-sm-9">
+	            	<textarea type="text" class="form-control" ng-model="mm.form.remark" ></textarea>
+	            </div>
+	        </div> 
+	    </form>
+    </div>
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-default" ng-click="mm.close()">取消</button>
+    <button type="button" class="btn btn-info" ng-show="mm.addDisabled" ng-disabled="Form.$invalid" ng-click="mm.addSave()">提交</button>
+    <button type="button" class="btn btn-info" ng-show="mm.joinDisabled" ng-click="mm.joinSave()">关联</button>
+</div>

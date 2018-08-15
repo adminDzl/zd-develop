@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+	<meta content="yes" name="apple-mobile-web-app-capable">
+	<meta content="black" name="apple-mobile-web-app-status-bar-style">
+	<meta content="telephone=no" name="format-detection">
+	<meta content="email=no" name="format-detection">
+	<meta name="hotcss" content="max-width=640">
+	<title>提交订单</title>
+	<link rel="stylesheet" href="../../css/common.css" />
+	<link rel="stylesheet" href="../../css/style.css" />
+	<script type="text/javascript" src="../../js/common/hotcss.js"></script>
+</head>
+
+<body class="bottomBtnFixBody" ng-app="myApp" ng-controller="AppCtrl">
+
+	<div class="container m-t-40">
+		<p class="f-s-40 f-c-494848 p-l-r-40">服务订单：{{orderInfo.orderNo}}</p>
+	</div>
+
+	<div class="container m-t-40">
+		<div ng-repeat="item in orderInfo.orderDetails">
+			<div class="textBox fix">
+				<p class="f-l">预定类别：</p>
+				<p class="f-r">{{item.type}}</p>
+			</div>
+			<div class="textBox fix">
+				<p class="f-l">{{item.type}}数量：</p>
+				<p class="f-r">{{item.orderCount}}个</p>
+			</div>
+			<div class="textBox fix">
+				<p class="f-l">包子总价：</p>
+				<p class="f-r">{{item.price}}元</p>
+			</div>
+			<div class="textBox fix">
+				<p class="f-l">预定时间：</p>
+				<p class="f-r">{{item.orderTime}}</p>
+			</div>
+
+			<div class="cut-off-rule"></div>
+		</div>
+
+		<div class="fix p-l-r-40 l-h-116">
+			<p class="f-l f-s-50 f-c-323232">合计总价：</p>
+			<p class="f-r f-s-50 f-c-fdd456">{{orderInfo.priceAll}}元</p>
+		</div>
+	</div>
+
+	<div class="container m-t-40">
+		<div class="textBox fix">
+			<p class="f-l">预定人姓名：</p>
+			<p class="f-r">{{orderInfo.orderBy}}</p>
+		</div>
+		<div class="textBox fix">
+			<p class="f-l">预定人部门：</p>
+			<p class="f-r">{{orderInfo.orderDept[0].deptName}}</p>
+		</div>
+		<div class="textBox fix">
+			<p class="f-l">预定人电话：</p>
+			<p class="f-r">{{orderInfo.orderMobile}}</p>
+		</div>
+	</div>
+
+	<div class="container m-t-40">
+		<div class="textBox fix">
+			<p class="f-l">结算方式：</p>
+			<p class="f-r">微信支付</p>
+		</div>
+		<div class="textBox fix">
+			<p class="f-l">包子提取时间：</p>
+			<p class="f-r" ng-bind-template="{{orderInfo.baoziTime+' 12:00~13:00'}}"></p>
+		</div>
+		<div class="textBox fix">
+			<p class="f-l">馒头提取时间：</p>
+			<p class="f-r" ng-bind-template="{{orderInfo.mantouTime+' 12:00~13:00'}}"></p>
+		</div>
+	</div>
+
+	<!-- <div class="container m-t-40" ng-if="waitingPay==1">
+			<p class="defaultP">订单状态</p>
+			<div class="orderStateBox restaurantPayState">
+				<div><div><em></em></div></div>
+				<ul class="fix">
+					<li class="select current">
+						<em></em>
+						<p>待支付</p>
+					</li>
+					<li class="reject">
+						<em></em>
+						<p>已支付</p>
+					</li>
+				</ul>
+			</div>
+		</div> -->
+
+	<div class="container m-t-40">
+		<div class="qrCodeBox">
+			<img src="http://qr.topscan.com/api.php?text={{ orderInfo.qrUrl}}" />
+		</div>
+		<div class="showQrCodeBox">
+			<p>分享二维码</p>
+			<div>
+				<em class="wechat" ng-click="share('weixin')"></em>
+				<em class="qq" ng-click="share('qq')"></em>
+			</div>
+		</div>
+	</div>
+
+	<!-- 蒙版 -->
+	<div class="masking"></div>
+
+	<script type="text/javascript" src="../../js/common/angular.js"></script>
+	<script type="text/javascript" src="../../js/common/jquery-1.8.3.min.js"></script>
+	<script type="text/javascript" src="../../js/common/jccplus-1.2.js"></script>
+	<script type="text/javascript" src="../../js/common/util.js"></script>
+	<script type="text/javascript" src="../../js/restaurantBooking/takeOutDetail.js"></script>
+</body>
+
+</html>

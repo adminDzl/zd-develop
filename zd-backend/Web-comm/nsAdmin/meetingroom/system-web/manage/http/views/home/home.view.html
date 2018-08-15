@@ -1,0 +1,93 @@
+  <div class="panel panel-default">
+      <div class="panel-heading">
+        <div class="row">
+          <div class="col-sm-8">             
+               <h5>场地列表 <small>共<i id="dataCount"></i>个场地</small></h5>          
+          </div>
+          <div class="col-sm-4">
+              <button class="btn btn-rounded btn-sm btn-info"  ng-click="toAddNewPlace()"><i class="fa fa-fw fa-plus"></i> 新增场地</button>  
+          </div>  
+        </div>  
+      </div>
+      <div class="panel-body">
+        <!---main-->
+          <!--condition-form-->
+          <div class="panel panel-default">
+              <div class="panel-heading">筛选</div>
+               <form name="queryForm">
+                  <table class="table">
+                     <tr>
+                       <td colspan="2">
+                          <div class="input-group" style="width:390px;">
+                              <input type="text" class="form-control"  ng-model="instance.params.roomName" placeholder="请输入场地名称">
+                              <span class="input-group-btn">
+                                <button class="btn btn-info" ng-click="instance.query()" type="button">查询</button>
+                              </span>
+                              <span class="input-group-btn" style="margin-left: 10px;">
+                                <button class="btn btn-gray" ng-click="instance.queryReset()" type="button">重置</button>
+                              </span>
+                            </div>
+                         
+                       </td>
+                     </tr>
+                     <tr>
+                       <td width="130px">场地类型：</td>
+                       <td> 
+                          <label for="" class="radio-inline">
+                              <input type="radio" ng-model="instance.params.roomType" checked="checked" value=""  ng-click="instance.query()"/>全部
+                          </label>
+                          <label class="radio-inline" ng-repeat="it in instance.placeTypes"><input type="radio" ng-model="instance.params.roomType" ng-click="instance.query()" value="{{it.id}}">{{it.name}}</label>                            
+                       </td>
+                     </tr>
+                     <tr>
+                        <td>场地状态：</td>
+                        <td>
+                            <label class="radio-inline" ng-repeat="it in instance.placeStatuses"><input type="radio" ng-model="instance.params.isDisplay" ng-click="instance.query()" value="{{it.isDisplay}}">{{it.name}}</label>                            
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>是否开启审核：</td>
+                        <td>
+                            <label class="radio-inline" ><input type="radio" ng-model="instance.params.isAuditManage" ng-click="instance.query()" value="" ng-checked="true" />全部</label>
+                            <label class="radio-inline" ><input type="radio" ng-model="instance.params.isAuditManage" ng-click="instance.query()" value="1"/>是</label>                            
+                        </td>
+                      </tr>
+                  </table>
+                </form>
+          </div>
+          <!--condition-form-->
+          <!--list-->
+          <div class="panel panel-default">  
+                <div class="table-responsive">       
+                  <table class="table"  datatable-directive url="dataUrl" filters="homeStatus" 
+                   search-params="instance.params"
+                   columns="columns" del="del(data)" 
+                   edit="edit(data)"
+                   view="view(data)" osset="instance.set(data,row)" 
+                   indentify-key="engine"  btns="os-e-d"  
+                   class="table table-striped b-t b-b">
+                      <thead>
+                      <tr>
+                          <th style="width: 90px;">序列</th>
+                          <th style="width: 150px;">场地名称</th>
+                          <th style="width: 110px;">类型</th>
+                          <th>地址</th>
+                          <th>服务</th>
+                          <th  style="width: 100px;">面积</th>
+                          <th  style="width: 120px;">容纳人数</th>
+                          <th style="width: 90px;">状态</th>                          
+                          <th>操作</th>
+                      </tr>
+                      </thead>
+                      <tbody>
+                      </tbody>
+                  </table>
+                </div>
+           
+          </div>
+          <!--list-->
+        <!---main-->
+      </div>
+    </div>
+
+    <modal-directive model-id='myModal'  setting="{title:'提示',btnName:'确定',content:'确定删除'}" callback="doYes()"></modal-directive>

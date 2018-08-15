@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<meta content="yes" name="apple-mobile-web-app-capable">
+		<meta content="black" name="apple-mobile-web-app-status-bar-style">
+		<meta content="telephone=no" name="format-detection">
+		<meta content="email=no" name="format-detection">
+		<meta name="hotcss" content="max-width=640">
+		<title>订单</title>
+		<link rel="stylesheet" href="../../css/common.css" />
+		<link rel="stylesheet" href="../../css/style.css" />
+		<script type="text/javascript" src="../../js/common/hotcss.js" ></script>
+	</head>
+	<body ng-app="myApp" ng-controller="AppCtrl">
+		
+		<div class="orderHeader">
+			<div class="orderSearchBox fix">
+				<i class="f-l"></i>
+				<input type="text" placeholder="服务类型搜索" class="f-l" />
+			</div>
+			<div class="orderNav">
+				<ul class="fix">
+					<li>任务订单</li>
+					<li>服务订单</li>
+					<li>餐饮订单</li>
+				</ul>
+				<em></em>
+			</div>
+		</div>
+		
+		<div class="container m-t-40 border-b">
+			<div class="orderItem">
+				<div class="orderItem-header border-b fix">
+					<p class="f-s-40 f-c-323232 f-l fellipsis">公务用车</p>
+					<p class="f-s-40 f-c-323232 f-l t-r fellipsis">申请时间：2018-03-01 14:52</p>
+				</div>
+				<div class="orderItem-info fix">
+					<div class="serviceImg f-l"></div>
+					<div class="serviceInfo f-r">
+						<div>
+							<p class="fellipsis3">公务用车服务（接待区领导）</p>
+						</div>
+						<div class="fix">
+							<p class="f-l fellipsis">订单号：CDS124562</p>
+							<div class="f-r fix">
+								<a href="javascript:;" class="f-r f-c-turn">改派</a>
+								<a href="javascript:;" class="f-r f-c-pass">通过</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<div class="container m-t-40 border-b">
+			<div class="orderItem">
+				<div class="orderItem-header border-b fix">
+					<p class="f-s-40 f-c-323232 f-l fellipsis">公务用车</p>
+					<p class="f-s-40 f-c-323232 f-l t-r fellipsis">申请时间：2018-03-01 14:52</p>
+				</div>
+				<div class="orderItem-info fix">
+					<div class="serviceImg f-l"></div>
+					<div class="serviceInfo f-r">
+						<div>
+							<p class="fellipsis3">公务用车服务（接待区领导）</p>
+						</div>
+						<div class="fix">
+							<p class="f-l fellipsis">订单号：CDS124562</p>
+							<div class="f-r fix">
+								<a href="javascript:;" class="f-r f-c-pass">改派</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<!-- 蒙版 -->
+		<div class="masking"></div>
+		
+		
+		
+		<script type="text/javascript" src="../../js/common/angular.js" ></script>
+		<script type="text/javascript" src="../../js/common/jquery-1.8.3.min.js" ></script>
+	</body>
+</html>

@@ -1,0 +1,54 @@
+<crumb title="区域管理" head="true"></crumb>
+<div class="wrapper-md" ng-controller="AreaListCtrl">
+	 <div class="panel panel-default">
+	 	
+	 	<div class="panel-heading">
+            <div class="form-inline">
+                <div class="form-group">
+            		<label class="control-label">状态：</label>
+            		
+		            <button id="status0" class="btn m-b-xs btn-sm btn-status-info btn-status-bgc" ng-model="keys" ng-click="keys='';search()">
+		            	全部
+		            </button>
+		            <button id="status1" class="btn m-b-xs btn-sm btn-status-info" ng-model="keys" ng-click="keys=1;search()">
+		            	启用
+		            </button>
+		            <button id="status2" class="btn m-b-xs btn-sm btn-status-info" ng-model="keys" ng-click="keys=2;search()">
+		            	禁用
+		            </button>            		
+                </div>
+            </div>
+           	<div class="line line-dashed b-b line-lg"></div>	
+            <button class="btn m-b-xs btn-sm btn-info btn-addon" ng-click="addNew()">
+            	<i class="fa fa-plus"></i>新增区域
+            </button>
+        </div>
+        
+        <div class="table-responsive">
+        	<table class="table table-striped b-t b-b">
+        		<thead>
+	                <tr>
+	                    <th data-breakpoints="xs">ID</th>
+	                    <th class="text-center">区域名称 </th>
+	                    <th class="text-center">状态 </th>
+	                    <th data-breakpoints="xs" style="width:15%" class="text-center">操作</th>
+	                </tr>
+                </thead>
+                <tbody>
+	                <tr data-expanded="true" ng-repeat="area in areaList">
+	                    <td ng-bind="paginationConf.currentPage ? paginationConf.pageSize*(paginationConf.currentPage-1)+$index+1 : $index+1"></td>
+	                    <td ng-bind="area.name"></td>
+	                    <td ng-bind-template="{{area.recordStatus == '1' ? '正常': '禁用'}}"></td>
+	                    <td>
+	                        <div class="buttons">
+	                            <button class="btn btn-sm btn-info" ng-click="update($index)">修改</button>
+	                            <button class="btn btn-sm btn-default" ng-click="viewById($index)">查看</button>
+	                        </div>
+	                    </td>
+	                </tr>
+                </tbody>
+        	</table>
+        	<tmpagination conf="paginationConf"></tmpagination>
+        </div>
+	 </div>
+</div>

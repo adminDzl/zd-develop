@@ -1,0 +1,148 @@
+<div class="col">
+    <!-- main header -->
+    <div>
+	    <ul class="breadcrumb bg-white customBread">
+	      <li><span><i class="fa fa-briefcase"></i> <span>园区信息管理</span></span></li>
+	    </ul>
+	</div>
+    <div class="bg-light lter b-b wrapper-md">
+      <div class="row">
+        <div class="col-sm-6 col-xs-12">
+          <h4 class="m-n font-thin h4" translate="">园区介绍</h4>
+        </div>
+      </div>
+    </div>
+    <!-- / main header -->
+    <!-- form -->
+    <div class="wrapper-md" ng-controller="queryParkInfoController">
+    	<div class="panel panel-default">
+    		<div class="panel-body" >
+    			<form name="parkIntrForm" class="form-horizontal form-validation ng-pristine ng-valid-email ng-invalid ng-invalid-required ng-valid-url ng-valid-pattern ng-valid-validator ng-valid-blacklist" >
+    				<div class="form-group">
+						<label class="col-sm-2 control-label" translate="">园区名称</label>
+						<div class="col-sm-6">
+							<input type="hidden" name="id" ng-model="parkInfo.id" />
+							<input type="text" name="name" ng-model="parkInfo.name" class="form-control" required aria-required="true" aria-invalid="true">
+						</div>
+						<div class="col-sm-4 text-danger control-label text-left">
+							<span class="text-danger">*</span>
+							<span class="text-danger" ng-show="parkIntrForm.name.$dirty  && parkIntrForm.name.$invalid">
+								<span ng-show="parkIntrForm.name.$error.required">请填写园区名称。</span>
+							</span>
+						</div>
+			        </div>
+    				<div class="form-group">
+						<label class="col-sm-2 control-label" translate="">园区地址</label>
+						<div class="col-sm-6">
+							<input type="text" name="address" ng-model="parkInfo.address" class="form-control" required aria-required="true" aria-invalid="true">
+						</div>
+						<div class="col-sm-4 text-danger control-label text-left">
+							<span class="text-danger">*</span>
+							<span class="text-danger" ng-show="parkIntrForm.address.$dirty  && parkIntrForm.address.$invalid">
+								<span ng-show="parkIntrForm.address.$error.required">请填写园区地址。</span>
+							</span>
+						</div>
+			        </div>
+		             <div class="line line-dashed b-b line-lg pull-in"></div>
+			        <div class="form-group">
+						<label class="col-sm-2 control-label" translate="">园区服务电话</label>
+						<div class="col-sm-6">
+							<input type="text" ng-model="parkInfo.parkTel" name='parkTel' class="form-control ng-pristine ng-valid-email ng-invalid ng-invalid-required ng-touched" required aria-required="true" aria-invalid="true">
+						</div>
+						<div class="col-sm-4 text-danger control-label text-left">
+							<span class="text-danger">*</span>
+							<span class="text-danger" ng-show="parkIntrForm.parkTel.$dirty  && parkIntrForm.parkTel.$invalid">
+								<span ng-show="parkIntrForm.parkTel.$error.required">请填写园区服务电话。</span>
+							</span>
+						</div>
+			        </div>
+			        <div class="line line-dashed b-b line-lg pull-in"></div>
+			        <div class="form-group">
+						<label class="col-sm-2 control-label" translate="">园区邮箱</label>
+						<div class="col-sm-6">
+							<input type="email" class="form-control" name='parkEmail'  ng-model="parkInfo.parkEmail">
+						</div>
+						<div class="col-sm-4 text-danger control-label text-left">
+							<span class="text-danger" ng-show="parkIntrForm.parkEmail.$dirty  && parkIntrForm.parkEmail.$invalid">
+								<span ng-show="parkIntrForm.parkEmail.$error.email">请填写正确的园区邮箱。</span>
+							</span>
+						</div>
+			        </div>
+			        <div class="line line-dashed b-b line-lg pull-in"></div>
+			        <div class="form-group">
+						<label class="col-sm-2 control-label" translate="">园区简介</label>
+						<div class="col-sm-6">
+							<input type="text" class="form-control" name='remark'  ng-model="parkInfo.remark">
+						</div>
+			        </div>
+			        <div class="line line-dashed b-b line-lg pull-in"></div>
+			        <div class="form-group">
+						<label class="col-sm-2 control-label" translate="" >园区网址</label>
+						<div class="col-sm-6">
+							<input type="url" class="form-control" name='parkUrl' ng-model="parkInfo.parkUrl">
+						</div>
+						<div class="col-sm-4 text-danger control-label text-left">
+							<span class="text-danger" ng-show="parkIntrForm.parkUrl.$dirty  && parkIntrForm.parkUrl.$invalid">
+								<span ng-show="parkIntrForm.parkUrl.$error.url">请填写正确的园区网址。</span>
+							</span>
+						</div>
+			        </div>
+			        
+			        <div class="line line-dashed b-b line-lg pull-in" ></div>
+					<div class="form-group">
+		              <label class="col-lg-2 control-label">园区PC端logo:</label>
+		              <div class="col-sm-6">
+						<div preview-container>
+						    <img width=100 height=100 border=0 src="{{ parkInfo.parkLogo | logoImgUrl}}">  
+						</div>
+						<input type="file" name="file" onchange="Utils.previewImage(this)" accept="image/*" class="m-t m-b"/>
+						<input type="text" style="display: none;" name="parkLogo" file-path-container ng-model="parkInfo.parkLogo"/>
+						<span class="col-lo-1 text-danger">（建议选择尺寸为1080*540px，大小不超过300k的 jpg/png图片）</span>
+		              </div>
+		              <span class="col-lo-1 text-danger">*</span>
+		            </div> 
+			        <div class="line line-dashed b-b line-lg pull-in" ></div>
+					<div class="form-group">
+		              <label class="col-lg-2 control-label">园区APP端logo:</label>
+		              <div class="col-sm-6">
+						<div preview-container>
+						    <img width=100 height=100 border=0 src="{{ parkInfo.parkLogoApp | logoImgUrl}}">  
+						</div>
+						<input type="file" name="file" onchange="Utils.previewImage(this)" accept="image/*" class="m-t m-b"/>
+						<input type="text" style="display: none;" name="parkLogoApp" file-path-container ng-model="parkInfo.parkLogoApp"/>
+						<span class="col-lo-1 text-danger">（建议选择尺寸为1080*540px，大小不超过300k的 jpg/png图片）</span>
+		              </div>
+		              <span class="col-lo-1 text-danger">*</span>
+		            </div> 
+			        
+			        
+			        <div class="line line-dashed b-b line-lg pull-in" ></div>
+				        <div class="form-group">
+							<label class="col-sm-2 control-label" translate="">坐标</label>
+							<div class="col-sm-6">
+								<input type="text" class="form-control" name='coordinate' ng-model="parkInfo.coordinate">
+							</div>
+							<label class="col-sm-2 control-label text-info text-left">
+								<a href="http://api.map.baidu.com/lbsapi/getpoint/?qq-pf-to=pcqq.c2c" target="_brank" translate="">拾取坐标</a>
+							</label>
+				        </div>
+			        
+			        
+			        <div class="form-group">
+			          <div class="col-sm-10 text-right">
+			          	<span class="text-danger app-aside fail-tip t-l"></span>
+		        		<span class="text-success app-aside success-tip t-l"></span>
+			            <button class="btn btn-primary" role="button"   ng-click="submit(parkInfo)" 
+			            	ng-disabled="parkIntrForm.$invalid" translate="">
+			            	确定</button>
+			          	<span></span>
+			       	  </div>
+			        </div>
+    			</form>
+    			
+    		</div>
+    	</div>
+    </div>
+    <!-- form end -->
+</div>
+

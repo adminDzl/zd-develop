@@ -1,0 +1,75 @@
+ 
+<div class="panel panel-default">
+<div class="panel-body">
+    <div class="col-sm-12">
+            <h4>设置权限</h4>
+    </div>
+<form class="form-horizontal" method="get">
+    <!--flag-->
+    <div class="line line-dashed b-b line-lg pull-in"></div>
+    <div class="form-group">
+        <label class="col-sm-2 control-label">姓名 </label>
+            <div class="col-sm-10">
+            <input type="text" ng-model="instance.model.personName"  readonly class="form-control">
+            </div>
+    </div>
+       <!--flag-->
+    <div class="line line-dashed b-b line-lg pull-in"></div>
+    <div class="form-group">
+        <label class="col-sm-2 control-label">电话 </label>
+            <div class="col-sm-10">
+            <input type="text" class="form-control" readonly ng-model="instance.model.personPhone">
+            </div>
+    </div>
+     <!--flag-->
+     <div class="line line-dashed b-b line-lg pull-in"></div>
+     <div class="form-group">
+         <label class="col-sm-2 control-label">邮箱 </label>
+        <div class="col-sm-10">
+        <input type="text" class="form-control" readonly ng-model="instance.model.personMail">
+        </div>
+     </div>
+      <!--flag-->
+    <div class="line line-dashed b-b line-lg pull-in"></div>
+    <div class="form-group">
+        <label class="col-sm-2 control-label">权限<i class="needred">*</i></label>
+        
+         <div class="col-sm-3">
+                <label class="i-checks"><input type="checkbox" ng-model="instance.role_view" value="1"> <i></i> 查看订单</label>              
+         </div>
+         <div class="col-sm-3">
+             <label class="i-checks"><input type="checkbox"  ng-model="instance.role_finish"    value="2"> <i></i>完成订单 </label>  
+        </div>
+        <div class="col-sm-3">
+            <label class="i-checks"><input type="checkbox"  ng-model="instance.role_close"    value="3"> <i></i> 关闭订单 </label>  
+       </div>
+       
+    </div>
+        <!--flag-->
+    <div class="line line-dashed b-b line-lg pull-in"></div>
+    <div class="form-group">
+        <label class="col-sm-2 control-label">负责场地<i class="needred">*</i></label>
+        <div class="col-sm-10">
+            <div class="row">
+                            
+                 <div class="col-sm-6" ng-repeat="it in instance.rooms" ng-if="!it.filter">
+                    <label class="i-checks">
+                        <input type="checkbox"  ng-model="it.select">
+                        <i></i>
+                            {{it.name}}
+                      </label>
+                 </div>
+            </div>
+        </div>
+    </div>     
+    
+    <div class="line line-dashed b-b line-lg pull-in"></div>
+    <div class="form-group">
+      <div class="col-sm-4 col-sm-offset-9">
+        <button type="reset" class="btn btn-default" ng-click="cancel()"> 取消</button>
+        <button type="submit" class="btn btn-primary"  ng-click="saveRole()">保存</button>
+      </div>
+    </div>
+  </form> 
+  </div>
+</div>

@@ -1,0 +1,139 @@
+<div class="col">
+    <!-- main header -->
+    <div>
+	    <ul class="breadcrumb bg-white customBread">
+	      <li><span><i class="fa fa-briefcase"></i> <span>个人中心</span></span></li>
+	    </ul>
+	</div>
+    <div class="bg-light lter b-b wrapper-md">
+      <div class="row">
+        <div class="col-sm-6 col-xs-12">
+          <h4 class="m-n font-thin h4" translate="">我的信息</h4>
+        </div>
+      </div>
+    </div>
+    <!-- / main header -->
+    <!-- form -->
+    <div class="wrapper-md" ng-controller="queryUserInfoController">
+    	<div class="panel panel-default">
+    		<div class="panel-body" >
+    			<form name="userIntrForm" class="form-horizontal form-validation ng-pristine ng-valid-email ng-invalid ng-invalid-required ng-valid-url ng-valid-pattern ng-valid-validator ng-valid-blacklist" >
+    				<div class="form-group">
+						<label class="col-sm-2 control-label" translate="">姓名</label>
+						<div class="col-sm-6">
+							<input type="hidden" name="id" ng-model="userInfo.id" />
+							<input type="text" name="realname" ng-model="userInfo.realname" class="form-control" required aria-required="true" aria-invalid="true">
+						</div>
+						<div class="col-sm-4 text-danger control-label text-left">
+							<span class="text-danger">*</span>
+							<span class="text-danger" ng-show="userIntrForm.realname.$dirty  && userIntrForm.realname.$invalid">
+								<span ng-show="userIntrForm.realname.$error.required">请填用户姓名。</span>
+							</span>
+						</div>
+			        </div>
+    				<div class="form-group">
+						<label class="col-sm-2 control-label" translate="">昵称</label>
+						<div class="col-sm-6">
+							<input type="text" name="nickname" ng-model="userInfo.nickname" class="form-control" required aria-required="true" aria-invalid="true">
+						</div>
+						<div class="col-sm-4 text-danger control-label text-left">
+							<span class="text-danger">*</span>
+							<span class="text-danger" ng-show="userIntrForm.nickname.$dirty  && userIntrForm.nickname.$invalid">
+								<span ng-show="userIntrForm.nickname.$error.required">请填用户昵称。</span>
+							</span>
+						</div>
+			        </div>
+			        <div class="line line-dashed b-b line-lg"></div>
+					<div class="form-group">
+						<label class="col-sm-2 control-label" translate="">性别</label>
+						<div class="col-sm-2">
+								<select   class="form-control" name="sex"  ng-model="userInfo.sex" ng-options="a.value as a.name for a in sexList" required ></select>
+						</div>
+						<div class="col-sm-4 text-danger control-label text-left">
+							<span class="text-danger">*</span>
+							<span class="text-danger" ng-show="userIntrForm.sex.$dirty  && userIntrForm.sex.$invalid">
+								<span ng-show="userIntrForm.sex.$error.required">请选择性别。</span>
+							</span>
+						</div>
+					</div>
+			        <div class="line line-dashed b-b line-lg pull-in" ></div>
+					<div class="form-group">
+		              <label class="col-lg-2 control-label">用户头像:</label>
+		              <div class="col-sm-6">
+						<div preview-container>
+						    <img width=100 height=100 border=0 src="{{ userInfo.photoUrl | photoImgUrl}}">  
+						</div>
+						<input type="file" name="file" onchange="Utils.previewImage(this)" accept="image/*" class="m-t m-b"/>
+						<input type="text" style="display: none;" name="photoUrl" file-path-container ng-model="userInfo.photoUrl"/>
+						<span class="col-lo-1 text-danger">（建议选择尺寸为1080*540px，大小不超过300k的 jpg/png图片）</span>
+		              </div>
+		              <span class="col-lo-1 text-danger">*</span>
+		            </div> 
+		             <div class="line line-dashed b-b line-lg pull-in"></div>
+			        <div class="form-group">
+						<label class="col-sm-2 control-label" translate="">手机号</label>
+						<div class="col-sm-6">
+							<input type="text" ng-model="userInfo.mobile" name='mobile' class="form-control ng-pristine ng-valid-email ng-invalid ng-invalid-required ng-touched" required aria-required="true" aria-invalid="true">
+						</div>
+						<div class="col-sm-4 text-danger control-label text-left">
+							<span class="text-danger">*</span>
+							<span class="text-danger" ng-show="userIntrForm.mobile.$dirty  && userIntrForm.mobile.$invalid">
+								<span ng-show="userIntrForm.mobile.$error.required">请填写用户手机号。</span>
+							</span>
+						</div>
+			        </div>
+			        <div class="line line-dashed b-b line-lg pull-in"></div>
+			        <div class="form-group">
+						<label class="col-sm-2 control-label" translate="">邮箱</label>
+						<div class="col-sm-6">
+							<input type="email" class="form-control" name='email'  ng-model="userInfo.email">
+						</div>
+						<div class="col-sm-4 text-danger control-label text-left">
+							<span class="text-danger" ng-show="userIntrForm.email.$dirty  && userIntrForm.email.$invalid">
+								<span ng-show="userIntrForm.parkEmail.$error.email">请填写正确的邮箱。</span>
+							</span>
+						</div>
+			        </div>
+			        <div class="line line-dashed b-b line-lg pull-in"></div>
+			        <div class="form-group">
+						<label class="col-sm-2 control-label" translate="">所属公司</label>
+						<div class="col-sm-6">
+							<input type="text" class="form-control" name='org'  ng-model="userInfo.org" disabled>
+						</div>
+			        </div>
+			        <div class="line line-dashed b-b line-lg pull-in"></div>
+			        <div class="form-group">
+						<label class="col-sm-2 control-label" translate="">所属园区</label>
+						<div class="col-sm-6">
+							<input type="text" class="form-control" name='park'  ng-model="userInfo.park" disabled>
+						</div>
+			        </div>
+			        <div class="line line-dashed b-b line-lg pull-in"></div>
+			        <div class="form-group">
+						<label class="col-sm-2 control-label" translate="">备注</label>
+						<div class="col-sm-6">
+							<input type="text" class="form-control" name='remark'  ng-model="userInfo.remark">
+						</div>
+			        </div>
+			        
+			        
+			        
+			        
+			        <div class="form-group">
+			          <div class="col-sm-10 text-right">
+			          	<span class="text-danger app-aside fail-tip t-l"></span>
+		        		<span class="text-success app-aside success-tip t-l"></span>
+			            <button class="btn btn-primary" role="button" ng-click="submit(userInfo)" 
+			            	ng-disabled="userIntrForm.$invalid" translate="">
+			            	确定</button>
+			          	<span></span>
+			       	  </div>
+			        </div>
+    			</form>
+    			
+    		</div>
+    	</div>
+    </div>
+    <!-- form end -->
+</div>
+

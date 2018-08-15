@@ -1,0 +1,321 @@
+<style>
+	.custom {
+		margin-bottom: 30px;
+	}
+	.custom h3 {
+		color: #ff9900;
+	}	
+	.custom_txt {
+		border: 1px solid #dee5e7;
+		width: 56%;
+		border-radius: 5px;
+		height: 30px;
+		line-height: 30px;
+		padding: 0px 12px;
+		margin-bottom: 5px;
+		margin-top: 20px;
+	}
+	.custom_txt div {
+		display: inline-block;
+	}
+	.custom_txt div:first-child {
+		float: left;
+	}
+	.custom_txt div:last-child {
+		float: right;
+	}
+	.custom_txtstyle {
+		color: #868686;
+		margin-left: 45px;
+	}
+	.custom_time {
+		margin-bottom: 25px;
+		border: 1px solid #dee5e7;
+		width: 56%;
+		border-radius: 5px;
+		height: 30px;
+		line-height: 30px;
+		padding: 0px 12px;
+		margin-top: -4px;
+		display: block;
+		border-top: none;
+	}
+	.details_top {
+		padding:10px 0;
+		width:100%;
+	}
+	.details_top > span {
+		  font-size: 20px;
+		  color: #333333;
+		  display: inline-block;
+	}
+	.details_top > span > em {
+	 	  color: #ff9900;
+	}
+	.details_top > button {
+		width: 140px;
+		float: right;
+		font-size: 20px;
+	}
+	.top_number {
+		width: 302px;
+	}
+	.top_type {
+		width: 536px;
+	}
+	.top_btn {
+		background: #ff9900;
+		color: #fff;
+		margin-right: 42px;
+	}
+	.top_btn:hover {
+		background: #E58A00;
+		color: #fff;
+	}
+	.midde_content {
+		border: 1px solid #dee5e7;
+		margin-top: 20px;
+		padding-top: 42px;
+		margin-bottom: 30px;
+	}
+	.flow_block{
+		text-align: center;
+		padding: 0px 10px;
+	}
+	.mt_type {
+		display: inline-block;
+		margin-bottom: 30px;
+		min-height: 110px;
+	}
+	.flow_step {
+	    width: 170px;
+    	float: left;
+    	margin-bottom: 10px;
+	}
+	.flow_step > div {
+		width: 50%;
+		display: inline-block;
+		text-align: center;
+		height: 100px;
+  		vertical-align: middle;
+  		float: left;
+	}
+	.flow_step > div > i {
+		font-size: 32px;
+	}
+	.flow_step > div p {
+		height: 30px;
+	}
+	.flow_step > span {
+		display: inline-block;
+	    border: 1px solid #000;
+	    width: 82px;
+	    margin-bottom: 38px;
+	    margin-top: 20px;
+    	float: left;
+	}
+	.mt_title,.mt_content {
+		background: #DADADA;
+	}
+	.mt_title {
+		height: 55px;
+		line-height: 55px;
+	}
+	.mt_content {
+		margin-top: 1px;  
+		padding: 10px 0px;
+	}
+	.mt_title > span,.mt_content span {
+		color: #333;
+		display: inline-block;
+	}
+	.mt_content span {
+		height: 30px;
+		line-height: 30px;
+	}
+	.mt_content span > em {
+		color: #ff0000;
+	}
+	.mt_title > span:first-child,.mt_content span:first-child {
+		padding: 0 0 0 35px;
+		width: 173px;
+	}
+	.mt_title > span:nth-child(2),.mt_content span:nth-child(2) {
+		margin-left: 88px;
+		width: 662px;
+	}
+	.botoom_content {
+		border: 1px solid #dee5e7;
+	}
+	.col-lg-12 > h3 {
+		margin-bottom: 22px;
+	}
+	.img-bolck{
+		display: inline-block;
+	    padding: 5px;
+	}
+	.img-wh{
+		width:300px;
+	}
+	.detail_img{
+		max-height: 20px;
+		border-radius: 3px;
+		margin: 0px 5px;
+	}
+</style>
+	<crumb title="订单详情"></crumb>
+	<div class="wrapper-md ng-scope" ng-controller="quoteDetailsCtrl">
+				<tabset class="tab-container">
+					<tab active="defaultTabs[0]">
+						<tab-heading>
+							<i class="glyphicon glyphicon-info-sign"></i> 基本信息
+						</tab-heading>
+							<div class="details_top">
+								<span class="top_number">订单号：{{entity.orderNum}}</span>
+								<span class="top_type">状态：<em> {{entity.orderStatusName}}</em></span>
+								<button class="btn btn-sm btn-info m-b-xs" ng-hide=" entity.finishFlag || type === 'all'"  ng-click="alloctOrder()">分配或转移</button>
+								<button class="btn btn-sm m-b-xs top_btn" ng-hide=" entity.finishFlag || (entity.orderStatus && entity.orderStatus >= 3) || type === 'all'" ng-click="receivingOrder()">接单</button>
+			                </div>	
+			                <div class="midde_content">
+				                <div class="flow_block">
+				                	<div class="mt_type">
+					                	<div class="flow_step" ng-repeat="step in site.processFlowDesc">
+					                		<div>
+					                			<i class="fa fa-check-circle" ng-class="{'btn-default':!step.createTime,'text-success':step.createTime}"></i><!-- text-success btn-default -->
+					                			<p>{{step.statusName}}</p>
+					                			<p>{{step.createTime}}</p>
+					                		</div>
+					                		<span ng-if="$index < site.processFlowDesc.length-1"></span>
+					                	</div>
+				                	</div>
+			                	</div>
+			                	<!-- <div class="mt_title">
+			                		<span>处理时间</span>
+			                		<span>处理信息</span>
+			                		<span>操作人</span>
+			                	</div>
+			                	<div class="mt_content">
+			                		<p ng-repeat="en in site.orderTracks">
+				                		<span>{{en.processTime}}</span>
+				                		<span>{{en.prefixContent}}<em>{{en.processContent?'('+en.processContent+')':''}}</em></span>
+				                		<span>{{en.processUserTypeName}} {{en.processUserName}}</span>
+			                		</p>
+			                	</div> -->
+			                </div>
+			                <div class="wrapper-md botoom_content">
+								<div class="row">
+								    <div class="col-lg-12">
+					                	<h3>报事单详情</h3>
+						                <div class="form-group">
+						                  <label class="col-sm-2 control-label"><span class="text-danger m-r"></span>申请人：</label>
+						                  <div class="col-sm-10">
+						                  	  <span class="form-control">{{entity.applyName}}{{entity.createUserSex?'('+ entity.createUserSex+')':''}}</span>
+						                  </div>
+						                </div>
+						                <div class="form-group">
+						                  <label class="col-sm-2 control-label"><span class="text-danger m-r"></span>联系电话：</label>
+						                  <div class="col-sm-10">
+						                  	  <span class="form-control">{{entity.applyMobile}}</span>
+						                  </div>
+						                </div>
+						                <div class="form-group">
+						                  <label class="col-sm-2 control-label"><span class="text-danger m-r"></span>维修区域：</label>
+						                  <div class="col-sm-10">
+						                  	  <span class="form-control">{{entity.areaName}} {{entity.areaDetail?'-'+entity.areaDetail:''}}</span>
+						                  </div>
+						                </div>
+						                <div class="form-group">
+						                  <label class="col-sm-2 control-label"><span class="text-danger m-r"></span>维修类型：</label>
+						                  <div class="col-sm-10">
+						                  	  <span class="form-control">{{entity.sortChiefName}}</span>
+						                  </div>
+						                </div>
+						                <div class="form-group">
+						                  <label class="col-sm-2 control-label"><span class="text-danger m-r"></span>报事详情：</label>
+						                  <div class="col-sm-10">
+						                  	  <span class="form-control">{{entity.sortSubName}} - {{entity.supplementText}}</span>
+						                  </div>
+						                </div>
+						                <div class="form-group">
+						                  <label class="col-sm-2 control-label"><span class="text-danger m-r"></span>附件：</label>
+						                  <div class="col-sm-10">
+						                  		<div class="form-control" style="height:auto">
+							                  	  	<div class="m-b img-bolck" ng-repeat="img in site.orderAttachments">
+									        			<img class="img-wh" ng-src="{{img}}">
+									    			</div>
+						                  	  	</div>
+						                  </div>
+						                </div>
+						          	</div>
+						        </div>
+			                </div>						
+					</tab>
+					<tab active="defaultTabs[1]">
+						<tab-heading>
+							<i class="glyphicon glyphicon-list"></i> 订单轨迹
+						</tab-heading>
+		                	<span ng-if="!entity.finishFlag" ng-hide="type === 'all'" style="display: block;width: 75%;border: 1px solid #dee5e7;border-radius: 5px;margin-bottom: -3px;height: 38px;line-height: 35px;padding-left: 16px;">报事单执行人  {{loginUserName}}</span>
+		                	<div ng-if="!entity.finishFlag" ng-hide="type === 'all'">
+			                	<div class="panel panel-default" style="width: 75%">
+							    	<form name="forms.theForm" class="form-horizontal" novalidate="novalidate">
+							            <div class="col-lg-11" style="width: 99%!important;margin-top: 10px;">
+							                 <form class="form-horizontal">
+							                     <div class="form-group">
+							                         <div class="col-sm-12">
+							                             <textarea class="form-control" ng-model="form.remark" style="height: 108px;" placeholder="请输入备注内容"></textarea>
+							                         </div>
+							                     </div>
+							                     <div class="form-group">
+								                     <div class="col-sm-12" style="padding-left: 11px;">
+								                     	<img-choose action="getImgs(datas)"></img-choose>
+							                     	 </div>
+							                     </div>
+							                 </form>
+							            </div>
+							            <div style="clear: both;"></div>
+							    	</form>
+					        	</div>
+					        	<div class="buttons" style="margin-bottom: 75px;">
+		                            <button class="btn btn-sm btn-info m-b-xs" ng-if="form.nextOrderStatus != 4" ng-click="addSaveAndNext(form,1)">保存备注</button>
+		                            <button class="btn btn-sm btn-info m-b-xs" ng-click="addSaveAndNext(form,2)">下一步（{{siteTrack.nextStatusdData.text}}）</button>
+		                            <button class="btn btn-sm btn-info m-b-xs" ng-click="addSaveBack(form)">退回</button>
+		                            <button class="btn btn-sm btn-info m-b-xs" ng-click="cancelOrder()">关闭订单</button>
+		                        </div>
+	                        </div>
+	                        <div class="custom" ng-repeat="en in siteTrack.orderTracks.slice()">
+	                        	<h3>{{en.text}}</h3>
+	                        	<div ng-repeat="li in en.list">
+		                        	<div class="custom_txt">
+		                        		<div>
+		                        			<span>{{li.processUserTypeName}}  {{li.processUserName}}</span>
+		                        			<span class="custom_txtstyle">{{li.processTime}}</span>
+		                        		</div>
+		                        		<div>
+		                        			<span>操作：<em style="color: #ff9900;">{{li.operateRemark}}</em></span>
+		                        		</div>
+		                        	</div>
+	                       			<span class="custom_time">
+	                       				{{li.prefixContent}} {{li.processContent?li.processContent:li.remark}}
+	                       				<a ng-repeat="img in li.trackImgs" href="{{img.attachmentPrefix+img.bigImgUrl}}" target="_blank"><img class="detail_img" style="margin-top: 5px;" ng-src="{{img.attachmentPrefix+img.smallImgUrl}}"></a>
+	                       			</span>
+	                        	</div>
+	                        </div>
+					</tab>
+					<tab active="defaultTabs[2]">
+						<tab-heading>
+							<i class="glyphicon glyphicon-list"></i> 处理记录
+						</tab-heading>
+		                <div>
+		                	<div class="panel panel-default">
+				                <div class="table-responsive" style="margin-top: 30px;margin-left: 20px;">
+				                	<span style="display: block;margin-bottom: 20px;" ng-repeat="en in site.orderProcessRecordList">
+				                		{{en.processTime}} {{en.prefixContent}}{{en.processContent?'('+en.processContent+')':''}}{{en.remark}}
+										<a ng-repeat="img in en.trackImgs" href="{{img.attachmentPrefix+img.bigImgUrl}}" target="_blank"><img class="detail_img" ng-src="{{img.attachmentPrefix+img.smallImgUrl}}"></a>
+				                	</span>
+				                </div>
+				        	</div>			                
+		                </div>
+					</tab>
+				</tabset>
+	</div>
+</div>

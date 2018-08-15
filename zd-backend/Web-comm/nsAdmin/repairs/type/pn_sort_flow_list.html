@@ -1,0 +1,53 @@
+<div ng-controller="SortFlowListCtrl">
+	<div>
+		<div class="panel panel-default">
+		 	<div class="panel-heading">
+	            <button class="btn m-b-xs btn-sm btn-info btn-addon" ng-hide="sortFlowAlreadyUsed" ng-click="addNew()">
+	            	<i class="fa fa-plus"></i>新增
+	            </button>
+	            <span class="text-danger m-r" ng-hide="!sortFlowAlreadyUsed">* 已用该流程创建报事单，不能进行修改</span>
+	        </div>		
+			<div class="table-responsive">
+				<table class="table table-striped">
+		             <thead>
+		                   <tr>
+		                       <th>流程名称</th>
+		                       <th class="text-center">前台显示文字</th>
+		                       <th>后台显示文字</th>
+		                       <th>成功</th>
+		                       <th>失败</th>
+		                       <th ng-hide="sortFlowAlreadyUsed">操作</th>
+		                   </tr>
+		              </thead>
+		              <tbody>
+		                   <tr data-expanded="true" ng-repeat="flow in flowItemList">
+		                       <td>
+		                       		<span ng-show="{{!flow.isEdit}}">{{flow.name}}</span>
+		                       		<input type="text" ng-show="{{flow.isEdit}}" ng-disabled="sortFlowAlreadyUsed" class="form-control" ng-model="flow.name"/>
+		                       </td>
+		                       <td class="form-horizontal">
+			                        <input type="text" class="form-control" ng-disabled="sortFlowAlreadyUsed" ng-model="flow.frontName"/>
+		                       	</td>
+		                       	<td>
+			                        <input type="text" class="form-control" ng-disabled="sortFlowAlreadyUsed" ng-model="flow.backName"/>
+		                       </td>
+		                       <td>下一步</td>
+		                       <td>关闭订单</td>
+		                       <td ng-hide="sortFlowAlreadyUsed">
+			                        <div class="buttons">
+			                            <button class="btn btn-sm btn-info" ng-show="{{flow.isEdit}}"  ng-click="deleteItem($index)">删除</button>
+			                        </div>		                       
+		                       </td>
+		                   </tr>				                    	
+		              </tbody>
+				</table>
+			</div>
+		</div>
+        <div class="panel-footer panel-footer-h">
+	        <div class="form-group pull-left panel-footer-h">
+	        	<!-- <button class="btn btn-warning" ui-sref="app.pn_sort_chief_list">返回</button> -->
+	            <button type="submit" class="btn btn-info padder-lg" ng-hide="sortFlowAlreadyUsed" ng-click="baseFlowFormSubmit()">保存</button>
+	        </div>							
+        </div>
+	</div>
+</div>

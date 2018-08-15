@@ -1,0 +1,62 @@
+<crumb title="订单管理" head="true"></crumb>
+<div class="wrapper-md" ng-controller="TCcOrderGrid">
+	 <div class="panel panel-default">
+	 	
+        <div class="panel-heading">
+            <button class="btn m-b-xs btn-sm btn-info btn-addon" power-key="order:add" ng-click="addNew()">
+            	<i class="fa fa-plus"></i>新增
+            </button>
+        </div>
+        <div class="panel-heading">
+          <form class="form-inline ng-pristine ng-valid" role="form">
+            <div class="form-group">
+	          <input type="text" class="form-control" placeholder="请输入订单名" ng-model="keyword" ng-keypress="search(keyword,$event)"/>
+	        </div>
+	        <button type="submit" class="btn btn-info" ng-click="search(keyword)">搜索</button>
+		  </form>
+        </div>
+        <div class="table-responsive">
+        	<table class="table table-striped b-t b-b">
+        		<thead>
+	                <tr>
+	                    <th style="width:5%" data-breakpoints="xs">序号</th>
+	                    <th style="width:8%" class="text-center">订单名称</th>
+	                    <th style="width:8%" class="text-center">订单号</th>
+	                    <th style="width:8%" class="text-center">一级分类 </th>
+	                    <th style="width:8%" class="text-center">二级分类</th>
+	                    <th style="width:8%" class="text-center">描述</th>
+	                    <th style="width:8%" class="text-center">下单人</th>
+	                    <th style="width:8%" class="text-center">联系电话</th>
+	                    <th style="width:8%" class="text-center">创建时间</th>
+	                    <th style="width:8%" class="text-center">订单状态</th>
+	                    <th style="width:15%" class="text-center" data-breakpoints="xs" >操作</th>
+	                </tr>
+                </thead>
+                <tbody>
+	                <tr data-expanded="true" ng-repeat="row in rows">
+	                    <td > {{paginationConf.currentPage ? paginationConf.pageSize*(paginationConf.currentPage-1)+$index+1 : $index+1}}</td>
+	                    <td > {{row.orderName}}</td>
+	                    <td > {{row.orderNum}}</td>
+	                    <td > {{row.orderType}}</td>
+	                    <td > {{row.orderTypeDetail}}</td>
+	                    <td > {{row.content | limitToNum:10}}</td>
+	                    <td > {{row.orderUserName}}</td>
+	                    <td > {{row.orderUserMobile}}</td>
+	                    <td > {{row.createTime}}</td>
+	                    <td > {{row.finishFlag | finishFlagStr}}</td>
+	                    <td>
+	                        <div class="buttons">
+	                        	<button class="btn btn-sm btn-info"  power-key="order:detail"  ng-click="detail(row.id)">详情</button>
+	                            <button class="btn btn-sm btn-info"  power-key="order:update"  ng-click="update(row.id)">编辑</button>
+	                            <button class="btn btn-sm btn-info"  power-key="order:cancelOrder"  ng-click="cancelOrder(row.id)">取消</button>
+	                            <button class="btn btn-sm btn-info"  power-key="order:completeOrder"  ng-click="completeOrder(row.id)">完成</button>
+	                            <button class="btn btn-sm btn-danger"  power-key="order:delete"  ng-click="deleteById(row.id)">删除</button>
+	                        </div>
+	                    </td>
+	                </tr>
+                </tbody>
+        	</table>
+        	<tmpagination conf="paginationConf"></tmpagination>
+        </div>
+	 </div>
+</div>

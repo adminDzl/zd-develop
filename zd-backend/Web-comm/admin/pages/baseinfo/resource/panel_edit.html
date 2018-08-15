@@ -1,0 +1,75 @@
+<div class="modal-header">
+    <button type="button" class="close" ng-click="close()"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+    <h4 class="modal-title">{{ site.title }}</h4>
+</div>
+<div class="modal-body">
+    <div class="wrapper-md ng-scope">
+	    <form name="Form"  class="form-horizontal form-validation" novalidate>
+	        <div class="form-group">
+	            <label class="col-sm-3 control-label"><span class="text-danger">*</span>名称:</label>
+	             <div class="col-sm-9">
+	            	<input type="text" class="form-control" ng-model="form.name" required/>
+	            </div>
+	        </div>
+	        <div class="line line-dashed b-b line-lg"></div>
+	        <div class="form-group">
+	            <label class="col-sm-3 control-label">上级:</label>
+	             <div class="col-sm-9">
+	            	<select class="form-control" ng-model="form.parentId" ng-options="row.id as row.name for row in site.parentList">
+	            		<option></option>
+	            	</select>
+	            </div>
+	        </div>
+	        <div class="line line-dashed b-b line-lg"></div>
+	        <div class="form-group">
+	            <label class="col-sm-3 control-label"><span class="text-danger">*</span>类型:</label>
+	             <div class="col-sm-9">
+	            	<select class="form-control" ng-model="form.type2" required>
+	            		<option value="1">菜单组</option>
+	            		<option value="2">菜单</option>
+	            		<option value="3">按钮</option>
+	            	</select>
+	            </div>
+	        </div>
+	        <div class="line line-dashed b-b line-lg"></div>
+	        <div class="form-group">
+	            <label class="col-sm-3 control-label">PC端URL:</label>
+	             <div class="col-sm-9">
+	            	<input type="text" class="form-control" ng-model="form.url_pc"/>
+	            </div>
+	        </div>
+	        <div class="line line-dashed b-b line-lg"></div>
+	        <div class="form-group">
+	            <label class="col-sm-3 control-label">移动端URL:</label>
+	             <div class="col-sm-9">
+	            	<input type="text" class="form-control" ng-model="form.url_mb"/>
+	            </div>
+	        </div>
+	        <div class="line line-dashed b-b line-lg"></div>
+	        <div class="form-group">
+	            <label class="col-sm-3 control-label">权限:</label>
+	             <div class="col-sm-9">
+	            	<input type="text" class="form-control" ng-model="form.permission"/>
+	            </div>
+	        </div>
+	        <div class="line line-dashed b-b line-lg"></div>
+	        <div class="form-group">
+	            <label class="col-sm-3 control-label">排序号:</label>
+	             <div class="col-sm-9">
+	            	<input type="text" class="form-control" ng-model="form.orderNo"/>
+	            </div>
+	        </div>
+	        <div class="line line-dashed b-b line-lg"></div>
+	        <div class="form-group">
+	            <label class="col-sm-3 control-label">备注:</label>
+	             <div class="col-sm-9">
+	            	<textarea type="text" class="form-control" ng-model="form.remark" ></textarea>
+	            </div>
+	        </div>
+	    </form>
+    </div>
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-default" ng-click="close()">取消</button>
+    <button type="button" class="btn btn-info" ng-disabled="Form.$invalid" ng-click="addSave()">提交</button>
+</div>

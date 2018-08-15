@@ -1,0 +1,62 @@
+ 
+<div class="panel panel-default">
+<div class="panel-body">
+    <div class="col-sm-12">
+            <h4>设置权限</h4>
+    </div>
+<form class="form-horizontal" method="get">
+    <!--flag-->
+    <div class="line line-dashed b-b line-lg pull-in"></div>
+    <div class="form-group">
+        <label class="col-sm-2 control-label">姓名<i class="needred">*</i></label>
+            <div class="col-sm-10">
+            <input type="text" ng-model="instance.model.name" class="form-control">
+            </div>
+    </div>
+       <!--flag-->
+    <div class="line line-dashed b-b line-lg pull-in"></div>
+    <div class="form-group">
+        <label class="col-sm-2 control-label">电话<i class="needred">*</i></label>
+            <div class="col-sm-10">
+            <input type="text" class="form-control" ng-model="instance.model.params">
+            </div>
+    </div>
+     <!--flag-->
+     <div class="line line-dashed b-b line-lg pull-in"></div>
+     <div class="form-group">
+         <label class="col-sm-2 control-label">邮箱<i class="needred">*</i></label>
+        <div class="col-sm-10">
+        <input type="text" class="form-control" ng-model="instance.model.amount">
+        </div>
+     </div>
+      <!--flag-->
+    <div class="line line-dashed b-b line-lg pull-in"></div>
+    <div class="form-group">
+        <label class="col-sm-2 control-label">权限<i class="needred">*</i></label>
+        <div class="col-sm-2">
+                <select class="form-control m-b" ng-model="instance.roomModal.roomTypeStr">
+                        <option value="">请选择场地类型</option>
+                        <option ng-repeat="it in  instance.roomTypes" value="{{it.code}}-{{it.name}}">{{it.name}}</option>
+                      </select>
+        </div>
+    </div>
+        <!--flag-->
+    <div class="line line-dashed b-b line-lg pull-in"></div>
+    <div class="form-group">
+        <label class="col-sm-2 control-label">负责场地<i class="needred">*</i></label>
+        <div class="col-sm-2">
+
+        </div>
+    </div>
+      
+    
+    <div class="line line-dashed b-b line-lg pull-in"></div>
+    <div class="form-group">
+      <div class="col-sm-4 col-sm-offset-9">
+        <button type="reset" class="btn btn-default" ng-click="cancel()"> 取消</button>
+        <button type="submit" class="btn btn-primary"  ng-click="commit()">保存</button>
+      </div>
+    </div>
+  </form> 
+  </div>
+</div>

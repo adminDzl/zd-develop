@@ -1,0 +1,359 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zshop.ad.dao.mapper.AdDataMapper">
+
+<!-- **************以下映射必须与数据库一致 不要更改，除非数据库改变**************** -->
+
+	<insert id="insert" useGeneratedKeys="true" keyProperty="id" parameterType="com.zshop.ad.entity.AdData">
+				
+		insert into zs_ad_data
+		(
+			AD_FULL_TITLE,
+			AD_SHORT_TITLE,
+			AD_TYPE,
+			AD_IMG_URL,
+			AD_CONTENT,
+			AD_SN,
+			AD_C_COUNT,
+			AD_F_COUNT,
+			AD_DESC,
+			AD_LINK_TYPE,
+			AD_LINK,
+			AD_STATE,
+			IS_DEL,
+			CREATE_BY,
+			CREATE_TIME,
+			UPDATE_BY,
+			UPDATE_TIME,
+			BID,
+			PARAM1,
+			PARAM2,
+			PARAM3,
+			PARAM4,
+			PARAM5
+		)
+		values	
+		(	
+			#{adFullTitle},
+			#{adShortTitle},
+			#{adType},
+			#{adImgUrl},
+			#{adContent},
+			#{adSn},
+			#{adCCount},
+			#{adFCount},
+			#{adDesc},
+			#{adLinkType},
+			#{adLink},
+			#{adState},
+			#{isDel},
+			#{createBy},
+			#{createTime},
+			#{updateBy},
+			#{updateTime},
+			#{bid},
+			#{param1},
+			#{param2},
+			#{param3},
+			#{param4},
+			#{param5}
+		)	
+
+	</insert>
+	
+	<delete id="deleteById" parameterType="java.lang.Integer">
+		delete from zs_ad_data 	
+		WHERE ID=#{id}
+	</delete>
+	
+	<delete id="deleteByIds" parameterType="java.util.Collection">
+     	delete from zs_ad_data 	
+     	WHERE ID IN
+     	<foreach collection="array" index="index" item="item" open="(" separator="," close=")"> #{item} </foreach> 
+  	 </delete>
+  	 
+  	 <delete id="logicDelete" parameterType="java.lang.Integer">
+		update zs_ad_data set status1 = '-1' 	
+		WHERE ID=#{id}
+	</delete>
+	
+	<delete id="logicDeleteByIds" parameterType="java.util.Collection">
+     	update zs_ad_data set status1 = '-1' 	
+     	WHERE ID IN
+     	<foreach collection="array" index="index" item="item" open="(" separator="," close=")"> #{item} </foreach> 
+  	 </delete>
+	
+	<update id="update" parameterType="com.zshop.ad.entity.AdData" >
+			
+		update zs_ad_data 	
+		<set> 	
+			AD_FULL_TITLE=#{adFullTitle},
+			AD_SHORT_TITLE=#{adShortTitle},
+			AD_TYPE=#{adType},
+			AD_IMG_URL=#{adImgUrl},
+			AD_CONTENT=#{adContent},
+			AD_SN=#{adSn},
+			AD_C_COUNT=#{adCCount},
+			AD_F_COUNT=#{adFCount},
+			AD_DESC=#{adDesc},
+			AD_LINK_TYPE=#{adLinkType},
+			AD_LINK=#{adLink},
+			AD_STATE=#{adState},
+			IS_DEL=#{isDel},
+			CREATE_BY=#{createBy},
+			CREATE_TIME=#{createTime},
+			UPDATE_BY=#{updateBy},
+			UPDATE_TIME=#{updateTime},
+			BID=#{bid},
+			PARAM1=#{param1},
+			PARAM2=#{param2},
+			PARAM3=#{param3},
+			PARAM4=#{param4},
+			PARAM5=#{param5}
+		</set> 	
+		where 
+		ID=#{id} 	
+
+	</update>
+	
+	<update id="updateWithIf" parameterType="com.zshop.ad.entity.AdData" >
+			
+		update zs_ad_data 	
+		<set> 	
+			<if test=" adFullTitle!=null ">	
+				AD_FULL_TITLE=#{adFullTitle},	
+			</if>	
+			<if test=" adShortTitle!=null ">	
+				AD_SHORT_TITLE=#{adShortTitle},	
+			</if>	
+			<if test=" adType!=null ">	
+				AD_TYPE=#{adType},	
+			</if>	
+			<if test=" adImgUrl!=null ">	
+				AD_IMG_URL=#{adImgUrl},	
+			</if>	
+			<if test=" adContent!=null ">	
+				AD_CONTENT=#{adContent},	
+			</if>	
+			<if test=" adSn!=null ">	
+				AD_SN=#{adSn},	
+			</if>	
+			<if test=" adCCount!=null ">	
+				AD_C_COUNT=#{adCCount},	
+			</if>	
+			<if test=" adFCount!=null ">	
+				AD_F_COUNT=#{adFCount},	
+			</if>	
+			<if test=" adDesc!=null ">	
+				AD_DESC=#{adDesc},	
+			</if>	
+			<if test=" adLinkType!=null ">	
+				AD_LINK_TYPE=#{adLinkType},	
+			</if>	
+			<if test=" adLink!=null ">	
+				AD_LINK=#{adLink},	
+			</if>	
+			<if test=" adState!=null ">	
+				AD_STATE=#{adState},	
+			</if>	
+			<if test=" isDel!=null ">	
+				IS_DEL=#{isDel},	
+			</if>	
+			<if test=" createBy!=null ">	
+				CREATE_BY=#{createBy},	
+			</if>	
+			<if test=" createTime!=null ">	
+				CREATE_TIME=#{createTime},	
+			</if>	
+			<if test=" updateBy!=null ">	
+				UPDATE_BY=#{updateBy},	
+			</if>	
+			<if test=" updateTime!=null ">	
+				UPDATE_TIME=#{updateTime},	
+			</if>	
+			<if test=" bid!=null ">	
+				BID=#{bid},	
+			</if>	
+			<if test=" param1!=null ">	
+				PARAM1=#{param1},	
+			</if>	
+			<if test=" param2!=null ">	
+				PARAM2=#{param2},	
+			</if>	
+			<if test=" param3!=null ">	
+				PARAM3=#{param3},	
+			</if>	
+			<if test=" param4!=null ">	
+				PARAM4=#{param4},	
+			</if>	
+			<if test=" param5!=null ">	
+				PARAM5=#{param5},	
+			</if>	
+		</set>	
+		where 	
+		ID=#{id} 	
+
+	</update>
+	
+	<!-- *************************************************************************** -->
+	<!-- **************以下映射根据业务做相应调整**************** -->
+	<!-- *************************************************************************** -->
+  	
+  	<delete id="deleteByMap" parameterType="java.util.Map">
+    	delete from zs_ad_data 	 
+    	<where>
+    		
+    	</where>
+  	</delete>
+	
+	<select id="findById" parameterType="java.lang.Integer" resultType="com.zshop.ad.entity.AdData">
+				
+		select  	
+			a.ID id,
+			a.AD_FULL_TITLE adFullTitle,
+			a.AD_SHORT_TITLE adShortTitle,
+			a.AD_TYPE adType,
+			a.AD_IMG_URL adImgUrl,
+			a.AD_CONTENT adContent,
+			a.AD_SN adSn,
+			a.AD_C_COUNT adCCount,
+			a.AD_F_COUNT adFCount,
+			a.AD_DESC adDesc,
+			a.AD_LINK_TYPE adLinkType,
+			a.AD_LINK adLink,
+			a.AD_STATE adState,
+			a.IS_DEL isDel,
+			a.CREATE_BY createBy,
+			a.CREATE_TIME createTime,
+			a.UPDATE_BY updateBy,
+			a.UPDATE_TIME updateTime,
+			a.BID bid,
+			a.PARAM1 param1,
+			a.PARAM2 param2,
+			a.PARAM3 param3,
+			a.PARAM4 param4,
+			a.PARAM5 param5
+		from zs_ad_data a	
+
+		where a.Id=#{id}	
+	</select>
+
+	<select id="findListByMap" parameterType="java.util.Map" resultType="com.zshop.ad.entity.AdData">
+		
+				
+		select  	
+			a.ID id,
+			a.AD_FULL_TITLE adFullTitle,
+			a.AD_SHORT_TITLE adShortTitle,
+			a.AD_TYPE adType,
+			a.AD_IMG_URL adImgUrl,
+			a.AD_CONTENT adContent,
+			a.AD_SN adSn,
+			a.AD_C_COUNT adCCount,
+			a.AD_F_COUNT adFCount,
+			a.AD_DESC adDesc,
+			a.AD_LINK_TYPE adLinkType,
+			a.AD_LINK adLink,
+			a.AD_STATE adState,
+			a.IS_DEL isDel,
+			a.CREATE_BY createBy,
+			a.CREATE_TIME createTime,
+			a.UPDATE_BY updateBy,
+			a.UPDATE_TIME updateTime,
+			a.BID bid,
+			a.PARAM1 param1,
+			a.PARAM2 param2,
+			a.PARAM3 param3,
+			a.PARAM4 param4,
+			a.PARAM5 param5
+		from zs_ad_data a	
+
+		
+		<where>
+			
+		</where>
+
+	</select>
+	
+	<select id="list" parameterType="java.util.Map" resultType="com.zshop.ad.entity.AdData">
+		
+		
+				
+		select  	
+			a.ID id,
+			a.AD_FULL_TITLE adFullTitle,
+			a.AD_SHORT_TITLE adShortTitle,
+			a.AD_TYPE adType,
+			a.AD_IMG_URL adImgUrl,
+			a.AD_CONTENT adContent,
+			a.AD_SN adSn,
+			a.AD_C_COUNT adCCount,
+			a.AD_F_COUNT adFCount,
+			a.AD_DESC adDesc,
+			a.AD_LINK_TYPE adLinkType,
+			a.AD_LINK adLink,
+			a.AD_STATE adState,
+			a.IS_DEL isDel,
+			a.CREATE_BY createBy,
+			a.CREATE_TIME createTime,
+			a.UPDATE_BY updateBy,
+			a.UPDATE_TIME updateTime,
+			a.BID bid,
+			a.PARAM1 param1,
+			a.PARAM2 param2,
+			a.PARAM3 param3,
+			a.PARAM4 param4,
+			a.PARAM5 param5
+		from zs_ad_data a	
+
+		
+		<where>
+			<if test="searchKeys!= null ">
+				AND ( 1=2
+				<foreach collection="searchKeys" index="index" item="item" >
+					 OR a.id like #{item}
+				</foreach> 
+				)
+			</if>
+		</where>
+
+		
+	</select>
+	
+	<select id="findOneByMap" parameterType="java.util.Map" resultType="com.zshop.ad.entity.AdData">
+				
+		select  	
+			a.ID id,
+			a.AD_FULL_TITLE adFullTitle,
+			a.AD_SHORT_TITLE adShortTitle,
+			a.AD_TYPE adType,
+			a.AD_IMG_URL adImgUrl,
+			a.AD_CONTENT adContent,
+			a.AD_SN adSn,
+			a.AD_C_COUNT adCCount,
+			a.AD_F_COUNT adFCount,
+			a.AD_DESC adDesc,
+			a.AD_LINK_TYPE adLinkType,
+			a.AD_LINK adLink,
+			a.AD_STATE adState,
+			a.IS_DEL isDel,
+			a.CREATE_BY createBy,
+			a.CREATE_TIME createTime,
+			a.UPDATE_BY updateBy,
+			a.UPDATE_TIME updateTime,
+			a.BID bid,
+			a.PARAM1 param1,
+			a.PARAM2 param2,
+			a.PARAM3 param3,
+			a.PARAM4 param4,
+			a.PARAM5 param5
+		from zs_ad_data a	
+
+		<where>
+		
+		</where>
+		limit 1
+	</select>
+</mapper>
+	

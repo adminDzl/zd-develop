@@ -1,0 +1,160 @@
+<div class="panel-body">
+        
+          <form class="form-horizontal" method="get">
+                  <div class="col-sm-12">
+                          <h4>预定设置</h4>
+                  </div>
+                    <!--flag-->
+                <div class="line line-dashed b-b line-lg pull-in"></div>
+                <div class="form-group">
+                  <label class="col-sm-2 control-label">定金支付功能<i class="needred">*</i></label>
+                  
+                  <div class="col-sm-10">
+                          <div class="col-sm-3">
+                              <div class="radio">
+                                  <label class="i-checks" > 
+                                      <input type="radio" name="status" ng-checked="instance.model.isFirstOpen=='1'"   ng-click="selectType(1)" >
+                                      <i></i>
+                                      开启
+                                  </label>
+                              </div>       
+                          </div>
+                          <div class="col-sm-3">
+                                  <div class="radio">
+                                      <label class="i-checks" > 
+                                          <input type="radio" name="status" ng-checked="instance.model.isFirstOpen=='2'"   ng-click="selectType(2)" >
+                                          <i></i>
+                                        关闭
+                                      </label>
+                                  </div> 
+                          </div>
+                  </div>
+                </div>
+              <!--flag-->
+              <div ng-show="instance.model.isFirstOpen=='1'">
+              <div class="line line-dashed b-b line-lg pull-in"></div>
+              <div class="form-group">
+                  <label class="col-sm-2 control-label">定金金额<i class="needred">*</i></label>
+                  <div class="col-sm-10">
+                          <input type="text" ng-model="instance.model.firstMoney" class="form-control" placeholder="请输入定金金额"/> 
+                  </div>
+              </div>
+                <!--flag-->
+                <div class="line line-dashed b-b line-lg pull-in"></div>
+                <div class="form-group">
+                  <label class="col-sm-2 control-label">定金支付时间<i class="needred">*</i></label>
+                  
+                  <div class="col-sm-10">
+                        <label class="col-sm-1 control-label">用户在</label>
+                        <div class="col-sm-2">
+                                <input type="text" ng-model="instance.model.firstPayTime" class="form-control" placeholder="请输入时间"/> 
+                        </div>
+                          <div class="col-sm-1">
+                              <div class="radio">
+                                  <label class="i-checks" > 
+                                      <input type="radio" name="status1" ng-checked="instance.model.firstPayType=='1'"   ng-click="selectType1(1)" >
+                                      <i></i>
+                                     分钟
+                                  </label>
+                              </div>       
+                          </div>
+                          <div class="col-sm-2">
+                                  <div class="radio">
+                                      <label class="i-checks" > 
+                                          <input type="radio" name="status1" ng-checked="instance.model.firstPayType=='2'"   ng-click="selectType1(2)" >
+                                          <i></i>
+                                       工作日
+                                      </label>
+                                  </div> 
+                          </div>
+                          <label class="col-sm-2 control-label text-left">内完成定金支付</label>
+                  </div>
+                </div>
+                 <!--flag-->
+                 <div class="line line-dashed b-b line-lg pull-in"></div>
+                 <div class="form-group">
+                        <label class="col-sm-2 control-label">尾款支付时间<i class="needred">*</i></label>
+                        <div class="col-sm-10">
+                            <div class="row">
+                                    <div class="col-sm-2">
+                                        <div class="radio">
+                                            <label class="i-checks" > 
+                                                <input type="radio" name="status2" ng-checked="instance.model.lastPayType=='1'"   ng-click="selectType2(1)" >
+                                                <i></i>
+                                                用户支付场地定金后 
+                                            </label>
+                                        </div>       
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <div class="radio">
+                                                <label class="i-checks" > 
+                                                    <input type="radio" name="status2" ng-checked="instance.model.lastPayType=='2'"   ng-click="selectType2(2)" >
+                                                    <i></i>
+                                                    使用开始前 
+                                                </label>
+                                            </div>      
+                                    </div>
+                            </div>
+                            <div class="line line-dashed b-b line-lg pull-in"></div>
+                            <div class="row">
+                                     
+                                        <div class="col-sm-2">
+                                                <input type="text" ng-model="instance.model.lastPayTime"   class="form-control" placeholder="请输入时间"/> 
+                                        </div>
+                                        <label class="col-sm-3 control-label text-left">工作日内完成尾款支付。</label>
+                            </div>
+                               
+                        </div>
+                 </div>
+                </div>
+               <!--flag-->
+               <div class="line line-dashed b-b line-lg pull-in"></div>
+               <div class="col-sm-12">
+                    <h4>退款设置</h4>
+                </div>
+                <div class="line line-dashed b-b line-lg pull-in"></div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">退还内容:<i class="needred">*</i></label>
+                   
+                    <div class="col-sm-10">
+                            <label class="col-sm-1 control-label text-left">使用开始前</label>
+                            <div class="col-sm-2">
+                                    <input type="text" ng-model="instance.model.refundFullTime" class="form-control" placeholder="请输入时间"/> 
+                            </div>
+                            <label class="col-sm-3 control-label text-left">工作日取消预订场地退还全款（订金+尾款）。</label>
+                    </div>
+                </div>
+                <div class="line line-dashed b-b line-lg pull-in"></div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">退还内容:<i class="needred">*</i></label>
+                   
+                    <div class="col-sm-10">
+                            <label class="col-sm-1 control-label text-left">使用开始前</label>
+                            <div class="col-sm-2">
+                                    <input type="text" ng-model="instance.model.refundLastTime" class="form-control" placeholder="请输入时间"/> 
+                            </div>
+                            <label class="col-sm-3 control-label text-left">工作日取消预订场地退还尾款，不退还订金。</label>
+                    </div>
+                </div>
+                <div class="line line-dashed b-b line-lg pull-in"></div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">退还内容:<i class="needred">*</i></label>
+                   
+                    <div class="col-sm-10">
+                            <label class="col-sm-1 control-label text-left">使用开始前</label>
+                            <div class="col-sm-2">
+                                    <input type="text" ng-model="instance.model.refundNoTime" class="form-control" placeholder="请输入时间"/> 
+                            </div>
+                            <label class="col-sm-3 control-label text-left">小时取消预订场地不退款。</label>
+                    </div>
+                </div>
+               
+              <div class="line line-dashed b-b line-lg pull-in"></div>
+              <div class="form-group">
+                  <div class="col-sm-4 col-sm-offset-9">
+                  <button type="reset" class="btn btn-default" ng-click="cancel()"> 取消</button>
+                  <button type="submit" class="btn btn-primary"  ng-click="commit()">保存</button>
+                  </div>
+              </div>
+              </form>
+       </div>

@@ -1,0 +1,54 @@
+ 
+<div class="panel-body">
+    <div class="col-sm-12">
+            <h4>基础数据</h4>
+    </div>
+<form class="form-horizontal" method="get">
+    <!--flag-->
+    <div class="line line-dashed b-b line-lg pull-in"></div>
+    <div class="form-group">
+        <label class="col-sm-2 control-label">名称<i class="needred">*</i></label>
+            <div class="col-sm-10">
+            <input type="text" ng-model="instance.dataModal.name" class="form-control">
+            </div>
+    </div>
+       <!--flag-->
+    <div class="line line-dashed b-b line-lg pull-in"></div>
+    <div class="form-group">
+        <label class="col-sm-2 control-label">参数<i class="needred">*</i></label>
+            <div class="col-sm-10">
+            <input type="text" class="form-control" ng-model="instance.dataModal.code">
+            </div>
+    </div>
+     <!--flag-->
+     <div class="line line-dashed b-b line-lg pull-in"></div>
+     <div class="form-group">
+         <label class="col-sm-2 control-label">分组<i class="needred">*</i></label>
+        <div class="col-sm-10">
+            <select name="account" class="form-control m-b" ng-model="instance.dataModal.groupCode">
+                    <option value="">请选择</option>
+                    <option  ng-repeat="g in instance.groups" value="{{g.code}}">{{g.name}}</option>
+                </select>  
+        </div>
+     </div>
+
+     <div class="line line-dashed b-b line-lg pull-in"></div>
+     <div class="form-group">
+         <label class="col-sm-2 control-label">备注</label>
+        <div class="col-sm-10">
+            <wysiwyge get-text="instance.getText(text)" model="instance.dataModal.remark"></wysiwyge>
+        </div>
+     </div>
+     
+    
+    <div class="line line-dashed b-b line-lg pull-in"></div>
+    <div class="form-group">
+      <div class="col-sm-4 col-sm-offset-9">
+        <button type="reset" class="btn btn-default" ng-click="cancel()"> 取消</button>
+        <button type="submit" class="btn btn-primary"  ng-click="commit()">保存</button>
+      </div>
+    </div>
+  </form>
+     
+     
+  </div>

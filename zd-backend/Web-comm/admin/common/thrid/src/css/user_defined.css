@@ -1,0 +1,195 @@
+@CHARSET "UTF-8";
+/* 
+   自定义样式
+*/
+
+.btn-pre-input-group{
+	float:left;
+	margin-right:20px;
+	line-height:36px;
+}
+
+.font-c{
+	color: rgba(255, 153, 0, 0.95);
+}
+
+.panel-footer-h{
+	height: 40px;
+}
+
+.input-group-addon-c{
+	background-color:#ffffff;
+	border:none;
+}  
+.a-link{
+	color: 	#23b7e5;
+	text-decoration: none 
+}
+.a-link:hover {
+	color: #23b7e5;
+	text-decoration: underline;
+}
+
+.ul-n{
+	list-style:none;
+}
+      
+.ul-n li{
+	float:left;
+	margin:0px 2px 0 2px;
+} 
+.div-rd .radio{
+	margin-right: 20px;
+}
+.sub-form-group-top .form-group{
+	margin-bottom: 10px;
+}
+
+.btn-status-info{
+	min-width: 80px;
+	background-color: white;
+	border: 1px solid #eaeff0;
+	margin-right: 4px;
+    border-radius: 5px;
+}
+
+.btn-status-bgc{
+	min-width: 80px;
+	background-color: #c5c5c5 !important;
+	margin-right: 4px;
+    border-radius: 5px;
+}
+
+.tr-bg-c{
+	background-color: #f9f9f9;
+}
+
+/******************    订单详情-操作样式 start     **********************/
+.pro-btn{margin:20px 0;}
+.pro-btn>span{cursor:pointer;width:120px;height:40px;display:inline-block;border-radius: 4px;color:#ffffff;background:#2796d4;font-size:14px;line-height:40px;text-align: center;}
+.pro-btn>span.next-dom{background:#FF9000;margin:0 10px;width:180px;}
+.pro-btn>span.close-service{background:#d2d2d2}
+.single-status-div{margin-bottom: 10px;}
+.status-head{overflow: hidden;padding:6px 10px;height:40px;border:1px solid #e2e2e2;cursor:pointer;}
+.status-head:hover{background:#f2f2f2;}
+.left-name{float:left;display: block;color:#FFAB00;line-height:26px;}
+.right-opera{float:right;}
+.right-opera>span{padding-left:30px;display: block;color:#484848;line-height:26px;}
+.status-body{border:1px solid #e2e2e2;padding:20px;background:#ffffff;border-top:none;}
+.status-body>table,.status-body-show>table{width:100%;border:1px solid #e2e2e2;border-bottom:none;}
+.status-body>table th,.status-body-show>table th{padding:8px 0;background:#F0F0F0;border-bottom:1px solid #e2e2e2;vertical-align:middle;font-size:12px;width:140px;border-right:1px solid #e2e2e2;font-weight:normal;color:#494848;height:24px;line-height:24px;text-align: center;}
+.status-body>table td,.status-body-show>table td{border-bottom:1px solid #e2e2e2;vertical-align:middle;}
+.status-body>table td div,.status-body-show>table td div{text-align: center;font-size:12px;color:#494848;position: relative;}
+.choose-peo{font-size:12px;color:#1d5297;display: block;cursor: pointer;position: absolute;right:10px;top:0;text-decoration: underline;}
+.area-zone{margin:10px;background:#ffffff;border:1px solid #e2e2e2;padding:8px;}
+.status-body>table td div textarea,.status-body-show>table td div textarea{width:100%;height:79px;line-height:24px;color:#484848;font-size:12px;border:none;outline:none;background:#ffffff;reisze:none;}
+.inner-table{margin:10px;}
+.inner-table>table{width:100%;border:1px solid #e2e2e2;border-bottom:none;border-right:none;}
+.inner-table>table td{border-bottom:1px solid #e2e2e2;border-right:1px solid #e2e2e2;background:#f0f0f0;padding:8px 10px;}
+.inner-table>table td div{font-size:12px;line-height:20px;text-align:left;}
+.status-body-show{border:1px solid #e2e2e2;padding:20px;background:#ffffff;border-top:none;display: none}
+
+/******************    订单详情-操作样式 end     **********************/
+ 
+/** 隐藏头部 导航 尾部  **/        
+/**		#app .app-header,#app .app-aside,#app .settings,#app .app-footer{
+			display: none !important;
+		}
+		#app{
+			padding-top: 0px!important;
+		}
+		#app .app-content{
+			margin-left: 0px!important;
+		}
+		#app .app-content .app-content-body{
+			padding-bottom: 0px !important;
+		}       **/ 
+		
+		
+		
+.u-i-checks {
+    padding-left: 20px;
+    cursor: pointer;
+}
+
+.u-i-checks input {
+    position: absolute;
+    margin-left: -20px;
+    opacity: 0;
+}
+
+.u-i-checks input:checked + i {
+    border-color: #23b7e5;
+}
+
+.u-i-checks input:checked + i:before {
+    top: 4px;
+    left: 4px;
+    width: 10px;
+    height: 10px;
+    background-color: #23b7e5;
+}
+
+.u-i-checks input:checked + span .active {
+    display: inherit;
+}
+
+.u-i-checks input[type="radio"] + i,
+.u-i-checks input[type="radio"] + i:before {
+    border-radius: 50%;
+}
+
+/* .u-i-checks input[disabled] + i,
+fieldset[disabled] .u-i-checks input + i {
+    border-color: #23b7e5;
+}
+ */
+ 
+.u-i-checks input[disabled] + i:before,
+fieldset[disabled] .u-i-checks input + i:before {
+    background-color: #23b7e5;
+}
+
+.u-i-checks > i {
+    position: relative;
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    margin-top: -2px;
+    margin-right: 4px;
+    margin-left: -20px;
+    line-height: 1;
+    vertical-align: middle;
+    background-color: #fff;
+    border: 1px solid #cfdadd;
+}
+
+.u-i-checks > i:before {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    background-color: transparent;
+    content: "";
+    -webkit-transition: all 0.2s;
+    transition: all 0.2s;
+}
+
+.u-i-checks > span {
+    margin-left: -20px;
+}
+
+.u-i-checks > span .active {
+    display: none;
+}		
+.form-control[disabled], fieldset[disabled] .form-control{
+	cursor:default;
+}
+
+.analisy-bar{
+	width: 1000px;
+    height: 1000px;
+}
+
+

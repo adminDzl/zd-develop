@@ -1,0 +1,122 @@
+<crumb title="用户管理" head="true"></crumb>
+<div class="wrapper-md" ng-controller="TUserGrid">
+	 <div class="panel panel-default">
+	 	<!-- 
+        <div class="panel-heading">
+            
+        </div> -->
+        <div class="panel-heading clearfix">
+          <div class="pull-left">
+	          <form class="form-inline ng-pristine ng-valid" role="form">
+	            <div class="form-group">
+		          <input type="text" class="form-control" placeholder="请输入用户名或者昵称" ng-model="keyword" ng-keypress="search(keyword,$event)"/>
+		        </div>
+		        <button type="submit" class="btn btn-info" ng-click="search(keyword)">搜索</button>
+		        <button type="submit" class="btn btn-info" ng-click="search('')">清空</button>
+			  </form>
+		  </div>
+		  <div class="pull-right">
+		  	<div class="btn-group" dropdown>
+                  	<button type="button" class="btn btn-default" dropdown-toggle>
+	             	操作 <span class="caret"></span>
+	            </button>
+	            <ul class="dropdown-menu dropdown_menu" role="menu">
+	              <li><a class="btn btn-sm "  power-key="user:add" ng-click="addNew()">新增</a></li>
+                  <li><a class="btn btn-sm "  power-key="user:toDataImport" ng-click="toDataImport()">导入数据</a></li>
+                  <li><a class="btn btn-sm "  power-key="user:toDataDownload" ng-click="toDataDownload()">下载模板</a></li>
+                  <li><a class="btn btn-sm "  ng-click="batchDept()">批量加入部门</a></li>
+                  <li><a class="btn btn-sm "  ng-click="batchOrg()">批量加入企业</a></li>
+                  <li><a class="btn btn-sm "  ng-click="batchPark()">批量加入园区</a></li>
+	            </ul>
+	    	</div>
+          </div>
+        </div>
+        <div class="table-responsive">
+        	<table class="table table-striped b-t b-b">
+        		<thead>
+	                <tr>
+	                    <th style="width:5%" class="text-center" data-breakpoints="xs">ID</th>
+	                    <th style="width:5%" class="text-center">
+							<label class="i-checks">
+                                <input type="checkbox"  ng-model="checkListAll" ng-change="checkAll()"><i></i>
+                            </label>
+						</th>
+	                    <th style="width:15%" class="text-center">姓名</th>
+	                    <th style="width:10%" class="text-center">昵称</th>
+	                    <th style="width:5%" class="text-center">性别 </th>
+	                    <th style="width:10%" class="text-center">手机号码</th>
+	                    <th style="width:5%" class="text-center">状态</th>
+	                    <th style="width:10%" class="text-center">备注</th>
+	                    <th style="width:10%" class="text-center" data-breakpoints="xs" >操作</th>
+	                </tr>
+                </thead>
+                <tbody>
+	                <tr data-expanded="true" ng-repeat="row in rows">
+	                    <td > {{paginationConf.currentPage ? paginationConf.pageSize*(paginationConf.currentPage-1)+$index+1 : $index+1}}</td>
+	                    <td>
+                            <label class="i-checks">
+                                <input type="checkbox" ng-model="row.checked" ng-change="checkOne()"><i></i>
+                            </label>
+                        </td>
+	                    <td > {{row.realname}}</td>
+	                    <td > {{row.nickname}}</td>
+	                    <td > {{row.sex == '0' ? '女' : '男'}}</td>
+	                    <td > {{row.mobile}}</td>
+	                    <td > {{row.status1 == '1'?'正常':'禁用'}}</td>
+	                    <td > {{row.remark}}</td>
+	                    <td>
+	                    	<div class="btn-group" dropdown>
+		                    	<button type="button" class="btn btn-default" dropdown-toggle>
+					             	操作 <span class="caret"></span>
+					            </button>
+					            <ul class="dropdown-menu dropdown_menu" role="menu">
+					              <li><a class="btn btn-sm "  power-key="user:update"  ng-click="detail(row.id)">详情</a></li>
+	                              <li><a class="btn btn-sm "  power-key="user:update"  ng-click="update(row.id)">编辑</a></li>
+	                              <li><a class="btn btn-sm "  power-key="user:joindept"  ng-click="joinDept(row.id)">加入部门</a></li>
+	                              <li><a class="btn btn-sm "  power-key="user:joinorg"  ng-click="joinOrg(row.id)">加入企业</a></li>
+	                              <li><a class="btn btn-sm "  power-key="user:joinPark"  ng-click="joinPark(row.id)">加入园区</a></li>
+	                              <li><a class="btn btn-sm "  power-key="user:updatePassword"  ng-click="updatePassword(row)">修改密码</a></li>
+	                              <li><a class="btn btn-sm "  power-key="user:delete"  ng-click="deleteById(row.id,row.status1)">{{ row.status1 == 1?'禁用':'开放' }}</a></li>
+					            </ul>
+					    	</div>
+	                    </td>
+	                </tr>
+                </tbody>
+        	</table>
+        	<tmpagination conf="paginationConf"></tmpagination>
+        </div>
+	 </div>
+	 
+	 
+	 <!-- 数据导入 -->
+	    <div class="modal fade" id="dataImport" tabindex="-1" role="dialog"  >
+		    <div class="modal-dialog" role="document">
+		      <div class="modal-content">
+		         
+		        <div class="modal-header">
+		          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+		            <span aria-hidden="true">&times;</span>
+		          </button>
+		          <h4 class="modal-title" id="exampleRoleLabel">数据导入</h4>
+		        </div>
+		        <div class="modal-body">
+		          <form name="dataImportForm" id="dataImportForm" novalidate style="height: 150px;" class="bs-example form-horizontal" >
+		             <div class="form-group">
+		              <label class="col-lg-3 control-label" translate="">上传文件</label>
+		              <div class="col-lg-9">
+		                <input type="file" name="file" id="fileInput" accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/vnd.ms-excel">
+		              </div>
+		            </div>
+		          </form>
+		        </div>
+		        <div class="modal-footer">
+		        	<span class="text-danger app-aside fail-tip t-l"></span>
+		        	<span class="text-success app-aside success-tip t-l"></span>
+		          <button type="button" class="btn btn-sm btn-warning" data-dismiss="modal" id="close" translate="">关闭</button>
+		          <button type="button" class="btn btn-sm btn-info ng-scope" ng-click="dataImport()" translate="">提交</button>
+		        </div>
+		      </div>
+		    </div>
+	  	</div>
+	  <!-- 数据导入 end-->
+</div>

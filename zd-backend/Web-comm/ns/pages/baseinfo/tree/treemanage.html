@@ -1,0 +1,57 @@
+<crumb title="逻辑树列表" head="true"></crumb>
+<div class="wrapper-md" ng-controller="TTreeManageGrid">
+	 <div class="panel panel-default">
+	 	
+        <div class="panel-heading clearfix">
+          <div class="pull-left">
+          	<form class="form-inline ng-pristine ng-valid" role="form">
+	            <div class="form-group">
+		          <input type="text" class="form-control" placeholder="请输入名称" ng-model="keyword" ng-keypress="search(keyword,$event)"/>
+		        </div>
+		        <button type="submit" class="btn btn-info" ng-click="search(keyword)">搜索</button>
+			  </form>
+          </div>
+          <div class="pull-right">
+        	<button class="btn m-b-xs btn-sm btn-info btn-addon"  power-key="tree:add" ng-click="addNew()">
+            	<i class="fa fa-plus"></i>新增
+            </button>
+          </div>
+         
+        </div>
+        <div class="table-responsive">
+        	<table class="table table-striped b-t b-b">
+        		<thead>
+	                <tr>
+	                    <th style="width:5%" data-breakpoints="xs">序号</th>
+	                    <th style="width:10%" class="text-center">名称</th>
+						<th style="width:10%" class="text-center">类型编码</th>
+						<th style="width:10%" class="text-center">创建时间</th>
+						<th style="width:10%" class="text-center">创建人</th>
+						<th style="width:10%" class="text-center">状态</th>
+						<th style="width:10%" class="text-center">备注</th>
+						<th style="width:10%" class="text-center">操作</th>
+	                </tr>
+                </thead>
+                <tbody>
+	                <tr data-expanded="true" ng-repeat="row in rows">
+	                    <td > {{paginationConf.currentPage ? paginationConf.pageSize*(paginationConf.currentPage-1)+$index+1 : $index+1}}</td>
+	                    <td > {{row.name}}</td>
+	                    <td > {{row.treeCode}}</td>
+	                    <td > {{row.createTime}}</td>
+	                    <td > {{row.createBy}}</td>
+	                    <td > {{row.status1}}</td>
+						<td > {{row.remark}}</td>
+	                    <td >
+							<div class="buttons">
+	                            <button class="btn btn-sm btn-info"  	power-key="tree:update" ng-click="update(row.id)">编辑</button>
+	                            <button class="btn btn-sm btn-info"  	power-key="tree:view"   ng-click="viewTree(row.id)">预览</button>
+	                            <button class="btn btn-sm btn-danger"   power-key="tree:delete" ng-click="deleteById(row.id)">删除</button>
+	                        </div>
+						</td>
+	                </tr>
+                </tbody>
+        	</table>
+        	<tmpagination conf="paginationConf"></tmpagination>
+        </div>
+	 </div>
+</div>

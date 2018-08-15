@@ -1,0 +1,108 @@
+<div class="modal-header">
+    <button type="button" class="close" ng-click="mm.close()"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+    <h4 class="modal-title">{{mm.site.title}}</h4>
+</div>
+<div class="modal-body">
+    <div class="wrapper-md ng-scope">
+	    <form name="Form"  class="form-horizontal form-validation" novalidate>
+	        <div class="form-group">
+	            <label class="col-sm-3 control-label">发送方:</label>
+	             <div class="col-sm-9">
+	             	<span ng-if="mm.site.code == 1 || mm.site.code == 2">
+	            		<input type="text" class="form-control" ng-model="mm.form.resource" ></input>
+	             	</span>
+	             	<span ng-if="mm.site.code == 3">
+	            		<input type="text" class="form-control" ng-model="mm.form.resource" disabled ></input>
+	             	</span>
+	            </div>
+	        </div>
+	        <div class="line line-dashed b-b line-lg"></div>
+	        <div class="form-group">
+	            <label class="col-sm-3 control-label">接收方:</label>
+	             <div class="col-sm-9">
+	             	<span ng-if="mm.site.code == 1 || mm.site.code == 2">
+	            		<input type="text" class="form-control" ng-model="mm.form.acceptor" ></input>
+	             	</span>
+	             	<span ng-if="mm.site.code == 3">
+	            		<input type="text" class="form-control" ng-model="mm.form.acceptor" disabled ></input>
+	             	</span>
+	            </div>
+	        </div>
+	        <div class="line line-dashed b-b line-lg"></div>
+	        <div class="form-group">
+	            <label class="col-sm-3 control-label"><span class="text-danger">*</span>接收接口:</label>
+	             <div class="col-sm-9">
+	             	<span ng-if="mm.site.code == 1 || mm.site.code == 2">
+	            		<input type="text" class="form-control" ng-model="mm.form.acceptorUrl" required ></input>
+	             	</span>
+	             	<span ng-if="mm.site.code == 3">
+	            		<input type="text" class="form-control" ng-model="mm.form.acceptorUrl" disabled ></input>
+	             	</span>
+	            </div>
+	        </div>
+	        <div class="line line-dashed b-b line-lg"></div>
+	        <div class="form-group">
+	            <label class="col-sm-3 control-label"><span class="text-danger">*</span>业务类型:</label>
+	             <div class="col-sm-9">
+	             	<span ng-if="mm.site.code == 1 || mm.site.code == 2">
+	            		<input type="text" class="form-control" ng-model="mm.form.opType" required></input>
+	             	</span>
+	             	<span ng-if="mm.site.code == 3">
+	            		<img alt="" width="50px" height="50px" ng-src="{{mm.form.opType}}">
+	             	</span>
+	            </div>
+	        </div> 
+	        <div class="line line-dashed b-b line-lg"></div>
+	        <div class="form-group">
+	            <label class="col-sm-3 control-label"><span class="text-danger">*</span>业务名称:</label>
+	             <div class="col-sm-9">
+	             	<span ng-if="mm.site.code == 1 || mm.site.code == 2">
+	            		<input type="text" class="form-control" ng-model="mm.form.typeName" required></input>
+	             	</span>
+	             	<span ng-if="mm.site.code == 3">
+	            		<img alt="" width="50px" height="50px" ng-src="{{mm.form.typeName}}">
+	             	</span>
+	            </div>
+	        </div>
+	        <div class="line line-dashed b-b line-lg"></div>
+	        <div class="form-group">
+	            <label class="col-sm-3 control-label">属性匹配JSON:</label>
+	             <div class="col-sm-9">
+	             	<span ng-if="mm.site.code == 1 || mm.site.code == 2">
+	            		<textarea type="text" rows="5" class="form-control" ng-model="mm.form.opAttribute"  ></textarea>
+	             	</span>
+	             	<span ng-if="mm.site.code == 3">
+	            		<textarea type="text" rows="5" class="form-control" ng-model="mm.form.opAttribute" disabled ></textarea>
+	             	</span>
+	            </div>
+	        </div> 
+	       <div class="line line-dashed b-b line-lg"></div>
+	        <div class="form-group">
+	            <label class="col-sm-3 control-label">状态:</label>
+	             <div class="col-sm-9">
+            		<div class="radio col-sm-4">
+		              <label class="i-checks">
+		                <input type="radio"   value="1" ng-model="mm.form.status">
+		                <i></i><span class="m-l-none">启用</span>
+		              </label>
+		            </div>
+		            <div class="radio col-sm-4">
+		              <label class="i-checks">
+		              <input type="radio" value="-1" ng-model="mm.form.status">
+		                <i></i><span class="m-l-none">未启用</span>
+		              </label>
+		            </div>
+	            </div>
+	        </div> 
+	    </form>
+    </div>
+</div>
+<div class="modal-footer">
+    <span ng-if="mm.site.code == 1 || mm.site.code == 2">
+    	<button type="button" class="btn btn-default" ng-click="mm.close()">取消</button>
+    	<button type="button" class="btn btn-info" ng-disabled="Form.$invalid" ng-click="mm.addSave()">提交</button>
+   	</span>
+   	<span ng-if="mm.site.code == 3">
+    	<button type="button" class="btn btn-default" ng-click="mm.close()">关闭</button>
+   	</span>
+</div>

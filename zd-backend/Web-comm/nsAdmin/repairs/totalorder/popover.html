@@ -1,0 +1,163 @@
+<style>
+	.name_details,.time_details,.district_details,.custom_txt {
+		font-size: 12px;
+	}
+	.name_details {
+		width: 244px;
+	}
+	.district_area{
+		width: 200px;
+		border: 1px solid #cfdadd;
+		border-radius: 3px;
+		text-align: center;
+		min-height: 40px; 
+		line-height: 30px;
+		padding:5px;
+	}
+	.district_details {
+		width: 200px;
+		border: 1px solid #cfdadd;
+		border-radius: 3px;
+		min-height: 60px; 
+		line-height: 30px;
+		padding:5px;
+	}
+	.details_title {
+		  border-bottom: 1px solid #e2e2e2;
+		  margin-bottom: 10px;
+		  height: 28px;
+	}
+	.name_details>span{
+		display: inline-block;
+		width: 86.3%;
+		text-align: center;
+		border: 1px solid #cfdadd;
+		height: 30px;
+		line-height: 30px;
+		margin-left: 6px;
+	}
+	.time_details>span{
+		color: #F05050;
+		margin-left: 36px;
+	}
+	.time_details>em{
+		color: #9C9999;
+	}
+	.custom_txt {
+		border: 1px solid #dee5e7;
+		width: 470px;
+		border-radius: 5px;
+		height: 30px;
+		line-height: 30px;
+		padding: 0px 12px;
+		margin-bottom: 5px;
+		margin-top: 20px;
+	}
+	.custom_txt>div {
+		display: inline-block;
+	}
+	.custom_txt>div:first-child {
+		float: left;
+	}
+	.custom_txt>div:last-child {
+		float: right;
+	}
+	.custom_txtstyle {
+		color: #868686;
+		margin-left: 45px;
+	}
+	.custom_time {
+		margin-bottom: 25px;
+	}
+	.tool_kit{
+		border: 2px dashed #F7A7A7;
+		padding: 2px;
+	} 
+</style>
+
+<div class="text-danger" ng-if="type==0"
+ 	data-container="body" 
+ 	data-toggle="popover"
+  	data-placement="bottom"
+  	data-html="true" 
+  	data-content='
+  		<div class="details_title">{{title}}</div>
+	  	<div class="name_details">电话:<span>{{otherdata}}</span></div>
+  	' 
+  	data-trigger="hover"><span class="tool_kit" ng-if="dataContent">{{dataContent}}</span>
+</div>
+
+<div ng-if="type==1"
+ 	data-container="body" 
+ 	data-toggle="popover"
+  	data-placement="bottom"
+  	data-html="true" 
+  	data-content='
+  		<div class="details_title">{{title}}</div>
+	  	<div class="district_area">{{otherdata}}</div>
+  	' 
+  	data-trigger="hover"><span class="tool_kit" ng-if="dataContent">{{dataContent}}</span>
+</div>
+
+<div ng-if="type==2"
+ 	data-container="body" 
+ 	data-toggle="popover"
+  	data-placement="auto bottom"
+  	data-html="true" 
+  	data-content='
+  		<div class="details_title">{{title}}</div>
+	  	<div class="district_details">{{dataContent}}</div>
+  	'
+  	data-trigger="hover"><span class="tool_kit" ng-if="dataContent" >{{dataContent | limitTo:12 }}</span>
+</div>
+
+<div data-id="lbxs" ng-if="type==3"
+ 	data-container="body" 
+ 	data-toggle="popover"
+  	data-placement="auto bottom"
+  	data-html="true" 
+  	data-content='{{otherdata}}' 
+  	data-trigger="hover"><span class="tool_kit" ng-if="dataContent" ng-focus="action">{{dataContent}}</span>
+</div>
+
+<!-- 
+
+<div ng-if="type==3"
+ 	data-container="body" 
+ 	data-toggle="popover"
+  	data-placement="auto bottom"
+  	data-html="true" 
+  	data-content='
+  		<div class="details_title">{{otherdata[0].orderStatusName}}</div>
+  		<div class="pop{{otherdata[0].id}}">
+		  	<div class="custom_txt">
+	    		<div>
+	    			<span>{{item.processUserTypeName}}  {{item.processUserName}}</span>
+	    			<span class="custom_txtstyle">{{item.prefixContent}}</span>
+	    		</div>
+	    		<div>
+	    			<span>操作：<em style="color: #ff9900;">{{item.operateRemark}}</em></span>
+	    		</div>
+	    	</div>
+	    	<div style="clear: both;"></div>
+	    	<span class="custom_time">{{item.processTime}}</span>
+    	</div>
+  	' 
+  	data-trigger="hover"><span class="tool_kit" ng-if="dataContent" ng-focus="action">{{dataContent}}</span>
+</div>
+
+ -->
+
+
+<div ng-if="type==4"
+ 	data-container="body" 
+ 	data-toggle="popover"
+  	data-placement="bottom"
+  	data-html="true" 
+  	data-content='
+  		<div class="details_title">{{title}}</div>
+	  	<div class="time_details" ng-if="otherdata">{{otherdata.planFinishTime}}<span>{{otherdata.overtimeFlag}}</span></div>
+  	' 
+  	data-trigger="hover"><span class="tool_kit" ng-if="dataContent">{{dataContent}}</span>
+</div>
+	                    

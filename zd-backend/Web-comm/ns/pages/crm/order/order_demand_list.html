@@ -1,0 +1,57 @@
+<crumb title="管理" head="true"></crumb>
+<div class="wrapper-md" ng-controller="CrmOrderDemandGrid">
+	 <div class="panel panel-default">
+	 	
+        <div class="panel-heading">
+            <button class="btn m-b-xs btn-sm btn-info btn-addon" ng-click="addNew()"><!--  power-key="transact:add"  -->
+            	<i class="fa fa-plus"></i>新增
+            </button>
+        </div>
+        <div class="panel-heading">
+          <form class="form-inline ng-pristine ng-valid" role="form">
+            <div class="form-group">
+	          <input type="text" class="form-control" placeholder="请输入联系人或电话" ng-model="keyword" ng-keypress="search(keyword,$event)"/>
+	        </div>
+	        <button type="submit" class="btn btn-info" ng-click="search(keyword)">搜索</button>
+		  </form>
+        </div>
+        <div class="table-responsive">
+        	<table class="table table-striped b-t b-b">
+        		<thead>
+	                <tr>
+	                    <th style="width:5%" data-breakpoints="xs">ID</th>
+	                    <th style="width:10%" class="text-center">联系人</th>
+	                    <th style="width:10%" class="text-center">联系电话</th>
+	                    <th style="width:5%" class="text-center">户型</th>
+	                    <th style="width:10%" class="text-center">价格范围 </th>
+	                    <th style="width:10%" class="text-center">面积范围</th>
+	                    <th style="width:10%" class="text-center">装修要求</th>
+	                    <th style="width:10%" class="text-center">入驻时间</th>
+	                    <th style="width:10%" class="text-center">创建时间</th>
+	                    <th style="width:15%" class="text-center" data-breakpoints="xs" >操作</th>
+	                </tr>
+                </thead>
+                <tbody>
+	                <tr data-expanded="true" ng-repeat="row in rows">
+	                    <td > {{paginationConf.currentPage ? paginationConf.pageSize*(paginationConf.currentPage-1)+$index+1 : $index+1}}</td>
+	                    <td > {{row.custimerName}}</td>
+	                    <td > {{row.linkPhone}}</td>
+	                    <td > {{row.houseType}}</td>
+	                    <td > {{row.priceScope}}</td>
+	                    <td > {{row.areaScope}}</td>
+	                    <td > {{row.decoration}}</td>
+	                    <td > {{row.joinDate}}</td>
+	                    <td > {{row.createTime}}</td>
+	                    <td>
+	                        <div class="buttons">
+	                            <button class="btn btn-sm btn-info"  ng-click="update(row.id)">编辑</button>
+	                            <button class="btn btn-sm btn-danger"  ng-click="deleteById(row.id)">删除</button>
+	                        </div>
+	                    </td>
+	                </tr>
+                </tbody>
+        	</table>
+        	<tmpagination conf="paginationConf"></tmpagination>
+        </div>
+	 </div>
+</div>

@@ -1,0 +1,60 @@
+<crumb title="下级园区管理" head="true"></crumb>
+<div class="wrapper-md" ng-controller="ChildParkGrid">
+	 <div class="panel panel-default">
+	 	
+        
+        <div class="panel-heading clearfix">
+        	<div class="pull-left">
+          <form class="form-inline ng-pristine ng-valid" role="form">
+            <div class="form-group">
+	          <input type="text" class="form-control" placeholder="请输入用户名或者昵称" ng-model="keyword" ng-keypress="search(keyword,$event)"/>
+	        </div>
+	        <button type="submit" class="btn btn-info" ng-click="search(keyword)">搜索</button>
+		  </form>
+		  </div>
+		  <div class="pull-right">
+            <button class="btn m-b-xs btn-sm btn-info btn-addon" power-key="park:add" ng-click="addNew()">
+            	<i class="fa fa-plus"></i>新增
+            </button>
+        </div>
+        </div>
+        <div class="table-responsive">
+        	<table class="table table-striped b-t b-b">
+        		<thead>
+	                <tr>
+	                    <th style="width:5%" data-breakpoints="xs">ID</th>
+	                    <th style="width:10%" class="text-center">园区名称</th>
+	                  <!--   <th style="width:10%" class="text-center">状态</th> -->
+	                    <th style="width:10%" class="text-center">是否初始化</th>
+	                    <th style="width:10%" class="text-center">园区部署类型 </th>
+	                    <th style="width:10%" class="text-center">备注</th>
+	                    <th style="width:10%" class="text-center" data-breakpoints="xs" >操作</th>
+	                </tr>
+                </thead>
+                <tbody>
+	                <tr data-expanded="true" ng-repeat="row in rows">
+	                    <td > {{paginationConf.currentPage ? paginationConf.pageSize*(paginationConf.currentPage-1)+$index+1 : $index+1}}</td>
+	                    <td > {{row.name}}</td>
+	                    <!-- <td > {{row.status1==1?"正常":'禁用'}}</td> -->
+	                    <td > {{row.isInit}}</td>
+	                    <td > </td>
+	                    <td > {{row.remark}}</td>
+	                    <td>
+	                    	<div class="btn-group" dropdown>
+		                    	<button type="button" class="btn btn-default" dropdown-toggle>
+					             	操作 <span class="caret"></span>
+					            </button>
+					            <ul class="dropdown-menu dropdown_menu" role="menu">
+					              <li><a class="btn btn-sm"  power-key="park:update"  ng-click="update(row.id)">修改</a></li>
+		                          <li><a class="btn btn-sm"  power-key="park:show"  ng-click="parkUsers(row.id)">园区成员</a></li>
+		                          <li><a class="btn btn-sm"  power-key="park:delete"  ng-click="deleteById(row.id)">删除</a></li>
+					            </ul>
+					    	</div>
+	                    </td>
+	                </tr>
+                </tbody>
+        	</table>
+        	<tmpagination conf="paginationConf"></tmpagination>
+        </div>
+	 </div>
+</div>

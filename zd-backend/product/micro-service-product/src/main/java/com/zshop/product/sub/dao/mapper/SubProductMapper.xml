@@ -1,0 +1,449 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zshop.product.sub.dao.mapper.SubProductMapper">
+
+<!-- **************以下映射必须与数据库一致 不要更改，除非数据库改变**************** -->
+
+	<insert id="insert" useGeneratedKeys="true" keyProperty="id" parameterType="com.zshop.product.sub.entity.SubProduct">
+				
+		insert into zs_sub_product
+		(
+			MAIN_PRODUCT_ID,
+			PRODUCT_CODE,
+			BAR_CODE,
+			PROPERTY,
+			POST_TIME,
+			ON_SALE,
+			AUDIT_FLAG,
+			ALIVEFLAG,
+			ON_SALE_TIME,
+			OFF_SALE_TIME,
+			PF_ON_SALE,
+			PF_ON_SALE_TIME,
+			PF_OFF_SALE_TIME,
+			IS_INVOICE,
+			PRODUCT_TYPE,
+			SOURCE_ID,
+			IS_DEL,
+			CREATE_BY,
+			CREATE_TIME,
+			UPDATE_BY,
+			UPDATE_TIME,
+			BID,
+			SORT,
+			IS_MAIN_SKU,
+			PARAM1,
+			PARAM2,
+			PARAM3,
+			PARAM4,
+			PARAM5,
+			AREA_MASK,
+			BUSINESS_MASK,
+			LEVEL_MASK
+		)
+		values	
+		(	
+			#{mainProductId},
+			#{productCode},
+			#{barCode},
+			#{property},
+			#{postTime},
+			#{onSale},
+			#{auditFlag},
+			#{aliveflag},
+			#{onSaleTime},
+			#{offSaleTime},
+			#{pfOnSale},
+			#{pfOnSaleTime},
+			#{pfOffSaleTime},
+			#{isInvoice},
+			#{productType},
+			#{sourceId},
+			#{isDel},
+			#{createBy},
+			#{createTime},
+			#{updateBy},
+			#{updateTime},
+			#{bid},
+			#{sort},
+			#{isMainSku},
+			#{param1},
+			#{param2},
+			#{param3},
+			#{param4},
+			#{param5},
+			#{areaMask},
+			#{businessMask},
+			#{levelMask}
+		)	
+
+	</insert>
+	
+	<delete id="deleteById" parameterType="java.lang.Integer">
+		delete from zs_sub_product 	
+		WHERE ID=#{id}
+	</delete>
+	
+	<delete id="deleteByIds" parameterType="java.util.Collection">
+     	delete from zs_sub_product 	
+     	WHERE ID IN
+     	<foreach collection="array" index="index" item="item" open="(" separator="," close=")"> #{item} </foreach> 
+  	 </delete>
+  	 
+  	 <delete id="logicDelete" parameterType="java.lang.Integer">
+		update zs_sub_product set status1 = '-1' 	
+		WHERE ID=#{id}
+	</delete>
+	
+	<delete id="logicDeleteByIds" parameterType="java.util.Collection">
+     	update zs_sub_product set status1 = '-1' 	
+     	WHERE ID IN
+     	<foreach collection="array" index="index" item="item" open="(" separator="," close=")"> #{item} </foreach> 
+  	 </delete>
+	
+	<update id="update" parameterType="com.zshop.product.sub.entity.SubProduct" >
+			
+		update zs_sub_product 	
+		<set> 	
+			MAIN_PRODUCT_ID=#{mainProductId},
+			PRODUCT_CODE=#{productCode},
+			BAR_CODE=#{barCode},
+			PROPERTY=#{property},
+			POST_TIME=#{postTime},
+			ON_SALE=#{onSale},
+			AUDIT_FLAG=#{auditFlag},
+			ALIVEFLAG=#{aliveflag},
+			ON_SALE_TIME=#{onSaleTime},
+			OFF_SALE_TIME=#{offSaleTime},
+			PF_ON_SALE=#{pfOnSale},
+			PF_ON_SALE_TIME=#{pfOnSaleTime},
+			PF_OFF_SALE_TIME=#{pfOffSaleTime},
+			IS_INVOICE=#{isInvoice},
+			PRODUCT_TYPE=#{productType},
+			SOURCE_ID=#{sourceId},
+			IS_DEL=#{isDel},
+			CREATE_BY=#{createBy},
+			CREATE_TIME=#{createTime},
+			UPDATE_BY=#{updateBy},
+			UPDATE_TIME=#{updateTime},
+			BID=#{bid},
+			SORT=#{sort},
+			IS_MAIN_SKU=#{isMainSku},
+			PARAM1=#{param1},
+			PARAM2=#{param2},
+			PARAM3=#{param3},
+			PARAM4=#{param4},
+			PARAM5=#{param5},
+			AREA_MASK=#{areaMask},
+			BUSINESS_MASK=#{businessMask},
+			LEVEL_MASK=#{levelMask}
+		</set> 	
+		where 
+		ID=#{id} 	
+
+	</update>
+	
+	<update id="updateWithIf" parameterType="com.zshop.product.sub.entity.SubProduct" >
+			
+		update zs_sub_product 	
+		<set> 	
+			<if test=" mainProductId!=null ">	
+				MAIN_PRODUCT_ID=#{mainProductId},	
+			</if>	
+			<if test=" productCode!=null ">	
+				PRODUCT_CODE=#{productCode},	
+			</if>	
+			<if test=" barCode!=null ">	
+				BAR_CODE=#{barCode},	
+			</if>	
+			<if test=" property!=null ">	
+				PROPERTY=#{property},	
+			</if>	
+			<if test=" postTime!=null ">	
+				POST_TIME=#{postTime},	
+			</if>	
+			<if test=" onSale!=null ">	
+				ON_SALE=#{onSale},	
+			</if>	
+			<if test=" auditFlag!=null ">	
+				AUDIT_FLAG=#{auditFlag},	
+			</if>	
+			<if test=" aliveflag!=null ">	
+				ALIVEFLAG=#{aliveflag},	
+			</if>	
+			<if test=" onSaleTime!=null ">	
+				ON_SALE_TIME=#{onSaleTime},	
+			</if>	
+			<if test=" offSaleTime!=null ">	
+				OFF_SALE_TIME=#{offSaleTime},	
+			</if>	
+			<if test=" pfOnSale!=null ">	
+				PF_ON_SALE=#{pfOnSale},	
+			</if>	
+			<if test=" pfOnSaleTime!=null ">	
+				PF_ON_SALE_TIME=#{pfOnSaleTime},	
+			</if>	
+			<if test=" pfOffSaleTime!=null ">	
+				PF_OFF_SALE_TIME=#{pfOffSaleTime},	
+			</if>	
+			<if test=" isInvoice!=null ">	
+				IS_INVOICE=#{isInvoice},	
+			</if>	
+			<if test=" productType!=null ">	
+				PRODUCT_TYPE=#{productType},	
+			</if>	
+			<if test=" sourceId!=null ">	
+				SOURCE_ID=#{sourceId},	
+			</if>	
+			<if test=" isDel!=null ">	
+				IS_DEL=#{isDel},	
+			</if>	
+			<if test=" createBy!=null ">	
+				CREATE_BY=#{createBy},	
+			</if>	
+			<if test=" createTime!=null ">	
+				CREATE_TIME=#{createTime},	
+			</if>	
+			<if test=" updateBy!=null ">	
+				UPDATE_BY=#{updateBy},	
+			</if>	
+			<if test=" updateTime!=null ">	
+				UPDATE_TIME=#{updateTime},	
+			</if>	
+			<if test=" bid!=null ">	
+				BID=#{bid},	
+			</if>	
+			<if test=" sort!=null ">	
+				SORT=#{sort},	
+			</if>	
+			<if test=" isMainSku!=null ">	
+				IS_MAIN_SKU=#{isMainSku},	
+			</if>	
+			<if test=" param1!=null ">	
+				PARAM1=#{param1},	
+			</if>	
+			<if test=" param2!=null ">	
+				PARAM2=#{param2},	
+			</if>	
+			<if test=" param3!=null ">	
+				PARAM3=#{param3},	
+			</if>	
+			<if test=" param4!=null ">	
+				PARAM4=#{param4},	
+			</if>	
+			<if test=" param5!=null ">	
+				PARAM5=#{param5},	
+			</if>	
+			<if test=" areaMask!=null ">	
+				AREA_MASK=#{areaMask},	
+			</if>	
+			<if test=" businessMask!=null ">	
+				BUSINESS_MASK=#{businessMask},	
+			</if>	
+			<if test=" levelMask!=null ">	
+				LEVEL_MASK=#{levelMask},	
+			</if>	
+		</set>	
+		where 	
+		ID=#{id} 	
+
+	</update>
+	
+	<!-- *************************************************************************** -->
+	<!-- **************以下映射根据业务做相应调整**************** -->
+	<!-- *************************************************************************** -->
+  	
+  	<delete id="deleteByMap" parameterType="java.util.Map">
+    	delete from zs_sub_product 	 
+    	<where>
+    		
+    	</where>
+  	</delete>
+	
+	<select id="findById" parameterType="java.lang.Integer" resultType="com.zshop.product.sub.entity.SubProduct">
+				
+		select  	
+			a.ID id,
+			a.MAIN_PRODUCT_ID mainProductId,
+			a.PRODUCT_CODE productCode,
+			a.BAR_CODE barCode,
+			a.PROPERTY property,
+			a.POST_TIME postTime,
+			a.ON_SALE onSale,
+			a.AUDIT_FLAG auditFlag,
+			a.ALIVEFLAG aliveflag,
+			a.ON_SALE_TIME onSaleTime,
+			a.OFF_SALE_TIME offSaleTime,
+			a.PF_ON_SALE pfOnSale,
+			a.PF_ON_SALE_TIME pfOnSaleTime,
+			a.PF_OFF_SALE_TIME pfOffSaleTime,
+			a.IS_INVOICE isInvoice,
+			a.PRODUCT_TYPE productType,
+			a.SOURCE_ID sourceId,
+			a.IS_DEL isDel,
+			a.CREATE_BY createBy,
+			a.CREATE_TIME createTime,
+			a.UPDATE_BY updateBy,
+			a.UPDATE_TIME updateTime,
+			a.BID bid,
+			a.SORT sort,
+			a.IS_MAIN_SKU isMainSku,
+			a.PARAM1 param1,
+			a.PARAM2 param2,
+			a.PARAM3 param3,
+			a.PARAM4 param4,
+			a.PARAM5 param5,
+			a.AREA_MASK areaMask,
+			a.BUSINESS_MASK businessMask,
+			a.LEVEL_MASK levelMask
+		from zs_sub_product a	
+
+		where a.Id=#{id}	
+	</select>
+
+	<select id="findListByMap" parameterType="java.util.Map" resultType="com.zshop.product.sub.entity.SubProduct">
+		
+				
+		select  	
+			a.ID id,
+			a.MAIN_PRODUCT_ID mainProductId,
+			a.PRODUCT_CODE productCode,
+			a.BAR_CODE barCode,
+			a.PROPERTY property,
+			a.POST_TIME postTime,
+			a.ON_SALE onSale,
+			a.AUDIT_FLAG auditFlag,
+			a.ALIVEFLAG aliveflag,
+			a.ON_SALE_TIME onSaleTime,
+			a.OFF_SALE_TIME offSaleTime,
+			a.PF_ON_SALE pfOnSale,
+			a.PF_ON_SALE_TIME pfOnSaleTime,
+			a.PF_OFF_SALE_TIME pfOffSaleTime,
+			a.IS_INVOICE isInvoice,
+			a.PRODUCT_TYPE productType,
+			a.SOURCE_ID sourceId,
+			a.IS_DEL isDel,
+			a.CREATE_BY createBy,
+			a.CREATE_TIME createTime,
+			a.UPDATE_BY updateBy,
+			a.UPDATE_TIME updateTime,
+			a.BID bid,
+			a.SORT sort,
+			a.IS_MAIN_SKU isMainSku,
+			a.PARAM1 param1,
+			a.PARAM2 param2,
+			a.PARAM3 param3,
+			a.PARAM4 param4,
+			a.PARAM5 param5,
+			a.AREA_MASK areaMask,
+			a.BUSINESS_MASK businessMask,
+			a.LEVEL_MASK levelMask
+		from zs_sub_product a	
+
+		
+		<where>
+			
+		</where>
+
+	</select>
+	
+	<select id="list" parameterType="java.util.Map" resultType="com.zshop.product.sub.entity.SubProduct">
+		
+		
+				
+		select  	
+			a.ID id,
+			a.MAIN_PRODUCT_ID mainProductId,
+			a.PRODUCT_CODE productCode,
+			a.BAR_CODE barCode,
+			a.PROPERTY property,
+			a.POST_TIME postTime,
+			a.ON_SALE onSale,
+			a.AUDIT_FLAG auditFlag,
+			a.ALIVEFLAG aliveflag,
+			a.ON_SALE_TIME onSaleTime,
+			a.OFF_SALE_TIME offSaleTime,
+			a.PF_ON_SALE pfOnSale,
+			a.PF_ON_SALE_TIME pfOnSaleTime,
+			a.PF_OFF_SALE_TIME pfOffSaleTime,
+			a.IS_INVOICE isInvoice,
+			a.PRODUCT_TYPE productType,
+			a.SOURCE_ID sourceId,
+			a.IS_DEL isDel,
+			a.CREATE_BY createBy,
+			a.CREATE_TIME createTime,
+			a.UPDATE_BY updateBy,
+			a.UPDATE_TIME updateTime,
+			a.BID bid,
+			a.SORT sort,
+			a.IS_MAIN_SKU isMainSku,
+			a.PARAM1 param1,
+			a.PARAM2 param2,
+			a.PARAM3 param3,
+			a.PARAM4 param4,
+			a.PARAM5 param5,
+			a.AREA_MASK areaMask,
+			a.BUSINESS_MASK businessMask,
+			a.LEVEL_MASK levelMask
+		from zs_sub_product a	
+
+		
+		<where>
+			<if test="searchKeys!= null ">
+				AND ( 1=2
+				<foreach collection="searchKeys" index="index" item="item" >
+					 OR a.id like #{item}
+				</foreach> 
+				)
+			</if>
+		</where>
+
+		
+	</select>
+	
+	<select id="findOneByMap" parameterType="java.util.Map" resultType="com.zshop.product.sub.entity.SubProduct">
+				
+		select  	
+			a.ID id,
+			a.MAIN_PRODUCT_ID mainProductId,
+			a.PRODUCT_CODE productCode,
+			a.BAR_CODE barCode,
+			a.PROPERTY property,
+			a.POST_TIME postTime,
+			a.ON_SALE onSale,
+			a.AUDIT_FLAG auditFlag,
+			a.ALIVEFLAG aliveflag,
+			a.ON_SALE_TIME onSaleTime,
+			a.OFF_SALE_TIME offSaleTime,
+			a.PF_ON_SALE pfOnSale,
+			a.PF_ON_SALE_TIME pfOnSaleTime,
+			a.PF_OFF_SALE_TIME pfOffSaleTime,
+			a.IS_INVOICE isInvoice,
+			a.PRODUCT_TYPE productType,
+			a.SOURCE_ID sourceId,
+			a.IS_DEL isDel,
+			a.CREATE_BY createBy,
+			a.CREATE_TIME createTime,
+			a.UPDATE_BY updateBy,
+			a.UPDATE_TIME updateTime,
+			a.BID bid,
+			a.SORT sort,
+			a.IS_MAIN_SKU isMainSku,
+			a.PARAM1 param1,
+			a.PARAM2 param2,
+			a.PARAM3 param3,
+			a.PARAM4 param4,
+			a.PARAM5 param5,
+			a.AREA_MASK areaMask,
+			a.BUSINESS_MASK businessMask,
+			a.LEVEL_MASK levelMask
+		from zs_sub_product a	
+
+		<where>
+		
+		</where>
+		limit 1
+	</select>
+</mapper>
+	

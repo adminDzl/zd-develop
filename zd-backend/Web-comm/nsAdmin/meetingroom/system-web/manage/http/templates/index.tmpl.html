@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html ng-app="wabgApp">
+
+<head>
+        <base href="/">
+    <meta charset="UTF-8">
+    <title>{{title}}</title>
+    <style>
+        .ng-cloak {
+            display: none;
+        }
+    </style>
+    <Script>
+        window.baseUrl = '/meeting-room/';
+        window.payNoitfy = 'http://10.20.1.149:8080/meetroom/admin/index.html';
+    </Script>
+</head>
+
+<body class="smart">
+    <div>       
+        <ui-view></ui-view>
+    </div>
+</body>
+ 
+</html>

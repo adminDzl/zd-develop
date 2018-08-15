@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<head>
+	<meta charset="utf-8">
+	<title>CC+管理后台</title>
+	<script src="common/thrid/libs/jquery/jquery-1.9.1.min.js"></script>
+	<link rel="stylesheet" href="common/thrid/libs/jquery/bootstrap/dist/css/bootstrap.css" type="text/css"/>
+	<link rel="stylesheet" href="common/thrid/src/css/public.css" type="text/css"/>
+    <script src="common/thrid/libs/jquery/layer/layer.js"></script>
+</head>
+<body class="signinLogin">
+	<div  id="login">
+		<div class="row">
+	      	<div class="form-signin">
+	        	<h2 class="form-signin-heading">管理系统登录</h2>
+	        	<input type="text" name="mobile" class="input-block-level" placeholder="手机号码">
+	        	<input type="password" name="password" class="input-block-level" placeholder="密码">
+	        	<a href = "register.html">注册</a>
+	        	
+	        	<a class="weixin" href="https://open.weixin.qq.com/connect/qrconnect?appid=wx8f33e40d5f9c5053&redirect_uri=http://arch-test.yuanqu.cc/security/weixin/oauthLogin&response_type=code&scope=snsapi_login&state=http://arch-test.yuanqu.cc/admin/login.html#wechat_redirect">微信登录</a>
+	        	<button class="btn btn-large btn-primary" onclick="login()" type="submit">登录</button>
+	      	</div>
+	    </div> 
+	</div>
+</body>
+<script type="text/javascript">
+	$(function(){
+		
+		$("body").keydown(function() {
+			  if (event.keyCode == "13") {//keyCode=13是回车键
+			    $('.btn.btn-large.btn-primary').click();
+			  }
+		});  
+		
+	});
+	
+	function getParam(name) {
+	    var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象
+	    var r = window.location.search.substr(1).match(reg);  //匹配目标参数
+	    if (r != null) return unescape(r[2]);
+	    return null; //返回参数值
+	}
+	
+	function wxlogin(){
+		var token = getParam("token");
+		if(token){
+			localStorage.token = token;
+			window.location.href = "index.html";
+		}
+	}
+	wxlogin();
+	function login(){
+		 var mobile = $("input[name='mobile']").val();
+		 var password = $("input[name='password']").val();
+		 if(mobile.length<=0 || password.length<=0){
+			layer.open({
+		    	content: "请输入手机号码或者密码！",
+		        style: 'background-color:#333; color:#fff; border:none;background:rgba(0, 0, 0, 0.7);',
+		        time: 2
+		    });
+		 	return;
+		 }
+
+		 var sendData = {name:mobile,password:password,from:"PC"};
+		 $.ajax({
+			type : "post",
+			url : "http://192.168.91.103:8080/security/user/login",
+			data : sendData,
+			dataType: "json",
+			success : function(data) {
+				if (data.result) {
+					console.log('登录成功!');
+					console.log(data);
+					localStorage.token = data.data.token;
+					window.location.href = "index.html";
+				}else{
+					//$("#remark").text("mobile and password is error!");
+					layer.open({
+				    	content: data.message,
+				        style: 'background-color:#333; color:#fff; border:none;background:rgba(0, 0, 0, 0.7);',
+				        time: 2
+				    });
+				}
+			},
+			error : function(XMLHttpRequest, textStatus, errorThrown) {
+				alert(errorThrown);
+			}
+		});
+		 
+	};
+
+</script>
+
+</html>

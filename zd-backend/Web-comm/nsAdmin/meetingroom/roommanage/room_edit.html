@@ -1,0 +1,125 @@
+	<crumb title="场地详情"></crumb>
+                
+ <div ng-controller="MeetingManageGridEdit">      
+ 	
+ 	{{site.id}}
+	<div class="wrapper-md ng-scope" >
+		<div class="row">
+			<div class="col-lg-12">
+				<tabset class="tab-container">
+					<tab active="tabs[0]">
+						<tab-heading>
+							<i class="glyphicon glyphicon-info-sign"></i> 创建场地
+						</tab-heading>
+						<form name="subForm" class="form-horizontal" novalidate="novalidate">
+							
+							<input type="hidden" name="id"  value="{{entity.id}}" />
+							<div class="form-group">
+				                <label class="col-sm-2 control-label"><span class="text-danger m-r">*</span>场地名称：</label>
+				                <div class="col-sm-10">
+				                    <input type="text" class="form-control" name="name" ng-model="instance.entity.name" value="{{entity.name}}">
+				                </div>								
+							</div>
+							<div class="line line-dashed b-b line-lg"></div>
+							<div class="form-group">
+				                <label class="col-sm-2 control-label"><span class="text-danger m-r">*</span>地址：</label>
+				                <div class="col-sm-10">
+				                	<input type="text" class="form-control" name="address" ng-model="instance.roomModal.address" ng-blur="validateName()" value="{{entity.address}}">
+				                </div>								
+							</div>	
+							<div class="form-group">
+				                <label class="col-sm-2 control-label"><span class="text-danger m-r">*</span>场地类型：</label>
+				                <div class="col-sm-10">
+				                	<input type="text" class="form-control" name="roomType" ng-model="instance.roomModal.roomType" ng-blur="validateName()" value="{{entity.roomType}}">
+				                </div>								
+							</div>
+							<div class="form-group">
+				                <label class="col-sm-2 control-label"><span class="text-danger m-r">*</span>场地用途：</label>
+				                <div class="col-sm-10">
+				                	<input type="text" class="form-control" name="useType" ng-model="instance.roomModal.useType" ng-blur="validateName()" value="{{entity.useType}}">
+				                </div>								
+							</div>
+							<div class="line line-dashed b-b line-lg"></div>
+							<div class="form-group">
+				                <label class="col-sm-2 control-label"><span class="text-danger m-r">*</span>场地面积：</label>
+				                <div class="col-sm-10">
+				                	<input type="text" class="form-control" name="acreage" ng-model="instance.roomModal.acreage" ng-blur="validateName()" value="{{entity.acreage}}">
+				                </div>								
+							</div>
+							<div class="line line-dashed b-b line-lg"></div>
+							<div class="form-group">
+				                <label class="col-sm-2 control-label"><span class="text-danger m-r">*</span>摆放形式：</label>
+				                <div class="col-sm-10">
+				                	摆放类型<input type="text" class="form-control" name="layType" ng-model="instance.roomModal.layType" ng-blur="validateName()" value="{{entity.layType}}">
+				                	人数<input type="text" class="form-control" name="layTypeNum" ng-model="instance.roomModal.layTypeNum" ng-blur="validateName()" value="{{entity.layTypeNum}}">
+				                </div>								
+							</div>
+							<div class="line line-dashed b-b line-lg"></div>
+							<div class="form-group">
+				                <label class="col-sm-2 control-label"><span class="text-danger m-r">*</span>场地时间：</label>
+				                <div class="col-sm-10">
+				                	<input type="text" class="form-control" name="openStartTime" ng-model="instance.roomModal.openStartTime" ng-blur="validateName()" value="{{entity.openStartTime}}">
+				                	<input type="text" class="form-control" name="openEndTime" ng-model="instance.roomModal.openEndTime" ng-blur="validateName()" value="{{entity.openEndTime}}">
+				                </div>								
+							</div>
+							<div class="line line-dashed b-b line-lg"></div>
+							<div class="form-group">
+				                <label class="col-sm-2 control-label"><span class="text-danger m-r">*</span>场地图片：</label>
+				                <div class="col-sm-10">
+				                	<input type="text" class="form-control" name="pic" ng-model="instance.roomModal.pic" ng-blur="validateName()" value="{{entity.pic}}">
+				                </div>								
+							</div>
+							<div class="line line-dashed b-b line-lg"></div>
+							<div class="form-group">
+				                <label class="col-sm-2 control-label">场地介绍信息：</label>
+				                <div class="col-sm-10">
+				                	<input type="text" class="form-control" name="description" ng-model="instance.roomModal.description" ng-blur="validateName()" value="{{entity.description}}">
+				                </div>								
+							</div>
+							<div class="line line-dashed b-b line-lg"></div>
+							<div class="form-group">
+				                <label class="col-sm-2 control-label">联系电话：</label>
+				                <div class="col-sm-10">
+				                	<input type="text" class="form-control" name="tel" ng-model="instance.roomModal.tel" ng-blur="validateName()" value="{{entity.tel}}">
+				                </div>								
+							</div>
+							<div class="line line-dashed b-b line-lg"></div>
+							<div class="form-group">
+				                <label class="col-sm-2 control-label">微信号：</label>
+				                <div class="col-sm-10">
+				                	<input type="text" class="form-control" name="weChat" ng-model="instance.roomModal.weChat" ng-blur="validateName()" value="{{entity.weChat}}">
+				                </div>								
+							</div>
+							<div class="line line-dashed b-b line-lg"></div>
+							<div class="form-group">
+				                <label class="col-sm-2 control-label">是否开启外屏展示：</label>
+				                <div class="col-sm-10">
+				                	<input type="text" class="form-control" name="isDisplay" ng-model="instance.roomModal.isDisplay" ng-blur="validateName()" value="{{entity.isDisplay}}">
+				                </div>								
+							</div>
+							<div class="line line-dashed b-b line-lg"></div>
+							<div class="form-group">
+				                <label class="col-sm-2 control-label"></label>
+				                <div class="col-sm-10 ">
+								   <button type="submit" class="btn btn-info padder-lg" ng-click="baseFormSubmit()">保存</button>
+				                </div>								
+							</div>								
+						</form>
+					</tab>
+					<tab ng-click="validateSaveBase()" active="tabs[2]">
+						<tab-heading>
+							<i class="glyphicon glyphicon-list"></i> 提供物品
+						</tab-heading>
+		                <div ng-include="'../nsAdmin/meetingroom/roommanage/room_things.html'"></div>
+					</tab>
+					<tab ng-click="validateSaveBase()" active="tabs[3]">
+			            <tab-heading>
+			              <i class="glyphicon glyphicon-bell"></i> 审核设置
+			            </tab-heading>
+						<div ng-include="'../nsAdmin/meetingroom/roommanage/room_audit.html'"></div>
+					</tab>
+				</tabset>
+			</div>
+		</div>
+	</div>
+</div>

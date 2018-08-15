@@ -1,0 +1,27 @@
+<crumb title="数据图表" head="true"></crumb>
+<div class="wrapper-md" ng-controller="TAnalysisGrid">
+	
+	
+	 	<div class="col-md-6" ng-repeat="en in list">
+	 		<div class="panel panel-default">
+			 	<div class="panel-heading font-bold">{{en.name}}</div>
+			 	<div class="panel-body" >
+			 		<ng-echarts ec-config="yearConfig" ec-option="en.tableInfo" style="width: 600px;height:400px;"></ng-echarts>
+			 	</div>
+			 </div>
+	 	</div>
+	
+	 <!-- 	<div class="col-md-6">
+	 		<div class="panel panel-default">
+			 	<div class="panel-heading font-bold">企业类别问题类型分布</div>
+			 	<div class="panel-body" >
+			 		<ng-echarts ec-config="yearConfig" ec-option="problemNum" style="width:600px;height:400px;"></ng-echarts>
+			 	</div>
+			 </div>
+	 	</div>
+	 -->
+	 
+	 
+</div>
+
+

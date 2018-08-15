@@ -1,0 +1,134 @@
+<div class="modal-header">
+    <button type="button" class="close" ng-click="close()"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+    <h4 class="modal-title">{{site.title}}</h4>
+</div>
+<div class="modal-body">
+    <div class="wrapper-md ng-scope">
+	    <form name="Form"  class="form-horizontal form-validation" novalidate>
+	        <div class="form-group">
+	            <label class="col-sm-3 control-label"><span class="text-danger">*</span>名称:</label>
+	             <div class="col-sm-9">
+	            	<input type="text" class="form-control" ng-model="form.name" required/>
+	            </div>
+	        </div>
+	        <div class="line line-dashed b-b line-lg"></div>
+	        <div class="form-group">
+	            <label class="col-sm-3 control-label">上级:</label>
+	             <div class="col-sm-9">
+	            	<select class="form-control" ng-model="form.parentId" ng-options="row.id as row.name for row in site.parentList"></select>
+	            </div>
+	        </div>
+	        <div class="line line-dashed b-b line-lg"></div>
+	        <div class="form-group">
+	            <label class="col-sm-3 control-label"><span class="text-danger">*</span>类型:</label>
+	             <div class="col-sm-9">
+	            	<select class="form-control" ng-model="form.type2" required>
+	            		<option value="4">服务组</option>
+	            		<option value="5">服务</option>
+	            		<option value="6">按钮</option>
+	            	</select>
+	            </div>
+	        </div>
+	        <div class="line line-dashed b-b line-lg"></div>
+	        <div class="form-group">
+	            <label class="col-sm-3 control-label">PC端URL:</label>
+	             <div class="col-sm-9">
+	            	<input type="text" class="form-control" ng-model="form.urlPc"/>
+	            </div>
+	        </div>
+	        <div class="line line-dashed b-b line-lg"></div>
+	        <div class="form-group" ng-if="!form.id">
+              <label class="col-sm-3 control-label">* PC端logo:</label>
+              <div class="col-sm-9">
+				<div preview-container>
+					<img width=100 height=100 border=0 src="{{ form.imagePathPc | imgUrl}}">  
+				</div>
+				<input type="file" name="file" onchange="Utils.previewImage(this)" accept="image/*" class="m-t m-b"/>
+				<input type="text" style="display: none;" name="imagePathPc" file-path-container ng-model="form.imagePathPc"/>
+              	<span class="col-lo-1 text-danger">（建议选择尺寸为1080*540px，大小不超过300k的 jpg/png图片）</span>
+              </div>
+            </div>
+            <div class="line line-dashed b-b line-lg"></div>
+            <div class="form-group" ng-if="form.id && site.code == 2">
+              <label class="col-sm-3 control-label">* PC端logo:</label>
+              <div class="col-sm-9">
+				<div preview-container>
+				    <img width=100 height=100 border=0 src="{{ form.imagePathPc | imgUrl}}">  
+				</div>
+				<input type="file" name="file" onchange="Utils.previewImage(this)" accept="image/*" class="m-t m-b"/>
+				<input type="text" style="display: none;" name="imagePathPc" file-path-container ng-model="form.imagePathPc"/>
+				<span class="col-lo-1 text-danger">（建议选择尺寸为1080*540px，大小不超过300k的 jpg/png图片）</span>
+              </div>
+            </div>
+	        
+	        <div class="line line-dashed b-b line-lg"></div>
+	        <div class="form-group">
+	            <label class="col-sm-3 control-label">移动端URL:</label>
+	             <div class="col-sm-9">
+	            	<input type="text" class="form-control" ng-model="form.urlMb"/>
+	            </div>
+	        </div>
+	        <div class="line line-dashed b-b line-lg"></div>
+	        <div class="form-group" ng-if="!form.id">
+              <label class="col-sm-3 control-label">*移动端logo:</label>
+              <div class="col-sm-9">
+				<div preview-container>
+					<img width=100 height=100 border=0 src="">  
+				</div>
+				<input type="file" name="file" onchange="Utils.previewImage(this)" accept="image/*" class="m-t m-b"/>
+				<input type="text" style="display: none;" name="imagePathMb" file-path-container ng-model="form.imagePathMb"/>
+              	<span class="col-lo-1 text-danger">（建议选择尺寸为1080*540px，大小不超过300k的 jpg/png图片）</span>
+              </div>
+            </div>
+            <div class="line line-dashed b-b line-lg"></div>
+            <div class="form-group" ng-if="form.id && site.code == 2">
+              <label class="col-sm-3 control-label">* 移动端logo:</label>
+              <div class="col-sm-9">
+				<div preview-container>
+				    <img width=100 height=100 border=0 src="{{ form.imagePathMb | imgUrl}}">  
+				</div>
+				<input type="file" name="file" onchange="Utils.previewImage(this)" accept="image/*" class="m-t m-b"/>
+				<input type="text" style="display: none;" name="imagePathMb" file-path-container ng-model="form.imagePathMb"/>
+				<span class="col-lo-1 text-danger">（建议选择尺寸为1080*540px，大小不超过300k的 jpg/png图片）</span>
+              </div>
+            </div> 
+	        <div class="line line-dashed b-b line-lg"></div>
+	        <div class="form-group">
+	            <label class="col-sm-3 control-label">权限:</label>
+	             <div class="col-sm-9">
+	            	<input type="text" class="form-control" ng-model="form.permission"/>
+	            </div>
+	        </div>
+	        <div class="line line-dashed b-b line-lg"></div>
+	        <div class="form-group">
+	            <label class="col-sm-3 control-label">授权页显示:</label>
+	             <div class="col-sm-9">
+				    <label class="checkbox-inline">
+				        <input type="radio" ng-model="form.status2" value="1">是
+				    </label>
+				    <label class="checkbox-inline">
+				        <input type="radio" ng-model="form.status2" value="-1">否
+				    </label>
+	            </div>
+	        </div>
+	        <div class="line line-dashed b-b line-lg"></div>
+	        <div class="form-group">
+	            <label class="col-sm-3 control-label">排序号:</label>
+	             <div class="col-sm-9">
+	            	<input type="text" class="form-control" ng-model="form.orderNo"/>
+	            </div>
+	        </div>
+	        <div class="line line-dashed b-b line-lg"></div>
+	        <div class="form-group">
+	            <label class="col-sm-3 control-label">备注:</label>
+	             <div class="col-sm-9">
+	            	<textarea type="text" class="form-control" ng-model="form.remark" ></textarea>
+	            </div>
+	        </div>
+	    </form>
+    </div>
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-default" ng-click="close()">取消</button>
+    <button type="button" class="btn btn-info" ng-disabled="Form.$invalid" ng-click="addSave()">提交</button>
+</div>

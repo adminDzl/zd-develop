@@ -1,0 +1,74 @@
+<crumb title="PC服务配置" head="true"></crumb>
+<div class="" ng-controller="ServicePcGrid">
+
+<div class="hbox hbox-auto-xs hbox-auto-sm">
+	<div class="col w-md bg-light dk b-r bg-auto">		
+		<div class="panel-default">
+			<div class="panel-heading">
+		         <select class="form-control" ng-model="rootNodeId" ng-options="row.id as row.name for row in rootNodeList"></select>
+		    </div>
+			<div class="panel-body">
+				<abn-tree tree-data="nodeList" tree-control="my_tree" on-select="navSelect(branch)" expand-level="2" initial-selection="Granny Smith" icon-leaf="fa fa-file-o" icon-expand="fa fa-plus" icon-collapse="fa fa-minus">
+				</abn-tree>
+			</div>
+		</div>
+	</div>
+	
+	<div class="col">
+		<div class="panel panel-default">
+	        <div class="panel-heading">
+	        	<button class="btn m-b-xs btn-sm btn-info btn-addon"  ng-click="setTop()">
+	            	<i class="fa fa-plus"></i>设置 [{{selected.name}}] 为默认
+	            </button>
+	        	<button class="btn m-b-xs btn-sm btn-info btn-addon"  ng-click="deepCopy()">
+	            	<i class="fa fa-plus"></i>复制 [{{selected.name}}] 到...
+	            </button>
+	        	<button class="btn m-b-xs btn-sm btn-info btn-addon"  ng-click="bindData()">
+	            	添加服务
+	            </button>
+	        </div>
+	        <div class="panel-heading">
+	          <form class="form-inline ng-pristine ng-valid" role="form">
+	            <div class="form-group">
+		          <input type="text" class="form-control" placeholder="请输入搜索内容" ng-model="searchKeys" ng-keypress="search($event)"/>
+		        </div>
+		        <button type="submit" class="btn btn-info" ng-click="search()">搜索</button>
+			  </form>
+	        </div>
+	        <div class="table-responsive">
+	        	<table class="table table-striped b-t b-b">
+	        		<thead>
+		                <tr>
+		                    <th style="width:5%" data-breakpoints="xs">No.</th>
+		                    <th style="width:10%" class="text-center">名称</th>
+		                    <th style="width:10%" class="text-center">名称（英文</th>
+							<th style="width:10%" class="text-center">PC路径</th>
+		                    <th style="width:10%" class="text-center">备注</th>
+		                    <th style="width:10%" class="text-center">排序号</th>
+		                    <th style="width:10%" class="text-center">创建时间</th>
+		                    <th style="width:15%" class="text-center">操作</th>
+		                </tr>
+	                </thead>
+	                <tbody>
+		                <tr data-expanded="true" ng-repeat="row in rows">
+		                    <td > {{paginationConf.currentPage ? paginationConf.pageSize*(paginationConf.currentPage-1)+$index+1 : $index+1}}</td>
+		                    <td > {{row.name}}</td>
+		                    <td > {{row.nameEn}}</td>
+		                    <td > {{row.urlPc}}</td>
+		                    <td > {{row.remark}}</td>
+		                    <td > {{row.orderNo}}</td>
+							<td > {{row.createTime}}</td>
+		                    <td>
+		                        <div class="buttons">
+		                            <button class="btn btn-sm btn-info" power-key="resource:update" ng-click="unbindData(row.id)">移除</button>
+		                        </div>
+		                    </td>
+		                </tr>
+	                </tbody>
+	        	</table>
+	        	<tmpagination conf="paginationConf"></tmpagination>
+	        </div>
+		 </div>
+	</div>
+</div>
+</div>

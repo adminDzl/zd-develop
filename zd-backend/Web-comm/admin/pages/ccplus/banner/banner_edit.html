@@ -1,0 +1,138 @@
+<div class="modal-header">
+    <button type="button" class="close" ng-click="mm.close()"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+    <h4 class="modal-title">{{mm.site.title}}</h4>
+</div>
+<div class="modal-body">
+    <div class="wrapper-md ng-scope">
+	    <form name="Form"  class="form-horizontal form-validation" novalidate>
+	    
+	        <div class="form-group">
+	            <label class="col-sm-3 control-label"><span class="text-danger">*</span>名称:</label>
+	             <div class="col-sm-9">
+	             	<span ng-if="mm.site.code == 1 || mm.site.code == 2">
+	            		<input type="text" class="form-control" ng-model="mm.form.title" required></input>
+	             	</span>
+	             	<span ng-if="mm.site.code == 3">
+	            		<input type="text" class="form-control" ng-model="mm.form.title" disabled ></input>
+	             	</span>
+	            </div>
+	        </div>
+	        <div class="line line-dashed b-b line-lg"></div>
+	        <div class="form-group">
+	            <label class="col-sm-3 control-label"><span class="text-danger">*</span>类型:</label>
+	             <div class="col-sm-9">
+	            	<select class="form-control" ng-model="mm.form.bannerType" ng-options="r.id as r.keyName for r in dics" required ></select>
+	            </div>
+	        </div>
+	         <div class="line line-dashed b-b line-lg"></div>
+	        <div class="form-group" ng-if="!mm.form.id">
+		              <label class="col-lg-3 control-label">图片:</label>
+		              <div class="col-sm-9">
+						<div preview-container>
+							<img width=100 height=100 border=0 src="">  
+						</div>
+						<input type="file" name="file" onchange="Utils.previewImage(this)" accept="image/*" class="m-t m-b"/>
+						<input type="text" style="display: none;" name="titlePicture" file-path-container ng-model="mm.form.title_picture"/>
+		              	<span class="col-lo-1 text-danger">（建议选择尺寸为1080*540px，大小不超过300k的 jpg/png图片）</span>
+		              </div>
+		              <span class="col-lo-1 text-danger">*</span>
+		            </div>
+		            <div class="form-group" ng-if="mm.form.id && mm.site.code == 2">
+		              <label class="col-lg-3 control-label">图片:</label>
+		              <div class="col-sm-9">
+						<div preview-container>
+						    <img width=100 height=100 border=0 src="{{ mm.form.title_picture | imgUrl}}">  
+						</div>
+						<input type="file" name="file" onchange="Utils.previewImage(this)" accept="image/*" class="m-t m-b"/>
+						<input type="text" style="display: none;" name="titlePicture" file-path-container ng-model="mm.form.title_picture"/>
+						<span class="col-lo-1 text-danger">（建议选择尺寸为1080*540px，大小不超过300k的 jpg/png图片）</span>
+		              </div>
+		              <span class="col-lo-1 text-danger">*</span>
+		            </div> 
+		            <div class="form-group" ng-if="mm.form.id && mm.site.code == 3">
+		              <label class="col-lg-3 control-label">图片:</label>
+		              <div class="col-sm-9">
+						<div preview-container>
+						    <img width=100 height=100 border=0 src="{{ mm.form.titlePicture | imgUrl}}">  
+						</div>
+		              </div>
+		            </div> 
+		            
+	        <div class="line line-dashed b-b line-lg"></div>
+	        <div class="form-group">
+	            <label class="col-sm-3 control-label"><span class="text-danger">*</span>内容:</label>
+	             <div class="col-sm-9">
+	             	<span ng-if="mm.site.code == 1 || mm.site.code == 2">
+	            		<textarea type="text" rows="5" class="form-control" ng-model="mm.form.content" required></textarea>
+	             	</span>
+	             	<span ng-if="mm.site.code == 3">
+	            		<textarea type="text" rows="5" class="form-control" ng-model="mm.form.content" disabled ></textarea>
+	             	</span>
+	            </div>
+	        </div>
+	   
+	        
+	        <div class="line line-dashed b-b line-lg"></div>
+	        <div class="form-group">
+	            <label class="col-sm-3 control-label">发布:</label>
+	             <div class="col-sm-9">
+            		<div class="radio col-sm-4">
+		              <label class="i-checks">
+		                <input type="radio"   value="1" ng-model="mm.form.status">
+		                <i></i><span class="m-l-none">发布</span>
+		              </label>
+		            </div>
+		            <div class="radio col-sm-4">
+		              <label class="i-checks">
+		              <input type="radio" value="-1" ng-model="mm.form.status">
+		                <i></i><span class="m-l-none">未发布</span>
+		              </label>
+		            </div>
+	            </div>
+	        </div>
+	        
+	        <div class="line line-dashed b-b line-lg"></div>
+	        <div class="form-group">
+	            <label class="col-sm-3 control-label">置顶:</label>
+	             <div class="col-sm-9">
+            		<div class="radio col-sm-4">
+		              <label class="i-checks">
+		                <input type="radio"   value="1" ng-model="mm.form.isTop">
+		                <i></i><span class="m-l-none">置顶</span>
+		              </label>
+		            </div>
+		            <div class="radio col-sm-4">
+		              <label class="i-checks">
+		              <input type="radio" value="0" ng-model="mm.form.isTop">
+		                <i></i><span class="m-l-none">不置顶</span>
+		              </label>
+		            </div>
+	            </div>
+	        </div>
+	        
+	        
+	        <div class="form-group">
+	            <label class="col-sm-3 control-label">URL:</label>
+	             <div class="col-sm-9">
+	             	<span ng-if="mm.site.code == 1 || mm.site.code == 2">
+	            		<input type="text" class="form-control" ng-model="mm.form.url"></input>
+	             	</span>
+	             	<span ng-if="mm.site.code == 3">
+	            		<input type="text" class="form-control" ng-model="mm.form.url" disabled ></input>
+	             	</span>
+	            </div>
+	        </div>
+	        
+	    </form>
+	    
+    </div>
+</div>
+<div class="modal-footer">
+    <span ng-if="mm.site.code == 1 || mm.site.code == 2">
+    	<button type="button" class="btn btn-default" ng-click="mm.close()">取消</button>
+    	<button type="button" class="btn btn-info" ng-disabled="Form.$invalid" ng-click="mm.addSave()">提交</button>
+   	</span>
+   	<span ng-if="mm.site.code == 3">
+    	<button type="button" class="btn btn-default" ng-click="mm.close()">关闭</button>
+   	</span>
+</div>

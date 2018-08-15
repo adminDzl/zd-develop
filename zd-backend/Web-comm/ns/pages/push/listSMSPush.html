@@ -1,0 +1,307 @@
+<div class="col">
+    <!-- main header -->
+    <div>
+    <ul class="breadcrumb bg-white customBread">
+      <li><span><i class="fa fa-briefcase"></i> <span translate="">消息推送</span></span></li>
+      <li><span translate="">短信消息推送</span></li>
+    </ul>
+  </div>
+    <!-- / main header -->
+    <!-- table -->
+    <div class="wrapper-md" ng-controller="listSMSPushController" >
+    	<div class="row m-b-sm">
+    		<div class="col-sm-2 m-r-n-md">
+    			<input type="text" placeholder="内容" class="form-control input-sm-h" ng-model="searchStr"/>
+    		</div>
+    		<div class="col-sm-2 m-r-n-md">
+    			<select ng-options = "a.value as a.text  for a in pushStatuss"  class="form-control input-sm-h small"  ng-model = "pushStatus" ></select>
+    		</div>
+    		<div class="col-sm-2 m-r-n-md">
+    			<select ng-options = "a.value as a.text  for a in statuss"  class="form-control input-sm-h small"  ng-model = "status" ></select>
+    		</div>
+    		<div class="col-sm-2 m-r-n-md">
+    			<select ng-options = "a.value as a.text  for a in sendTypes"  class="form-control input-sm-h small"  ng-model = "sendType" ></select>
+    		</div>
+    		<button class="btn btn-sm btn-info icon icon-magnifier m-l"  title="搜索"  ng-click="query()">搜索</button>
+    		<button class="btn btn-sm btn-success glyphicon glyphicon-plus m-t-n-xxs m-l-sm"  title="添加"  ng-click="addSMSPush()" ></button>
+    		</div>
+    	<div class="panel panel-default">
+    		<table class="table table-bordered table-striped orderSueTable">
+				<thead>
+	          	  <tr class="TOPS_th">
+		            <th style="width:2%;" ></th>
+		            <th style="width:10%;" translate="" >短信内容</th>
+		            <th style="width:5%;" translate="" >发送对象</th>
+		            <th style="width:8%;" translate="" >推送时间</th>
+		            <th style="width:6%;" translate="" >推送状态</th>
+		            <th style="width:8%;" translate="" >创建时间</th>
+		            <th style="width:8%;" translate="" >创建人</th>
+		            <th style="width:5%;" translate="" >状态</th>
+	 	            <th style="width:10%;" translate="" >操作</th>
+		          </tr>
+		        </thead>
+		        <tbody>
+					<tr ng-repeat="SMSPushData in datas.rows">
+						<td>{{ $index+1 }}</td>
+						<td title="{{ SMSPushData.content }}">{{ SMSPushData.content | limitToNum:20 }}</td>
+						<td ng-if="SMSPushData.targetType==1" title="{{ SMSPushData.pushTargetName }}">{{ SMSPushData.pushTargetName | limitToNum:20 }}</td>
+						<td ng-if="SMSPushData.targetType==0" >所有人</td>
+						<td> {{ SMSPushData.sendTime }}</td>
+						<td> {{ SMSPushData.pushStatus | pushStatusStr }}</td>
+						<td> {{ SMSPushData.createTime }}</td>
+						<td> {{ SMSPushData.createUser }}</td>
+						<td> {{ SMSPushData.status | statusStr2 }}</td>
+						<td>
+							<button class="btn btn-sm btn-info glyphicon glyphicon-edit m-t-n-xxs"  title="编辑" ng-click="toeditSMSPush(SMSPushData)"  ng-if="SMSPushData.pushStatus==0" ></button>
+		          			<button class="btn btn-sm btn-danger fa fa-trash-o m-t-n-xxs m-l-xs"  title="删除" ng-click="delSMSPush(SMSPushData)" ng-if="SMSPushData.status==1&&SMSPushData.pushStatus!=2" ></button>
+		          			<button class="btn btn-sm btn-info glyphicon glyphicon-eye-open m-t-n-xxs"  title="详情" ng-click="viewSMSPushDetail(SMSPushData)"></button>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+			<div ng-include="'pages/push/page.html'"></div>
+    	</div>
+    	
+    	<!-- 编辑 -->
+	    <div class="modal fade" id="editSMSPush" tabindex="-1" role="dialog"  >
+		   <div class="modal-dialog" style="margin-right: 360px;" role="document">
+		      <div class="modal-content" style="width: 900px; float: left;position: relative;">
+		         
+		        <div class="modal-header">
+		          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+		            <span aria-hidden="true">&times;</span>
+		          </button>
+		          <h4 class="modal-title" id="exampleRoleLabel" ng-if="SMSPushDatas.id">编辑 【今日短信已发送{{allSendedSMSCount}}条，已预约{{allWaitSMSCount}}条，可用{{smsDayAvailableCount}}条】</h4>
+		          <h4 class="modal-title" id="exampleRoleLabel" ng-if="!SMSPushDatas.id">添加 【今日短信已发送{{allSendedSMSCount}}条，已预约{{allWaitSMSCount}}条，可用{{smsDayAvailableCount}}条】</h4>
+		        </div>
+		        <div class="modal-body" style="width: 750px;height: 540px;">
+		          <form name="myForm" autosize="true" class="bs-example form-horizontal">
+		            <div class="form-group">
+		              <label class="col-lg-2 control-label" translate="">短信内容</label>
+		              <div class="col-lg-8">
+		                <textarea style="resize:none;height: 100px;width: 460px;" maxlength="70" class="form-control" placeholder="请输入短信内容，不超过70个字" ng-model="SMSPushDatas.content" ng-if="SMSPushDatas.id"></textarea>
+		                <textarea style="resize:none;height: 100px;width: 460px;" maxlength="70" class="form-control" placeholder="请输入短信内容，不超过70个字" ng-model="SMSPushDatas.content" ng-keyup="viewSMS(SMSPushDatas.content)" ng-if="!SMSPushDatas.id"></textarea>
+		                
+		              </div>
+		              <span class="col-lo-1 text-danger">*</span>
+		            </div>
+		            <div class="form-group">
+		              <label class="col-lg-2 control-label" translate="">发送对象</label>
+		              <div class="col-sm-8">
+		            	    <div class="radio col-sm-4">
+				              <label class="i-checks">
+				              <input type="radio" name="targetType" checked="" value="1" ng-model="SMSPushDatas.targetType">
+				                <i></i><span translate="" class="m-l-none">指定群组</span>
+				              </label>
+				            </div>
+							<div class="radio col-sm-4">
+				              <label class="i-checks">
+				                <input type="radio" name="targetType" checked="" value="0" ng-model="SMSPushDatas.targetType">
+				                <i></i><span translate="" class="m-l-none">所有人</span>
+				              </label>
+				            </div>
+				            
+						</div>
+		            </div>
+		            
+		            <div class="panel panel-default" style="max-height: 230px; width: 470px; overflow-y: auto; margin: 10px auto 10px 120px;"  ng-if="SMSPushDatas.targetType==1">
+	    			<table class="table table-bordered table-striped ">
+						<thead>
+			          	  <tr class="TOPS_th">
+				            <th style="width:3%;" translate="">选择</th>
+				            <th style="width:10%;" translate="" >群组名称/成员数量</th>
+				          </tr>
+				        </thead>
+				       	 <tbody>
+							<tr ng-repeat="pushGroup in pushGroups">
+								<td> <input id={{pushGroup.id }}  type="checkbox"  ng-model="x" ng-checked="groupIdStr.indexOf(pushGroup.id)!=-1" ng-click="chkGroup(pushGroup.id,pushGroup.label,x)"></td>
+								<td>{{ pushGroup.label | limitToNum:20 }}</td>
+							</tr>
+						</tbody>
+					</table>
+	    		</div>
+		            
+		            <div class="form-group">
+		              <label class="col-lg-2 control-label" translate="">推送类型</label>
+		              <div class="col-sm-8">
+							<div class="radio col-sm-4">
+				              <label class="i-checks">
+				                <input type="radio" name="sendType" checked="" value="0" ng-model="SMSPushDatas.sendType">
+				                <i></i><span translate="" class="m-l-none">立即推送</span>
+				              </label>
+				            </div>
+				            <div class="radio col-sm-4">
+				              <label class="i-checks">
+				              <input type="radio" name="sendType" checked="" value="1" ng-model="SMSPushDatas.sendType">
+				                <i></i><span translate="" class="m-l-none">定时推送</span>
+				              </label>
+				            </div>
+						</div>
+		            </div>
+		            <div class="form-group" ng-if="SMSPushDatas.sendType==1">
+		              <label class="col-lg-2 control-label" translate="">推送时间</label>
+		              <div class="col-lg-8">
+		             	<input type="text" class="form-control selectTime" placeholder="发送时间" name="sendTime" ng-model="SMSPushDatas.sendTime" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss',minDate:'%y-%M-%d'})" />
+		              </div>
+		              <span class="col-lo-1 text-danger">*</span>
+		            </div>
+		            
+		            <div class="form-group">
+		              <label class="col-lg-2 control-label" translate="">推送状态</label>
+		              <div class="col-sm-8">
+							<div class="radio col-sm-4">
+				              <label class="i-checks">
+				                <input type="radio" name="status" checked="" value="1" ng-model="SMSPushDatas.status">
+				                <i></i><span translate="" class="m-l-none">开放</span>
+				              </label>
+				            </div>
+				            <div class="radio col-sm-4">
+				              <label class="i-checks">
+				              <input type="radio" name="status" checked="" value="-1" ng-model="SMSPushDatas.status">
+				                <i></i><span translate="" class="m-l-none">冻结</span>
+				              </label>
+				            </div>
+						</div>
+		            </div>
+		            
+		          </form>
+		        </div>
+		        <div class="modal-body" style="width: 300px;position: absolute;left: 640px;top: 100px;height: 460px;">
+			        <div>预览</div>
+			        <div style="width: 250px;height: 440px;position: relative;background:url(/ccplus/manage/img/iPhoneTemplate.png) no-repeat  center;background-size:100% 100%;-moz-background-size:100% 100%;">
+				        <textarea readonly="readonly" style="resize:none;position: absolute;top: 12px;width: 190px;left: 30px;height: 128px;padding: 1px;font-size: 12px;" class="form-control" placeholder="内容详情" ng-model="SMSPushDatas.content" ng-if="SMSPushDatas.id"></textarea>
+				        <textarea readonly="readonly" style="resize:none;position: absolute;top: 12px;width: 190px;left: 30px;height: 128px;padding: 1px;font-size: 12px;" class="form-control" placeholder="内容详情" ng-model="viewContent" ng-if="!SMSPushDatas.id"></textarea>
+			        </div>
+		        </div>
+		        <div class="modal-footer">
+		       	 <span class="text-danger app-aside fail-tip t-l"></span>
+		          <button type="button" class="btn btn-sm btn-warning" data-dismiss="modal" id="close" translate="">关闭</button>
+		          <button type="button" class="btn btn-sm btn-info ng-scope" ng-click="viewSMSPush(SMSPushDatas)" translate="">保存</button>
+		        </div>
+		      </div>
+		    </div>
+	  	</div>
+	  <!-- 编辑 end-->
+    	<!-- 预览 -->
+	    <div class="modal fade" id="viewSMSPush" tabindex="-1" role="dialog"  >
+		   <div class="modal-dialog" style="margin-right: 266px;margin-top: 80px;" role="document">
+		      <div class="modal-content" style="width: 800px;float: left;position: relative;">
+		         
+		        <div class="modal-header">
+		          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+		            <span aria-hidden="true">&times;</span>
+		          </button>
+		          <h4 class="modal-title" id="exampleRoleLabel" >推送明细</h4>
+		        </div>
+		        <div class="modal-body" style="width: 750px;height: 380px;">
+		          <form name="myForm" autosize="true" class="bs-example form-horizontal">
+		            <div class="form-group">
+		              <label class="col-lg-2 control-label" translate="">短信内容</label>
+		              <div class="col-lg-8 pad-t-7" >
+				           <span style="word-break:normal;"  class="m-l-none">{{SMSPushDatas.content}}</span>
+		              </div>
+		            </div>
+		            <div class="form-group">
+		              <label class="col-lg-2 control-label" translate="">发送对象</label>
+		              <div class="col-sm-8 pad-t-7" >
+			                <span translate="" class="m-l-none" ng-if="SMSPushDatas.targetType==0">所有人</span>
+			                <span  class="m-l-none" style="word-break:normal;" ng-if="SMSPushDatas.targetType==1">{{groupNameStr}}</span>
+						</div>
+		            </div>
+		            
+		            
+		            <div class="form-group">
+		              <label class="col-lg-2 control-label" translate="tableTitle.sendTime">推送时间</label>
+		              <div class="col-sm-8 pad-t-7" >
+			                <span translate="" class="m-l-none" ng-if="SMSPushDatas.sendType==0">立即推送</span>
+			                <span translate="" class="m-l-none" ng-if="SMSPushDatas.sendType==1">{{SMSPushDatas.sendTime}}</span>
+						</div>
+		            </div>
+		            
+		            <div class="form-group">
+		              <label class="col-lg-2 control-label" translate="">发布状态</label>
+		              <div class="col-sm-8 pad-t-7" >
+			                <span translate="" class="m-l-none" ng-if="SMSPushDatas.status==1">发布</span>
+			                <span translate="" class="m-l-none" ng-if="SMSPushDatas.status==-1">冻结</span>
+						</div>
+		            </div>
+		            
+		          </form>
+		        </div>
+		        <div class="modal-footer" style="position: relative;height: 60px;">
+		          <button type="button" class="btn btn-sm btn-warning" data-dismiss="modal" id="close" style="position: absolute;left: 300px;">返回修改</button>
+		          <button type="button" class="btn btn-sm btn-info ng-scope" ng-click="saveSMSPush(SMSPushDatas)"  style="position: absolute;left: 400px;width: 70px;">确定发送</button>
+		        </div>
+		      </div>
+		    </div>
+	  	</div>
+	  <!-- 预览 end-->
+	  
+    	<!-- 发送详情 -->
+	    <div class="modal fade" id="detailSMSPush" tabindex="-1" role="dialog"  >
+		   <div class="modal-dialog" style="margin-right: 266px;margin-top: 80px;" role="document">
+		      <div class="modal-content" style="width: 800px; float: left;position: relative;">
+		         
+		        <div class="modal-header">
+		          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+		            <span aria-hidden="true">&times;</span>
+		          </button>
+		          <h4 class="modal-title" id="exampleRoleLabel" >详情</h4>
+		        </div>
+		        <div class="modal-body" style="width: 750px;max-height: 380px;">
+		          <form name="myForm" autosize="true" class="bs-example form-horizontal">
+		            <div class="form-group">
+		              <label class="col-lg-2 control-label" translate="">短信内容</label>
+		              <div class="col-lg-8 pad-t-7" >
+				           <span style="word-break:normal;"  class="m-l-none">{{SMSPushDatas.content}}</span>
+		              </div>
+		            </div>
+		            <div class="form-group">
+		              <label class="col-lg-2 control-label" translate="">发送对象</label>
+		              <div class="col-sm-8 pad-t-7" >
+			                <span translate="" class="m-l-none" ng-if="SMSPushDatas.targetType==0">所有人</span>
+			                <span  class="m-l-none" style="word-break:normal;" ng-if="SMSPushDatas.targetType==1">{{groupNameStr}}</span>
+						</div>
+		            </div>
+		            
+		            
+		            <div class="form-group">
+		              <label class="col-lg-2 control-label" translate="">推送时间</label>
+		              <div class="col-sm-8 pad-t-7" >
+			                <span translate="" class="m-l-none" ng-if="SMSPushDatas.sendType==0">立即推送</span>
+			                <span  class="m-l-none" ng-if="SMSPushDatas.sendType==1">{{SMSPushDatas.sendTime}}</span>
+						</div>
+		            </div>
+		            
+		            <div class="form-group">
+		              <label class="col-lg-2 control-label" translate="">推送状态</label>
+		              <div class="col-sm-8 pad-t-7" >
+			                <span translate="" class="m-l-none"  ng-if="SMSPushDatas.pushStatus==0">待推送</span>
+			                <span translate="" class="m-l-none"  ng-if="SMSPushDatas.pushStatus==1">推送中</span>
+			                <span translate="" class="m-l-none"  ng-if="SMSPushDatas.pushStatus==2">已完成</span>
+						</div>
+		            </div>
+		            
+		          </form>
+		        </div>
+		        <div class="modal-footer" style="position: relative;">
+		          <button type="button" class="btn btn-sm btn-warning" data-dismiss="modal" id="close">关闭</button>
+		        </div>
+		      </div>
+		    </div>
+	  	</div>
+	  <!-- 发送详情 end-->
+	  
+	  	  <!-- 提示框 -->
+	    <div class="modal fade" id="editTip" tabindex="-1" role="dialog">
+		     <div class="modal-content" style="width: 200px;border-radius: 10px;position: absolute;top: 50%;left: 50%;">
+		        <div class="modal-header" style="border: 0px;">
+		          <h4 class="modal-title" id="exampleRoleLabel" style="text-align: center;height: 40px;line-height: 40px;">{{ tipMessage }}</h4>
+		        </div>
+		      </div>
+	  	</div>
+	  <!-- 提示框 end-->
+    
+    </div>
+    <!-- table end -->
+</div>

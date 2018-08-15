@@ -1,0 +1,66 @@
+<div class="modal-header">
+    <button type="button" class="close" ng-click="batchCtrl.close()"><span aria-hidden="true">×</span><span class="sr-only">Close</span>
+    </button>
+    <h4 class="modal-title">批量设置权限</h4>
+</div>
+<div class="modal-body">
+  <div class="panel-body">
+    <form class="form-horizontal">
+      <div class="form-group">
+        <label class="col-sm-3 control-label"><span class="text-danger m-r-xs">*</span>权限：</label>
+        <div class="col-sm-9 p-l-none">
+            <label class="checkbox-inline i-checks">
+              <input type="checkbox" ng-model="batchCtrl.editSort.powerSub[0]" ng-true-value="1" ng-false-value=""><i></i> 接单
+            </label>
+            <label class="checkbox-inline i-checks">
+              <input type="checkbox" ng-model="batchCtrl.editSort.powerSub[1]" ng-true-value="2" ng-false-value=""><i></i> 分配
+            </label>
+        </div>   
+      </div>
+      <div class="line line-dashed b-b line-lg"></div>
+      <div class="form-group">
+        <label class="col-sm-3 control-label"><span class="text-danger m-r-xs">*</span>选择下级分类：</label>
+        <div class="col-sm-9 p-l-none">
+            <label class="checkbox-inline i-checks m-l-none m-r-sm" ng-repeat="sub in batchCtrl.subList">
+              <input type="checkbox" ng-model="batchCtrl.editSort.sortSub[$index]" ng-true-value="'{{sub.id}}'" ng-false-value=""><i></i> {{sub.name}}
+            </label>
+        </div>   
+      </div>
+      <div class="line line-dashed b-b line-lg"></div>
+      <div class="form-group">
+        <label class="col-sm-3 control-label"><span class="text-danger m-r-xs">*</span>选择负责区域：</label>
+        <div class="col-sm-9 p-l-none">
+            <label class="checkbox-inline i-checks m-l-none m-r-sm" ng-repeat="area in batchCtrl.areaList">
+              <input type="checkbox" ng-model="batchCtrl.editSort.area[$index]" ng-true-value="'{{area.id}}'" ng-false-value=""><i></i> {{area.name}}
+            </label>
+        </div>   
+      </div>
+      <div class="line line-dashed b-b line-lg"></div>
+      <div class="form-group" >
+      	<label class="col-sm-3 control-label">设置人员：</label>
+      	<div class="col-sm-9 p-l-none">
+           <table class="table table-striped table-hover table-fixed-header b-t b-b b-l b-r table-lay-zone m-b-none">
+               <thead>
+	               <tr>
+	                   <th data-breakpoints="xs">ID</th>
+	                   <th>姓名</th>
+	                   <th>手机号</th>
+	               </tr>
+               </thead>
+               <tbody>
+	               <tr data-expanded="true" ng-repeat="u in batchCtrl.users" class="fade-in-down">
+	                   <td>{{$index+1}}</td>
+	                   <td>{{u.realname}}</td>
+	                   <td>{{u.mobile}}</td>
+	               </tr>
+               </tbody>
+           </table>
+      	</div>
+      </div>                   
+    </form>
+  </div>
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-default" ng-click="batchCtrl.close()">关闭</button>
+    <button type="button" class="btn btn-info" ng-click="batchCtrl.addSave(batchCtrl.addr)" ng-show="{{batchCtrl.site.code != 3}}">保存</button>
+</div>

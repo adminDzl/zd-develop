@@ -1,0 +1,43 @@
+<crumb title="操作日志" head="true"></crumb>
+<div class="wrapper-md" ng-controller="TLogGrid">
+	 <div class="panel panel-default">
+	 	
+        <div class="panel-heading">
+            <button class="btn m-b-xs btn-sm btn-info btn-addon" ng-click="search()">
+            	刷新
+            </button>
+        </div>
+        
+        <div class="table-responsive">
+        	<table class="table table-striped b-t b-b">
+        		<thead>
+	                <tr>
+	                    <th style="width:5%" data-breakpoints="xs">ID</th>
+	                    <!--<th style="width:10%" class="text-center">园区</th>-->
+	                    <th style="width:10%" class="text-center">请求URL</th>
+	                    <th style="width:10%" class="text-center">请求参数</th>
+	                    <th style="width:10%" class="text-center">操作</th>
+	                    <th style="width:10%" class="text-center">请求人(或IP)</th>
+						<th style="width:15%" class="text-center">说明</th>
+	                    <th style="width:10%" class="text-center">发生时间</th>
+						
+	                </tr>
+                </thead>
+                <tbody>
+	                <tr data-expanded="true" ng-repeat="row in rows">
+	                    <td > {{paginationConf.currentPage ? paginationConf.pageSize*(paginationConf.currentPage-1)+$index+1 : $index+1}}</td>
+	                    <!--<td > {{row.park}}</td>-->
+	                    <td > {{row.url}}</td>
+	                    <td > {{row.parameter}}</td>
+	                    <td > {{row.tbMethod=='0'? '新增': row.tbMethod=='2'? '修改': '删除'}}</td>
+	                    <td > {{row.requestBy + '/' + row.requestIp}}</td>
+						<td > {{row.remark}}</td>
+	                    <td > {{row.createTime}}</td>
+	                    
+	                </tr>
+                </tbody>
+        	</table>
+        	<tmpagination conf="paginationConf"></tmpagination>
+        </div>
+	 </div>
+</div>

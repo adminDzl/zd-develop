@@ -1,0 +1,357 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zshop.common.rating.dao.mapper.CommRatingMapper">
+
+<!-- **************以下映射必须与数据库一致 不要更改，除非数据库改变**************** -->
+
+	<insert id="insert"  parameterType="com.zshop.common.rating.entity.CommRating">
+				
+		insert into comm_rating
+		(
+			id,
+			park_id,
+			type1,
+			order_id,
+			rating_type,
+			rating_score,
+			title,
+			rating_desc,
+			rating_file_url,
+			remark,
+			rating_src,
+			create_by,
+			create_time,
+			update_by,
+			update_time,
+			status1,
+			status2,
+			ext1,
+			ext2,
+			ext3,
+			ext4,
+			ext5,
+			ext6
+		)
+		values	
+		(	
+			#{id},
+			#{parkId},
+			#{type1},
+			#{orderId},
+			#{ratingType},
+			#{ratingScore},
+			#{title},
+			#{ratingDesc},
+			#{ratingFileUrl},
+			#{remark},
+			#{ratingSrc},
+			#{createBy},
+			#{createTime},
+			#{updateBy},
+			#{updateTime},
+			#{status1},
+			#{status2},
+			#{ext1},
+			#{ext2},
+			#{ext3},
+			#{ext4},
+			#{ext5},
+			#{ext6}
+		)	
+
+	</insert>
+	
+	<delete id="deleteById" parameterType="java.lang.String">
+		delete from comm_rating 	
+		WHERE ID=#{id}
+	</delete>
+	
+	<delete id="deleteByIds" parameterType="java.util.Collection">
+     	delete from comm_rating 	
+     	WHERE ID IN
+     	<foreach collection="array" index="index" item="item" open="(" separator="," close=")"> #{item} </foreach> 
+  	 </delete>
+  	 
+  	 <delete id="logicDelete" parameterType="java.lang.String">
+		update comm_rating set status1 = '-1' 	
+		WHERE ID=#{id}
+	</delete>
+	
+	<delete id="logicDeleteByIds" parameterType="java.util.Collection">
+     	update comm_rating set status1 = '-1' 	
+     	WHERE ID IN
+     	<foreach collection="array" index="index" item="item" open="(" separator="," close=")"> #{item} </foreach> 
+  	 </delete>
+	
+	<update id="update" parameterType="com.zshop.common.rating.entity.CommRating" >
+			
+		update comm_rating 	
+		<set> 	
+			park_id=#{parkId},
+			type1=#{type1},
+			order_id=#{orderId},
+			rating_type=#{ratingType},
+			rating_score=#{ratingScore},
+			title=#{title},
+			rating_desc=#{ratingDesc},
+			rating_file_url=#{ratingFileUrl},
+			remark=#{remark},
+			rating_src=#{ratingSrc},
+			create_by=#{createBy},
+			create_time=#{createTime},
+			update_by=#{updateBy},
+			update_time=#{updateTime},
+			status1=#{status1},
+			status2=#{status2},
+			ext1=#{ext1},
+			ext2=#{ext2},
+			ext3=#{ext3},
+			ext4=#{ext4},
+			ext5=#{ext5},
+			ext6=#{ext6}
+		</set> 	
+		where 
+		ID=#{id} 	
+
+	</update>
+	
+	<update id="updateWithIf" parameterType="com.zshop.common.rating.entity.CommRating" >
+			
+		update comm_rating 	
+		<set> 	
+			<if test=" parkId!=null ">	
+				park_id=#{parkId},	
+			</if>	
+			<if test=" type1!=null ">	
+				type1=#{type1},	
+			</if>	
+			<if test=" orderId!=null ">	
+				order_id=#{orderId},	
+			</if>	
+			<if test=" ratingType!=null ">	
+				rating_type=#{ratingType},	
+			</if>	
+			<if test=" ratingScore!=null ">	
+				rating_score=#{ratingScore},	
+			</if>	
+			<if test=" title!=null ">	
+				title=#{title},	
+			</if>	
+			<if test=" ratingDesc!=null ">	
+				rating_desc=#{ratingDesc},	
+			</if>	
+			<if test=" ratingFileUrl!=null ">	
+				rating_file_url=#{ratingFileUrl},	
+			</if>	
+			<if test=" remark!=null ">	
+				remark=#{remark},	
+			</if>	
+			<if test=" ratingSrc!=null ">	
+				rating_src=#{ratingSrc},	
+			</if>	
+			<if test=" createBy!=null ">	
+				create_by=#{createBy},	
+			</if>	
+			<if test=" createTime!=null ">	
+				create_time=#{createTime},	
+			</if>	
+			<if test=" updateBy!=null ">	
+				update_by=#{updateBy},	
+			</if>	
+			<if test=" updateTime!=null ">	
+				update_time=#{updateTime},	
+			</if>	
+			<if test=" status1!=null ">	
+				status1=#{status1},	
+			</if>	
+			<if test=" status2!=null ">	
+				status2=#{status2},	
+			</if>	
+			<if test=" ext1!=null ">	
+				ext1=#{ext1},	
+			</if>	
+			<if test=" ext2!=null ">	
+				ext2=#{ext2},	
+			</if>	
+			<if test=" ext3!=null ">	
+				ext3=#{ext3},	
+			</if>	
+			<if test=" ext4!=null ">	
+				ext4=#{ext4},	
+			</if>	
+			<if test=" ext5!=null ">	
+				ext5=#{ext5},	
+			</if>	
+			<if test=" ext6!=null ">	
+				ext6=#{ext6},	
+			</if>	
+		</set>	
+		where 	
+		ID=#{id} 	
+
+	</update>
+	
+	<!-- *************************************************************************** -->
+	<!-- **************以下映射根据业务做相应调整**************** -->
+	<!-- *************************************************************************** -->
+  	
+  	<delete id="deleteByMap" parameterType="java.util.Map">
+    	delete from comm_rating 	 
+    	<where>
+    		
+    	</where>
+  	</delete>
+	
+	<select id="findById" parameterType="java.lang.String" resultType="com.zshop.common.rating.entity.CommRating">
+				
+		select  	
+			a.id id,
+			a.park_id parkId,
+			a.type1 type1,
+			a.order_id orderId,
+			a.rating_type ratingType,
+			a.rating_score ratingScore,
+			a.title title,
+			a.rating_desc ratingDesc,
+			a.rating_file_url ratingFileUrl,
+			a.remark remark,
+			a.rating_src ratingSrc,
+			a.create_by createBy,
+			a.create_time createTime,
+			a.update_by updateBy,
+			a.update_time updateTime,
+			a.status1 status1,
+			a.status2 status2,
+			a.ext1 ext1,
+			a.ext2 ext2,
+			a.ext3 ext3,
+			a.ext4 ext4,
+			a.ext5 ext5,
+			a.ext6 ext6
+		from comm_rating a	
+
+		where a.Id=#{id}	
+	</select>
+
+	<select id="findListByMap" parameterType="java.util.Map" resultType="com.zshop.common.rating.entity.CommRating">
+		
+				
+		select  	
+			a.id id,
+			a.park_id parkId,
+			a.type1 type1,
+			a.order_id orderId,
+			a.rating_type ratingType,
+			a.rating_score ratingScore,
+			a.title title,
+			a.rating_desc ratingDesc,
+			a.rating_file_url ratingFileUrl,
+			a.remark remark,
+			a.rating_src ratingSrc,
+			a.create_by createBy,
+			a.create_time createTime,
+			a.update_by updateBy,
+			a.update_time updateTime,
+			a.status1 status1,
+			a.status2 status2,
+			a.ext1 ext1,
+			a.ext2 ext2,
+			a.ext3 ext3,
+			a.ext4 ext4,
+			a.ext5 ext5,
+			a.ext6 ext6
+		from comm_rating a	
+
+		
+		<where>
+			
+		</where>
+
+	</select>
+	
+	<select id="list" parameterType="java.util.Map" resultType="com.zshop.common.rating.entity.CommRating">
+		
+		
+				
+		select  	
+			a.id id,
+			a.park_id parkId,
+			a.type1 type1,
+			a.order_id orderId,
+			a.rating_type ratingType,
+			a.rating_score ratingScore,
+			a.title title,
+			a.rating_desc ratingDesc,
+			a.rating_file_url ratingFileUrl,
+			a.remark remark,
+			a.rating_src ratingSrc,
+			a.create_by createBy,
+			a.create_time createTime,
+			a.update_by updateBy,
+			a.update_time updateTime,
+			a.status1 status1,
+			a.status2 status2,
+			a.ext1 ext1,
+			a.ext2 ext2,
+			a.ext3 ext3,
+			a.ext4 ext4,
+			a.ext5 ext5,
+			a.ext6 ext6
+		from comm_rating a	
+
+		
+		<where>
+			<if test="searchKeys!= null ">
+				AND ( 1=2
+				<foreach collection="searchKeys" index="index" item="item" >
+					 OR a.id like #{item}
+				</foreach> 
+				)
+			</if>
+		</where>
+
+		
+	</select>
+	
+	<select id="findOneByMap" parameterType="java.util.Map" resultType="com.zshop.common.rating.entity.CommRating">
+				
+		select  	
+			a.id id,
+			a.park_id parkId,
+			a.type1 type1,
+			a.order_id orderId,
+			a.rating_type ratingType,
+			a.rating_score ratingScore,
+			a.title title,
+			a.rating_desc ratingDesc,
+			a.rating_file_url ratingFileUrl,
+			a.remark remark,
+			a.rating_src ratingSrc,
+			a.create_by createBy,
+			a.create_time createTime,
+			a.update_by updateBy,
+			a.update_time updateTime,
+			a.status1 status1,
+			a.status2 status2,
+			a.ext1 ext1,
+			a.ext2 ext2,
+			a.ext3 ext3,
+			a.ext4 ext4,
+			a.ext5 ext5,
+			a.ext6 ext6
+		from comm_rating a	
+
+		<where>
+			<if	test="orderId!=null">
+				and a.order_id = #{orderId}
+			</if>
+			<if	test="parkId!=null">
+				and a.park_id = #{parkId}
+			</if>
+		
+		</where>
+		limit 1
+	</select>
+</mapper>
+	

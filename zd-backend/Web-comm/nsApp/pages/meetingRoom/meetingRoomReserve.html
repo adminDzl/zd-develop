@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<meta content="yes" name="apple-mobile-web-app-capable">
+		<meta content="black" name="apple-mobile-web-app-status-bar-style">
+		<meta content="telephone=no" name="format-detection">
+		<meta content="email=no" name="format-detection">
+		<meta name="hotcss" content="max-width=640">
+		<title>会议室预订</title>
+		<link rel="stylesheet" href="../../css/common.css" />
+		<link rel="stylesheet" href="../../css/style.css" />
+		<script type="text/javascript" src="../../js/common/hotcss.js" ></script>
+	</head>
+	<body ng-app="myApp" ng-controller="AppCtrl" class="meetingPage meetingReserve" style="overflow-x: hidden;">
+		<div class="meeting-list meetingDetails">
+			<ul>
+				<li class="libox">
+					<img src="{{ meetingRoomInfo.picList }}"/>
+					<div class="roomdoc">
+						<div>
+							<span>{{meetingRoomInfo.name}}</span>
+						</div>
+						<div>
+							<img src="../../img/location.png" />
+							<span>{{ meetingRoomInfo.address }}</span>
+						</div>
+						<div>
+							<img src="../../img/person.png" />
+							<span>{{ meetingRoomInfo.layTypeNum }}人以内</span>
+						</div>
+					</div>							
+				</li>
+			</ul>
+		</div>
+		
+		<div class="container">
+			<div class="inputBox">
+				<p>时间</p>
+				<div ng-click="selectMeetingTime()" class="m-t-40 selectMeetingTime">
+					<!--<p style="margin-top: 0;" >{{ meeting_day }} {{ meeting_time }}</p>-->
+					<!--<input style="margin-top: 0;" type="text" placeholder="请选择会议时间" ng-model="meeting_time" disabled="disabled"/>-->
+					<ul ng-if="meetingRoomInfo.timeType==1">
+						<li ng-repeat="item in selectTime track by $index">
+							<span>{{ item.time1 }}</span>
+							<span>{{ item.time2 }}</span>
+							<span>{{ item.time3 }}</span>
+						</li>
+					</ul>
+					<ul ng-if="meetingRoomInfo.timeType==2">
+						<li ng-repeat="item in selectTime track by $index">
+							<span>{{ item.time1 }}</span>
+							<span>{{ item.time2 }}</span>
+						</li>
+					</ul>
+				</div>
+			</div>
+			<div class="inputBox">
+				<p>会议级别</p>
+				<input type="text" placeholder="请输入与会人最高级别" ng-model="level"/>
+			</div>
+			<div class="inputBox">
+				<p>主题</p>
+				<input type="text" placeholder="请输入会议主题" ng-model="theme"/>
+			</div>
+			<div class="inputBox">
+				<p>人数</p>
+				<input type="number" placeholder="请输入与会人数" ng-model="person"/>
+			</div>						
+			<div class="radioBox3" ng-if="devices.length>0">
+				<p>设备选择(必填)</p>
+				<ul class="fix">
+					<li ng-repeat="item in devices" class="libox f-l" ng-click="chooseDevice($event)" data-type="{{ item.id }}">
+						<span><i></i>{{ item.name }}</span>						
+					</li>
+				</ul>
+			</div>
+			<div class="textareaBox">
+				<p>电子横幅内容</p>
+				<textarea placeholder="请输入需要投屏的电子横幅内容" ng-model="content"></textarea>
+			</div>
+			<!--<div class="fileBox">
+				<p>附件:</p>
+				<div>
+					<div class="fix">
+						<input type="text" disabled="disabled" class="f-l" />
+						<div class="f-l t-c">
+							<em class="file"></em>
+							选择文件
+						</div>
+					</div>
+					<input type="file" placeholder="请输入目的地" />
+				</div>
+			</div>-->
+			<div class="inputBox selectRepairsFile">
+	            <p>附件</p>
+	            <ul class="fix main" id="commentPicture">
+	                <li>
+	                    <form id="registration" name="registration" method="post" enctype="multipart/form-data" novalidate>
+	                        <input type="file" name="file" id="choose" accept="image/*"/>
+	                    </form>
+	                </li>
+	            </ul>
+	        </div>
+			<div class="textareaBox">
+				<p>备注:</p>
+				<textarea placeholder="请输入备注信息" ng-model="remark"></textarea>
+			</div>
+			
+			<a ng-click="submitBtn()" class="fill-btn confirm">确定</a>
+		</div>
+		
+		<!-- 时间选择 -->
+		<div class="selectLeaderBox selectTimeBox">
+			<div class="m-t-30 meetRoomTimeSelect">
+				<p class="headerBox">选择会议时间</p>
+				 <div class="head-time-choose">
+		            <span rel="timeChooseTab" data-fx="1" class="left-span un-left-span" ng-click="changeTimeTab('pre')"></span>
+		            <div id="timeChooseTab" class="time-choose-table">
+		                <table cellspacing="0" cellspadding="0">
+		                    <tbody>
+		                        <tr>
+		                            <td ng-repeat="item in dayList" ng-class="$index==0 ? 'current' : '' " data-day="{{ item.day }}" ng-click="getMeetingTime(item.type,$event)">
+		                                <p ng-bind="item.day"></p>
+		                                <span ng-bind="item.week"></span>
+		                            </td>                            
+		                        </tr>
+		                    </tbody>
+		                </table>
+		            </div>
+		            <span rel="timeChooseTab" data-fx="0" class="right-span" ng-click="changeTimeTab('next')"></span>
+		        </div>  
+		
+		        <div id="detailDayList" class="detail-day-list" ng-if="meetingRoomInfo.timeType == 2">   <!--ng-if="meetingRoomInfo.timeType == 2"-->
+		
+		            <table cellspacing="0" style="width: 100%;" cellspadding="0" id="bookTab2">
+		                <tbody>
+			                <tr ng-repeat="item in meetingTime" class="timeBox">
+			                    <td>
+			                      <div class="inner-td fix">
+			                         <p class="left-time" ng-bind="item.time"></p>
+			                         <p class="full-statue yuyue" ng-if="item.type==1 && item.hasReserved==false">可以预约</p>
+			                         <p class="full-statue" ng-if="item.type==0">不可预约</p>
+			                         <p class="full-statue" ng-if="item.type==1 && item.hasReserved==true" ng-class="item.hasReserved==false ? 'yuyue' : ''">已经预约</p>
+			                         <!--<p ng-class="item.type==1 ? 'full-statue yuyue' : 'full-statue'" ng-bind="item.type==1 ? '可预约':'不可预约'"></p>-->
+			                         <!--<p ng-class="item.type==1 ? 'full-statue yuyue hasYuyue' : 'full-statue'">已预约</p>-->
+			                         <div ng-if="item.type==1 && item.hasReserved==false" class="yuyue-btn yuyue" ng-click="changeMeetType($event,$index)" data-index="{{$index}}">
+			                         	<i></i>
+			                         </div>
+			                         <div ng-if="item.type==0" class="yuyue-btn" ng-click="changeMeetType($event,$index)" data-index="{{$index}}">
+			                         	<i></i>
+			                         </div>
+			                         <div ng-if="item.type==1 && item.hasReserved==true" class="yuyue-btn" ng-click="changeMeetType($event)" data-index="{{$index}}">
+			                         	<i></i>
+			                         </div>
+			                         <!--<div ng-class="item.type==1 ? 'yuyue-btn yuyue' : 'yuyue-btn'" ng-click="changeMeetType($event,$index)" data-index="{{$index}}">
+			                         	<i></i>
+			                         </div>-->
+			                      </div>
+			                    </td>
+			                </tr>
+		                </tbody>
+		            </table>
+		
+		        </div>
+		        
+		        <div id="detailDayList1" class="detail-day-list1" ng-if="meetingRoomInfo.timeType == 1">
+		        	<div ng-class="item.timeType=='morning'? 'morning' : 'afternoon'" ng-repeat="item in meetingTime1" class="timeBox1">
+		        		<div class="fix bookTime1">
+		        			<p class="time f-l" ng-if="item.timeType=='morning'">上午</p>
+		        			<p class="time f-l" ng-if="item.timeType=='afternoon'">下午</p>
+		        			<!--<div class="f-r yuyue-btn" ng-click="reserveType1($event)" data-index="{{$index}}">
+	                         	<i></i>
+	                        </div>-->
+	                        <div ng-if="item.type==1 && item.hasReserved1==false" class="yuyue-btn yuyue" ng-click="changeMeetType($event,$index)" data-index="{{$index}}">
+	                         	<i></i>
+	                        </div>
+	                        <div ng-if="item.type==0" class="yuyue-btn" ng-click="changeMeetType($event,$index)" data-index="{{$index}}">
+	                         	<i></i>
+	                        </div>
+	                        <div ng-if="item.type==1 && item.hasReserved1==true" class="yuyue-btn" ng-click="changeMeetType($event,$index)" data-index="{{$index}}">
+	                         	<i></i>
+	                        </div>
+		        		</div>
+		        		<div class="fix bookTime2">
+		        			<p class="f-l" ng-bind="item.time"></p>
+		        			<!--<p class="f-r" ng-if="!item.hasReserved1">可以预约</p>
+		        			<p class="f-r" ng-if="item.hasReserved1">不可预约</p>-->
+		        			<p class="full-statue yuyue f-r" ng-if="item.type==1 && item.hasReserved1==false" style="color: #5be3e3;">可以预约</p>
+	                        <p class="full-statue f-r" ng-if="item.type==0" style="color: #989898;">不可预约</p>
+	                        <p class="full-statue f-r" ng-if="item.type==1 && item.hasReserved1==true" ng-class="item.hasReserved==false ? 'yuyue' : ''" style="color: #989898;">已经预约</p>
+		        		</div>
+		        	</div>
+		        </div>
+				<a href="javascript:;" class="lookBtn" ng-click="bookMeetingRoom(meetingRoomInfo.timeType)" ng-class="meetingRoomInfo.timeType==1?'confirm1':''">确定</a>
+			</div>
+			<div class="tips-box">
+				<p>请选择会议时间！</p>
+			</div>
+		</div>
+		
+		<!-- 提交成功 -->
+	    <div class="successfulBox t-c">
+	        <div class="successHeader">
+	            <div class="successIcon"></div>
+	            <em class="successClose" ng-click="closeOrOpenTipBox('close')"></em>
+	        </div>
+	        <p class="f-s-50 f-b l-h-116 m-t-33">提交成功</p>
+	        <p class="f-s-40">订单提交成功，请在我的订单查看状态。</p>
+	        <div class="f-s-40">(
+	            <span class="countDown" ng-bind-template="{{ countDown }}"></span>s)请等待</div>
+	    </div>
+		
+		<!-- 蒙版 -->
+		<div class="masking"></div>
+		
+		
+		<script type="text/javascript" src="../../js/common/angular.min.js" ></script>
+		<script type="text/javascript" src="../../js/common/jquery-1.8.3.min.js" ></script>
+		<script type="text/javascript" src="../../js/common/jquery.form.js"></script>
+    	<script type="text/javascript" src="../../js/common/mobileFix.mini.js"></script>
+    	<script type="text/javascript" src="../../js/common/exif.js"></script>
+    	<script type="text/javascript" src="../../js/common/lrz.js"></script>
+    	<script type="text/javascript" src="../../js/common/util.js"></script>
+		<script type="text/javascript" src="../../js/meetingRoom/meetingRoomReserve.js"></script>
+	</body>
+</html>

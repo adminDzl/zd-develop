@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<head>
+	<meta charset="utf-8">
+	<title>安检系统</title>
+	<script src="common/thrid/libs/jquery/jquery-1.9.1.min.js"></script>
+	<link rel="stylesheet" href="common/thrid/libs/jquery/bootstrap/dist/css/bootstrap.css" type="text/css"/>
+	<link rel="stylesheet" href="common/thrid/src/css/public.css" type="text/css"/>
+  <script src="common/thrid/libs/jquery/layer/layer.js"></script>
+</head>
+<body class="signinLogin">
+	<div  id="login">
+		<div class="row">
+	      	<div class="form-signin form-group">
+	        	<h2 class="form-signin-heading">管理系统注册</h2>
+	        	<input type="text" name="nickName" class="input-block-level" placeholder="请输入昵称">
+	        	<input type="text" name="mobile" class="input-block-level" placeholder="手机号码">
+	        	<input type="password" name="password" class="input-block-level" placeholder="密码">
+	        	<div class="fix">
+	        	<input type="text" name="imageCode" class="input-block-level" placeholder="图片验证码">
+	        	<img class="login-imageCode" id="v_container"  src="#" title="看不清，点击换一张" onclick="javascript:getImageVerifyCode()"/>
+	        	</div>
+	        	<div class="fix">
+		        	<input type="text" name="verifyCode" class="input-block-level col-md-2" placeholder="验证码">
+		        	<button type="button" class="btn-default  btn-sm getCodeBtn" onclick="getVerifyCode()">获取验证码</button>  
+	        	</div>
+	        	<button class="btn btn-large btn-primary" onclick="register()" type="submit">注册</button>
+	      	</div>
+	    </div> 
+	</div>
+</body>
+<script type="text/javascript">
+    var path = "http://192.168.91.103:8080/";
+	//获取图片验证码
+	getImageVerifyCode = function(){
+	  var v_container = document.getElementById("v_container"); 
+	  v_container.src = path+"security/user/getImageVerifyCode?date=" + new Date();
+	};
+	getImageVerifyCode();
+	
+	getVerifyCode = function(){
+		var mobile = $("input[name='mobile']").val();
+		var imageCode = $("input[name='imageCode']").val();
+		if(!mobile){
+			layer.open({
+		    	content: "请输入手机号码！",
+		        style: 'background-color:#333; color:#fff; border:none;background:rgba(0, 0, 0, 0.7);',
+		        time: 2
+		    });
+		 	return;
+		}
+		
+		if((typeof(imageCode) == undefined || imageCode.length == 0)){
+			layer.open({
+		    	content: "请输入图片验证码！",
+		        style: 'background-color:#333; color:#fff; border:none;background:rgba(0, 0, 0, 0.7);',
+		        time: 2
+		    });
+		 	return;
+		}
+		
+		 var sendData = {name:mobile,imageCode:imageCode,sendType:1};
+		 
+		 $.ajax({
+				type : "post",
+				url :path+ "security/user/sendVerifyCode",
+				data : sendData,
+				dataType: "json",
+				success : function(data) {
+					if (data.result) {
+						layer.open({
+					    	content: "验证码发送成功！",
+					        style: 'background-color:#333; color:#fff; border:none;background:rgba(0, 0, 0, 0.7);',
+					        time: 2
+					    });
+					}else{
+						layer.open({
+					    	content: data.message,
+					        style: 'background-color:#333; color:#fff; border:none;background:rgba(0, 0, 0, 0.7);',
+					        time: 2
+					    });
+					}
+				},
+				error : function(XMLHttpRequest, textStatus, errorThrown) {
+					alert(errorThrown);
+				}
+			});
+	}
+	function register(){
+		 var mobile = $("input[name='mobile']").val();
+		 var password = $("input[name='password']").val();
+		 var nickName = $("input[name='nickName']").val();
+		 var verifyCode = $("input[name='verifyCode']").val();
+		 if(mobile.length<=0 || password.length<=0){
+			layer.open({
+		    	content: "请输入手机号码或者密码！",
+		        style: 'background-color:#333; color:#fff; border:none;background:rgba(0, 0, 0, 0.7);',
+		        time: 2
+		    });
+		 	return;
+		 }
+
+		 var sendData = {name:mobile,password:password,nickName:nickName,verifyCode:verifyCode};
+		 $.ajax({
+			type : "post",
+			url : path+"/security/user/register",
+			data : sendData,
+			dataType: "json",
+			success : function(data) {
+				if (data.result) {
+					window.location.href = "login.html";
+				}else{
+					//$("#remark").text("mobile and password is error!");
+					layer.open({
+				    	content: data.message,
+				        style: 'background-color:#333; color:#fff; border:none;background:rgba(0, 0, 0, 0.7);',
+				        time: 2
+				    });
+				}
+			},
+			error : function(XMLHttpRequest, textStatus, errorThrown) {
+				alert(errorThrown);
+			}
+		});
+		 
+	};
+
+</script>
+
+</html>

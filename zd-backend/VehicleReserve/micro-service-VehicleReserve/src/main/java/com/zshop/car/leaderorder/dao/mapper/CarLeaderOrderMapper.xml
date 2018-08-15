@@ -1,0 +1,303 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zshop.car.leaderorder.dao.mapper.CarLeaderOrderMapper">
+
+<!-- **************以下映射必须与数据库一致 不要更改，除非数据库改变**************** -->
+
+	<insert id="insert"  parameterType="com.zshop.car.leaderorder.entity.CarLeaderOrder">
+				
+		insert into car_leader_order
+		(
+			id,
+			park_id,
+			order_id,
+			leader_id,
+			leader_name,
+			remark,
+			create_by,
+			create_time,
+			update_by,
+			update_time,
+			status1,
+			status2,
+			ext1,
+			ext2,
+			ext3,
+			ext4,
+			ext5,
+			ext6
+		)
+		values	
+		(	
+			#{id},
+			#{parkId},
+			#{orderId},
+			#{leaderId},
+			#{leaderName},
+			#{remark},
+			#{createBy},
+			#{createTime},
+			#{updateBy},
+			#{updateTime},
+			#{status1},
+			#{status2},
+			#{ext1},
+			#{ext2},
+			#{ext3},
+			#{ext4},
+			#{ext5},
+			#{ext6}
+		)	
+
+	</insert>
+	
+	<delete id="deleteById" parameterType="java.lang.String">
+		delete from car_leader_order 	
+		WHERE ID=#{id}
+	</delete>
+	
+	<delete id="deleteByIds" parameterType="java.util.Collection">
+     	delete from car_leader_order 	
+     	WHERE ID IN
+     	<foreach collection="array" index="index" item="item" open="(" separator="," close=")"> #{item} </foreach> 
+  	 </delete>
+  	 
+  	 <delete id="logicDelete" parameterType="java.lang.String">
+		update car_leader_order set status1 = '-1' 	
+		WHERE ID=#{id}
+	</delete>
+	
+	<delete id="logicDeleteByIds" parameterType="java.util.Collection">
+     	update car_leader_order set status1 = '-1' 	
+     	WHERE ID IN
+     	<foreach collection="array" index="index" item="item" open="(" separator="," close=")"> #{item} </foreach> 
+  	 </delete>
+	
+	<update id="update" parameterType="com.zshop.car.leaderorder.entity.CarLeaderOrder" >
+			
+		update car_leader_order 	
+		<set> 	
+			park_id=#{parkId},
+			order_id=#{orderId},
+			leader_id=#{leaderId},
+			leader_name=#{leaderName},
+			remark=#{remark},
+			create_by=#{createBy},
+			create_time=#{createTime},
+			update_by=#{updateBy},
+			update_time=#{updateTime},
+			status1=#{status1},
+			status2=#{status2},
+			ext1=#{ext1},
+			ext2=#{ext2},
+			ext3=#{ext3},
+			ext4=#{ext4},
+			ext5=#{ext5},
+			ext6=#{ext6}
+		</set> 	
+		where 
+		ID=#{id} 	
+
+	</update>
+	
+	<update id="updateWithIf" parameterType="com.zshop.car.leaderorder.entity.CarLeaderOrder" >
+			
+		update car_leader_order 	
+		<set> 	
+			<if test=" parkId!=null ">	
+				park_id=#{parkId},	
+			</if>	
+			<if test=" orderId!=null ">	
+				order_id=#{orderId},	
+			</if>	
+			<if test=" leaderId!=null ">	
+				leader_id=#{leaderId},	
+			</if>	
+			<if test=" leaderName!=null ">	
+				leader_name=#{leaderName},	
+			</if>	
+			<if test=" remark!=null ">	
+				remark=#{remark},	
+			</if>	
+			<if test=" createBy!=null ">	
+				create_by=#{createBy},	
+			</if>	
+			<if test=" createTime!=null ">	
+				create_time=#{createTime},	
+			</if>	
+			<if test=" updateBy!=null ">	
+				update_by=#{updateBy},	
+			</if>	
+			<if test=" updateTime!=null ">	
+				update_time=#{updateTime},	
+			</if>	
+			<if test=" status1!=null ">	
+				status1=#{status1},	
+			</if>	
+			<if test=" status2!=null ">	
+				status2=#{status2},	
+			</if>	
+			<if test=" ext1!=null ">	
+				ext1=#{ext1},	
+			</if>	
+			<if test=" ext2!=null ">	
+				ext2=#{ext2},	
+			</if>	
+			<if test=" ext3!=null ">	
+				ext3=#{ext3},	
+			</if>	
+			<if test=" ext4!=null ">	
+				ext4=#{ext4},	
+			</if>	
+			<if test=" ext5!=null ">	
+				ext5=#{ext5},	
+			</if>	
+			<if test=" ext6!=null ">	
+				ext6=#{ext6},	
+			</if>	
+		</set>	
+		where 	
+		ID=#{id} 	
+
+	</update>
+	
+	<!-- *************************************************************************** -->
+	<!-- **************以下映射根据业务做相应调整**************** -->
+	<!-- *************************************************************************** -->
+  	
+  	<delete id="deleteByMap" parameterType="java.util.Map">
+    	delete from car_leader_order 	 
+    	<where>
+    		
+    	</where>
+  	</delete>
+	
+	<select id="findById" parameterType="java.lang.String" resultType="com.zshop.car.leaderorder.entity.CarLeaderOrder">
+				
+		select  	
+			a.id id,
+			a.park_id parkId,
+			a.order_id orderId,
+			a.leader_id leaderId,
+			a.leader_name leaderName,
+			a.remark remark,
+			a.create_by createBy,
+			a.create_time createTime,
+			a.update_by updateBy,
+			a.update_time updateTime,
+			a.status1 status1,
+			a.status2 status2,
+			a.ext1 ext1,
+			a.ext2 ext2,
+			a.ext3 ext3,
+			a.ext4 ext4,
+			a.ext5 ext5,
+			a.ext6 ext6
+		from car_leader_order a	
+
+		where a.Id=#{id}	
+	</select>
+
+	<select id="findListByMap" parameterType="java.util.Map" resultType="com.zshop.car.leaderorder.entity.CarLeaderOrder">
+		
+				
+		select  	
+			a.id id,
+			a.park_id parkId,
+			a.order_id orderId,
+			a.leader_id leaderId,
+			a.leader_name leaderName,
+			a.remark remark,
+			a.create_by createBy,
+			a.create_time createTime,
+			a.update_by updateBy,
+			a.update_time updateTime,
+			a.status1 status1,
+			a.status2 status2,
+			a.ext1 ext1,
+			a.ext2 ext2,
+			a.ext3 ext3,
+			a.ext4 ext4,
+			a.ext5 ext5,
+			a.ext6 ext6
+		from car_leader_order a	
+		<where>
+			1=1
+			<if test="orderId!= null ">
+				AND order_id = #{orderId}
+			</if>
+			
+		</where>
+
+	</select>
+	
+	<select id="list" parameterType="java.util.Map" resultType="com.zshop.car.leaderorder.entity.CarLeaderOrder">
+		
+		
+				
+		select  	
+			a.id id,
+			a.park_id parkId,
+			a.order_id orderId,
+			a.leader_id leaderId,
+			a.leader_name leaderName,
+			a.remark remark,
+			a.create_by createBy,
+			a.create_time createTime,
+			a.update_by updateBy,
+			a.update_time updateTime,
+			a.status1 status1,
+			a.status2 status2,
+			a.ext1 ext1,
+			a.ext2 ext2,
+			a.ext3 ext3,
+			a.ext4 ext4,
+			a.ext5 ext5,
+			a.ext6 ext6
+		from car_leader_order a	
+
+		
+		<where>
+			<if test="searchKeys!= null ">
+				AND ( 1=2
+				<foreach collection="searchKeys" index="index" item="item" >
+					 OR a.id like #{item}
+				</foreach> 
+				)
+			</if>
+		</where>
+
+		
+	</select>
+	
+	<select id="findOneByMap" parameterType="java.util.Map" resultType="com.zshop.car.leaderorder.entity.CarLeaderOrder">
+				
+		select  	
+			a.id id,
+			a.park_id parkId,
+			a.order_id orderId,
+			a.leader_id leaderId,
+			a.leader_name leaderName,
+			a.remark remark,
+			a.create_by createBy,
+			a.create_time createTime,
+			a.update_by updateBy,
+			a.update_time updateTime,
+			a.status1 status1,
+			a.status2 status2,
+			a.ext1 ext1,
+			a.ext2 ext2,
+			a.ext3 ext3,
+			a.ext4 ext4,
+			a.ext5 ext5,
+			a.ext6 ext6
+		from car_leader_order a	
+
+		<where>
+		
+		</where>
+		limit 1
+	</select>
+</mapper>
+	

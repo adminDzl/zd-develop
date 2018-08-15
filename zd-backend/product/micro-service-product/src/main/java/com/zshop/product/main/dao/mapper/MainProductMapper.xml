@@ -1,0 +1,269 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zshop.product.main.dao.mapper.MainProductMapper">
+
+<!-- **************以下映射必须与数据库一致 不要更改，除非数据库改变**************** -->
+
+	<insert id="insert" useGeneratedKeys="true" keyProperty="id" parameterType="com.zshop.product.main.entity.MainProduct">
+				
+		insert into zs_main_product
+		(
+			PRODUCT_NAME,
+			BRAND_ID,
+			CLASS_ID,
+			IS_DEL,
+			CREATE_BY,
+			CREATE_TIME,
+			UPDATE_BY,
+			UPDATE_TIME,
+			BID,
+			PARAM1,
+			PARAM2,
+			PARAM3,
+			PARAM4,
+			PARAM5
+		)
+		values	
+		(	
+			#{productName},
+			#{brandId},
+			#{classId},
+			#{isDel},
+			#{createBy},
+			#{createTime},
+			#{updateBy},
+			#{updateTime},
+			#{bid},
+			#{param1},
+			#{param2},
+			#{param3},
+			#{param4},
+			#{param5}
+		)	
+
+	</insert>
+	
+	<delete id="deleteById" parameterType="java.lang.Integer">
+		delete from zs_main_product 	
+		WHERE ID=#{id}
+	</delete>
+	
+	<delete id="deleteByIds" parameterType="java.util.Collection">
+     	delete from zs_main_product 	
+     	WHERE ID IN
+     	<foreach collection="array" index="index" item="item" open="(" separator="," close=")"> #{item} </foreach> 
+  	 </delete>
+  	 
+  	 <delete id="logicDelete" parameterType="java.lang.Integer">
+		update zs_main_product set status1 = '-1' 	
+		WHERE ID=#{id}
+	</delete>
+	
+	<delete id="logicDeleteByIds" parameterType="java.util.Collection">
+     	update zs_main_product set status1 = '-1' 	
+     	WHERE ID IN
+     	<foreach collection="array" index="index" item="item" open="(" separator="," close=")"> #{item} </foreach> 
+  	 </delete>
+	
+	<update id="update" parameterType="com.zshop.product.main.entity.MainProduct" >
+			
+		update zs_main_product 	
+		<set> 	
+			PRODUCT_NAME=#{productName},
+			BRAND_ID=#{brandId},
+			CLASS_ID=#{classId},
+			IS_DEL=#{isDel},
+			CREATE_BY=#{createBy},
+			CREATE_TIME=#{createTime},
+			UPDATE_BY=#{updateBy},
+			UPDATE_TIME=#{updateTime},
+			BID=#{bid},
+			PARAM1=#{param1},
+			PARAM2=#{param2},
+			PARAM3=#{param3},
+			PARAM4=#{param4},
+			PARAM5=#{param5}
+		</set> 	
+		where 
+		ID=#{id} 	
+
+	</update>
+	
+	<update id="updateWithIf" parameterType="com.zshop.product.main.entity.MainProduct" >
+			
+		update zs_main_product 	
+		<set> 	
+			<if test=" productName!=null ">	
+				PRODUCT_NAME=#{productName},	
+			</if>	
+			<if test=" brandId!=null ">	
+				BRAND_ID=#{brandId},	
+			</if>	
+			<if test=" classId!=null ">	
+				CLASS_ID=#{classId},	
+			</if>	
+			<if test=" isDel!=null ">	
+				IS_DEL=#{isDel},	
+			</if>	
+			<if test=" createBy!=null ">	
+				CREATE_BY=#{createBy},	
+			</if>	
+			<if test=" createTime!=null ">	
+				CREATE_TIME=#{createTime},	
+			</if>	
+			<if test=" updateBy!=null ">	
+				UPDATE_BY=#{updateBy},	
+			</if>	
+			<if test=" updateTime!=null ">	
+				UPDATE_TIME=#{updateTime},	
+			</if>	
+			<if test=" bid!=null ">	
+				BID=#{bid},	
+			</if>	
+			<if test=" param1!=null ">	
+				PARAM1=#{param1},	
+			</if>	
+			<if test=" param2!=null ">	
+				PARAM2=#{param2},	
+			</if>	
+			<if test=" param3!=null ">	
+				PARAM3=#{param3},	
+			</if>	
+			<if test=" param4!=null ">	
+				PARAM4=#{param4},	
+			</if>	
+			<if test=" param5!=null ">	
+				PARAM5=#{param5},	
+			</if>	
+		</set>	
+		where 	
+		ID=#{id} 	
+
+	</update>
+	
+	<!-- *************************************************************************** -->
+	<!-- **************以下映射根据业务做相应调整**************** -->
+	<!-- *************************************************************************** -->
+  	
+  	<delete id="deleteByMap" parameterType="java.util.Map">
+    	delete from zs_main_product 	 
+    	<where>
+    		
+    	</where>
+  	</delete>
+	
+	<select id="findById" parameterType="java.lang.Integer" resultType="com.zshop.product.main.entity.MainProduct">
+				
+		select  	
+			a.ID id,
+			a.PRODUCT_NAME productName,
+			a.BRAND_ID brandId,
+			a.CLASS_ID classId,
+			a.IS_DEL isDel,
+			a.CREATE_BY createBy,
+			a.CREATE_TIME createTime,
+			a.UPDATE_BY updateBy,
+			a.UPDATE_TIME updateTime,
+			a.BID bid,
+			a.PARAM1 param1,
+			a.PARAM2 param2,
+			a.PARAM3 param3,
+			a.PARAM4 param4,
+			a.PARAM5 param5
+		from zs_main_product a	
+
+		where a.Id=#{id}	
+	</select>
+
+	<select id="findListByMap" parameterType="java.util.Map" resultType="com.zshop.product.main.entity.MainProduct">
+		
+				
+		select  	
+			a.ID id,
+			a.PRODUCT_NAME productName,
+			a.BRAND_ID brandId,
+			a.CLASS_ID classId,
+			a.IS_DEL isDel,
+			a.CREATE_BY createBy,
+			a.CREATE_TIME createTime,
+			a.UPDATE_BY updateBy,
+			a.UPDATE_TIME updateTime,
+			a.BID bid,
+			a.PARAM1 param1,
+			a.PARAM2 param2,
+			a.PARAM3 param3,
+			a.PARAM4 param4,
+			a.PARAM5 param5
+		from zs_main_product a	
+
+		
+		<where>
+			
+		</where>
+
+	</select>
+	
+	<select id="list" parameterType="java.util.Map" resultType="com.zshop.product.main.entity.MainProduct">
+		
+		
+				
+		select  	
+			a.ID id,
+			a.PRODUCT_NAME productName,
+			a.BRAND_ID brandId,
+			a.CLASS_ID classId,
+			a.IS_DEL isDel,
+			a.CREATE_BY createBy,
+			a.CREATE_TIME createTime,
+			a.UPDATE_BY updateBy,
+			a.UPDATE_TIME updateTime,
+			a.BID bid,
+			a.PARAM1 param1,
+			a.PARAM2 param2,
+			a.PARAM3 param3,
+			a.PARAM4 param4,
+			a.PARAM5 param5
+		from zs_main_product a	
+
+		
+		<where>
+			<if test="searchKeys!= null ">
+				AND ( 1=2
+				<foreach collection="searchKeys" index="index" item="item" >
+					 OR a.id like #{item}
+				</foreach> 
+				)
+			</if>
+		</where>
+
+		
+	</select>
+	
+	<select id="findOneByMap" parameterType="java.util.Map" resultType="com.zshop.product.main.entity.MainProduct">
+				
+		select  	
+			a.ID id,
+			a.PRODUCT_NAME productName,
+			a.BRAND_ID brandId,
+			a.CLASS_ID classId,
+			a.IS_DEL isDel,
+			a.CREATE_BY createBy,
+			a.CREATE_TIME createTime,
+			a.UPDATE_BY updateBy,
+			a.UPDATE_TIME updateTime,
+			a.BID bid,
+			a.PARAM1 param1,
+			a.PARAM2 param2,
+			a.PARAM3 param3,
+			a.PARAM4 param4,
+			a.PARAM5 param5
+		from zs_main_product a	
+
+		<where>
+		
+		</where>
+		limit 1
+	</select>
+</mapper>
+	

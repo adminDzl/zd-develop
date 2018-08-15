@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zshop.product.list.dao.mapper.ProductListMapper">
+
+<!-- **************以下映射必须与数据库一致 不要更改，除非数据库改变**************** -->
+
+	<insert id="insert"  parameterType="com.zshop.product.list.entity.ProductList">
+				
+		insert into product_list
+		(
+			id,
+			product_code,
+			product_name,
+			product_price,
+			product_desc,
+			product_bar_code,
+			product_stock_count,
+			product_type_name,
+			remark,
+			create_by,
+			create_time,
+			status1
+		)
+		values	
+		(	
+			#{id},
+			#{productCode},
+			#{productName},
+			#{productPrice},
+			#{productDesc},
+			#{productBarCode},
+			#{productStockCount},
+			#{productTypeName},
+			#{remark},
+			#{createBy},
+			#{createTime},
+			#{status1}
+		)	
+
+	</insert>
+	
+	<delete id="deleteById" parameterType="java.lang.String">
+		delete from product_list 	
+		WHERE ID=#{id}
+	</delete>
+	
+	<delete id="deleteByIds" parameterType="java.util.Collection">
+     	delete from product_list 	
+     	WHERE ID IN
+     	<foreach collection="array" index="index" item="item" open="(" separator="," close=")"> #{item} </foreach> 
+  	 </delete>
+  	 
+  	 <delete id="logicDelete" parameterType="java.lang.String">
+		update product_list set status1 = '-1' 	
+		WHERE ID=#{id}
+	</delete>
+	
+	<delete id="logicDeleteByIds" parameterType="java.util.Collection">
+     	update product_list set status1 = '-1' 	
+     	WHERE ID IN
+     	<foreach collection="array" index="index" item="item" open="(" separator="," close=")"> #{item} </foreach> 
+  	 </delete>
+	
+	<update id="update" parameterType="com.zshop.product.list.entity.ProductList" >
+			
+		update product_list 	
+		<set> 	
+			product_code=#{productCode},
+			product_name=#{productName},
+			product_price=#{productPrice},
+			product_desc=#{productDesc},
+			product_bar_code=#{productBarCode},
+			product_stock_count=#{productStockCount},
+			product_type_name=#{productTypeName},
+			remark=#{remark},
+			create_by=#{createBy},
+			create_time=#{createTime},
+			status1=#{status1}
+		</set> 	
+		where 
+		ID=#{id} 	
+
+	</update>
+	
+	<update id="updateWithIf" parameterType="com.zshop.product.list.entity.ProductList" >
+			
+		update product_list 	
+		<set> 	
+			<if test=" productCode!=null ">	
+				product_code=#{productCode},	
+			</if>	
+			<if test=" productName!=null ">	
+				product_name=#{productName},	
+			</if>	
+			<if test=" productPrice!=null ">	
+				product_price=#{productPrice},	
+			</if>	
+			<if test=" productDesc!=null ">	
+				product_desc=#{productDesc},	
+			</if>	
+			<if test=" productBarCode!=null ">	
+				product_bar_code=#{productBarCode},	
+			</if>	
+			<if test=" productStockCount!=null ">	
+				product_stock_count=#{productStockCount},	
+			</if>	
+			<if test=" productTypeName!=null ">	
+				product_type_name=#{productTypeName},	
+			</if>	
+			<if test=" remark!=null ">	
+				remark=#{remark},	
+			</if>	
+			<if test=" createBy!=null ">	
+				create_by=#{createBy},	
+			</if>	
+			<if test=" createTime!=null ">	
+				create_time=#{createTime},	
+			</if>	
+			<if test=" status1!=null ">	
+				status1=#{status1},	
+			</if>	
+		</set>	
+		where 	
+		ID=#{id} 	
+
+	</update>
+	
+	<!-- *************************************************************************** -->
+	<!-- **************以下映射根据业务做相应调整**************** -->
+	<!-- *************************************************************************** -->
+  	
+  	<delete id="deleteByMap" parameterType="java.util.Map">
+    	delete from product_list 	 
+    	<where>
+    		
+    	</where>
+  	</delete>
+	
+	<select id="findById" parameterType="java.lang.String" resultType="com.zshop.product.list.entity.ProductList">
+				
+		select  	
+			a.id id,
+			a.product_code productCode,
+			a.product_name productName,
+			a.product_price productPrice,
+			a.product_desc productDesc,
+			a.product_bar_code productBarCode,
+			a.product_stock_count productStockCount,
+			a.product_type_name productTypeName,
+			a.remark remark,
+			a.create_by createBy,
+			a.create_time createTime,
+			a.status1 status1
+		from product_list a	
+
+		where a.Id=#{id}	
+	</select>
+
+	<select id="findListByMap" parameterType="java.util.Map" resultType="com.zshop.product.list.entity.ProductList">
+		
+				
+		select  	
+			a.id id,
+			a.product_code productCode,
+			a.product_name productName,
+			a.product_price productPrice,
+			a.product_desc productDesc,
+			a.product_bar_code productBarCode,
+			a.product_stock_count productStockCount,
+			a.product_type_name productTypeName,
+			a.remark remark,
+			a.create_by createBy,
+			a.create_time createTime,
+			a.status1 status1
+		from product_list a	
+
+		
+		<where>
+			
+		</where>
+
+	</select>
+	
+	<select id="list" parameterType="java.util.Map" resultType="com.zshop.product.list.entity.ProductList">
+		
+		
+				
+		select  	
+			a.id id,
+			a.product_code productCode,
+			a.product_name productName,
+			a.product_price productPrice,
+			a.product_desc productDesc,
+			a.product_bar_code productBarCode,
+			a.product_stock_count productStockCount,
+			a.product_type_name productTypeName,
+			a.remark remark,
+			a.create_by createBy,
+			a.create_time createTime,
+			a.status1 status1
+		from product_list a	
+
+		
+		<where>
+			<if test="searchKeys!= null ">
+				AND ( 1=2
+				<foreach collection="searchKeys" index="index" item="item" >
+					 OR a.id like #{item}
+				</foreach> 
+				)
+			</if>
+		</where>
+
+		
+	</select>
+	
+	<select id="findOneByMap" parameterType="java.util.Map" resultType="com.zshop.product.list.entity.ProductList">
+				
+		select  	
+			a.id id,
+			a.product_code productCode,
+			a.product_name productName,
+			a.product_price productPrice,
+			a.product_desc productDesc,
+			a.product_bar_code productBarCode,
+			a.product_stock_count productStockCount,
+			a.product_type_name productTypeName,
+			a.remark remark,
+			a.create_by createBy,
+			a.create_time createTime,
+			a.status1 status1
+		from product_list a	
+
+		<where>
+		
+		</where>
+		limit 1
+	</select>
+</mapper>
+	

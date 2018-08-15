@@ -1,0 +1,28 @@
+
+
+<div class="panel panel-default">      
+      <div class="panel-body">
+            <!---->                  
+            <ul class="nav nav-pills nav-sm">
+                  
+                  <li ng-if="!isEdit" ng-class="{true:'active',false:''}[currentTab=='addroom']"><a ng-click="changeTab('addroom')" >创建场地</a></li><!--ui-sref="manage.meetingroom.addroom"-->
+                  <li ng-if="isEdit" ng-class="{true:'active',false:''}[currentTab=='addroom']"><a ng-click="changeTab('addroom')" >编辑场地</a></li>
+                  <li ng-class="{true:'active',false:''}[currentTab=='pricemanage']"><a ng-click="changeTab('pricemanage')">价格管理</a></li>
+                  <li ng-class="{true:'active',false:''}[currentTab=='timemanage']"><a ng-click="changeTab('timemanage')">时间管理</a></li>
+                  <li ng-class="{true:'active',false:''}[currentTab=='goodsmanage']"><a ng-click="changeTab('goodsmanage')">提供物品</a></li>
+                  <li ng-class="{true:'active',false:''}[currentTab=='valueaddmanage']"><a ng-click="changeTab('valueaddmanage')">增值服务</a></li>
+                  <li ng-class="{true:'active',false:''}[currentTab=='favourablemanage']"><a ng-click="changeTab('favourablemanage')">优惠设置</a></li>
+                  <li ng-class="{true:'active',false:''}[currentTab=='bespeakmanage']"><a ng-click="changeTab('bespeakmanage')">预约设置</a></li>
+                  <!--<li ng-class="{true:'active',false:''}[currentTab=='auditmanage']"><a ng-click="changeTab('auditmanage')">审核设置</a></li>-->
+            </ul>                  
+            <!---->
+            <div ckass="panel bg-white">
+                  <div class="wrapper-md ">
+                        <ui-view></ui-view>
+                  </div>
+            </div>
+      </div>      
+</div>
+   
+  
+    

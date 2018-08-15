@@ -1,0 +1,31 @@
+<div class="modal-header">
+    <button type="button" class="close" ng-click="mm.close()"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+    <h4 class="modal-title">{{mm.site.title}}</h4>
+</div>
+<div class="modal-body">
+    <div class="wrapper-md ng-scope">
+         <div class="table-responsive panel panel-default">
+	      <table class="table table-bordered table-striped">
+			<thead>
+          	  <tr>
+	            <th style="width:2%;" ></th>
+	            <th style="width:3%;">选择</th>
+	            <th style="width:10%;">订单阶段</th>
+	          </tr>
+	        </thead>
+	        <tbody>
+				<tr ng-repeat="dict in dicts">
+					<td>{{ $index+1 }}</td>
+					<td> <input  type="checkbox"  ng-checked="dict.id == mm.site.orderStage" value="{{dict.id}}" ng-click="updateSelection($event,dict.id)"></td>
+					<td>{{dict.keyName}}</td>
+				</tr>
+			</tbody>
+		  </table>
+		 </div>
+    </div>
+</div>
+<div class="modal-footer">
+    	<button type="button" class="btn btn-info" ng-click="mm.confirm()">确定</button>
+    	<button type="button" class="btn btn-default" ng-click="mm.close()">关闭</button>
+   
+</div>

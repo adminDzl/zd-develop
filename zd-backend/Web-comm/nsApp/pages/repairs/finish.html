@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <meta content="telephone=no" name="format-detection">
+    <meta content="email=no" name="format-detection">
+    <meta name="hotcss" content="max-width=640">
+    <title>提交成功</title>
+    <link rel="stylesheet" href="../../css/common.css" />
+    <link rel="stylesheet" href="../../css/style.css" />
+    <script type="text/javascript" src="../../js/common/hotcss.js"></script>
+</head>
+
+<body ng-app="myApp" ng-controller="AppCtrl">
+    <div class="container m-t-40">
+        <div class="repair-success">
+            <span></span>
+        </div>
+        <div class="repair-center">
+            <h4 class="text-success">提交成功</h4>
+            <p class="bot">订单号：{{orderNum}}</p>
+            <p>我们会尽快处理您的报事单，期间可能需要与您进行沟通确认，请保持通讯顺畅。谢谢。</p>
+        </div>
+        <div>
+            <a class="fill-btn confirm" href="javascript:;" ng-click="getDetail()">查看掌上报修详情</a>
+            <a class="fill-btn confirm" href="javascript:;" style="background-color: rgb(91,227,227)" ng-click="toHome()">返回掌上报修首页</a>
+        </div>
+        <div class="tip bottom">
+            <em class="f-l"></em>请在订单/服务订单中查看订单详情列表
+        </div>
+    </div>
+
+    <!-- 蒙版 -->
+    <div class="masking"></div>
+
+
+
+    <script type="text/javascript" src="../../js/common/angular.js"></script>
+    <script type="text/javascript" src="../../js/common/jquery-1.8.3.min.js"></script>
+    <script type="text/javascript" src="../../js/common/util.js"></script>
+    <script type="text/javascript" src="../../js/repairs/finish.js"></script>
+</body>
+
+</html>

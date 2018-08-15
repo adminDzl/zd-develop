@@ -1,0 +1,421 @@
+<div class="col">
+    <!-- main header -->
+    <div>
+    <ul class="breadcrumb bg-white customBread">
+      <li><span><i class="fa fa-briefcase"></i> <span translate="">消息推送</span></span></li>
+      <li><span translate="">APP消息推送</span></li>
+    </ul>
+  </div>
+    <!-- / main header -->
+    <!-- table -->
+    <div class="wrapper-md" ng-controller="listAPPPushController" >
+    	<div class="row m-b-sm">
+    		<div class="col-sm-2 m-r-n-md">
+    			<input type="text" placeholder="" class="form-control input-sm-h" ng-model="searchStr"/>
+    		</div>
+    		<div class="col-sm-2 m-r-n-md">
+    			<select ng-options = "a.value as a.text  for a in pushStatuss"  class="form-control input-sm-h small"  ng-model = "pushStatus" ></select>
+    		</div>
+    		<div class="col-sm-2 m-r-n-md">
+    			<select ng-options = "a.value as a.text  for a in statuss"  class="form-control input-sm-h small"  ng-model = "status" ></select>
+    		</div>
+    		<div class="col-sm-2 m-r-n-md">
+    			<select ng-options = "a.value as a.text  for a in sendTypes"  class="form-control input-sm-h small"  ng-model = "sendType" ></select>
+    		</div>
+    		<button class="btn btn-sm btn-info icon icon-magnifier m-l"  title="搜索"  ng-click="query()">搜索</button>
+    		<button class="btn btn-sm btn-success glyphicon glyphicon-plus m-t-n-xxs m-l-sm"  title="添加"  ng-click="addAPPPush()" ></button>
+    		</div>
+    	<div class="panel panel-default">
+    		<table class="table table-bordered table-striped orderSueTable">
+				<thead>
+	          	  <tr class="TOPS_th">
+		            <th style="width:2%;" ></th>
+		            <th style="width:10%;" translate="" >消息标题</th>
+		            <th style="width:5%;" translate="" >发送对象</th>
+		            <th style="width:8%;" translate="" >推送时间</th>
+		            <th style="width:4%;" translate="" >推送状态</th>
+		            <th style="width:8%;" translate="" >创建时间</th>
+		            <th style="width:8%;" translate="" >创建人</th>
+		            <th style="width:10%;" translate="" >状态</th>
+	 	            <th style="width:10%;" translate="" >操作</th>
+		          </tr>
+		        </thead>
+		        <tbody>
+					<tr ng-repeat="aPPPushData in datas.rows">
+						<td>{{ $index+1 }}</td>
+						<td title="{{ aPPPushData.title }}">{{ aPPPushData.title | limitToNum:20 }}</td>
+						<td ng-if="aPPPushData.targetType==1 || aPPPushData.targetType==2" title="{{ aPPPushData.pushTargetName }}">{{ aPPPushData.pushTargetName | limitToNum:20 }}</td>
+						<td ng-if="aPPPushData.targetType==0" >所有人</td>
+						<td> {{ aPPPushData.sendTime }}</td>
+						<td> {{ aPPPushData.pushStatus | pushStatusStr }}</td>
+						<td> {{ aPPPushData.createTime }}</td>
+						<td> {{ aPPPushData.createUser }}</td>
+						<td> {{ aPPPushData.status | statusStr2 }}</td>
+						<td>
+							<button class="btn btn-sm btn-info glyphicon glyphicon-edit m-t-n-xxs"  title="编辑" ng-click="toeditAPPPush(aPPPushData)"  ng-if="aPPPushData.pushStatus==0"></button>
+		          			<button class="btn btn-sm btn-danger fa fa-trash-o m-t-n-xxs m-l-xs"  title="删除" ng-click="delAPPPush(aPPPushData)" ng-if="aPPPushData.status==1&&aPPPushData.pushStatus!=2" ></button>
+		          			<button class="btn btn-sm btn-info glyphicon glyphicon-eye-open m-t-n-xxs"  title="详情" ng-click="viewAPPPushDetail(aPPPushData)"></button>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+			<div ng-include="'pages/push/page.html'"></div>
+    	</div>
+    	
+    	<!-- 编辑 -->
+	    <div class="modal fade"  style="overflow: scroll;" id="editAPPPush" tabindex="-1" role="dialog"  >
+		    <div class="modal-dialog" style="margin-right: 400px; width: 60%;"  role="document">
+		      <div class="modal-content" style="width: 1200px; float: left;position: relative;">
+		         
+		        <div class="modal-header">
+		          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+		            <span aria-hidden="true">&times;</span>
+		          </button>
+		          <h4 class="modal-title" id="exampleRoleLabel" ng-if="aPPPushDatas.id">编辑</h4>
+		          <h4 class="modal-title" id="exampleRoleLabel" ng-if="!aPPPushDatas.id">添加</h4>
+		        </div>
+		        <div class="modal-body" style="width: 750px;">
+		          <form name="myForm" autosize="true" class="bs-example form-horizontal">
+		             <div class="form-group">
+		              <label class="col-lg-2 control-label" translate="">消息标题</label>
+		              <div class="col-lg-8">
+		                <input type="text" class="form-control" placeholder="请输入消息标题，不超过30个字" maxlength="30" ng-model="aPPPushDatas.title">
+		              </div>
+		              <span class="col-lo-1 text-danger">*</span>
+		            </div>
+		            <div class="form-group">
+		              <label class="col-lg-2 control-label" translate="">消息描述</label>
+		              <div class="col-lg-8">
+		                <textarea style="resize:none" class="form-control" placeholder="请输入消息描述，不超过100个字" maxlength="100" ng-model="aPPPushDatas.simpleDesc" ></textarea>
+		              </div>
+		              <span class="col-lo-1 text-danger">*</span>
+		            </div>
+		            <div class="form-group">
+		              <label class="col-lg-2 control-label" translate="">推送消息类型</label>
+		              <div class="col-lg-9">
+						<select  class="form-control lter" ng-model="aPPPushDatas.notifyType"  ng-options="message.messageCode as message.name group by message.parentName  for message in classifiedMessageList">
+							<option value="" selected="selected" translate="">--请选择--</option>
+						</select>
+		              </div>
+<!-- 		              <div class="col-lg-9"> -->
+<!-- 						<select class="form-control lter" ng-model="aPPPushDatas.notifyType"> -->
+<!-- 							<option value="" selected="selected" translate="">--请选择--</option> -->
+<!-- 		                    <option value="{{firstP.id}}" ng-repeat="firstP in classifiedMessageList">{{firstP.name}}</option> -->
+<!-- 						</select> -->
+<!-- 		              </div> -->
+		            </div>
+		            <div class="form-group">
+		              <label class="col-lg-2 control-label" translate="">内容类型</label>
+		              <div class="col-sm-8">
+							<div class="radio col-sm-4">
+				              <label class="i-checks">
+				                <input type="radio" name="contentType" checked="" value="0" ng-model="aPPPushDatas.contentType">
+				                <i></i><span translate="" class="m-l-none">文本</span>
+				              </label>
+				            </div>
+				            <div class="radio col-sm-4">
+				              <label class="i-checks">
+				              <input type="radio" name="contentType" checked="" value="1" ng-model="aPPPushDatas.contentType">
+				                <i></i><span translate="" class="m-l-none">外部链接</span>
+				              </label>
+				            </div>
+						</div>
+		            </div>
+		            <div class="form-group" id="contentDetail">
+		              <label class="col-lg-2 control-label" translate="">内容</label>
+		              <div class="col-lg-9">
+						  <input type="url" class="form-control" placeholder="请输入文本"  name="mpcontent"  ng-model="aPPPushDatas.content" >
+					  </div>
+		              <span class="col-lo-1 text-danger">*</span>
+		            </div>
+		            <div class="form-group" id="contentUrl">
+		              <label class="col-lg-2 control-label" translate="">url</label>
+		              <div class="col-lg-8">
+		                <input type="url" class="form-control" placeholder="请输入以http或者https开头的URL地址" name="urlPath" ng-model="aPPPushDatas.urlPath" >
+		              </div>
+		            </div>
+		            <div class="form-group">
+		              <label class="col-lg-2 control-label" translate="">发送对象</label>
+		              <div class="col-sm-8">
+				            <div class="radio col-sm-4">
+				              <label class="i-checks">
+				              <input type="radio" name="targetType" checked="" value="1" ng-model="aPPPushDatas.targetType">
+				                <i></i><span translate="" class="m-l-none">指定群组</span>
+				              </label>
+				            </div>
+				            <div class="radio col-sm-4">
+				              <label class="i-checks">
+				                <input type="radio" name="targetType" checked="" value="0" ng-model="aPPPushDatas.targetType">
+				                <i></i><span translate="" class="m-l-none">所有人</span>
+				              </label>
+				            </div>
+				            <div class="radio col-sm-4">
+				              <label class="i-checks">
+				                <input type="radio" name="targetType" checked="" value="2" ng-model="aPPPushDatas.targetType">
+				                <i></i><span translate="" class="m-l-none">指定用户</span>
+				              </label>
+				            </div>
+						</div>
+		            </div>
+		            
+		            <div class="panel panel-default" style="max-height: 230px; width: 540px; overflow-y: auto; margin: 10px auto 10px 118px;"  ng-if="aPPPushDatas.targetType==1">
+		    			<table class="table table-bordered table-striped ">
+							<thead>
+				          	  <tr class="TOPS_th">
+					            <th style="width:3%;" translate="">选择</th>
+					            <th style="width:10%;" translate="" >群组名称/成员数量</th>
+					          </tr>
+					        </thead>
+					       	 <tbody>
+								<tr ng-repeat="pushGroup in pushGroups">
+									<td> <input id={{pushGroup.id }}  type="checkbox"  ng-model="x" ng-checked="groupIdStr.indexOf(pushGroup.id)!=-1" ng-click="chkGroup(pushGroup.id,pushGroup.label,x)"></td>
+									<td>{{ pushGroup.label | limitToNum:20 }}</td>
+								</tr>
+							</tbody>
+						</table>
+		    		</div>
+		            
+		            <div  class="panel panel-default" style="max-height: 230px; width: 540px; overflow-y: auto; margin: 10px auto 10px 118px;"  ng-if="aPPPushDatas.targetType==2">
+		    			<div class="form-group">
+							<div class="col-sm-6">
+								<input type="text" name="searchUser" ng-model="searchUser" class="form-control" placeholder="搜索关键字">
+<!-- 								<input type="text" name="searchUser" ng-model="searchUser" class="form-control" placeholder=""> -->
+							</div>
+							<div class="col-sm-1">
+								<button class="btn btn-sm btn-info icon icon-magnifier m-l"  title="搜索" ng-click="searchUserFunc(searchUser)"></button>
+							</div>
+				        </div>
+				        <div class="form-group">
+							<div class="col-sm-6">
+<!-- 								<select name="client"  class="form-control" ng-model="searchUserId"> -->
+<!-- 									<option ng-repeat="user in userList" value="{{ user.userId }}">{{ user.email }}&nbsp;{{ user.mobile }}&nbsp;{{ user.realname }}&nbsp;{{ user.userId }}</option> -->
+<!-- 								</select> -->
+<!-- 								<select  class="form-control lter" ng-model="aPPPushDatas.searchUserEntity"  ng-options="user as user.realname for user in userList"> -->
+<!-- 								</select> -->
+								
+								<select name="searchUserEntity" ng-model="aPPPushDatas.searchUserEntity"   class="form-control">
+									<option ng-repeat="user in userList" value="{{ user }}">{{ user.email }}&nbsp;{{ user.mobile }}&nbsp;{{ user.realname }}</option>
+								</select>
+							</div>
+				        </div>
+		    		</div>
+		            
+		            <div class="form-group">
+		              <label class="col-lg-2 control-label" translate="">推送类型</label>
+		              <div class="col-sm-8">
+							<div class="radio col-sm-4">
+				              <label class="i-checks">
+				                <input type="radio" name="sendType" checked="" value="0" ng-model="aPPPushDatas.sendType">
+				                <i></i><span translate="" class="m-l-none">立即推送</span>
+				              </label>
+				            </div>
+				            <div class="radio col-sm-4">
+				              <label class="i-checks">
+				              <input type="radio" name="sendType" checked="" value="1" ng-model="aPPPushDatas.sendType">
+				                <i></i><span translate="" class="m-l-none">定时推送</span>
+				              </label>
+				            </div>
+						</div>
+		            </div>
+		            <div class="form-group" ng-if="aPPPushDatas.sendType==1">
+		              <label class="col-lg-2 control-label" translate="">推送时间</label>
+		              <div class="col-lg-8">
+		             	<input type="text" class="form-control selectTime" placeholder="{{ 'tableTitle.sendTime' |  translate }}" name="sendTime" ng-model="aPPPushDatas.sendTime" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss',minDate:'%y-%M-%d'})" />
+		              </div>
+		              <span class="col-lo-1 text-danger">*</span>
+		            </div>
+		            
+		            <div class="form-group">
+		              <label class="col-lg-2 control-label" translate="">推送状态</label>
+		              <div class="col-sm-8">
+							<div class="radio col-sm-4">
+				              <label class="i-checks">
+				                <input type="radio" name="status" checked="" value="1" ng-model="aPPPushDatas.status">
+				                <i></i><span translate="" class="m-l-none">开放</span>
+				              </label>
+				            </div>
+				            <div class="radio col-sm-4">
+				              <label class="i-checks">
+				              <input type="radio" name="status" checked="" value="-1" ng-model="aPPPushDatas.status">
+				                <i></i><span translate="" class="m-l-none">冻结</span>
+				              </label>
+				            </div>
+						</div>
+		            </div>
+		            
+		          </form> 
+		        </div>
+		        <div class="modal-body" style="width: 362px;position: absolute;left: 750px;top: 66px;height: 360px;">
+			        <div>预览</div>
+			        <div style="width: 360px;height: 320px;position: relative;background:url(pages/push/img/andriod_preview.png) no-repeat  center;">
+				        <input type="text" readonly="readonly" class="form-control" style="position: absolute;top: 88px;width: 270px;left: 80px;text-overflow: ellipsis;" placeholder="标题" ng-model="aPPPushDatas.title">
+				        <input type="text" readonly="readonly" class="form-control" style="position: absolute;top: 118px;width: 270px;left: 80px;text-overflow: ellipsis;" placeholder="简要描述" ng-model="aPPPushDatas.simpleDesc">
+			        </div>
+		        </div>
+		        
+		        <div class="modal-footer">
+		       	 <span class="text-danger app-aside fail-tip t-l"></span>
+		          <button type="button" class="btn btn-sm btn-warning" data-dismiss="modal" id="close" translate="">关闭</button>
+		          <button type="button" class="btn btn-sm btn-info ng-scope" ng-click="viewAPPPush(aPPPushDatas)" translate="">保存</button>
+		        </div>
+		      </div>
+		    </div>
+	  	</div>
+	  <!-- 编辑 end-->
+	  <!-- 预览-->
+	    <div class="modal fade" id="viewAPPPush" tabindex="-1" role="dialog"  >
+		    <div class="modal-dialog" style="margin-right: 366px;margin-top: 40px; width: 60%;" role="document">
+		      <div class="modal-content" style="width: 1050px; float: left;position: relative;">
+		         
+		        <div class="modal-header">
+		          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+		            <span aria-hidden="true">&times;</span>
+		          </button>
+		          <h4 class="modal-title" id="exampleRoleLabel" >推送明细</h4>
+		        </div>
+		        <div class="modal-body">
+		          <form name="myForm" autosize="true" class="bs-example form-horizontal">
+		             <div class="form-group">
+		              <label class="col-lg-2 control-label" translate="">消息标题</label>
+		              <div class="col-lg-8 pad-t-7" >
+		              		<span style="word-break:normal;"  class="m-l-none">{{aPPPushDatas.title}}</span>
+		              </div>
+		            </div>
+		             <div class="form-group">
+		              <label class="col-lg-2 control-label" translate="">消息描述</label>
+		              <div class="col-lg-8 pad-t-7"  >
+		              		<span style="word-break:normal;"  class="m-l-none">{{aPPPushDatas.simpleDesc}}</span>
+		              </div>
+		            </div>
+		             <div class="form-group">
+		              <label class="col-lg-2 control-label" translate="">推送消息类型</label>
+		              <div class="col-lg-8 pad-t-7"  >
+		              		<span style="word-break:normal;"  class="m-l-none">{{aPPPushDatas.notifyType}}</span>
+		              </div>
+		            </div>
+		            <div class="form-group">
+		              <label class="col-lg-2 control-label" translate="">内容</label>
+		              <div class="col-lg-9" style="max-height: 300px;overflow-y: scroll;border: solid 1px;padding-top: 7px;" >
+		             	<div class="ng-binding ng-scope" ng-bind-html="contentDetail" ng-if="aPPPushDatas.content&&aPPPushDatas.contentType==0" ></div>
+		              	<span style="word-break:normal;"  class="m-l-none" ng-if="aPPPushDatas.contentType==1" >{{aPPPushDatas.urlPath}}</span>
+		              </div>
+		            </div>
+		            <div class="form-group">
+		              <label class="col-lg-2 control-label" translate="">发送对象</label>
+		              <div class="col-sm-8 pad-t-7" >
+				                <span class="m-l-none" ng-if="aPPPushDatas.targetType==0">所有人</span>
+				                <span  class="m-l-none" style="word-break:normal;"  ng-if="aPPPushDatas.targetType==1 || aPPPushDatas.targetType==2">{{groupNameStr}}</span>
+						</div>
+		            </div>
+		            
+		            
+		            <div class="form-group">
+		              <label class="col-lg-2 control-label" translate="">推送时间</label>
+		              <div class="col-sm-8 pad-t-7" >
+				                <span translate="" class="m-l-none"  ng-if="aPPPushDatas.sendType==0">立即推送</span>
+				                <span translate="" class="m-l-none"  ng-if="aPPPushDatas.sendType==1">推送时间</span>
+						</div>
+		            </div>
+		            
+		            <div class="form-group">
+		              <label class="col-lg-2 control-label" translate="">发布状态</label>
+		              <div class="col-sm-8 pad-t-7" >
+				                <span translate="" class="m-l-none"  ng-if="aPPPushDatas.status==1">发布</span>
+				                <span translate="" class="m-l-none"  ng-if="aPPPushDatas.status==-1">冻结</span>
+						</div>
+		            </div>
+		            
+		          </form>
+		        </div>
+			        <div class="modal-footer" style="position: relative;height: 60px;">
+			          <button type="button" class="btn btn-sm btn-warning"  ng-click="closeView()" data-dismiss="modal" id="closeView" style="position: absolute;left: 420px;">返回修改</button>
+			          <button type="button" class="btn btn-sm btn-info ng-scope" ng-click="saveAPPPush(aPPPushDatas)"  style="position: absolute;left: 560px;width: 70px;">确定发送</button>
+			        </div>
+		      </div>
+		    </div>
+	  	</div>
+	  <!-- 预览 end-->
+	  <!-- 查看详情-->
+	    <div class="modal fade" id="detailAPPPush" tabindex="-1" role="dialog"  >
+		    <div class="modal-dialog" style="margin-right: 366px;margin-top: 40px;" role="document">
+		      <div class="modal-content" style="width: 1050px; float: left;position: relative;">
+		         
+		        <div class="modal-header">
+		          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+		            <span aria-hidden="true">&times;</span>
+		          </button>
+		          <h4 class="modal-title" id="exampleRoleLabel" >详情</h4>
+		        </div>
+		        <div class="modal-body">
+		          <form name="myForm" autosize="true" class="bs-example form-horizontal">
+		             <div class="form-group">
+		              <label class="col-lg-2 control-label" translate="">消息标题</label>
+		              <div class="col-lg-8 pad-t-7" >
+		              		<span style="word-break:normal;"  class="m-l-none">{{aPPPushDatas.title}}</span>
+		              </div>
+		            </div>
+		             <div class="form-group">
+		              <label class="col-lg-2 control-label" translate="">消息描述</label>
+		              <div class="col-lg-8 pad-t-7"  >
+		              		<span style="word-break:normal;"  class="m-l-none">{{aPPPushDatas.simpleDesc}}</span>
+		              </div>
+		            </div>
+		            <div class="form-group">
+		              <label class="col-lg-2 control-label" translate="">内容</label>
+		              <div class="col-lg-9" style="max-height: 300px;overflow-y: scroll;border: solid 1px;padding-top: 7px;" >
+		             	<div class="ng-binding ng-scope" ng-bind-html="aPPPushDatas.content" ng-if="aPPPushDatas.content&&aPPPushDatas.contentType==0" ></div>
+		              	<span style="word-break:normal;"  class="m-l-none" ng-if="aPPPushDatas.contentType==1" >{{aPPPushDatas.urlPath}}</span>
+		              </div>
+		            </div>
+		            <div class="form-group">
+		              <label class="col-lg-2 control-label" translate="">发送对象</label>
+		              <div class="col-sm-8 pad-t-7" >
+			                <span translate="" class="m-l-none"  ng-if="aPPPushDatas.targetType==0">所有人</span>
+			                <span  class="m-l-none" style="word-break:normal;"  ng-if="aPPPushDatas.targetType==1 || aPPPushDatas.targetType==2">{{groupNameStr}}</span>
+						</div>
+		            </div>
+		            
+		            
+		            <div class="form-group">
+		              <label class="col-lg-2 control-label" translate="">推送时间</label>
+		              <div class="col-sm-8 pad-t-7" >
+				                <span translate="" class="m-l-none"  ng-if="aPPPushDatas.sendType==0">立即推送</span>
+				                <span  class="m-l-none"  ng-if="aPPPushDatas.sendType==1">{{aPPPushDatas.sendTime}}</span>
+						</div>
+		            </div>
+		            
+		            <div class="form-group">
+		              <label class="col-lg-2 control-label" translate="">推送状态</label>
+		              <div class="col-sm-8 pad-t-7" >
+				              <label>
+				                <span translate="" class="m-l-none"  ng-if="aPPPushDatas.pushStatus==0">待推送</span>
+				                <span translate="" class="m-l-none"  ng-if="aPPPushDatas.pushStatus==1">推送中</span>
+				                <span translate="" class="m-l-none"  ng-if="aPPPushDatas.pushStatus==2">已完成</span>
+				              </label>
+						</div>
+		            </div>
+		            
+		          </form>
+		        </div>
+			        <div class="modal-footer" style="position: relative;">
+			          <button type="button" class="btn btn-sm btn-warning" data-dismiss="modal" id="close" >关闭</button>
+			        </div>
+		      </div>
+		    </div>
+	  	</div>
+	  <!-- 查看详情 end-->
+	  
+	  
+	  <!-- 提示框 -->
+	    <div class="modal fade" id="editTip" tabindex="-1" role="dialog">
+		      <div class="modal-content" style="width: 200px;border-radius: 10px;position: absolute;top: 50%;left: 50%;">
+		        <div class="modal-header" style="border: 0px;">
+		          <h4 class="modal-title" id="exampleRoleLabel" style="text-align: center;height: 40px;line-height: 40px;">{{ tipMessage }}</h4>
+		        </div>
+		      </div>
+	  	</div>
+	  <!-- 提示框 end-->
+    
+    </div>
+    <!-- table end -->
+</div>

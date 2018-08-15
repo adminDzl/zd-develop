@@ -1,0 +1,38 @@
+<div class="panel panel-default">        
+    <div class="panel-body" style="max-height:480px;overflow:auto">  
+        <div class="col-sm-12">
+            <h4>分配</h4>
+        </div>
+        <form class="form-horizontal" method="get" >
+            <!--s-->
+            <div class="line line-dashed b-b line-lg pull-in"></div>            
+                
+            <table class="table table-striped m-b-none">
+                <thead>
+                   <tr>
+                     <th style="width:60px;">序列</th>
+                     <th>人员名称</th>
+                     <th>联系方式</th>
+                     <th>联系邮箱</th>
+                   </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="it in instance.users">
+                        <td style="width:60px;"><input type="checkbox" ng-click="signSelect(it)"  ng-model="it.select"/></td>
+                        <td>{{it.personName}}</td>
+                        <td>{{it.personPhone}}</td>
+                        <td>{{it.personMail}}</td>
+                    </tr>
+                </tbody>
+            </table>     
+            <div class="line line-dashed b-b line-lg pull-in"></div>  
+                 <!-- s --> 
+            <div class="col-sm-4 col-sm-offset-2">                    
+                <button type="button" class="btn btn-default"  ng-click="cancel()">取消</button>
+                <button type="button" class="btn btn-primary"  ng-click="saveOrderFen()">保存</button>
+            </div>       
+        </form>
+    </div>
+   
+</div>
+ 

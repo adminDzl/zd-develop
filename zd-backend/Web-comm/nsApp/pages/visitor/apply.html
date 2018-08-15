@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<meta content="yes" name="apple-mobile-web-app-capable">
+		<meta content="black" name="apple-mobile-web-app-status-bar-style">
+		<meta content="telephone=no" name="format-detection">
+		<meta content="email=no" name="format-detection">
+		<meta name="hotcss" content="max-width=640">
+		<title>来访登记</title>
+		<link rel="stylesheet" href="../../css/common.css" />
+		<link rel="stylesheet" href="../../css/style.css" />
+		<script type="text/javascript" src="../../js/common/hotcss.js" ></script>
+	</head>
+	<body ng-app="myApp" ng-controller="AppCtrl">
+		
+		<div class="colorHeader">
+			<div class="orderSearchBox fix">
+				<i class="f-l"></i>
+				<input type="text" placeholder="搜索来访记录" class="f-l" disabled="disabled" />
+			</div>
+		</div>
+		
+		<div class="container">
+			<div class="inputBox">
+				<p>来访事由(必填):</p>
+				<input type="text" placeholder="请输入来访事由" />
+			</div>
+			<div class="inputBox">
+				<p>来访者姓名(必填):</p>
+				<input type="text" placeholder="请输入来访者姓名" />
+			</div>
+			<div class="inputBox">
+				<p>来访者电话(必填):</p>
+				<input type="tel" placeholder="请输入来访者电话" />
+			</div>
+			<div class="inputBox">
+				<p>来访者单位(必填):</p>
+				<input type="text" placeholder="请输入来访者单位" />
+			</div>
+			<div class="inputBox">
+				<p>来访时间(必填):</p>
+				<div class="fix time-two-select">
+					<div class="f-l">
+						<input type="date" name="vistTime"/>
+						<em class="calendar"></em>
+					</div>
+					<i class="f-l"></i>
+					<div class="timeSelect f-r">
+						<select>
+							<option>上午</option>
+							<option>下午</option>
+						</select>
+					</div>
+				</div>
+			</div>
+			<div class="inputBox">
+				<p>访问者姓名(必填):</p>
+				<input type="text" placeholder="请输入访问者姓名" />
+			</div>
+			<div class="inputBox">
+				<p>访问者单位(必填):</p>
+				<input type="text" placeholder="请输入访问者单位" />
+			</div>
+			<p class="tip m-b-40"><em></em>温馨提示：二维码只在设定时间有效，上午为9:00～12:00,下午为14:00～18:00。</p>
+			<a href="orderDetail.html" class="fill-btn confirm">确定</a>
+		</div>
+		
+		<!-- 蒙版 -->
+		<div class="masking"></div>
+		
+		
+		
+		<!--<script type="text/javascript" src="../../js/common/angular.js" ></script>-->
+		<script type="text/javascript" src="../../js/common/jquery-1.8.3.min.js" ></script>
+		<script>
+			$(".orderSearchBox").unbind("click").bind(("click"),function(event){
+				event.stopPropagation();
+				window.location.href="historySearch.html";
+			})
+			$(function(){
+				var ddd = new Date();
+				var day =ddd.getDate();
+				
+				if(ddd.getMonth()<10){
+				var month = "0"+(ddd.getMonth()+1); 
+				}
+				
+				if(ddd.getDate()<10){
+				 day = "0"+ddd.getDate(); 
+				}
+				
+				var datew = ddd.getFullYear()+"-"+month+"-"+day;
+				var datew = datew.toString();
+				
+				$("[name=vistTime]").val(datew);
+			})
+		</script>
+	</body>
+</html>

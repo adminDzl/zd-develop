@@ -1,0 +1,303 @@
+<style>
+	.custom {
+		margin-bottom: 30px;
+	}
+	.custom h3 {
+		color: #ff9900;
+	}	
+	.custom_txt {
+		border: 1px solid #dee5e7;
+		width: 56%;
+		border-radius: 5px;
+		height: 30px;
+		line-height: 30px;
+		padding: 0px 12px;
+		margin-bottom: 5px;
+		margin-top: 20px;
+	}
+	.custom_txt div {
+		display: inline-block;
+	}
+	.custom_txt div:first-child {
+		float: left;
+	}
+	.custom_txt div:last-child {
+		float: right;
+	}
+	.custom_txtstyle {
+		color: #868686;
+		margin-left: 45px;
+	}
+	.custom_time {
+		margin-bottom: 25px;
+		border: 1px solid #dee5e7;
+		width: 56%;
+		border-radius: 5px;
+		height: 30px;
+		line-height: 30px;
+		padding: 0px 12px;
+		margin-top: -4px;
+		display: block;
+		border-top: none;
+	}
+	.details_top {
+		padding:10px 0;
+		width:100%;
+	}
+	.details_top > span {
+		  font-size: 20px;
+		  color: #333333;
+		  display: inline-block;
+	}
+	.details_top > span > em {
+	 	  color: #ff9900;
+	}
+	.details_top > button {
+		width: 140px;
+		float: right;
+		font-size: 20px;
+	}
+	.top_number {
+		width: 302px;
+	}
+	.top_type {
+		width: 536px;
+	}
+	.top_btn {
+		background: #ff9900;
+		color: #fff;
+		margin-right: 42px;
+	}
+	.top_btn:hover {
+		background: #E58A00;
+		color: #fff;
+	}
+	.midde_content {
+		border: 1px solid #dee5e7;
+		margin-top: 20px;
+		padding-top: 42px;
+		margin-bottom: 30px;
+	}
+	.flow_block{
+		text-align: center;
+		padding: 0px 10px;
+	}
+	.mt_type {
+		display: inline-block;
+		margin-bottom: 30px;
+		min-height: 110px;
+	}
+	.flow_step {
+	    width: 170px;
+    	float: left;
+    	margin-bottom: 10px;
+	}
+	.flow_step > div {
+		width: 50%;
+		display: inline-block;
+		text-align: center;
+		height: 100px;
+  		vertical-align: middle;
+  		float: left;
+	}
+	.flow_step > div > i {
+		font-size: 32px;
+	}
+	.flow_step > div p {
+		height: 30px;
+	}
+	.flow_step > span {
+		display: inline-block;
+	    border: 1px solid #000;
+	    width: 82px;
+	    margin-bottom: 38px;
+	    margin-top: 20px;
+    	float: left;
+	}
+	.mt_title,.mt_content {
+		background: #DADADA;
+	}
+	.mt_title {
+		height: 55px;
+		line-height: 55px;
+	}
+	.mt_content {
+		margin-top: 1px;  
+		padding: 10px 0px;
+	}
+	.mt_title > span,.mt_content span {
+		color: #333;
+		display: inline-block;
+	}
+	.mt_content span {
+		height: 30px;
+		line-height: 30px;
+	}
+	.mt_content span > em {
+		color: #ff0000;
+	}
+	.mt_title > span:first-child,.mt_content span:first-child {
+		padding: 0 0 0 35px;
+		width: 173px;
+	}
+	.mt_title > span:nth-child(2),.mt_content span:nth-child(2) {
+		margin-left: 88px;
+		width: 662px;
+	}
+	.botoom_content {
+		border: 1px solid #dee5e7;
+		margin-bottom: 30px;
+	}
+	.col-lg-12 > h3 {
+		margin-bottom: 22px;
+	}
+	.img-bolck{
+		display: inline-block;
+	    padding: 5px;
+	}
+	.img-wh{
+		width:300px;
+		height: 200px;
+	}
+	.detail_img{
+		max-height: 20px;
+		border-radius: 3px;
+		margin: 0px 5px;
+	}
+	.form-control{
+		margin-bottom: 10px;
+	}
+</style>
+	<crumb title="订单详情"></crumb>
+	<div class="wrapper-md ng-scope" ng-controller="quoteDetailsCtrl">
+					<tabset class="tab-container">
+						<tab active="defaultTabs[0]">
+							<tab-heading>
+								<i class="glyphicon glyphicon-info-sign"></i> 基本信息
+							</tab-heading>
+							<div class="details_top">
+								<span class="top_number">服务单号：{{entity.orderNo}}</span>
+			                </div>	
+			                <div class="midde_content">
+				                <div class="flow_block">
+				                	<div class="mt_type">
+					                	<div class="flow_step" ng-repeat="step in site">
+					                		<div>
+					                			<i class="fa fa-check-circle" ng-class="{'btn-default':!step.orderStatus,'text-success':step.orderStatus}"></i>
+					                			<p>{{step.orderStatusName}}</p>
+					                		</div>
+					                		<span ng-if="$index < site.length-1"></span>
+					                	</div>
+				                	</div>
+			                	</div>
+			                </div>
+			                <div class="wrapper-md botoom_content">
+								<div class="row">
+								    <div class="col-lg-12">
+						                <div class="form-group">
+						                  <label class="col-sm-2 control-label"><span class="text-danger m-r"></span>申请事由：</label>
+						                  <div class="col-sm-10">
+						                  	  <span class="form-control">{{entity.reason}}</span>
+						                  </div>
+						                </div>
+						                <div class="form-group">
+						                  <label class="col-sm-2 control-label"><span class="text-danger m-r"></span>接待级别：</label>
+						                  <div class="col-sm-10">
+						                  	  <span class="form-control">{{entity.recLevelName}}</span>
+						                  </div>
+						                </div>
+						                <div class="form-group">
+						                  <label class="col-sm-2 control-label"><span class="text-danger m-r"></span>接待人数：</label>
+						                  <div class="col-sm-10">
+						                  	  <span class="form-control">{{entity.recNumber}}</span>
+						                  </div>
+						                </div>
+						                <div class="form-group">
+						                  <label class="col-sm-2 control-label"><span class="text-danger m-r"></span>接待时间：</label>
+						                  <div class="col-sm-10">
+						                  	  <span class="form-control">{{entity.recDate}}</span>
+						                  </div>
+						                </div>
+						                <div class="form-group" ng-if="entity.isSamllCar=='1'">
+						                  <label class="col-sm-2 control-label"><span class="text-danger m-r"></span>小车数量：</label>
+						                  <div class="col-sm-10">
+						                  	  <span class="form-control">{{entity.smallCarNum}}</span>
+						                  </div>
+						                </div>
+						                <div class="form-group" ng-if="entity.isMidCar=='1'">
+						                  <label class="col-sm-2 control-label"><span class="text-danger m-r"></span>中巴数量：</label>
+						                  <div class="col-sm-10">
+						                  	  <span class="form-control">{{entity.midCarNum}}</span>
+						                  </div>
+						                </div>
+						          	</div>
+						         </div>
+						      </div>
+						      <div class="wrapper-md botoom_content">
+								<div class="row">
+						          	<div class="col-lg-12">
+						                <div class="form-group">
+						                  <label class="col-sm-2 control-label"><span class="text-danger m-r"></span>预订人名称：</label>
+						                  <div class="col-sm-10">
+						                  	  <span class="form-control">{{entity.applyName}}</span>
+						                  </div>
+						                </div>
+						                <div class="form-group">
+						                  <label class="col-sm-2 control-label"><span class="text-danger m-r"></span>预订人部门：</label>
+						                  <div class="col-sm-10">
+						                  	  <span class="form-control">{{entity.applyDept}}</span>
+						                  </div>
+						                </div>
+						                <div class="form-group">
+						                  <label class="col-sm-2 control-label"><span class="text-danger m-r"></span>预订人电话：</label>
+						                  <div class="col-sm-10">
+						                  	  <span class="form-control">{{entity.applyMobile}}</span>
+						                  </div>
+						                </div>
+						          	</div>
+						          </div>
+						       </div>
+						       <div class="wrapper-md botoom_content">
+								  <div class="row">
+						          	<div class="col-lg-12" ng-if="attachmentUrl">
+						                <div class="form-group">
+						                  <label class="col-sm-2 control-label"><span class="text-danger m-r"></span>附件：</label>
+						                  <div class="col-sm-10">
+						                  		<div class="form-control" style="height:auto">
+							                  	  	<div class="m-b img-bolck" ng-repeat="img in attachmentUrl">
+									        			<img class="img-wh" ng-src="{{img}}">
+									    			</div>
+						                  	  	</div>
+						                  </div>
+						                </div>
+						          	</div>
+						          	<div class="col-lg-12">
+						                <div class="form-group">
+						                  <label class="col-sm-2 control-label"><span class="text-danger m-r"></span>备注信息：</label>
+						                  <div class="col-sm-10">
+						                  	  <span class="form-control">{{entity.remarks}}</span>
+						                  </div>
+						                </div>
+						          	</div>
+						          	<div class="col-lg-12">
+						                <div class="form-group">
+						                  <label class="col-sm-2 control-label" ng-if="commRating"><span class="text-danger m-r"></span>评价内容：</label>
+						                  <div class="col-sm-10" ng-if="commRating">
+						                  	  <span class="form-control">{{commRating.ratingDesc}}</span>
+						                  </div>
+						                  <label class="col-sm-2 control-label" ng-if="ratingFileUrl"><span class="text-danger m-r"></span>评价附件：</label>
+						                  <div class="col-sm-10" ng-if="ratingFileUrl">
+						                  		<div class="form-control" style="height:auto">
+							                  	  	<div class="m-b img-bolck" ng-repeat="img in ratingFileUrl">
+									        			<img class="img-wh" ng-src="{{img}}">
+									    			</div>
+						                  	  	</div>
+						                  </div>
+						                </div>
+						          	</div>
+						        </div>
+			                </div>	
+			              </tab>
+			            </tabset>					
+	</div>
+</div>

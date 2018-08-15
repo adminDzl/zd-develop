@@ -1,0 +1,12 @@
+<div class="modal-header">
+    <button type="button" class="close" ng-click="mm.close()"><span aria-hidden="true">×</span><span class="sr-only">Close</span>
+    </button>
+    <h4 class="modal-title">{{mm.site.title}}</h4>
+</div>
+<div class="modal-body" ng-class="{0:'',1:'alert-success',2:'alert-info',3:'alert-warning',4:'alert-danger'}[mm.choose()]">
+    <i class="glyphicon glyphicon-volume-up" ng-show="mm.site.icon" style="font-size: 25px;line-height: 30px;margin-right:10px"></i><span style="line-height: 30px;vertical-align:top;" ng-bind-html="mm.site.data"></span>
+</div>
+<div class="modal-footer" ng-if="mm.show()">
+    <button type="button" class="btn btn-default" ng-click="mm.close()">取消</button>
+    <button type="button" class="btn btn-info" ng-click="mm.ok()">{{mm.site.addInfo ? mm.site.addInfo : '确定'}}</button>
+</div>

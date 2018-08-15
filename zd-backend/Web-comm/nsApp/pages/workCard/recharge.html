@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<meta content="yes" name="apple-mobile-web-app-capable">
+		<meta content="black" name="apple-mobile-web-app-status-bar-style">
+		<meta content="telephone=no" name="format-detection">
+		<meta content="email=no" name="format-detection">
+		<meta name="hotcss" content="max-width=640">
+		<title>工卡充值</title>
+		<link rel="stylesheet" href="../../css/common.css" />
+		<link rel="stylesheet" href="../../css/style.css" />
+		<script type="text/javascript" src="../../js/common/hotcss.js" ></script>
+	</head>
+	<body ng-app="myApp" ng-controller="AppCtrl">
+		
+		<div class="rechargeBox">
+			<div class="wordCardHeader fix">
+				<p class="f-c-f f-l rechargeHeader">许词，您好！</p>
+				<p class="f-c-f f-r rechargeHeader">本次充值：￥50</p>
+			</div>
+			
+			<div class="wordCardRecharge">
+				<ul class="fix">
+					<li class="select">50元</li>
+					<li>100元</li>
+					<li>200元</li>
+					<li>500元</li>
+					<li>800元</li>
+					<li>1000元</li>
+				</ul>
+			</div>
+			
+			<div class="rechargeInputBox">
+				<p>自定充值金额</p>
+				<div class="fix">
+					<input type="number" placeholder="请输入充值金额" />
+					<span>元</span>
+				</div>
+			</div>
+		</div>
+		
+		<div class="container m-t-40">
+			<div class="paySelect fix">
+				<p class="fix"><em></em>微信</p>
+				<i class="select"></i>
+			</div>
+		</div>
+		
+		<div class="m-t-40 tip">
+			<p><em></em>温馨提示：</p>
+			<p>线上充值后，请到园区各大自助终端，将您充值的费用刷去您的实体卡内！自助终端分布：A座10楼1002办公室门口，A座5楼502办公室门口，A座1楼大厅</p>
+			<p>充值方式：充值方式为微信充值！</p>
+		</div>
+		
+		<a href="javascript:;" class="fill-btn confirm m-t-40">确定支付</a>
+		
+		<!-- 蒙版 -->
+		<div class="masking"></div>
+		
+		<script type="text/javascript" src="../../js/common/angular.js" ></script>
+		<script type="text/javascript" src="../../js/common/jquery-1.8.3.min.js" ></script>
+		<script type="text/javascript" src="../../js/common/util.js" ></script>
+		
+	</body>
+</html>

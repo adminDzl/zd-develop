@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <meta content="telephone=no" name="format-detection">
+    <meta content="email=no" name="format-detection">
+    <meta name="hotcss" content="max-width=640">
+    <title>公务接待</title>
+    <link rel="stylesheet" href="../../css/common.css" />
+    <link rel="stylesheet" href="../../css/style.css" />
+    <script type="text/javascript" src="../../js/common/hotcss.js"></script>
+</head>
+
+<body ng-app="myApp" ng-controller="AppCtrl">
+    <div class="container m-t-40">
+        <div class="inputBox">
+            <p>事由(必填):</p>
+            <input type="text" placeholder="请输入接待事由" ng-model="reason" />
+        </div>
+        <div class="selectBox">
+            <p>级别(必填):</p>
+            <div>
+                <select ng-model="level" ng-options="item.id as item.keyName for item in receptionInfo.levelInfoList"></select>
+            </div>
+        </div>
+        <div class="inputBox">
+            <p>人数(必填):</p>
+            <input type="text" placeholder="请输入接待人数" ng-model="num" />
+        </div>
+        <div class="inputBox">
+            <p>接待时间时间(必填):</p>
+            <div class="inputBoxTime">
+                <input type="datetime-local" placeholder="接待时间" ng-model="time" />
+                <em class="calendar"></em>
+            </div>
+        </div>
+        <div class="inputBox">
+            <p>联系电话(必填):</p>
+            <input type="text" placeholder="请输入联系电话" ng-model="receptionInfo.userInfo.applyMobile" />
+        </div>
+        <div class="inputBoxHasRadio">
+            <div class="fix radioBox">
+                <p class="f-l f-s-40 f-c-494848">小车</p>
+                <div class="f-r radioBtn smallCar" ng-click="selectCar($event)" data-id="chooseSmall"></div>
+            </div>
+            <input type="number" placeholder="请输入需要小车数量" ng-model="smallCar" />
+        </div>
+        <div class="inputBoxHasRadio">
+            <div class="fix radioBox">
+                <p class="f-l f-s-40 f-c-494848">中巴</p>
+                <div class="f-r radioBtn middleCar" ng-click="selectCar($event)" data-id="chooseMiddle"></div>
+            </div>
+            <input type="number" placeholder="请输入需要中巴数量" ng-model="middleCar" />
+        </div>
+        <div class="inputBox selectRepairsFile">
+            <p>附件</p>
+            <ul class="fix main" id="commentPicture">
+                <li>
+                    <form id="registration" name="registration" method="post" enctype="multipart/form-data" novalidate>
+                        <input type="file" name="file" id="choose" accept="image/*" />
+                    </form>
+                </li>
+            </ul>
+        </div>
+        <div class="textareaBox">
+            <p>备注:</p>
+            <textarea placeholder="请输入需要备注的信息" ng-model="remark"></textarea>
+        </div>
+        <div class="fill-btn confirm" ng-click="submitBtn()">确定</div>
+    </div>
+
+    <!-- 蒙版 -->
+    <div class="masking"></div>
+
+    <!-- 提交成功 -->
+    <div class="successfulBox t-c">
+        <div class="successHeader">
+            <div class="successIcon"></div>
+            <em class="successClose" ng-click="closeOrOpenTipBox('close')"></em>
+        </div>
+        <p class="f-s-50 f-b l-h-116 m-t-33">提交成功</p>
+        <p class="f-s-40">订单提交成功，请在我的订单查看状态。</p>
+        <div class="f-s-40">(
+            <span class="countDown" ng-bind-template="{{ countDown }}"></span>s)请等待</div>
+    </div>
+
+    <script type="text/javascript" src="../../js/common/angular.js"></script>
+    <script type="text/javascript" src="../../js/common/jquery-1.8.3.min.js"></script>
+    <script type="text/javascript" src="../../js/common/jquery.form.js"></script>
+    <script type="text/javascript" src="../../js/common/mobileFix.mini.js"></script>
+    <script type="text/javascript" src="../../js/common/exif.js"></script>
+    <script type="text/javascript" src="../../js/common/lrz.js"></script>
+    <script type="text/javascript" src="../../js/common/util.js"></script>
+    <script type="text/javascript" src="../../js/receptions/index.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,116 @@
+<style>
+	.name_details {
+		font-size: 12px;
+	}
+	.name_details > span　{
+		display: inline-block;
+		width: 86.3%;
+		text-align: center;
+		border: 1px solid #cfdadd;
+		height: 30px;
+		line-height: 30px;
+	}
+	.tool_title {
+		border-bottom: 2px dashed #F7A7A7;
+	} 
+</style>
+<crumb title="全部报事单" head="true"></crumb>
+<div class="wrapper-md" ng-controller="QuoteListCtrl">
+	 <div class="panel panel-default">
+	 	
+	 	<div class="panel-heading" style="background: #fff;">
+	 		<button type="submit" class="btn btn-sm btn-info btn-addon" ui-sref="app.repairs_add_new"><i class="fa fa-plus"></i>新增报事订单</button>
+	        <!-- <button type="submit" class="btn btn-sm btn-info btn-addon" ng-click="exportOrder();"><i class="fa fa-arrow-circle-down"></i>导出列表</button> -->
+    	</div>
+	 	
+	 	<div class="panel-heading" style="background: #fff;">
+	 	<form class="form-inline ng-pristine ng-valid">
+                <div class="form-group" style="margin-right: 30px; margin-bottom: 20px; ">
+		            <select class="form-control ng-pristine ng-valid ng-touched m-b-xs" ng-model="form.sortChiefId" ng-change="changeParam(form.sortChiefId);"  ng-options="en.sortChiefId as en.sortChiefName for en in site.sortChiefCombox">
+		            	<option value="">--类型--</option>
+		            </select>            		
+				</div>
+				<div class="form-group" style="margin-right: 30px; margin-bottom: 20px; ">
+		            <select class="form-control ng-pristine ng-valid ng-touched m-b-xs" ng-model="form.sortSubId" ng-change="search()"  ng-options="en.sortSubId as en.sortSubName for en in site.sortSubCombox">
+		            	<option value="">--二级类型--</option>
+		            </select>          		
+                </div>
+                <div class="form-group" style="margin-right: 30px; margin-bottom: 20px; ">
+						<!-- <select class="form-control ng-pristine ng-valid ng-touched m-b-xs" ng-model="form.orderStatus"  ng-options="en.orderStatus as en.orderStatusName for en in site.orderStatusList"> -->
+		            <select class="form-control ng-pristine ng-valid ng-touched m-b-xs" ng-model="form.orderStatus" ng-change="search()">
+						<option value="">--状态--</option>
+						<option value="1">提交</option>
+						<option value="2">已分配</option>
+						<option value="3">接单</option>
+						<option value="4">进行中</option>
+						<option value="5">已完成</option>
+						<option value="6">已关闭</option>
+		            </select>             		
+                </div>
+                <div class="form-group" style="margin-right: 30px; margin-bottom: 20px; ">
+		            <select class="form-control ng-pristine ng-valid ng-touched m-b-xs" ng-model="form.orderSource" ng-change="search()"  ng-options="en.id as en.text for en in site.orgList">
+		            	<option value="">--来源--</option>
+		            </select>  		
+                </div>
+                <div class="form-group" style="margin-right: 30px; margin-bottom: 20px; ">
+		            <select class="form-control ng-pristine ng-valid ng-touched m-b-xs" ng-model="form.areaChiefId" ng-change="search()"  ng-options="en.areaChiefId as en.areaName for en in site.areaCombox">
+		            	<option value="">--区域--</option>
+		            </select>  		
+                </div>
+                <div class="form-group" style="margin-right: 30px; margin-bottom: 20px;">
+            		<label class="control-label">时间：</label>
+            		<input id="searchDate" ui-jq="daterangepicker" ui-options="dateRangeOptions" style="min-width: 325px;vertical-align: initial;height: 30px;" placeholder="请输入日期范围" ng-model="dateTime"  aria-invalid="false" class="form-control ng-pristine ng-valid ng-touched" />
+					            		
+		            <button  class="btn m-b-xs btn-sm btn-status-info" ng-model="dateTime" ng-click="nearDay(7)">
+		            	近7天
+		            </button>
+		            <button  class="btn m-b-xs btn-sm btn-status-info"  ng-model="dateTime"  ng-click="nearDay(30)">
+		            	近1个月
+		            </button>
+		            <span class="input-group div-line"></span>
+                </div>
+                <div class="form-group" style="margin-right: 30px; margin-bottom: 20px; ">
+				  <input type="text" class="form-control" ng-model="form.otherSearchText"  style="width:300px;" placeholder="输入订单号/执行人/描述">
+				  <button type="submit" class="btn btn-info" ng-click="search(form.otherSearchText);">搜 索</button>
+		        </div>
+            </form>
+        </div>
+        
+        
+        
+        <div class="table-responsive" style="overflow: visible;">
+        	<table class="table table-striped b-b" >
+        		<thead>
+	                <tr>
+	                    <th data-breakpoints="xs">ID</th>
+	                    <th class="text-center">下单时间 </th>
+	                    <th class="text-center">订单号</th>
+	                    <th class="text-center">申请人</th>
+	                    <th class="text-center">类型</th>
+	                    <th class="text-center">二级类型</th>
+	                    <th class="text-center">区域</th>
+	                    <th class="text-center">描述</th>
+	                    <th class="text-center">状态</th>
+	                </tr>
+                </thead>
+                <tbody>
+	                <tr ng-repeat=" row in site.rows" >
+	                    <td > {{paginationConf.currentPage ? paginationConf.pageSize*(paginationConf.currentPage-1)+$index+1 : $index+1}}</td>
+	                    <td > {{row.createTime}}</td>
+	                    <td title="点击查看">
+	                    	<a ui-sref="app.repairs_detail({id:row.id,type:'all'})" class="text-info">{{row.orderNum}}</a>
+	                   	</td>
+	                    <td e-popover e-title='row.applyDept' e-type='0' e-otherdata='row.applyMobile' e-content='row.applyName' ></td>
+	                    <td>{{row.sortChiefName}}</td>
+	                    <td>{{row.sortSubName}}</td>
+	                    <td e-popover e-title="'公共区域'" e-type='1' e-otherdata='row.areaName' e-action="" e-content="'查看'" ></td>
+	                    <td e-popover e-title="'描述'" e-type='2' e-content="row.supplementText" ></td>
+	                    <td e-popover e-title='row.orderStatusName' e-type='3' e-otherdata='row.orderTracksHtml' e-content='row.orderStatusName' ></td>
+	                    <td></td>
+	                </tr>
+                </tbody>
+        	</table>
+        	<tmpagination conf="paginationConf"></tmpagination>
+        </div>
+	 </div>
+</div>

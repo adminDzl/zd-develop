@@ -1,0 +1,93 @@
+<div class="modal-header">
+    <button type="button" class="close" ng-click="mm.close()"><span aria-hidden="true">×</span><span class="sr-only">Close</span>
+    </button>
+    <h4 class="modal-title">{{mm.site.title}}</h4>
+</div>
+<div class="modal-body">
+    <div class="wrapper-md ng-scope" style="padding-bottom: 0px;">
+        <div class="row">
+            <div class="col-lg-12">
+            <tabset class="tab-container">
+					<tab>
+						<tab-heading>
+							<i class="glyphicon glyphicon-info-sign"></i> 下属
+						</tab-heading>
+						<div class="panel-heading" style="background: #fff;">
+			                 <form class="form-inline ng-pristine ng-valid">
+		                        <div class="form-group">
+						          <input type="text" class="form-control" ng-model="mm.allotKeys" ng-keypress="mm.searchAllot(mm.allotKeys,$event)" placeholder="输入关键字">
+						        </div>
+						        <button type="submit" class="btn btn-info" ng-click="mm.searchAllot(mm.allotKeys);">查询</button>
+							        
+						        <div style="padding-left: 0px;margin-top: 10px;">
+						            <span style="border: 1px solid #ccc;padding: 0 10px;" ng-if="mm.site.subordinateList.length>0">{{mm.site.userName}}</span>
+					            	<ul style="margin-left: 120px;">
+									    <li ng-repeat="en in mm.site.subordinateList" class="child_top">
+									    	<label class="i-checks">
+									        	<input type="checkbox" ng-checked="en.isChoose" ng-click="mm.chooseUser(en);"  >
+									          	<i></i>
+									        </label>
+									        <span style="border: 1px solid #ccc;padding: 0 10px;">{{en.userName}}</span>
+									    </li>
+									</ul>
+								</div>
+			                 </form>
+			            </div>
+						<div class="modal-footer">
+						    <button type="button" class="btn btn-btn-default" ng-click="mm.close()">取消</button>
+						    <button type="button" class="btn btn-info" ng-show="mm.site.orderStatus>3" ng-click="mm.invitedAssist(mm.form,1)">邀请协助</button>
+						    <button type="button" class="btn btn-info" ng-click="mm.addSaveAllot();">分配</button>
+						</div>
+					</tab>
+					<tab>
+						<tab-heading>
+							<i class="glyphicon glyphicon-info-sign"></i> 平级
+						</tab-heading>
+						<div class="panel-heading">
+			                 <form class="form-inline ng-pristine ng-valid">
+		                        <div class="form-group">
+						          <input type="text" class="form-control" ng-model="mm.TransferKeys" ng-keypress="mm.searchTransfer(mm.TransferKeys,$event)" placeholder="输入关键字">
+						        </div>
+						        <button type="submit" class="btn btn-info" ng-click="mm.searchTransfer(mm.TransferKeys);">查询</button>
+			                 </form>
+			            </div>
+			            <div style="clear: both;"></div>
+			            
+			            <div>
+						    <ul>
+						        <li style="margin-bottom: 10px;" ng-if="mm.site.showType == 1" ng-repeat="en in mm.site.sameLevelUserList" >
+							        <label class="i-checks">
+							          <input type="checkbox" ng-checked="en.isChoose" ng-disabled="mm.site.userName == en.userName"  ng-click="mm.chooseUserOther(en,en.principalId);"  ><i></i>
+							        </label>
+						            <span style="border: 1px solid #ccc;padding: 0 10px;">{{en.principalName}}</span>
+						        </li>
+						        <li style="margin-bottom: 10px;" ng-if="mm.site.showType == 2" ng-repeat="en in mm.site.sameLevelUserList" >
+							        <label class="i-checks" >
+							          <input type="checkbox" ng-checked="en.isChoose" ng-disabled="mm.site.userName == en.userName" ng-click="mm.chooseUserOther(en,en.userId);"  ><i></i>
+							        </label>
+						            <span style="border: 1px solid #ccc;padding: 0 10px;">{{en.userName}}</span>
+						        </li>
+						    </ul>
+						</div>
+				        
+						<div class="panel-heading">
+				            <div class="form-group m-b-xs">
+  							  <div class="row">
+		                         <div class="col-sm-12">
+		                             <textarea class="form-control" ng-model="mm.form.remark" style="height: 108px;" placeholder="请输入备注内容"></textarea>
+		                         </div>
+		                      </div>
+		                     </div>
+			            </div>
+			            <div style="clear: both;"></div>
+						<div class="modal-footer">
+						    <button type="button" class="btn btn-default" ng-click="mm.close()">取消</button>
+						    <button type="button" class="btn btn-info" ng-show="mm.site.orderStatus>3" ng-click="mm.invitedAssist(mm.form,2)">邀请协助</button>
+						    <button type="button" class="btn btn-info" ng-click="mm.addSaveTransfer(mm.form)">转移</button>
+						</div>
+					</tab>
+				</tabset>
+            </div>
+        </div>
+    </div>
+</div>

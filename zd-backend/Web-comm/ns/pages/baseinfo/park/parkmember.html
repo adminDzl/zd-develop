@@ -1,0 +1,152 @@
+<crumb title="园区成员" ></crumb>
+<div class="wrapper-md ng-scope" >
+	<div class="row">
+		<div class="col-lg-12">
+			<tabset class="tab-container">
+				<tab>
+					<tab-heading>
+						<i class="glyphicon glyphicon-info-sign"></i> 园区公司列表
+					</tab-heading>
+					<div class="panel panel-default" ng-controller="TParkOrgGrid">
+			        <div class="panel-heading">
+			        	<form class="form-inline ng-pristine ng-valid" role="form">
+				            <div class="form-group">
+					          	<input type="text" class="form-control" placeholder="请输入搜索内容" ng-model="keyword" ng-keypress="search(keyword,$event)"/>
+					        </div>
+				        	<button type="submit" class="btn btn-info" ng-click="search(keyword)">搜索</button>
+					  	</form>
+			        </div>
+			        <div class="table-responsive">
+			        	<table class="table table-striped b-t b-b">
+			        		<thead>
+				                <tr>
+				                    <th style="width:5%" data-breakpoints="xs">ID</th>
+				                    <th style="width:10%" class="text-center">企业名称</th>
+				                    <th style="width:10%" class="text-center">所属行业</th>
+				                    <th style="width:10%" class="text-center">企业法人</th>
+				                    <th style="width:10%" class="text-center">联系方式</th>
+				                    <th style="width:10%" class="text-center">企业地址</th>
+				                    <th style="width:10%" class="text-center">备注</th>
+				                    <th style="width:10%" class="text-center">操作</th>
+				                </tr>
+			                </thead>
+			                <tbody>
+				                <tr data-expanded="true" ng-repeat="row in rows">
+				                    <td > {{paginationConf.currentPage ? paginationConf.pageSize*(paginationConf.currentPage-1)+$index+1 : $index+1}}</td>
+				                    <td > {{row.name}}</td>
+				                    <td > {{row.business}}</td>
+				                    <td > {{row.corporateOwer}}</td>
+				                    <td > {{row.contact}}</td>
+				                    <td > {{row.address}}</td>
+				                    <td > {{row.remark}}</td>
+				                    <td >
+										<div class="buttons">
+				                            <!-- <button class="btn btn-sm btn-danger"  power-key="company:delete" ng-click="deleteById(row.id)">删除</button> -->
+				                        </div>
+									</td>
+				                </tr>
+			                </tbody>
+			        	</table>
+			        	<tmpagination conf="paginationConf"></tmpagination>
+			        </div>
+				 </div>
+				</tab>
+				
+				<tab>
+					<tab-heading>
+						<i class="glyphicon glyphicon-list"></i> 园区个人用户
+					</tab-heading>
+						<div class="panel panel-default"  ng-controller="ParkPersonGrid">
+				        <div class="panel-heading">
+				          <form class="form-inline ng-pristine ng-valid" role="form">
+				            <div class="form-group">
+					          <input type="text" class="form-control" placeholder="请输入用户名或者昵称" ng-model="keyword" ng-keypress="search(keyword,$event)"/>
+					        </div>
+					        <button type="submit" class="btn btn-info" ng-click="search(keyword)">搜索</button>
+						  </form>
+				        </div>
+				        <div class="table-responsive">
+				        	<table class="table table-striped b-t b-b">
+				        		<thead>
+					                <tr>
+					                    <th style="width:5%" data-breakpoints="xs">ID</th>
+					                    <th style="width:10%" class="text-center">姓名</th>
+					                    <th style="width:10%" class="text-center">昵称</th>
+					                    <th style="width:5%" class="text-center">性别 </th>
+					                    <th style="width:10%" class="text-center">手机号码</th>
+					                    <th style="width:10%" class="text-center">邮箱</th>
+					                    <th style="width:10%" class="text-center">备注</th>
+					                    <th style="width:15%" class="text-center" data-breakpoints="xs" >操作</th>
+					                </tr>
+				                </thead>
+				                <tbody>
+					                <tr data-expanded="true" ng-repeat="row in rows">
+					                    <td > {{paginationConf.currentPage ? paginationConf.pageSize*(paginationConf.currentPage-1)+$index+1 : $index+1}}</td>
+					                    <td > {{row.realname}}</td>
+					                    <td > {{row.nickname}}</td>
+					                    <td > {{row.sex == '0' ? '女' : '男'}}</td>
+					                    <td > {{row.mobile}}</td>
+					                    <td > {{row.email}}</td>
+					                    <td > {{row.remark}}</td>
+					                    <td>
+					                        <div class="buttons">
+					                        </div>
+					                    </td>
+					                </tr>
+				                </tbody>
+				        	</table>
+				        	<tmpagination conf="paginationConf"></tmpagination>
+				        </div>
+					 </div>
+				</tab>
+				<tab>
+					<tab-heading>
+						<i class="glyphicon glyphicon-list"></i>下属园区
+					</tab-heading>
+					<div class="panel panel-default"  ng-controller="ChildParkMemberGrid">
+			        <div class="panel-heading">
+			          <form class="form-inline ng-pristine ng-valid" role="form">
+			            <div class="form-group">
+				          <input type="text" class="form-control" placeholder="请输入用户名或者昵称" ng-model="keyword" ng-keypress="search(keyword,$event)"/>
+				        </div>
+				        <button type="submit" class="btn btn-info" ng-click="search(keyword)">搜索</button>
+					  </form>
+			        </div>
+			        <div class="table-responsive">
+			        	<table class="table table-striped b-t b-b">
+			        		<thead>
+				                <tr>
+				                    <th style="width:5%" data-breakpoints="xs">ID</th>
+				                    <th style="width:10%" class="text-center">名称</th>
+				                    <th style="width:10%" class="text-center">园区地址</th>
+				                    <th style="width:10%" class="text-center">园区类型 </th>
+				                    <th style="width:10%" class="text-center">园区网址</th>
+				                    <th style="width:10%" class="text-center">备注</th>
+				                    <th style="width:15%" class="text-center" data-breakpoints="xs" >操作</th>
+				                </tr>
+			                </thead>
+			                <tbody>
+				                <tr data-expanded="true" ng-repeat="row in rows">
+				                    <td > {{paginationConf.currentPage ? paginationConf.pageSize*(paginationConf.currentPage-1)+$index+1 : $index+1}}</td>
+				                    <td > {{row.name}}</td>
+				                    <td > {{row.address}}</td>
+				                    <td > {{row.parkType}}</td>
+				                    <td > {{row.parkUrl}}</td>
+				                    <td > {{row.remark}}</td>
+				                    <td>
+				                        <div class="buttons">
+				                            <button class="btn btn-sm btn-info"  power-key="user:save"  ng-click="save(row.id)">认证密码</button>
+				                        </div>
+				                    </td>
+				                </tr>
+			                </tbody>
+			        	</table>
+			        	<tmpagination conf="paginationConf"></tmpagination>
+			        </div>
+					 </div>
+				</tab>
+			</tabset>
+		</div>
+	</div>
+	 
+</div>

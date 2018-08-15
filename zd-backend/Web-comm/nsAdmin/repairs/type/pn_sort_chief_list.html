@@ -1,0 +1,75 @@
+<crumb title="报事类型" head="true"></crumb>
+<div class="wrapper-md" ng-controller="SortChiefListCtrl">
+	 <div class="panel panel-default">
+	 	
+	 	<div class="panel-heading">
+            <div class="form-inline">
+                <div class="form-group">
+            		<label class="control-label">状态：</label>
+            		
+		            <button id="status0" class="btn m-b-xs btn-sm btn-status-info btn-status-bgc" ng-model="recordStatus" ng-click="recordStatus='';search()">
+		            	全部
+		            </button>
+		            <button id="status1" class="btn m-b-xs btn-sm btn-status-info" ng-model="recordStatus" ng-click="recordStatus=1;search()">
+		            	启用
+		            </button>
+		            <button id="status2" class="btn m-b-xs btn-sm btn-status-info" ng-model="recordStatus" ng-click="recordStatus=2;search()">
+		            	禁用
+		            </button>            		
+                </div>
+            </div>
+        </div>
+	 	<div class="panel-heading">
+	 	 <div class="form-inline">	
+			      <div class="input-group">
+			        <input type="text" class="form-control" style="width: 300px;" placeholder="输入分类名称" ng-model="keys" ng-keypress="search(keys,$event)"/>
+			        <div class="input-group-btn">
+			          <button class="btn btn-info" ng-click="search(keys)">搜索</button>
+			        </div>
+			      </div> 
+			      <div class="input-group div-line">
+			      </div>   
+			      <button class="btn btn-sm btn-info btn-addon" ng-click="addNew()">
+	            	<i class="fa fa-plus"></i>新增分类
+	           	  </button>        
+            </div>
+        </div>        
+        
+        <div class="table-responsive">
+        	<table class="table table-striped b-t b-b">
+        		<thead>
+	                <tr>
+	                    <th data-breakpoints="xs">ID</th>
+	                    <th class="text-center">分类名称 </th>
+	                    <th class="text-center">负责人</th>
+	                    <th class="text-center">联系电话</th>
+	                    <th class="text-center">描述</th>
+	                    <th class="text-center">发布时间</th>
+	                    <th class="text-center">状态</th>
+	                    <th data-breakpoints="xs" style="width:15%">操作</th>
+	                </tr>
+                </thead>
+                <tbody>
+	                <tr data-expanded="true" ng-repeat="sort in sortChiefList">
+	                    <td ng-bind="paginationConf.currentPage ? paginationConf.pageSize*(paginationConf.currentPage-1)+$index+1 : $index+1"></td>
+	                    <td ng-bind="sort.name | subStringFilter:25" title="{{sort.name}}"></td>
+	                    <td ng-bind="sort.userName"></td>
+	                    <td ng-bind="sort.mobile"></td>
+	                    <td ng-bind="sort.description | subStringFilter:20" title="{{sort.description}}"></td>
+	                    <td ng-bind="sort.createTime">{{sort.createTime | date:'yyyy-MM-dd hh:mm:ss'}}</td>
+	                    <td ng-bind-template="{{sort.recordStatus=='1'?'启用':'禁用'}}"></td>
+	                    <td>
+	                        <div class="buttons">
+								<button class="btn btn-sm {{sort.defaultCategory == '0'? 'btn-default' :'btn-info'}}" ng-disabled="sort.defaultCategory == '0'? true :false" ng-click="set(sort)">默认</button>
+	                            <button class="btn btn-sm btn-info" ng-click="update(sort)">修改</button>
+	                            <button class="btn btn-sm btn-default" ng-show="{{sort.recordStatus == 1}}" ng-click="changeStatus($index,2)">禁用</button>
+	                            <button class="btn btn-sm btn-default" ng-show="{{sort.recordStatus == 2}}" ng-click="changeStatus($index,1)">启用</button>
+	                        </div>
+	                    </td>
+	                </tr>
+                </tbody>
+        	</table>
+        	<tmpagination conf="paginationConf"></tmpagination>
+        </div>
+	 </div>
+</div>

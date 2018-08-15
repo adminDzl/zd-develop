@@ -1,0 +1,67 @@
+.fullAll{
+	padding: 10px 15px;
+	margin: 0px;
+	width: 100%;
+	height: 100%;
+	line-height: 100%;
+	text-align: center;
+	font-size: 20px;
+}
+.imgs{
+	list-style-type: none;
+	margin: 0px;
+	padding: 0px;
+}
+.imgs li{
+	margin: 5px;
+}
+
+.imgs li img{
+	max-height: 80px;
+	max-width: 80px;
+}
+.imgParent{
+	position: relative;
+	padding: 5px;
+	background: burlywood;
+}
+
+.deleteBtn, .deleteBtnS{
+	position: absolute;
+	top: 0px;
+	bottom: 0px;
+	left: 0px;
+	right: 0px;
+	width: 100%;
+	height: 100%;
+	opacity: 0;
+	background-color: white;
+}
+.deleteBtn{
+	font-size: 50px;	
+}
+.deleteBtn:hover,.deleteBtnS:hover{
+	opacity: 0.6;
+}
+.relative{
+	position: relative;
+}
+/*.inputFull{*/
+	/*opacity: 0;*/
+	/*display: none;*/
+	/*position: absolute;*/
+	/*width: 100%;*/
+	/*height: 100%;*/
+	/*top: 0px;*/
+	/*right: 0px;*/
+/*}*/
+.opacity{
+	opacity: 0;
+}
+.coverOn{
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	height: 100%;
+	width: 100%;
+}

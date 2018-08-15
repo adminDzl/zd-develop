@@ -1,0 +1,560 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zshop.common.order.dao.mapper.CommOrderMapper">
+
+<!-- **************以下映射必须与数据库一致 不要更改，除非数据库改变**************** -->
+
+	<insert id="insert"  parameterType="com.zshop.common.order.entity.CommOrder">
+				
+		insert into comm_order
+		(
+			id,
+			is_done,
+			park_id,
+			type1,
+			type1_name,
+			type2,
+			type2_name,
+			order_no,
+			order_id,
+			order_status,
+			img_url,
+			remark,
+			status1,
+			status2,
+			create_by,
+			create_name,
+			create_time,
+			update_by,
+			update_time,
+			waithandle_type,
+			waithandle_id,
+			ext1,
+			ext2,
+			ext3,
+			ext4,
+			ext5,
+			ext6
+		)
+		values	
+		(	
+			#{id},
+			#{isDone},
+			#{parkId},
+			#{type1},
+			#{type1Name},
+			#{type2},
+			#{type2Name},
+			#{orderNo},
+			#{orderId},
+			#{orderStatus},
+			#{imgUrl},
+			#{remark},
+			#{status1},
+			#{status2},
+			#{createBy},
+			#{createName},
+			#{createTime},
+			#{updateBy},
+			#{updateTime},
+			#{waithandleType},
+			#{waithandleId},
+			#{ext1},
+			#{ext2},
+			#{ext3},
+			#{ext4},
+			#{ext5},
+			#{ext6}
+		)	
+
+	</insert>
+	
+	<delete id="deleteById" parameterType="java.lang.String">
+		delete from comm_order 	
+		WHERE ID=#{id}
+	</delete>
+	
+	<delete id="deleteByIds" parameterType="java.util.Collection">
+     	delete from comm_order 	
+     	WHERE ID IN
+     	<foreach collection="array" index="index" item="item" open="(" separator="," close=")"> #{item} </foreach> 
+  	 </delete>
+  	 
+  	 <delete id="logicDelete" parameterType="java.lang.String">
+		update comm_order set status1 = '-1' 	
+		WHERE ID=#{id}
+	</delete>
+	
+	<delete id="logicDeleteByIds" parameterType="java.util.Collection">
+     	update comm_order set status1 = '-1' 	
+     	WHERE ID IN
+     	<foreach collection="array" index="index" item="item" open="(" separator="," close=")"> #{item} </foreach> 
+  	 </delete>
+	
+	<update id="update" parameterType="com.zshop.common.order.entity.CommOrder" >
+			
+		update comm_order 	
+		<set> 	
+			is_done=#{isDone},
+			park_id=#{parkId},
+			type1=#{type1},
+			type1_name=#{type1Name},
+			type2=#{type2},
+			type2_name=#{type2Name},
+			order_no=#{orderNo},
+			order_id=#{orderId},
+			order_status=#{orderStatus},
+			img_url=#{imgUrl},
+			remark=#{remark},
+			status1=#{status1},
+			status2=#{status2},
+			create_by=#{createBy},
+			create_name=#{createName},
+			create_time=#{createTime},
+			update_by=#{updateBy},
+			update_time=#{updateTime},
+			waithandle_type=#{waithandleType},
+			waithandle_id=#{waithandleId},
+			ext1=#{ext1},
+			ext2=#{ext2},
+			ext3=#{ext3},
+			ext4=#{ext4},
+			ext5=#{ext5},
+			ext6=#{ext6}
+		</set> 	
+		where 
+		ID=#{id} 	
+
+	</update>
+	
+	<update id="updateWithIf" parameterType="com.zshop.common.order.entity.CommOrder" >
+			
+		update comm_order 	
+		<set> 	
+			<if test=" isDone!=null ">	
+				is_done=#{isDone},	
+			</if>	
+			<if test=" parkId!=null ">	
+				park_id=#{parkId},	
+			</if>	
+			<if test=" type1!=null ">	
+				type1=#{type1},	
+			</if>	
+			<if test=" type1Name!=null ">	
+				type1_name=#{type1Name},	
+			</if>	
+			<if test=" type2!=null ">	
+				type2=#{type2},	
+			</if>	
+			<if test=" type2Name!=null ">	
+				type2_name=#{type2Name},	
+			</if>	
+			<if test=" orderNo!=null ">	
+				order_no=#{orderNo},	
+			</if>	
+			<if test=" orderId!=null ">	
+				order_id=#{orderId},	
+			</if>	
+			<if test=" orderStatus!=null ">	
+				order_status=#{orderStatus},	
+			</if>	
+			<if test=" imgUrl!=null ">	
+				img_url=#{imgUrl},	
+			</if>	
+			<if test=" remark!=null ">	
+				remark=#{remark},	
+			</if>	
+			<if test=" status1!=null ">	
+				status1=#{status1},	
+			</if>	
+			<if test=" status2!=null ">	
+				status2=#{status2},	
+			</if>	
+			<if test=" createBy!=null ">	
+				create_by=#{createBy},	
+			</if>	
+			<if test=" createName!=null ">	
+				create_name=#{createName},	
+			</if>	
+			<if test=" createTime!=null ">	
+				create_time=#{createTime},	
+			</if>	
+			<if test=" updateBy!=null ">	
+				update_by=#{updateBy},	
+			</if>	
+			<if test=" updateTime!=null ">	
+				update_time=#{updateTime},	
+			</if>	
+			<if test=" waithandleType!=null ">	
+				waithandle_type=#{waithandleType},	
+			</if>	
+			<if test=" waithandleId!=null ">	
+				waithandle_id=#{waithandleId},	
+			</if>	
+			<if test=" ext1!=null ">	
+				ext1=#{ext1},	
+			</if>	
+			<if test=" ext2!=null ">	
+				ext2=#{ext2},	
+			</if>	
+			<if test=" ext3!=null ">	
+				ext3=#{ext3},	
+			</if>	
+			<if test=" ext4!=null ">	
+				ext4=#{ext4},	
+			</if>	
+			<if test=" ext5!=null ">	
+				ext5=#{ext5},	
+			</if>	
+			<if test=" ext6!=null ">	
+				ext6=#{ext6},	
+			</if>	
+		</set>	
+		where 	
+		ID=#{id} 	
+
+	</update>
+	
+	<!-- *************************************************************************** -->
+	<!-- **************以下映射根据业务做相应调整**************** -->
+	<!-- *************************************************************************** -->
+  	
+  	<delete id="deleteByMap" parameterType="java.util.Map">
+    	delete from comm_order 	 
+    	<where>
+    		
+    	</where>
+  	</delete>
+	
+	<select id="findById" parameterType="java.lang.String" resultType="com.zshop.common.order.entity.CommOrder">
+				
+		select  	
+			a.id id,
+			a.is_done isDone,
+			a.park_id parkId,
+			a.type1 type1,
+			a.type1_name type1Name,
+			a.type2 type2,
+			a.type2_name type2Name,
+			a.order_no orderNo,
+			a.order_id orderId,
+			a.order_status orderStatus,
+			a.img_url imgUrl,
+			a.remark remark,
+			a.status1 status1,
+			a.status2 status2,
+			a.create_by createBy,
+			a.create_name createName,
+			a.create_time createTime,
+			a.update_by updateBy,
+			a.update_time updateTime,
+			a.waithandle_type waithandleType,
+			a.waithandle_id waithandleId,
+			a.ext1 ext1,
+			a.ext2 ext2,
+			a.ext3 ext3,
+			a.ext4 ext4,
+			a.ext5 ext5,
+			a.ext6 ext6
+		from comm_order a	
+
+		where a.Id=#{id}	
+	</select>
+
+	<select id="findListByMap" parameterType="java.util.Map" resultType="com.zshop.common.order.entity.CommOrder">
+		
+				
+		select  	
+			a.id id,
+			a.is_done isDone,
+			a.park_id parkId,
+			a.type1 type1,
+			a.type1_name type1Name,
+			a.type2 type2,
+			a.type2_name type2Name,
+			a.order_no orderNo,
+			a.order_id orderId,
+			a.order_status orderStatus,
+			a.img_url imgUrl,
+			a.remark remark,
+			a.status1 status1,
+			a.status2 status2,
+			a.create_by createBy,
+			a.create_name createName,
+			a.create_time createTime,
+			a.update_by updateBy,
+			a.update_time updateTime,
+			a.waithandle_type waithandleType,
+			a.waithandle_id waithandleId,
+			a.ext1 ext1,
+			a.ext2 ext2,
+			a.ext3 ext3,
+			a.ext4 ext4,
+			a.ext5 ext5,
+			a.ext6 ext6
+		from comm_order a	
+
+		
+		<where>
+			
+		</where>
+
+	</select>
+	
+	<select id="list" parameterType="java.util.Map" resultType="com.zshop.common.order.entity.CommOrder">
+		
+		
+				
+		select  	
+			a.id id,
+			a.is_done isDone,
+			a.park_id parkId,
+			a.type1 type1,
+			a.type1_name type1Name,
+			a.type2 type2,
+			a.type2_name type2Name,
+			a.order_no orderNo,
+			a.order_id orderId,
+			a.order_status orderStatus,
+			a.img_url imgUrl,
+			a.remark remark,
+			a.status1 status1,
+			a.status2 status2,
+			a.create_by createBy,
+			a.create_name createName,
+			a.create_time createTime,
+			a.update_by updateBy,
+			a.update_time updateTime,
+			a.waithandle_type waithandleType,
+			a.waithandle_id waithandleId,
+			a.ext1 ext1,
+			a.ext2 ext2,
+			a.ext3 ext3,
+			a.ext4 ext4,
+			a.ext5 ext5,
+			a.ext6 ext6
+		from comm_order a	
+
+		
+		<where>
+			<if test="searchKeys!= null ">
+				AND ( 1=2
+				<foreach collection="searchKeys" index="index" item="item" >
+					 OR a.id like #{item}
+				</foreach> 
+				)
+			</if>
+		</where>
+
+		
+	</select>
+	
+	<select id="findOneByMap" parameterType="java.util.Map" resultType="com.zshop.common.order.entity.CommOrder">
+				
+		select  	
+			a.id id,
+			a.is_done isDone,
+			a.park_id parkId,
+			a.type1 type1,
+			a.type1_name type1Name,
+			a.type2 type2,
+			a.type2_name type2Name,
+			a.order_no orderNo,
+			a.order_id orderId,
+			a.order_status orderStatus,
+			a.img_url imgUrl,
+			a.remark remark,
+			a.status1 status1,
+			a.status2 status2,
+			a.create_by createBy,
+			a.create_name createName,
+			a.create_time createTime,
+			a.update_by updateBy,
+			a.update_time updateTime,
+			a.waithandle_type waithandleType,
+			a.waithandle_id waithandleId,
+			a.ext1 ext1,
+			a.ext2 ext2,
+			a.ext3 ext3,
+			a.ext4 ext4,
+			a.ext5 ext5,
+			a.ext6 ext6
+		from comm_order a	
+
+		<where>
+		
+		</where>
+		limit 1
+	</select>
+
+
+	<update id="updateWithIfByOrderId" parameterType="com.zshop.common.order.entity.CommOrder" >
+
+		update comm_order
+		<set>
+			<if test=" isDone!=null ">
+				is_done=#{isDone},
+			</if>
+			<if test=" parkId!=null ">
+				park_id=#{parkId},
+			</if>
+			<if test=" type1!=null ">
+				type1=#{type1},
+			</if>
+			<if test=" type1Name!=null ">
+				type1_name=#{type1Name},
+			</if>
+			<if test=" type2!=null ">
+				type2=#{type2},
+			</if>
+			<if test=" type2Name!=null ">
+				type2_name=#{type2Name},
+			</if>
+			<if test=" orderNo!=null ">
+				order_no=#{orderNo},
+			</if>
+			<if test=" orderId!=null ">
+				order_id=#{orderId},
+			</if>
+			<if test=" orderStatus!=null ">
+				order_status=#{orderStatus},
+			</if>
+			<if test=" imgUrl!=null ">
+				img_url=#{imgUrl},
+			</if>
+			<if test=" remark!=null ">
+				remark=#{remark},
+			</if>
+			<if test=" status1!=null ">
+				status1=#{status1},
+			</if>
+			<if test=" status2!=null ">
+				status2=#{status2},
+			</if>
+			<if test=" createBy!=null ">
+				create_by=#{createBy},
+			</if>
+			<if test=" createName!=null ">
+				create_name=#{createName},
+			</if>
+			<if test=" createTime!=null ">
+				create_time=#{createTime},
+			</if>
+			<if test=" updateBy!=null ">
+				update_by=#{updateBy},
+			</if>
+			<if test=" updateTime!=null ">
+				update_time=#{updateTime},
+			</if>
+			<if test=" waithandleType!=null ">
+				waithandle_type=#{waithandleType},
+			</if>
+			<if test=" waithandleId!=null ">
+				waithandle_id=#{waithandleId},
+			</if>
+			<if test=" ext1!=null ">
+				ext1=#{ext1},
+			</if>
+			<if test=" ext2!=null ">
+				ext2=#{ext2},
+			</if>
+			<if test=" ext3!=null ">
+				ext3=#{ext3},
+			</if>
+			<if test=" ext4!=null ">
+				ext4=#{ext4},
+			</if>
+			<if test=" ext5!=null ">
+				ext5=#{ext5},
+			</if>
+			<if test=" ext6!=null ">
+				ext6=#{ext6},
+			</if>
+		</set>
+		where
+		order_id=#{orderId}
+	</update>
+
+	<select id="orderList" parameterType="java.util.Map" resultType="com.zshop.common.order.entity.CommOrder">
+
+
+
+		select
+		a.id id,
+		a.is_done isDone,
+		a.park_id parkId,
+		a.type1 type1,
+		a.type1_name type1Name,
+		a.type2 type2,
+		a.type2_name type2Name,
+		a.order_no orderNo,
+		a.order_id orderId,
+		a.order_status orderStatus,
+		a.img_url imgUrl,
+		a.remark remark,
+		a.status1 status1,
+		a.status2 status2,
+		a.create_by createBy,
+		a.create_name createName,
+		a.create_time createTime,
+		a.update_by updateBy,
+		a.update_time updateTime,
+		a.waithandle_type waithandleType,
+		a.waithandle_id waithandleId,
+		a.ext1 ext1,
+		a.ext2 ext2,
+		a.ext3 ext3,
+		a.ext4 ext4,
+		a.ext5 ext5,
+		a.ext6 ext6
+		from comm_order a
+
+
+		<where>
+			1=1
+			<if test="parkId!=null">
+				and park_id = #{parkId}
+			</if>
+			<if test="isDone!=null">
+				and is_done = #{isDone}
+			</if>
+			<if test="createBy!=null">
+				and create_by = #{createBy}
+			</if>
+
+			<if test="waithandleType!=null">
+				and waithandle_type = #{waithandleType}
+			</if>
+
+			<if test="userPrivs!=null">
+				and waithandle_id in
+				<foreach collection="userPrivs" index="index" item="userPrivs" open="(" separator="," close=")">
+					#{userPrivs}
+				</foreach>
+				and ext2 in
+				<foreach collection="userPrivs" index="index" item="userPrivs" open="(" separator="," close=")">
+					#{userPrivs}
+				</foreach>
+			</if>
+
+			<if test="notUserPrivs!=null">
+				and a.waithandle_id not in
+				<foreach collection="notUserPrivs" index="index" item="notUserPrivs" open="(" separator="," close=")">
+					#{notUserPrivs}
+				</foreach>
+			</if>
+
+			<if test="operationId!=null">
+				and order_id in (select order_id from comm_order_detail_data where create_by = #{operationId})
+			</if>
+
+		</where>
+
+	order by create_time desc
+
+	</select>
+
+
+</mapper>
+	

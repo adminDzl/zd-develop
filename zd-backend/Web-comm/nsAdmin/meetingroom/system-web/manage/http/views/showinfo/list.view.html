@@ -1,0 +1,35 @@
+<div class="panel panel-default">            
+        <div class="panel-footer bg-light lter">
+            <form class="form-horizontal" role="form">
+                <div class="form-group" style="margin-bottom:0px;">
+                    
+                    <div class="col-sm-12">
+                        <button class="btn btn-rounded btn-sm btn-info"  ng-click="addNewShowInfo()"><i class="fa fa-fw fa-plus"></i> 新增内容</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+     
+    <div class="panel panel-default">        
+         
+            <div class="table-responsive">       <!--filters="baseGroupDataStatus"-->
+            <table  datatable-directive url="dataUrl"  columns="columns" search-params="searchParams" del="del(data)" set="see(data)" edit="edit(data)" indentify-key="engine"  btns="d-e-s"
+            class="table  table-striped b-t b-b table-bordered table-hover">
+                <thead>
+                <tr>  
+                    <th  style="width:15%">日期</th>
+                    <th  style="width:10%">开始时间</th>
+                    <th  style="width:10%">结束</th>
+                    <th  style="width:25%">主题名称</th>
+                    <th  style="width:15%">内容数</th>
+                    <th  style="width:20%">操作</th> 
+                </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+           
+        </div>
+       </div>
+       <modal-directive model-id='myModal'  setting="{title:'提示',btnName:'好的',content:'确定删除'}" callback="doYes()"></modal-directive>

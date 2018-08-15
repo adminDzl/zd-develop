@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<meta content="yes" name="apple-mobile-web-app-capable">
+		<meta content="black" name="apple-mobile-web-app-status-bar-style">
+		<meta content="telephone=no" name="format-detection">
+		<meta content="email=no" name="format-detection">
+		<meta name="hotcss" content="max-width=640">
+		<title>订单详情</title>
+		<link rel="stylesheet" href="../../css/common.css" />
+		<link rel="stylesheet" href="../../css/style.css" />
+		<script type="text/javascript" src="../../js/common/hotcss.js" ></script>
+	</head>
+	<body ng-app="myApp" ng-controller="AppCtrl">
+		<div class="container m-t-40">
+			<p class="f-s-40 f-c-494848 p-l-r-40">服务订单：45889555424</p>
+		</div>
+		
+		<div class="container m-t-40">
+			<div class="textBox fix">
+				<p class="f-l">来访事由：</p>
+				<p class="f-r">工作对接</p>
+			</div>
+			<div class="textBox fix">
+				<p class="f-l">访客姓名：</p>
+				<p class="f-r">阿姆斯特朗</p>
+			</div>
+			<div class="textBox fix">
+				<p class="f-l">访客电话：</p>
+				<p class="f-r">13854698741</p>
+			</div>
+			<div class="textBox fix">
+				<p class="f-l">访客单位：</p>
+				<p class="f-r">智慧园区</p>
+			</div>
+			<div class="textBox fix">
+				<p class="f-l">来访时间：</p>
+				<p class="f-r">2018-04-09 上午</p>
+			</div>
+		</div>
+		
+		<div class="container m-t-40">
+			<div class="textBox fix">
+				<p class="f-l">被访问者姓名：</p>
+				<p class="f-r">许词</p>
+			</div>
+			<div class="textBox fix">
+				<p class="f-l">被访问者单位：</p>
+				<p class="f-r">车管科</p>
+			</div>
+			<div class="textBox fix">
+				<p class="f-l">被访问者电话：</p>
+				<p class="f-r">13745685232</p>
+			</div>
+		</div>
+		
+		<div class="container m-t-40">
+			<div class="qrCodeBox">
+				<img src="../../img/back/QRcode.jpg" />
+			</div>
+			<div class="showQrCodeBox">
+				<p>分享二维码</p>
+				<div>
+					<em class="wechat"></em>
+					<em class="qq"></em>
+					<em class="email"></em>
+					<em class="download"></em>
+				</div>
+			</div>
+		</div>
+		
+		<div class="notifications">
+			<p>提交成功！</p>
+		</div>
+		
+		<!-- 蒙版 -->
+		<div class="masking"></div>
+		
+		
+		<!--<script type="text/javascript" src="../../js/common/angular.js" ></script>-->
+		<script type="text/javascript" src="../../js/common/jquery-1.8.3.min.js" ></script>
+		<script type="text/javascript" src="../../js/common/util.js" ></script>
+		<script>
+			$(function(){
+				setTimeout(function(){
+					$(".notifications").attr("class","notifications showDiv");
+				},100);
+				setTimeout(function(){
+					$(".notifications").attr("class","notifications noShowDiv");
+				},1500);
+			})
+		</script>
+	</body>
+</html>

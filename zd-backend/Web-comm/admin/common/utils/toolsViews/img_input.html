@@ -1,0 +1,21 @@
+<div class="panel panel-info relative">
+    <div class="panel-heading relative" style="padding: 0px">
+        <label class="fullAll">添加图片</label>
+        <input style="display: none;" class="inputFull" id="imgInput" type="file" multiple="multiple" ng-model="myFile"/>
+    </div>
+    <div class="panel-body">
+        <ul class="imgs">
+            <li ng-repeat="img in imgs" class="pull-left">
+                <div class="imgParent">
+                    <img ng-src="{{img.src}}"/>
+                    <br/>
+	        		<span>
+	        			{{img.name}}
+	        		</span>
+                    <button class="btn deleteBtn" ng-click="delete($index)">&times;</button>
+                </div>
+            </li>
+        </ul>
+    </div>
+    <div class="coverOn" ng-show="cover()"></div>
+</div>

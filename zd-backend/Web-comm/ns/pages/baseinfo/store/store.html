@@ -1,0 +1,59 @@
+<crumb title="商家管理" head="true"></crumb>
+<div class="wrapper-md" ng-controller="TStoreGrid">
+	 <div class="panel panel-default">
+	 	
+        
+        <div class="panel-heading clearfix">
+        	<div class="pull-left">
+	          <form class="form-inline ng-pristine ng-valid" role="form">
+	            <div class="form-group">
+		          <input type="text" class="form-control" placeholder="请输入搜索内容" ng-model="keyword" ng-keypress="search(keyword,$event)"/>
+		        </div>
+		        <button type="submit" class="btn btn-info" ng-click="search(keyword)">搜索</button>
+			  </form>
+			</div>
+		  <div class="pull-right">
+	        	<button class="btn m-b-xs btn-sm btn-info btn-addon"  power-key="store:add" ng-click="addNew()">
+	            	<i class="fa fa-plus"></i>新增
+	            </button>
+	        </div>
+        </div>
+        <div class="table-responsive">
+        	<table class="table table-striped b-t b-b">
+        		<thead>
+	                <tr>
+	                    <th style="width:5%" data-breakpoints="xs">ID</th>
+	                    <th style="width:10%" class="text-center">商家名称</th>
+	                    <th style="width:10%" class="text-center">所属行业</th>
+	                    <th style="width:10%" class="text-center">商家法人</th>
+	                    <th style="width:10%" class="text-center">联系方式</th>
+	                    <th style="width:10%" class="text-center">商家地址</th>
+	                    <th style="width:10%" class="text-center">备注</th>
+	                    <th style="width:10%" class="text-center">操作</th>
+	                </tr>
+                </thead>
+                <tbody>
+	                <tr data-expanded="true" ng-repeat="row in rows">
+	                    <td > {{paginationConf.currentPage ? paginationConf.pageSize*(paginationConf.currentPage-1)+$index+1 : $index+1}}</td>
+	                    <td > {{row.name}}</td>
+	                    <td > {{row.business}}</td>
+	                    <td > {{row.corporateOwer}}</td>
+	                    <td > {{row.contact}}</td>
+	                    <td > {{row.address}}</td>
+	                    <td > {{row.remark}}</td>
+	                    <td >
+							<div class="buttons">
+	                            <button class="btn btn-sm btn-info"  power-key="store:update" ng-click="update(row.id)">编辑</button>
+	                            <button class="btn btn-sm btn-info"  power-key="store:user" ng-click="userlist(row.id)">商家成员</button>
+	                            <button class="btn btn-sm btn-info"  power-key="store:joinorg"  ng-click="joinOrg(row.id)">加入商家</button>
+	                            <button class="btn btn-sm btn-info"  power-key="store:joinpark" ng-click="joinPark(row.id)">加入园区</button>
+	                            <button class="btn btn-sm btn-danger"  power-key="store:delete" ng-click="deleteById(row.id)">删除</button>
+	                        </div>
+						</td>
+	                </tr>
+                </tbody>
+        	</table>
+        	<tmpagination conf="paginationConf"></tmpagination>
+        </div>
+	 </div>
+</div>

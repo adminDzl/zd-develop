@@ -1,0 +1,85 @@
+<crumb title="API列表" head="true"></crumb>
+<div class="" ng-controller="TApiInfoGrid">
+<div class="hbox hbox-auto-xs hbox-auto-sm">
+	<div class="col w-md bg-light dk b-r bg-auto">
+		<div class="panel-body">
+			<abn-tree tree-data="list" tree-control="my_tree" on-select="navSelect(branch)" expand-level="2" initial-selection="Granny Smith" icon-leaf="fa fa-file-o" icon-expand="fa fa-plus" icon-collapse="fa fa-minus">
+			</abn-tree>
+		</div>
+	</div>
+			
+    <div class="col">    
+        <div class="panel-heading clearfix">
+        	<div class="pull-left">
+	          <form class="form-inline ng-pristine ng-valid" role="form">
+	            <div class="form-group">
+		          <input type="text" class="form-control" placeholder="请输入搜索内容" ng-model="keyword" ng-keypress="search(keyword,$event)"/>
+		        </div>
+		        <button type="submit" class="btn btn-info" ng-click="search(keyword)">搜索</button>
+			  </form>
+			 </div>
+		  	<div class="pull-right">
+	        	<button class="btn m-b-xs btn-sm btn-info btn-addon"  power-key="api:add"  ng-click="addNew()">
+	            	<i class="fa fa-plus"></i>新增
+	            </button>
+	        	<button class="btn m-b-xs btn-sm btn-info btn-addon"  power-key="api:bind"  ng-click="userToGroup()">
+	            	<i class="fa fa-plus"></i>绑定
+	            </button>
+	        	<button class="btn m-b-xs btn-sm btn-info btn-addon"   ng-click="removeFromGroup()"><!-- power-key="api:removebind"  -->
+	            	<i class="fa fa-minus"></i>解除绑定
+	            </button>
+		  	</div>
+        </div>
+        <div class="table-responsive">
+        	<table class="table table-striped b-t b-b table-layot">
+        		<thead>
+	                <tr>
+	                    <th style="width:5%" class="text-center">选择</th>
+	                    <th style="width:5%" data-breakpoints="xs">ID</th>
+	                    <th style="width:10%" class="text-center">接口名称</th>
+	                    <th style="width:15%" class="text-center">接口地址</th>
+						<th style="width:10%" class="text-center">微服务名</th>
+	                    <th style="width:5%" class="text-center">请求类型</th>
+	                    <th style="width:5%" class="text-center">使用范围</th>
+	                    <th style="width:5%" class="text-center">验证类型</th>
+						<th style="width:10%" class="text-center">创建时间</th>
+	                    <!-- <th style="width:10%" class="text-center">创建人</th> -->
+						<!-- <th style="width:10%" class="text-center">更新时间</th> -->
+						<!-- <th style="width:10%" class="text-center">更新人</th> -->
+						<th style="width:5%" class="text-center">状态</th>
+						<th style="width:10%" class="text-center">备注</th>
+						<th style="width:20%" class="text-center">操作</th>
+	                </tr>
+                </thead>
+                <tbody>
+	                <tr data-expanded="true" ng-repeat="row in rows">
+	                    <td>
+	                    	<label class="i-checks">
+			                    <input  id={{row.id }} type="checkbox" ng-model="x"  ng-click="chkData(row.id,x)"/><i></i>
+			                  </label> 
+	                    </td>
+	                    <td > {{paginationConf.currentPage ? paginationConf.pageSize*(paginationConf.currentPage-1)+$index+1 : $index+1}}</td>
+	                    <td > {{row.apiName}}</td>
+	                    <td > {{row.apiUrl}}</td>
+	                    <td > {{row.microServiceName}}</td>
+	                    <td > {{row.requestType}}</td>
+	                    <td > {{row.apiScope}}</td>
+	                    <td > {{row.verificationType}}</td>
+						<td > {{row.createTime}}</td>
+						<td > {{row.status1}}</td>
+						<td > {{row.remark}}</td>
+	                    <td >
+							<div class="buttons">
+	                            <button class="btn btn-sm btn-info"  power-key="api:update" ng-click="update(row.id)">编辑</button>
+	                            <button class="btn btn-sm btn-info"  power-key="api:detail" ng-click="apiInfo(row)">接口详情</button>
+	                            <button class="btn btn-sm btn-danger"  power-key="api:delete" ng-click="deleteById(row.id)">删除</button>
+	                        </div>
+						</td>
+	                </tr>
+                </tbody>
+        	</table>
+        	<tmpagination conf="paginationConf"></tmpagination>
+        </div>
+	 </div>
+	</div>
+</div>

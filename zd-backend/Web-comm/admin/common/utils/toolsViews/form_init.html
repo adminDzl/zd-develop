@@ -1,0 +1,440 @@
+<div>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    我的表单
+                </div>
+                    <div id="build">
+                        <form id="target" class="form-horizontal">
+                            <fieldset>
+                                <div id="legend" class="component" rel="popover" title="编辑属性" trigger="manual"
+                                     data-html="true" data-content="
+					                <form class='form'>
+					                  <div class='controls'>
+					                    <label class='control-label'>表单名称</label> <input type='text' id='orgvalue' placeholder='请输入表单名称'/>
+					                    <hr/>
+					                    <button class='btn btn-info' type='button'>确定</button><button class='btn btn-danger' type='button'>取消</button>
+					                  </div>
+					                </form>">
+                                    <input type="hidden" name="form_name" value="" class="leipiplugins"
+                                           leipiplugins="form_name"/>
+                                    <legend class="leipiplugins-orgvalue">点击填写表单名</legend>
+                                </div>
+                                <div id="inserHtmlZone">
+
+                                </div>
+                            </fieldset>
+                        </form>
+                    </div>
+                <div class="panel-footer">
+                    <button type="button" class="btn btn-info" ng-click="action()">保存</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    拖拽下面的控件到左侧
+                </div>
+                    <div class="tabbable">
+                        <ul class="nav nav-tabs" id="navtab">
+                            <li class="active">
+                                <a href="#" onclick="$('#page1').fadeIn();$('#page2').fadeOut()" data-toggle="tab">非必填控件</a>
+                            </li>
+                            <li class>
+                                <a href="#" onclick="$('#page1').fadeOut();$('#page2').fadeIn()" data-toggle="tab">必填控件</a>
+                            </li>
+                        </ul>
+                        <form class="form-horizontal" id="components">
+                            <fieldset>
+                                <div class="tab-content">
+                                    <div class="tab-pane active" id="page1">
+                                        <!--title-->
+                                        <div class="control-group component" rel="popover" title="文本框控件"
+                                             trigger="manual" data-html="true"  data-content="
+		                              <form class='form'>
+		                                <div class='controls'>
+		                                  <label class='control-label'>默认值</label> <input type='text' id='orgvalue' placeholder='默认值'/>
+		                                  <hr/>
+		                                  <button class='btn btn-info' type='button'>确定</button><button class='btn btn-danger' type='button'>取消</button>
+		                                </div>
+		                              </form>">
+                                            <!-- Text -->
+                                            <div class="userInfoTop leipiplugins" leipiplugins="title">栏目标题组件</div>
+                                        </div>
+                                        <!--end-->
+
+                                        <!-- Text start -->
+                                        <div class="control-group component" rel="popover" title="文本框控件"
+                                             trigger="manual" data-html="true"  data-content="
+		                                      <form class='form'>
+		                                        <div class='controls'>
+		                                          <label class='control-label'>控件名称</label> <input type='text' id='orgname' placeholder='必填项'/>
+		                                          <label class='control-label'>默认值</label> <input type='text' id='orgvalue' placeholder='默认值'/>
+		                                          <hr/>
+		                                          <button class='btn btn-info' type='button'>确定</button><button class='btn btn-danger' type='button'>取消</button>
+		                                        </div>
+		                                      </form>">
+                                            <div class="soloInfo clear form-group">
+                                                <span class="control-label leipiplugins-orgname">文本框：</span>
+                                                <input type="text" name="leipiNewField" placeholder="" title="文本框"
+                                                       value="" class="leipiplugins" leipiplugins="text"/>
+                                            </div>
+                                        </div>
+                                        <!-- Text end -->
+
+                                        <!-- Textarea start -->
+                                        <div class="control-group component" rel="popover" title="多行文本控件"
+                                             trigger="manual" data-html="true"  data-content="
+		                                      <form class='form'>
+		                                        <div class='controls'>
+		                                          <label class='control-label'>控件名称</label> <input type='text' id='orgname' placeholder='必填项'/>
+		                                          <label class='control-label'>默认值</label> <input type='text' id='orgvalue' placeholder='默认值'/>
+		                                          <hr/>
+		                                          <button class='btn btn-info' type='button'>确定</button><button class='btn btn-danger' type='button'>取消</button>
+		                                        </div>
+		                                      </form>">
+
+                                            <div class="soloInfo clear form-group">
+                                                <span class="control-label leipiplugins-orgname">多行文本：</span>
+                                                <textarea title="多行文本" name="leipiNewField" class="leipiplugins"
+                                                          placeholder="" leipiplugins="textarea"></textarea>
+                                            </div>
+                                        </div>
+                                        <!-- Textarea end -->
+
+                                        <!-- Select start -->
+                                        <div class="control-group component" rel="popover" title="下拉控件" trigger="manual" data-html="true"
+                                             data-content="
+				                              <form class='form'>
+				                                <div class='controls'>
+				                                  <label class='control-label'>控件名称</label> <input type='text' id='orgname' placeholder='必填项'/>
+				                                  <label class='control-label'>下拉选项</label>
+				                                  <textarea style='min-height: 200px' id='orgvalue'></textarea>
+				                                  <p class='help-block'>一行一个选项</p>
+				                                  <hr/>
+				                                  <button class='btn btn-info' type='button'>确定</button><button class='btn btn-danger' type='button'>取消</button>
+				                                </div>
+				                              </form>">
+                                            <!-- Select -->
+                                            <div class="soloInfo clear form-group">
+                                                <span class="control-label leipiplugins-orgname">下拉菜单：</span>
+
+                                                <select name="leipiNewField" title="下拉菜单" class="leipiplugins"
+                                                        leipiplugins="select">
+                                                    <option>选项一</option>
+                                                    <option>选项二</option>
+                                                    <option>选项三</option>
+                                                </select>
+
+                                            </div>
+
+                                        </div>
+                                        <!-- Select end -->
+
+                                        <!-- Multiple Checkboxes start -->
+                                        <div class="control-group component" rel="popover" title="复选控件" trigger="manual" data-html="true"
+                                             data-content="
+				                              <form class='form'>
+				                                <div class='controls'>
+				                                  <label class='control-label'>控件名称</label> <input type='text' id='orgname' placeholder='必填项'/>
+				                                  <label class='control-label'>复选框</label>
+				                                  <textarea style='min-height: 200px' id='orgvalue'></textarea>
+				                                  <p class='help-block'>一行一个选项</p>
+				                                  <hr/>
+				                                  <button class='btn btn-info' type='button'>确定</button><button class='btn btn-danger' type='button'>取消</button>
+				                                </div>
+				                              </form>">
+
+                                            <div class="soloInfo clear form-group">
+                                                <span class="control-label leipiplugins-orgname">复选框：</span>
+                                                <div class="leipiplugins-orgvalue">
+                                                    <label class="checkbox inline">
+                                                        <input class="leipiplugins choose" type="checkbox"
+                                                               name="leipiNewField" title="复选框" value="选项1"
+                                                               leipiplugins="checkbox"/>选项1
+                                                        <i class="i2"></i>
+                                                    </label>
+                                                    <label class="checkbox inline">
+                                                        <input class="leipiplugins choose" type="checkbox"
+                                                               name="leipiNewField" title="复选框" value="选项2"
+                                                               leipiplugins="checkbox"/>选项2
+                                                        <i class="i2"></i>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- Multiple Checkboxes end -->
+
+                                        <!-- Multiple radios start -->
+                                        <div class="control-group component" rel="popover" title="单选控件" trigger="manual" data-html="true"
+                                             data-content="
+				                              <form class='form'>
+				                                <div class='controls'>
+				                                  <label class='control-label'>控件名称</label> <input type='text' id='orgname' placeholder='必填项'/>
+				                                  <label class='control-label'>单选框</label>
+				                                  <textarea style='min-height: 200px' id='orgvalue'></textarea>
+				                                  <p class='help-block'>一行一个选项</p>
+				                                  <hr/>
+				                                  <button class='btn btn-info' type='button'>确定</button><button class='btn btn-danger' type='button'>取消</button>
+				                                </div>
+				                              </form>">
+
+                                            <div class="soloInfo clear form-group">
+                                                <span class="control-label leipiplugins-orgname">单选框：</span>
+                                                <div class="leipiplugins-orgvalue">
+                                                    <label class="radio inline">
+                                                        <input class="leipiplugins choose" type="radio"
+                                                               name="leipiNewField" title="单选框" value="选项1"
+                                                               leipiplugins="radio" orginline="inline"/>选项1
+                                                        <i class="i1"></i>
+                                                    </label>
+                                                    <label class="radio inline">
+                                                        <input class="leipiplugins choose" type="radio"
+                                                               name="leipiNewField" title="单选框" value="选项2"
+                                                               leipiplugins="radio" orginline="inline"/>选项2
+                                                        <i class="i1"></i>
+                                                    </label>
+
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                        <!-- Multiple radios end -->
+
+                                        <!-- File Upload -->
+                                        <div class="control-group component" rel="popover" title="文件上传" trigger="manual" data-html="true"
+                                             data-content="
+			                                  <form class='form'>
+			                                    <div class='controls'>
+			                                      <label class='control-label'>控件名称</label> <input type='text' id='orgname' placeholder='必填项'/>
+			                                      <hr/>
+			                                      <button class='btn btn-info' type='button'>确定</button><button class='btn btn-danger' type='button'>取消</button>
+			                                    </div>
+			                                  </form>">
+                                            <!-- File Upload -->
+                                            <div class="soloInfo clear form-group">
+                                                <span class="control-label leipiplugins-orgname">文件上传：</span>
+                                                <div class="rigth-zone">
+                                                    <div class="file-wrap-zone">
+
+                                                    </div>
+                                                    <div class="upload" style="margin-right: 8px;">
+                                                        <div class="fl-div">
+                                                            <span class="addFile"></span>
+                                                            <input class="leipiplugins fileBtn" type="file"
+                                                                   name="leipiNewField" title="文件上传"
+                                                                   leipiplugins="uploadfile"/>
+                                                        </div>
+                                                        <div class="explain">
+                                                            <strong>上传文档说明：</strong>
+                                                            <p>在此仅可以上传 doc，xls，rar，zip，pdf，txt 类型的文件，<br>如有多个文件需逐一上传。一个文件最大为1MB，<br>如果超过1MB请打包上传。
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                        <!--file end -->
+                                    </div>
+
+                                    <!--必填控件-->
+                                    <div class="tab-pane" id="page2">
+                                        <br/>
+                                        <!-- Text start -->
+                                        <div class="control-group component" rel="popover" title="文本框控件"
+                                             trigger="manual" data-html="true"  data-content="
+		                                      <form class='form'>
+		                                        <div class='controls'>
+		                                          <label class='control-label'>控件名称</label> <input type='text' id='orgname' placeholder='必填项'/>
+		                                          <label class='control-label'>默认值</label> <input type='text' id='orgvalue' placeholder='默认值'/>
+		                                          <hr/>
+		                                          <button class='btn btn-info' type='button'>确定</button><button class='btn btn-danger' type='button'>取消</button>
+		                                        </div>
+		                                      </form>">
+                                            <div class="soloInfo clear form-group">
+                                                <span class="control-label leipiplugins-orgname">文本框：</span>
+                                                <input type="text" name="leipiNewField" placeholder="" title="文本框"
+                                                       value="" class="c_validate leipiplugins" leipiplugins="text"
+                                                       formRequired="true"/><em>*</em>
+                                            </div>
+                                        </div>
+                                        <!-- Text end -->
+
+                                        <!-- Textarea start -->
+                                        <div class="control-group component" rel="popover" title="多行文本控件"
+                                             trigger="manual" data-html="true"  data-content="
+		                                      <form class='form'>
+		                                        <div class='controls'>
+		                                          <label class='control-label'>控件名称</label> <input type='text' id='orgname' placeholder='必填项'/>
+		                                          <label class='control-label'>默认值</label> <input type='text' id='orgvalue' placeholder='默认值'/>
+		                                          <hr/>
+		                                          <button class='btn btn-info' type='button'>确定</button><button class='btn btn-danger' type='button'>取消</button>
+		                                        </div>
+		                                      </form>">
+
+                                            <div class="soloInfo clear form-group">
+                                                <span class="control-label leipiplugins-orgname">多行文本：</span>
+                                                <textarea title="多行文本" name="leipiNewField"
+                                                          class="c_validate leipiplugins" placeholder=""
+                                                          leipiplugins="textarea"
+                                                          formRequired="true"></textarea><em>*</em>
+                                            </div>
+                                        </div>
+                                        <!-- Textarea end -->
+
+                                        <!-- Select start -->
+                                        <div class="control-group component" rel="popover" title="下拉控件" trigger="manual" data-html="true"
+                                             data-content="
+				                              <form class='form'>
+				                                <div class='controls'>
+				                                  <label class='control-label'>控件名称</label> <input type='text' id='orgname' placeholder='必填项'/>
+				                                  <label class='control-label'>下拉选项</label>
+				                                  <textarea style='min-height: 200px' id='orgvalue'></textarea>
+				                                  <p class='help-block'>一行一个选项</p>
+				                                  <hr/>
+				                                  <button class='btn btn-info' type='button'>确定</button><button class='btn btn-danger' type='button'>取消</button>
+				                                </div>
+				                              </form>">
+                                            <!-- Select -->
+                                            <div class="soloInfo clear form-group">
+                                                <span class="control-label leipiplugins-orgname">下拉菜单：</span>
+
+                                                <select name="leipiNewField" title="下拉菜单"
+                                                        class="c_validate leipiplugins" leipiplugins="select">
+                                                    <option>选项一</option>
+                                                    <option>选项二</option>
+                                                    <option>选项三</option>
+                                                </select>
+                                                <em>*</em>
+                                            </div>
+
+                                        </div>
+                                        <!-- Select end -->
+
+                                        <!-- Multiple Checkboxes start -->
+                                        <div class="control-group component" rel="popover" title="复选控件" trigger="manual" data-html="true"
+                                             data-content="
+		                              <form class='form'>
+		                                <div class='controls'>
+		                                  <label class='control-label'>控件名称</label> <input type='text' id='orgname' placeholder='必填项'/>
+		                                  <label class='control-label'>复选框</label>
+		                                  <textarea style='min-height: 200px' id='orgvalue'  data-required='1'></textarea>
+		                                  <p class='help-block'>一行一个选项</p>
+		                                  <hr/>
+		                                  <button class='btn btn-info' type='button'>确定</button><button class='btn btn-danger' type='button'>取消</button>
+		                                </div>
+		                              </form>">
+
+                                            <div class="soloInfo clear form-group">
+                                                <span class="control-label leipiplugins-orgname">复选框：</span>
+                                                <div class="leipiplugins-orgvalue">
+                                                    <label class="checkbox inline">
+                                                        <input class="c_validate leipiplugins choose" type="checkbox"
+                                                               name="leipiNewField" title="复选框" value="选项1"
+                                                               leipiplugins="checkbox"/>选项1
+                                                        <i class="i2"></i>
+                                                    </label>
+                                                    <label class="checkbox inline">
+                                                        <input class="c_validate leipiplugins choose" type="checkbox"
+                                                               name="leipiNewField" title="复选框" value="选项2"
+                                                               leipiplugins="checkbox"/>选项2
+                                                        <i class="i2"></i>
+                                                    </label>
+                                                    <em>*</em>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                        <!-- Multiple Checkboxes end -->
+
+                                        <!-- Multiple radios start -->
+                                        <div class="control-group component" rel="popover" title="单选控件" trigger="manual" data-html="true"
+                                             data-content="
+				                              <form class='form'>
+				                                <div class='controls'>
+				                                  <label class='control-label'>控件名称</label> <input type='text' id='orgname' placeholder='必填项' />
+				                                  <label class='control-label'>单选框</label>
+				                                  <textarea style='min-height: 200px' id='orgvalue'  data-required='1'></textarea>
+				                                  <p class='help-block'>一行一个选项</p>
+				                                  <hr/>
+				                                  <button class='btn btn-info' type='button'>确定</button><button class='btn btn-danger' type='button'>取消</button>
+				                                </div>
+				                              </form>">
+
+                                            <div class="soloInfo clear form-group">
+                                                <span class="control-label leipiplugins-orgname">单选框：</span>
+                                                <div class="leipiplugins-orgvalue">
+                                                    <label class="radio inline">
+                                                        <input class="c_validate leipiplugins choose" type="radio"
+                                                               name="leipiNewField" title="单选框" value="选项1"
+                                                               leipiplugins="radio" orginline="inline"/>选项1
+                                                        <i class="i1"></i>
+                                                    </label>
+                                                    <label class="radio inline">
+                                                        <input class="c_validate leipiplugins choose" type="radio"
+                                                               name="leipiNewField" title="单选框" value="选项2"
+                                                               leipiplugins="radio" orginline="inline"/>选项2
+                                                        <i class="i1"></i>
+                                                    </label>
+                                                    <em>*</em>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                        <!-- Multiple radios end -->
+
+                                        <!-- File Upload -->
+                                        <div class="control-group component" rel="popover" title="文件上传" trigger="manual" data-html="true"
+                                             data-content="
+		                                  <form class='form'>
+		                                    <div class='controls'>
+		                                      <label class='control-label'>控件名称</label> <input type='text' id='orgname' placeholder='必填项'/>
+		                                      <hr/>
+		                                      <button class='btn btn-info' type='button'>确定</button><button class='btn btn-danger' type='button'>取消</button>
+		                                    </div>
+			                                  </form>">
+                                            <!-- File Upload -->
+                                            <div class="soloInfo clear form-group">
+                                                <span class="control-label leipiplugins-orgname">文件上传：</span>
+                                                <div class="rigth-zone">
+                                                    <div class="file-wrap-zone">
+
+                                                    </div>
+                                                    <div class="upload" style="margin-right: 8px;">
+                                                        <div class="fl-div">
+                                                            <span class="addFile"></span>
+                                                            <input class="leipiplugins fileBtn" type="file"
+                                                                   name="leipiNewField" title="文件上传"
+                                                                   leipiplugins="uploadfile"/>
+                                                        </div>
+                                                        <div class="explain">
+                                                            <strong>上传文档说明：</strong>
+                                                            <p>在此仅可以上传 doc，xls，rar，zip，pdf，txt 类型的文件，<br>如有多个文件需逐一上传。一个文件最大为1MB，<br>如果超过1MB请打包上传。
+                                                            </p>
+                                                        </div>
+                                                        <em>*</em>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!--file end -->
+                                    </div>
+                                    <!--非必填控件end-->
+                                </div>
+                            </fieldset>
+                        </form>
+                    </div>
+            </div>
+            <!--tab-content-->
+        </div>
+        <!---tabbable-->
+    </div>
+    <!-- row -->
+
+</div>
+<!-- /container -->

@@ -1,0 +1,246 @@
+
+   <!-- aside -->
+   <aside id="aside" class="app-aside hidden-xs bg-dark" ng-show="isShow">
+    <div class="aside-wrap">
+      <div class="navi-wrap">
+        
+
+        <!-- nav -->
+        <nav ui-nav class="navi clearfix">
+          <ul class="nav">
+             
+            <li class="line dk"></li>
+            <li>
+              <a ui-sref="manage.home">
+                <i class="glyphicon glyphicon-home"></i>
+                <span>场地管理</span>
+              </a>
+            </li>
+            <!--<li>
+              <a ui-sref="manage.meettingscreen">
+                <i class="glyphicon glyphicon-briefcase"></i>
+                <span>场地预定屏显</span>
+              </a>
+            </li>-->
+            <!--<li>
+              <a ui-sref="manage.showinfo">
+                <i class="glyphicon glyphicon-random"></i>
+                <span>外屏信息展示</span>
+              </a>
+            </li>-->
+            <!-- <li>
+              <a ui-sref="manage.meetingroom.addroom">
+                <i class="glyphicon glyphicon-plus"></i>
+                <span>创建场地</span>
+              </a>
+            </li> -->
+            <!-- <li>
+              <a ui-sref="manage.meetingroom.addroom">
+                <i class="glyphicon glyphicon-plus"></i>
+                <span>编辑场地</span>
+              </a>
+            </li> -->
+            <!--<li>
+              <a href="javascript:;" onclick="showOrHide(this)"  class="auto">
+                <span class="pull-right text-muted">
+                  <i class="fa fa-fw fa-angle-right text"></i>
+                  <i class="fa fa-fw fa-angle-down text-active"></i>
+                </span>
+                <i class="glyphicon glyphicon-briefcase icon"></i>
+                <span>创建场地</span>
+              </a>
+              <ul class="nav nav-sub dk">
+                <li class="nav-sub-header">
+                  <a href>
+                    <span>创建场地</span>
+                  </a>
+                </li>
+                <li>
+                  <a ui-sref="manage.meetingroom.addroom">
+                    <span>创建场地详情</span>
+                  </a>
+                </li>
+                <li>
+                  <a ui-sref="manage.meetingroom.pricemanage">
+                 
+                    <span>价格管理</span>
+                  </a>
+                </li>
+                <li>
+                  <a ui-sref="manage.meetingroom.timemanage">
+                    <span>时间管理</span>
+                  </a>
+                </li>
+                <li>
+                  <a ui-sref="manage.meetingroom.goodsmanage">
+                   
+                    <span>提供物品</span>
+                  </a>
+                </li>
+                <li>
+                  <a ui-sref="manage.meetingroom.valueaddmanage">
+                    <span>增值服务</span>
+                  </a>
+                </li>
+                <li>
+                  <a ui-sref="manage.meetingroom.favourablemanage">
+                    <span>优惠设置</span>
+                  </a>
+                </li>
+                <li>
+                  <a ui-sref="manage.meetingroom.bespeakmanage">
+                    <span>预约设置</span>
+                  </a>
+                </li>
+                
+              </ul>
+            </li>-->
+            <!--<li>
+              <a ui-sref="manage.vas">
+                <i class="glyphicon glyphicon-signal"></i>
+                <span>增值服务（配置）</span>
+              </a>
+            </li>-->
+            <li>
+                <a ui-sref="manage.things">
+                  <i class="glyphicon  glyphicon-shopping-cart"></i>
+                  <span>物品管理</span>
+                </a>
+              </li>
+              <!-- <li>
+                <a ui-sref="manage.meetingroom.addroom">
+                  <i class="glyphicon glyphicon-user"></i>
+                  <span>人员管理</span>
+                </a>
+              </li> -->
+             <!--<li>
+                <a ui-sref="manage.infomation">
+                  <i class="glyphicon  glyphicon-earphone"></i>
+                  <span>信息设置</span>
+                </a>
+              </li>-->
+              <li>
+                <a ui-sref="manage.orders">
+                  <i class="glyphicon  glyphicon-shopping-cart"></i>
+                  <span>场地订单</span>
+                </a>
+              </li>
+               
+              <li>
+                <a href="javascript:;" onclick="showOrHide(this)" class="auto"   >
+                  <span class="pull-right text-muted">
+                    <i class="fa fa-fw fa-angle-right text"></i>
+                    <i class="fa fa-fw fa-angle-down text-active"></i>
+                  </span>
+                  <i class="glyphicon  glyphicon-user icon"></i>
+                  <span>人员管理</span>
+                </a>
+                <ul class="nav nav-sub dk">
+                  <li class="nav-sub-header">
+                    <a >
+                      <span>人员管理</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a ui-sref="manage.staff">
+                      <span>人员管理</span>
+                    </a>
+                  </li>
+                  <!-- <li>
+                    <a ui-sref="manage.staffquery">
+                      <span>添加人员</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a ui-sref="manage.staffrole">
+                      <span>权限设置</span>
+                    </a>
+                  </li> -->
+                  </ul>
+                </li>
+              <!--<li>
+                <a href="javascript:;" onclick="showOrHide(this)" class="auto"   >
+                  <span class="pull-right text-muted">
+                    <i class="fa fa-fw fa-angle-right text"></i>
+                    <i class="fa fa-fw fa-angle-down text-active"></i>
+                  </span>
+                  <i class="glyphicon  glyphicon-list-alt icon"></i>
+                  <span>数据统计</span>
+                </a>
+                <ul class="nav nav-sub dk">
+                  <li class="nav-sub-header">
+                    <a href>
+                      <span>数据统计</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a ui-sref="manage.censusindex">
+                      <span>统计报表</span>
+                    </a>
+                  </li>
+                  </ul>
+                </li>-->
+            
+            <li>
+              <a href="javascript:;" onclick="showOrHide(this)" class="auto"   >
+                <span class="pull-right text-muted">
+                  <i class="fa fa-fw fa-angle-right text"></i>
+                  <i class="fa fa-fw fa-angle-down text-active"></i>
+                </span>
+                <i class="glyphicon glyphicon-file icon"></i>
+                <span>基础数据</span>
+              </a>
+              <ul class="nav nav-sub dk">
+                <li class="nav-sub-header">
+                  <a href>
+                    <span>基础数据</span>
+                  </a>
+                </li>
+                <li>
+                  <a ui-sref="manage.basedatagroup">
+                    <span>数据分组</span>
+                  </a>
+                </li>
+                <li>
+                  <a ui-sref="manage.basedata">
+                    <span>数据字典</span>
+                  </a>
+                </li>
+                
+              </ul>
+            </li>
+
+            <li class="line dk hidden-folded"></li>
+
+          
+          </ul>
+        </nav>
+        <!-- nav -->
+
+      
+      </div>
+    </div>
+</aside>
+<!-- / aside -->
+<script>
+function showOrHide(obj){
+  var parent = $(obj).parent('li');
+  var ul =  $(obj).siblings('ul');
+   
+  if(parent.hasClass('active')){
+    parent.removeClass('active');
+    // if(ul[0]){
+     
+    //   ul[0].style.display='none'
+    // }
+  }else{
+    parent.addClass('active');
+    // if(ul[0]){
+    //   ul[0].style.display='block'
+    // }
+  }
+ 
+
+}
+
+</script>

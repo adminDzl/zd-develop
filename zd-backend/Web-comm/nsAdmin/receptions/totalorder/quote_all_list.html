@@ -1,0 +1,78 @@
+<style>
+	.name_details {
+		font-size: 12px;
+	}
+	.name_details > span　{
+		display: inline-block;
+		width: 86.3%;
+		text-align: center;
+		border: 1px solid #cfdadd;
+		height: 30px;
+		line-height: 30px;
+	}
+	.tool_title {
+		border-bottom: 2px dashed #F7A7A7;
+	} 
+</style>
+<crumb title="公务接待" head="true"></crumb>
+<div class="wrapper-md" ng-controller="QuoteListCtrl">
+	 <div class="panel panel-default">
+	 	
+	 	<div class="panel-heading" style="background: #fff;">
+	 		<form class="form-inline ng-pristine ng-valid">
+	 			<div class="form-group" style="margin-right: 30px; margin-bottom: 20px;">
+            		<label class="control-label">时间：</label>
+            		<input id="searchDate" ui-jq="daterangepicker" ui-options="dateRangeOptions" style="min-width: 325px;vertical-align: initial;height: 30px;" placeholder="请输入日期范围" ng-model="dateTime"  aria-invalid="false" class="form-control ng-pristine ng-valid ng-touched" />
+		            <span class="input-group div-line"></span>
+                </div>
+                <div class="form-group" style="margin-right: 30px; margin-bottom: 20px; ">
+                	<label class="control-label">状态：</label>
+		            <select class="form-control ng-pristine ng-valid ng-touched m-b-xs" ng-model="form.orderStatus">
+		            	<option value="">状态</option>
+						<option value="0">待审核</option>
+						<option value="1">已审核</option>
+						<option value="2">已评价</option>
+						<option value="4">已取消</option>
+						<option value="3">已驳回</option>
+		            </select>             		
+                </div>
+                <div class="form-group" style="margin-right: 30px; margin-bottom: 20px; ">
+				  <input type="text" class="form-control" ng-model="form.otherSearchText"  style="width:300px;" placeholder="输入关键字">
+				  <button type="submit" class="btn btn-info" ng-click="search(form.otherSearchText);">搜 索</button>
+		        </div>
+            </form>
+        </div>
+        
+        <div class="table-responsive" style="overflow: visible;">
+        	<table class="table table-striped b-b" >
+        		<thead>
+	                <tr>
+	                    <th data-breakpoints="xs">ID</th>
+	                    <th class="text-center">订单编号 </th>
+	                    <th class="text-center">申请人</th>
+	                    <th class="text-center">申请人电话</th>
+	                    <th class="text-center">申请事由</th>
+	                    <th class="text-center">接待级别</th>
+	                    <th class="text-center">接待时间</th>
+	                    <th class="text-center">状态</th>
+	                </tr>
+                </thead>
+                <tbody>
+	                <tr ng-repeat=" row in site.rows" >
+	                    <td > {{paginationConf.currentPage ? paginationConf.pageSize*(paginationConf.currentPage-1)+$index+1 : $index+1}}</td>
+	                    <td title="点击查看">
+	                    	<a ui-sref="app.receptions_detail({id:row.id,type:'all'})" class="text-info">{{row.orderNo}}</a>
+	                   	</td>
+	                    <td> {{row.applyName}}</td>
+	                    <td>{{row.applyMobile}}</td>
+	                    <td>{{row.reason}}</td>
+	                    <td>{{row.recLevelName}}</td>
+	                    <td>{{row.recDate}}</td>
+	                    <td>{{row.orderStatusCN}}</td>
+	                </tr>
+                </tbody>
+        	</table>
+        	<tmpagination conf="paginationConf"></tmpagination>
+        </div>
+	 </div>
+</div>

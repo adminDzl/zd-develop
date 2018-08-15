@@ -1,0 +1,12 @@
+
+nsAdmin添加菜单操作：
+
+1.添加新项目后台，需要在/admin/index.html里配置项目的js  
+  <!-- 南山后勤 -->
+  <script src="../nsAdmin/nshq.router.js"></script>
+
+2.添加菜单需要在/admin/pages/navCtrl.js 添加路由
+
+
+3.在navCtrl.js添加路由后需要在/nsAdmin/nshq.router.js里配置路由
+

@@ -1,0 +1,99 @@
+<crumb title="园区企业管理" head="true"></crumb>
+<div class="wrapper-md" ng-controller="TParkCompanyGrid">
+	 <div class="panel panel-default">
+	 	
+        
+        <div class="panel-heading clearfix">
+          <div class="pull-left">
+	          <form class="form-inline ng-pristine ng-valid" role="form">
+	            <div class="form-group">
+		          <input type="text" class="form-control" placeholder="请输入搜索内容" ng-model="keyword" ng-keypress="search(keyword,$event)"/>
+		        </div>
+		        <button type="submit" class="btn btn-info" ng-click="search(keyword)">搜索</button>
+			  </form>
+		  </div>
+		  <div class="pull-right">
+        	<button class="btn m-b-xs btn-sm btn-info btn-addon"  power-key="parkcompany:add" ng-click="addNew()">
+            	<i class="fa fa-plus"></i>新增
+            </button>
+        	<button title="导入数据" class="btn m-b-xs btn-sm btn-info btn-addon"  power-key="parkcompany:toDataImport" ng-click="toDataImport()">
+            	导入数据
+            </button>
+        	<button title="下载模板" class="btn m-b-xs btn-sm btn-info btn-addon"  power-key="parkcompany:toDataDownload" ng-click="toDataDownload()">
+            	下载模板
+            </button>
+        </div>
+		  
+        </div>
+        <div class="table-responsive">
+        	<table class="table table-striped b-t b-b">
+        		<thead>
+	                <tr>
+	                    <th style="width:5%" data-breakpoints="xs">ID</th>
+	                    <th style="width:10%" class="text-center">企业名称</th>
+	                    <th style="width:10%" class="text-center">所属行业</th>
+	                    <th style="width:10%" class="text-center">企业法人</th>
+	                    <th style="width:10%" class="text-center">联系方式</th>
+	                    <th style="width:10%" class="text-center">企业地址</th>
+	                    <th style="width:10%" class="text-center">备注</th>
+	                    <th style="width:10%" class="text-center">操作</th>
+	                </tr>
+                </thead>
+                <tbody>
+	                <tr data-expanded="true" ng-repeat="row in rows">
+	                    <td > {{paginationConf.currentPage ? paginationConf.pageSize*(paginationConf.currentPage-1)+$index+1 : $index+1}}</td>
+	                    <td > {{row.name}}</td>
+	                    <td > {{row.business}}</td>
+	                    <td > {{row.corporateOwer}}</td>
+	                    <td > {{row.contact}}</td>
+	                    <td > {{row.address}}</td>
+	                    <td ng-bind-html="row.remark|to_trusted"></td>
+	                    <td >
+							<div class="buttons">
+	                            <button class="btn btn-sm btn-info"  power-key="parkcompany:update" ng-click="update(row.id)">编辑</button>
+	                            <button class="btn btn-sm btn-info"  power-key="parkcompany:user" ng-click="userlist(row.id)">公司成员</button>
+	                            <button class="btn btn-sm btn-info"  power-key="parkcompany:joinorg"  ng-click="joinOrg(row.id)">加入公司</button>
+	                            <button class="btn btn-sm btn-info"  power-key="parkcompany:joinpark" ng-click="joinPark(row.id)">加入园区</button>
+	                            <button class="btn btn-sm btn-danger"  power-key="parkcompany:delete" ng-click="deleteById(row.id)">删除</button>
+	                        </div>
+						</td>
+	                </tr>
+                </tbody>
+        	</table>
+        	<tmpagination conf="paginationConf"></tmpagination>
+        </div>
+	 </div>
+	 
+	   
+	  <!-- 数据导入 -->
+	    <div class="modal fade" id="dataImport" tabindex="-1" role="dialog"  >
+		    <div class="modal-dialog" role="document">
+		      <div class="modal-content">
+		         
+		        <div class="modal-header">
+		          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+		            <span aria-hidden="true">&times;</span>
+		          </button>
+		          <h4 class="modal-title" id="exampleRoleLabel">数据导入</h4>
+		        </div>
+		        <div class="modal-body">
+		          <form name="dataImportForm" id="dataImportForm" novalidate style="height: 150px;" class="bs-example form-horizontal" >
+		             <div class="form-group">
+		              <label class="col-lg-3 control-label" translate="">上传文件</label>
+		              <div class="col-lg-9">
+		                <input type="file" name="file" id="fileInput" accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/vnd.ms-excel">
+		              </div>
+		            </div>
+		          </form>
+		        </div>
+		        <div class="modal-footer">
+		        	<span class="text-danger app-aside fail-tip t-l"></span>
+		        	<span class="text-success app-aside success-tip t-l"></span>
+		          <button type="button" class="btn btn-sm btn-warning" data-dismiss="modal" id="close" translate="">关闭</button>
+		          <button type="button" class="btn btn-sm btn-info ng-scope" ng-click="dataImport()" translate="">提交</button>
+		        </div>
+		      </div>
+		    </div>
+	  	</div>
+	  <!-- 数据导入 end-->
+</div>

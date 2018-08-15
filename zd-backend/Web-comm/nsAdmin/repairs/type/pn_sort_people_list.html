@@ -1,0 +1,76 @@
+<style>
+#tbodyTree .level-1{
+	padding-left:10px;
+}
+#tbodyTree .level-2{
+	padding-left:30px;
+}
+#tbodyTree .level-3{
+	padding-left:50px;
+}
+#tbodyTree .level-4{
+	padding-left:70px;
+}
+#tbodyTree>tr>td>a>span{
+	padding-left: 5px;
+}
+#tbodyTree .tr-b-c{
+	background-color: #f9f9f9;
+}
+#tbodyTree>tr>td{
+	line-height: 30px;
+}
+</style>
+<div class="wrapper-md" ng-controller="SortPeopleListCtrl">
+	 <div class="panel panel-default">
+	 	
+	 	<div class="panel-heading">
+            <button class="btn m-b-xs btn-sm btn-info btn-addon" ng-click="set()">
+            	<i class="fa fa-plus"></i>设置权限
+            </button>            
+            <button class="btn m-b-xs btn-sm btn-info btn-addon" ng-click="search()">
+            	<i class="fa fa-search"></i>刷新列表
+			</button>
+			<button class="btn m-b-xs btn-sm btn-info btn-addon" ng-click="addNew()">
+            	<i class="fa fa-plus"></i>新增人员
+            </button>
+        </div>
+        
+        <div class="table-responsive">
+        	<table class="table table-lay-zone">
+        		<thead>
+	                <tr>
+	                	<th class="col-lg-1">选择</th>
+	                    <th data-breakpoints="xs" class="col-lg-1">ID</th>
+	                    <th class="col-lg-2 text-center">名称</th>
+	                    <th class="col-lg-2 text-center">一级分类</th>
+	                    <th class="col-lg-2 text-center">二级分类 </th>
+	                    <th class="col-lg-2 text-center">区域 </th>
+	                    <th data-breakpoints="xs" class="col-lg-2">操作</th>
+	                </tr>
+                </thead>
+                <tbody>
+                    <tr data-expanded="true" ng-repeat="row in peopleTree" class="fade-in-down">
+                        <td>
+                            <label class="i-checks">
+                                <input type="checkbox" ng-model="row.chk" ng-click="clickBox(row)"><i></i>
+                            </label>
+						</td>
+						<td>{{$index+1}}</td>
+                        <td>{{row.name}}</td>
+						<td ng-bind="row.sortChiefName | subStringFilter:20" title="{{row.sortChiefName}}"></td>
+						<td ng-bind="row.sortSubName | subStringFilter:20" title="{{row.sortSubName}}"></td>
+						<td ng-bind="row.areaName | subStringFilter:20" title="{{row.areaName}}"></td>
+						<td>
+							<div class="buttons">
+								<button class="btn btn-sm btn-info" ng-click="update(row)">修改</button>
+								<button class="btn btn-sm btn-info" ng-click="remove(row,row.sortSubId)">移除</button>
+							</div>
+						</td>
+                    </tr>
+                    </tbody>
+        	</table>
+			<tmpagination conf="paginationConf"></tmpagination>
+        </div>
+	 </div>
+</div>

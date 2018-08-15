@@ -1,0 +1,51 @@
+<div class="modal-header">
+    <button type="button" class="close" ng-click="close()"><span aria-hidden="true">×</span><span
+            class="sr-only">Close</span>
+    </button>
+    <h3 class="modal-title">公司选择</h3>
+</div>
+<div class="modal-body">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+		      <form class="form-inline ng-pristine ng-valid" role="form">
+		        <div class="form-group">
+		          <input type="text" class="form-control" ng-model="keys" placeholder="请输入要查询的关键字">
+		        </div>
+		        <button type="submit" class="btn btn-info" ng-click="searchFor()">搜 索</button>
+		      </form>
+        </div>
+        <div>
+            <div class="table-responsive">
+                <table class="table table-striped b-t b-b table-lay-zone" style="margin-bottom: 0px;">
+                    <thead>
+                    <tr>
+                        <th>选择</th>
+                        <th data-breakpoints="xs">ID</th>
+                        <th>公司全称</th>
+                        <th>公司简称</th>
+                        <th ng-hide="hideAddress">地址</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr data-expanded="true" ng-repeat="customer in customers" ng-click="checkRow($index)">
+                        <td>
+                            <label class="u-i-checks">
+	                        	<input type="checkbox" disabled="disabled" ng-model="customer.chk"><i></i>
+                            </label>                        
+                        </td>
+                        <td>{{paginationConf.currentPage ? paginationConf.pageSize*(paginationConf.currentPage-1)+$index+1 : $index+1}}</td>
+                        <td>{{customer.name}}</td>
+                        <td>{{customer.abridge}}</td>
+                        <td ng-hide="hideAddress" ng-bind="customer.address | subStringFilter:20" title="{{customer.address}}"></td>
+                    </tr>
+                    </tbody>
+                </table>
+                <tmpagination conf="paginationConf"></tmpagination>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-default" ng-click="close()">取消</button>
+    <button type="button" class="btn btn-info" ng-click="commit()">提交</button>
+</div>

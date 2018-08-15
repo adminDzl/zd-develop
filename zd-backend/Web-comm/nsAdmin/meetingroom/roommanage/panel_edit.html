@@ -1,0 +1,85 @@
+﻿<div class="modal-header">
+    <button type="button" class="close" ng-click="close()"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+    <h4 class="modal-title">{{site.title}}</h4>
+</div>
+<div class="modal-body">
+    <div class="wrapper-md ng-scope">
+	    <form name="Form"  class="form-horizontal form-validation" novalidate>
+	        <div class="form-group">
+	            <label class="col-sm-3 control-label">菜名:</label>
+	             <div class="col-sm-9">
+	            	<input type="text" class="form-control" ng-model="form.foodName" required/>
+	            </div>
+	        </div>
+			<div class="form-group">
+				<label class="col-sm-3 control-label">卡路里:</label>
+				<div class="col-sm-9">
+					<input type="text" class="form-control" ng-model="form.foodCalories" required/>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-3 control-label">价格:</label>
+				<div class="col-sm-9">
+					<input type="text" class="form-control" ng-model="form.price" required/>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-3 control-label">单位:</label>
+				<div class="col-sm-9">
+					<input type="text" class="form-control" ng-model="form.foodUnit" required/>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-3 control-label">菜单标签:</label>
+				<div class="col-sm-9">
+					<input type="text" class="form-control" ng-model="form.foodLabel" required/>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-3 control-label">预定上限:</label>
+				<div class="col-sm-9">
+					<input type="text" class="form-control" ng-model="form.maxTakeout" required/>
+				</div>
+			</div>
+
+			<div class="form-group">
+				<label class="col-lg-3 control-label">菜单图片:</label>
+				<div class="col-sm-9">
+					<div preview-container>
+						<img width=100 height=100 border=0 src="{{ form.foodImg | imgUrl }}">
+					</div>
+					<input type="file" name="file" onchange="Utils.previewImage(this)" accept="image/*" class="m-t m-b"/>
+					<input type="text" style="display: none;" name="foodImg" file-path-container ng-model="form.foodImg"/>
+					<span class="col-lo-1 text-danger">（建议选择尺寸为120*120px，大小不超过300k的 jpg/png图片）</span>
+				</div>
+				<span class="col-lo-1 text-danger">*</span>
+			</div>
+
+
+			<div class="form-group">
+				<label class="col-lg-3 control-label">每100克菜品图片:</label>
+				<div class="col-sm-9">
+					<div preview-container>
+						<img width=100 height=100 border=0 src="{{ form.ext1 | imgUrl }}">
+					</div>
+					<input type="file" name="file" onchange="Utils.previewImage(this)" accept="image/*" class="m-t m-b"/>
+					<input type="text" style="display: none;" name="ext1" file-path-container ng-model="form.ext1"/>
+					<span class="col-lo-1 text-danger">（建议选择尺寸为120*120px，大小不超过300k的 jpg/png图片）</span>
+				</div>
+				<span class="col-lo-1 text-danger">*</span>
+			</div>
+
+	        <div class="line line-dashed b-b line-lg"></div>
+	        <div class="form-group">
+	            <label class="col-sm-3 control-label">备注:</label>
+	             <div class="col-sm-9">
+	            	<textarea type="text" class="form-control" ng-model="form.remark" ></textarea>
+	            </div>
+	        </div>
+	    </form>
+    </div>
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-default" ng-click="close()">取消</button>
+    <button type="button" class="btn btn-info" ng-disabled="Form.$invalid" ng-click="addSave()">提交</button>
+</div>

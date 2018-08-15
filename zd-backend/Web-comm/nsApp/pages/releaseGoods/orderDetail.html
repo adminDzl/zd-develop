@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+	<meta content="yes" name="apple-mobile-web-app-capable">
+	<meta content="black" name="apple-mobile-web-app-status-bar-style">
+	<meta content="telephone=no" name="format-detection">
+	<meta content="email=no" name="format-detection">
+	<meta name="hotcss" content="max-width=640">
+	<title>订单详情</title>
+	<link rel="stylesheet" href="../../css/common.css" />
+	<link rel="stylesheet" href="../../css/style.css" />
+	<link rel="stylesheet" href="../../css/common/swiper.min.css" />
+	<script type="text/javascript" src="../../js/common/hotcss.js"></script>
+</head>
+
+<body ng-app="myApp" ng-controller="AppCtrl" class="bottomBtnFixBody">
+	<div class="container m-t-40 fix">
+		<p class="f-s-40 f-c-494848 p-l-r-40 f-l l-h-88 f-l" ng-bind-template="服务订单：{{ orderDetail.orderNo }}"></p>
+		<div class="f-r renewReleaseGood" ng-click="goIndex()" ng-if="renew==1">续签</div>
+	</div>
+
+	<div class="container m-t-40">
+		<div class="textBox fix">
+			<p class="f-l">携物者类别：</p>
+			<p class="f-r" ng-bind-template="{{ {passType:orderDetail.passType,takeType:orderDetail.takeType} | setUserType }}"></p>
+		</div>
+		<div class="textBox fix">
+			<p class="f-l">需放行人姓名：</p>
+			<p class="f-r" ng-bind-template="{{ orderDetail.needPassName }}"></p>
+		</div>
+		<div class="textBox fix">
+			<p class="f-l">需放行人电话：</p>
+			<p class="f-r" ng-bind-template="{{ orderDetail.needPassMobile }}"></p>
+		</div>
+		<div class="textBox fix">
+			<p class="f-l">需放行人单位：</p>
+			<p class="f-r" ng-bind-template="{{ orderDetail.needPassOrg }}"></p>
+		</div>
+		<div class="textBox fix">
+			<p class="f-l">物品名称及数量：</p>
+			<p class="f-r" ng-bind-template="{{ orderDetail.goodsNumber }}"></p>
+		</div>
+		<div class="textBox fix">
+			<p class="f-l">物品类别：</p>
+			<p class="f-r" ng-bind-template="{{ orderDetail.goodsType1=='0' ? '非工程类' : '工程类' }}"></p>
+		</div>
+		<div class="textBox fix">
+			<p class="f-l">申请放行时间：</p>
+			<p class="f-r" ng-bind-template="{{ orderDetail.releaseTime }}"></p>
+		</div>
+		<div class="textBox fix" ng-if="orderDetail.file[0].filePath">
+			<p>附件：</p>
+			<div class="selectRepairsFile showFileImgBox">
+				<ul class="fix">
+					<li style="background: url({{ item.filePath }}) center no-repeat; background-size: cover;" data-imgurl="{{ item.filePath }}"
+					 data-index="{{ $index+1 }}" ng-repeat="item in orderDetail.file"></li>
+				</ul>
+			</div>
+		</div>
+		<div class="textBox fix">
+			<p class="f-l">订单状态：</p>
+			<p class="f-r" ng-bind-template="{{ { status : orderDetail.orderStatus , ext:orderDetail.ext1} | getOrderStatus }}"></p>
+		</div>
+		<div class="textBox fix" ng-if="orderDetail.orderStatus=='5'">
+			<p class="f-l">实际放行时间：</p>
+			<p class="f-r" ng-bind-template="{{ orderDetail.factPassDatetime }}"></p>
+		</div>
+		<div class="textBox fix" ng-if="orderDetail.orderStatus=='5' || orderDetail.orderStatus=='6'">
+			<p class="f-l">放行处理人：</p>
+			<p class="f-r" ng-bind-template="{{ orderDetail.checkUserName }}"></p>
+		</div>
+		<div class="textBox fix" ng-if="orderDetail.orderStatus=='2' || orderDetail.orderStatus=='4' || orderDetail.orderStatus=='6'">
+			<p class="f-l">拒绝原因：</p>
+			<p class="f-r" ng-bind-template="{{ orderDetail.remark }}"></p>
+		</div>
+	</div>
+
+	<div class="container m-t-40">
+		<div class="textBox fix">
+			<p class="f-l">申请人姓名：</p>
+			<p class="f-r" ng-bind-template="{{ orderDetail.createUserName }}"></p>
+		</div>
+		<div class="textBox fix">
+			<p class="f-l">申请人单位：</p>
+			<p class="f-r" ng-bind-template="{{ orderDetail.createUserDeptName }}"></p>
+		</div>
+		<div class="textBox fix">
+			<p class="f-l">申请人电话：</p>
+			<p class="f-r" ng-bind-template="{{ orderDetail.createUserMobile }}"></p>
+		</div>
+	</div>
+
+	<div class="container m-t-40" ng-if="orderFinish==1">
+		<div class="qrCodeBox">
+			<img src="http://qr.topscan.com/api.php?text={{ orderDetail.qrCodeUrl }}" />
+		</div>
+		<div class="showQrCodeBox">
+			<p>分享二维码</p>
+			<div>
+				<em class="wechat" ng-click="share('weixin')"></em>
+				<em class="qq" ng-click="share('qq')"></em>
+			</div>
+		</div>
+	</div>
+	<!-- 订单状态 -->
+	<div class="container m-t-40">
+		<p class="defaultP">订单状态</p>
+		<div class="orderStateBox">
+			<div>
+				<div>
+					<em></em>
+				</div>
+			</div>
+			
+			<ul class="fix whiteListLi" ng-if="orderDetail.ext1!='1'">
+				<li ng-class="{ orderStatus : orderDetail.orderStatus , ext : orderDetail.ext1 , current:'0' } | setAuditType">
+					<em></em>
+					<p>已提交</p>
+				</li>
+				<li class="course" ng-class="{ orderStatus : orderDetail.orderStatus , ext : orderDetail.ext1 , current:'1' } | setAuditType">
+					<em></em>
+					<p>已审核</p>
+				</li>
+				<li class="course" ng-class="{ orderStatus : orderDetail.orderStatus , ext : orderDetail.ext1 , current:'5' } | setAuditType">
+					<em></em>
+					<p>已放行</p>
+				</li>
+				<li class="reject" ng-if="orderDetail.orderStatus=='2' || orderDetail.orderStatus=='6'">
+					<em></em>
+					<p ng-bind-template="{{ orderDetail.orderStatus == '6'? '拒绝放行' : '审核驳回'}}"></p>
+				</li>
+			</ul>
+			
+			<ul class="fix blacklistLi" ng-if="orderDetail.ext1=='1'">
+				<li ng-class="{ orderStatus : orderDetail.orderStatus , ext : orderDetail.ext1 , current:'0' } | setAuditType">
+					<em></em>
+					<p>已提交</p>
+				</li>
+				<li class="course" ng-class="{ orderStatus : orderDetail.orderStatus , ext : orderDetail.ext1 , current:'1' } | setAuditType">
+					<em></em>
+					<p>一级审核</p>
+				</li>
+				
+				<li class="course" ng-class="{ orderStatus : orderDetail.orderStatus , ext : orderDetail.ext1 , current:'3' } | setAuditType">
+					<em></em>
+					<p>二级审核</p>
+				</li>
+				
+				<li class="course" ng-class="{ orderStatus : orderDetail.orderStatus , ext : orderDetail.ext1 , current:'5' } | setAuditType">
+					<em></em>
+					<p>已放行</p>
+				</li>
+				<li class="reject" ng-if="orderDetail.orderStatus=='2' || orderDetail.orderStatus=='4' || orderDetail.orderStatus=='6'">
+					<em></em>
+					<p ng-bind-template="{{ orderDetail.orderStatus == '6'? '拒绝放行' : '审核驳回'}}">审核驳回</p>
+				</li>
+			</ul>
+		</div>
+		<div class="container m-t-40" ng-if="(orderDetail.orderStatus=='0' || (orderDetail.ext1=='1' && orderDetail.orderStatus!='3')) && orderDetail.currentSteps.length>0">
+			<div class="inputBox">
+				<p>驳回理由:</p>
+				<input type="text" placeholder="若驳回请输入驳回原因" name="rejectText" />
+			</div>
+		</div>
+
+		<div class="bottomBtnTwo fix bottomBtnFix" ng-if="(orderDetail.orderStatus=='0' || (orderDetail.ext1=='1' && orderDetail.orderStatus!='3')) && orderDetail.currentSteps.length>0">
+			<button class="cancel" ng-click="checkAuth('reject',orderDetail.currentSteps[1])" >驳回</button>
+			<button class="confirm" ng-click="checkAuth('agree',orderDetail.currentSteps[0])" >通过</button>
+		</div>
+
+		<!-- 蒙版 -->
+		<div class="masking"></div>
+		
+		<!-- 提交成功 -->
+		<div class="successfulBox t-c">
+			<div class="successHeader">
+				<div class="successIcon"></div>
+				<em class="successClose" ng-click="closeOrOpenTipBox('close')"></em>
+			</div>
+			<p class="f-s-50 f-b l-h-116 m-t-33" ng-bind-template="{{ orderState }}"></p>
+			<p class="f-s-40" ng-bind-template="{{ orderStateInfo }}"></p>
+			<div class="f-s-40">(<span class="countDown" ng-bind-template="{{ countDown }}"></span>s)请等待</div>
+		</div>		
+
+		<script type="text/javascript" src="../../js/common/angular.js"></script>
+		<script type="text/javascript" src="../../js/common/jquery-1.8.3.min.js"></script>
+		<script type="text/javascript" src="../../js/common/jccplus-1.2.js"></script>
+		<script type="text/javascript" src="../../js/common/util.js"></script>
+		<script type="text/javascript" src="../../js/common/swiper.min.js"></script>
+		<script type="text/javascript" src="../../js/releaseGoods/orderDetail.js"></script>
+</body>
+
+</html>

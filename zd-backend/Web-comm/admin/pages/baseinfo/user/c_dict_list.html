@@ -1,0 +1,67 @@
+<crumb title="数据字典" head="true"></crumb>
+<div class="wrapper-md" ng-controller="TCodeGrid">
+	 <div class="panel panel-default">
+	 	
+        
+        <div class="panel-heading clearfix">
+         <div class="pull-left">
+          <form class="form-inline ng-pristine ng-valid" role="form">
+			  <div class="form-group">
+				  <input type="text" class="form-control" placeholder="请输入搜索内容" ng-model="keyword"
+						 ng-keypress="search(keyword,$event)"/>
+			  </div>
+			  <button type="submit" class="btn btn-info" ng-click="search(keyword)">搜索</button>
+		  </form>
+		  </div>
+		  <div class="pull-left">
+			 <form class="form-inline ng-pristine ng-valid" role="form">
+				 <div class="form-group">
+					 <label class="control-label"><span class="text-danger">*</span>父项:</label>
+					 <input type="text" class="form-control" placeholder="请输入父项名称" ng-model="parentItem" ng-keypress="searchChild(parentItem, $event)" required/>
+				 </div>
+				 <button type="submit" class="btn btn-info" ng-click="searchChild(parentItem)">搜索</button>
+			 </form>
+		 </div>
+		  <div class="pull-right">
+            <button class="btn m-b-xs btn-sm btn-info btn-addon" power-key="dict:add" ng-click="addNew()">
+            	<i class="fa fa-plus"></i>新增
+            </button>
+          </div>
+        </div>
+		 
+        <div class="table-responsive">
+        	<table class="table table-striped b-t b-b">
+        		<thead>
+	                <tr>
+	                    <th style="width:5%" data-breakpoints="xs">ID</th>
+	                    <th style="width:10%" class="text-center">父项</th>
+	                    <th style="width:10%" class="text-center">字典选项名称</th>
+	                    <th style="width:10%" class="text-center">字典选项值</th>
+	                    <th style="width:10%" class="text-center">字典选项Code</th>
+	                    <!--<th style="width:10%" class="text-center">排序值</th>-->
+	                    <th style="width:20%" class="text-center">备注 </th>
+	                    <th style="width:15%" class="text-center" data-breakpoints="xs" >操作</th>
+	                </tr>
+                </thead>
+                <tbody>
+	                <tr data-expanded="true" ng-repeat="row in rows">
+	                    <td > {{paginationConf.currentPage ? paginationConf.pageSize*(paginationConf.currentPage-1)+$index+1 : $index+1}}</td>
+	                    <td > {{row.parentName}}</td>
+	                    <td > {{row.keyName}}</td>
+	                    <td > {{row.value}}</td>
+	                    <td > {{row.keyCode}}</td>
+	                    <td > {{row.remark}}</td>
+	                    <td>
+	                        <div class="buttons">
+	                            <button class="btn btn-sm btn-info" power-key="dict:update" ng-click="update(row.id)">编辑</button>
+	                            <button class="btn btn-sm btn-danger" power-key="dict:delete" ng-click="deleteById(row.id)">删除</button>
+	                            <!--<button class="btn btn-sm btn-dark" ng-click="deleteById(row.id)">查询子项</button>-->
+	                        </div>
+	                    </td>
+	                </tr>
+                </tbody>
+        	</table>
+        	<tmpagination conf="paginationConf"></tmpagination>
+        </div>
+	 </div>
+</div>

@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+	<meta content="yes" name="apple-mobile-web-app-capable">
+	<meta content="black" name="apple-mobile-web-app-status-bar-style">
+	<meta content="telephone=no" name="format-detection">
+	<meta content="email=no" name="format-detection">
+	<meta name="hotcss" content="max-width=640">
+	<title>订单详情</title>
+	<link rel="stylesheet" href="../../css/common.css" />
+	<link rel="stylesheet" href="../../css/style.css" />
+	<link rel="stylesheet" href="../../css/common/swiper.min.css" />
+	<script type="text/javascript" src="../../js/common/hotcss.js"></script>
+</head>
+
+<body ng-app="myApp" ng-controller="AppCtrl">
+	<div class="container m-t-40">
+		<p class="f-s-40 f-c-494848 p-l-r-40">订单编号：
+			<span ng-bind="orderInfo.orderChiefFrom[0].orderNum"></span>
+		</p>
+	</div>
+
+	<div class="container m-t-40">
+		<div class="textBox fix">
+			<p class="f-l">申请人姓名：</p>
+			<p class="f-r" ng-bind="orderInfo.orderChiefFrom[0].applyName"></p>
+		</div>
+		<div class="textBox fix">
+			<p class="f-l">单位名称：</p>
+			<p class="f-r" ng-bind="orderInfo.orderChiefFrom[0].applyDept"></p>
+		</div>
+		<div class="textBox fix">
+			<p class="f-l">申请人电话：</p>
+			<p class="f-r" ng-bind="orderInfo.orderChiefFrom[0].applyMobile"></p>
+		</div>
+		<div class="textBox fix">
+			<p class="f-l">维修区域：</p>
+			<p class="f-r" ng-bind="orderInfo.orderChiefFrom[0].areaName"></p>
+		</div>
+		<div class="textBox fix">
+			<p class="f-l">报修类型：</p>
+			<p class="f-r" ng-bind="orderInfo.orderChiefFrom[0].sortChiefName"></p>
+		</div>
+		<div class="textBox fix">
+			<p class="f-l">维修详情：</p>
+			<p class="f-r" ng-bind="orderInfo.orderChiefFrom[0].supplementText"></p>
+		</div>
+
+		<div class="textBox fix" ng-if="orderInfo.attachmentURL.length > 0">
+			<p>附件：</p>
+			<div class="selectRepairsFile showFileImgBox">
+				<ul class="fix">
+					<li style="background: url({{item}}) center no-repeat; background-size: cover;" data-imgurl="{{ item }}" data-index="{{ $index+1 }}"
+					 ng-repeat="item in orderInfo.attachmentURL"></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+
+	<div class="container m-t-40" ng-if="orderInfo.engineerInfo.id">
+		<div class="textBox fix">
+			<p class="f-l">维修工程师姓名:</p>
+			<p class="f-r" ng-bind="orderInfo.engineerInfo.name"></p>
+		</div>
+		<div class="textBox fix">
+			<p class="f-l">维修工程师电话:</p>
+			<p class="f-r" ng-bind="orderInfo.engineerInfo.phome"></p>
+		</div>
+	</div>
+
+	<!-- 订单状态 -->
+	<div class="container m-t-40">
+		<p class="defaultP">订单状态</p>
+		<div class="orderStateBox repairs">
+			<div>
+				<div>
+					<em></em>
+				</div>
+			</div>
+			<ul class="fix">
+				<li>
+					<em></em>
+					<p>已提交</p>
+				</li>
+				<li class="course">
+					<em></em>
+					<p>已派单</p>
+				</li>
+				<li class="course">
+					<em></em>
+					<p>已接单</p>
+				</li>
+				<li class="course">
+					<em></em>
+					<p>已维修</p>
+				</li>
+				<li class="course">
+					<em></em>
+					<p>已评价</p>
+				</li>
+				<li class="reject">
+					<em></em>
+					<p>已取消</p>
+				</li>
+			</ul>
+		</div>
+		<div class="m-t-65">
+			<a href="javascript:;" class="fill-btn confirm" ng-click="repairOperate('accept')" ng-if="orderInfo.operateStatus == '5'">接单</a>
+			<a href="javascript:;" class="fill-btn confirm" ng-click="repairOperate('done')" ng-if="orderInfo.operateStatus == '6'">维修完成</a>
+		</div>
+	</div>
+
+
+	<!-- 蒙版 -->
+	<div class="masking"></div>
+
+
+	<script type="text/javascript" src="../../js/common/angular.js"></script>
+	<script type="text/javascript" src="../../js/common/jquery-1.8.3.min.js"></script>
+	<script type="text/javascript" src="../../js/common/swiper.min.js"></script>
+	<script type="text/javascript" src="../../js/common/util.js"></script>
+	<script type="text/javascript" src="../../js/repairs/receiveOrder.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,102 @@
+<crumb title="餐饮订单列表" head="true"></crumb>
+<div class="wrapper-md" ng-controller="orderlist">
+	<div class="panel panel-default">
+
+		<div class="panel-heading">
+			<form class="form-inline ng-pristine ng-valid" id="foodOrderForm" >
+				<div class="form-group" style="margin-right: 30px; margin-bottom: 20px;">
+					<label class="control-label">用餐时间：</label>
+					<input id="searchDate" ui-jq="daterangepicker" ui-options="dateRangeOptions" style="min-width: 325px;vertical-align: initial;height: 30px;"
+					 placeholder="请输入日期范围" ng-model="mealTime" name="mealTime" aria-invalid="false" class="form-control ng-pristine ng-valid ng-touched"
+					/>
+				</div>
+				<div class="form-group" style="margin-right: 30px; margin-bottom: 20px;">
+					<label class="control-label">餐饮类别：</label>
+					<select class="form-control ng-pristine ng-valid ng-touched m-b-xs" ng-model="foodType" name="foodType" ng-change="search()">
+						<option value="">全部</option>
+						<option value="2">晚餐</option>
+						<option value="3">外卖</option>
+					</select>
+				</div>
+				<div class="form-group" style="margin-right: 30px; margin-bottom: 20px;">
+					<input type="text" class="form-control" placeholder="输入下单人姓名" ng-model="keyword" name="keyword" ng-keypress="search(keyword,$event)" />
+					<button type="submit" class="btn btn-info" ng-click="search(keyword)">搜索</button>
+					<button type="submit" class="btn btn-info" ng-click="exportFoodOrder(keyword)">导出Excel</button>
+				</div>
+
+				<div class="form-group" style="margin-right: 30px; margin-bottom: 20px;">
+					<label class="control-label">下单时间：</label>
+					<input id="searchDates" ui-jq="daterangepicker" ui-options="dateRangeOptions" style="min-width: 325px;vertical-align: initial;height: 30px;"
+					 placeholder="请输入日期范围" ng-model="orderTime" name="orderTime" aria-invalid="false" class="form-control ng-pristine ng-valid ng-touched"
+					/>
+				</div>
+				<div class="form-group" style="margin-right: 30px; margin-bottom: 20px;">
+					<label class="control-label">预订类别：</label>
+					<select class="form-control ng-pristine ng-valid ng-touched m-b-xs" ng-model="type" name="type" ng-change="search()" >
+						<option value="">全部</option>
+						<option value="1">个人</option>
+						<option value="2">单位</option>
+					</select>
+				</div>
+				<div class="form-group" style="margin-right: 30px; margin-bottom: 20px;">
+					<label class="control-label">结算方式：</label>
+					<select class="form-control ng-pristine ng-valid ng-touched m-b-xs" ng-model="buyType" name="buyType" ng-change="search()">
+						<option value="">全部</option>
+						<option value="1">微信支付</option>
+						<option value="2">月结</option>
+					</select>
+				</div>
+				<div class="form-group" style="margin-right: 30px; margin-bottom: 20px;">
+					<label class="control-label">订单状态：</label>
+					<select class="form-control ng-pristine ng-valid ng-touched m-b-xs" ng-model="orderStatus" name="orderStatus" ng-change="search()">
+						<option value="">全部</option>
+						<option value="0">待支付</option>
+						<option value="1">已支付</option>
+						<option value="2">已取餐</option>
+					</select>
+				</div>
+			</form>
+		</div>
+		<div class="table-responsive">
+			<table class="table table-striped b-t b-b">
+				<thead>
+					<tr>
+						<th style="width:5%" class="text-center" data-breakpoints="xs">No.</th>
+						<th style="width:10%" class="text-center">订单编号</th>
+						<th style="width:5%" class="text-center">姓名</th>
+						<th style="width:10%" class="text-center">餐饮类别</th>
+						<th style="width:10%" class="text-center">预订类别</th>
+						<th style="width:10%" class="text-center">餐饮名称</th>
+						<th style="width:5%" class="text-center">总价(元)</th>
+						<th style="width:10%" class="text-center">结算方式</th>
+						<th style="width:5%" class="text-center">订单状态</th>
+						<th style="width:10%" class="text-center">用餐时间</th>
+						<th style="width:10%" class="text-center">下单时间</th>
+						<th style="width:10%" class="text-center" data-breakpoints="xs">操作</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr data-expanded="true" ng-repeat="row in rows">
+						<td> {{paginationConf.currentPage ? paginationConf.pageSize*(paginationConf.currentPage-1)+$index+1 : $index+1}}</td>
+						<td> {{row.orderNo}}</td>
+						<td> {{row.orderName}}</td>
+						<td ng-bind="row.ext4 =='2' ? '晚餐':'外卖'"></td>
+						<td ng-bind="row.type =='1' ? '个人':'单位'"></td>
+						<td> {{row.ext2}}</td>
+						<td> {{row.priceAll}}</td>
+						<td ng-bind="row.type =='1' ? '微信支付':'月结'"></td>
+						<td> {{row.orderStatus =='0' ?'待支付':(row.orderStatus =='1'? '已支付':'已取餐')}}</td>
+						<td> {{row.orderTime}}</td>
+						<td> {{row.createTime}}</td>
+						<td>
+							<div class="buttons">
+								<button class="btn btn-sm btn-info" ng-click="set(row.id)">查看详情</button>
+							</div>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+			<tmpagination conf="paginationConf"></tmpagination>
+		</div>
+	</div>
+</div>

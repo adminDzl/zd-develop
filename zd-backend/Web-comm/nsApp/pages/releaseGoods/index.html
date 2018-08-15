@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<meta content="yes" name="apple-mobile-web-app-capable">
+		<meta content="black" name="apple-mobile-web-app-status-bar-style">
+		<meta content="telephone=no" name="format-detection">
+		<meta content="email=no" name="format-detection">
+		<meta name="hotcss" content="max-width=640">
+		<title>物品放行</title>
+		<link rel="stylesheet" href="../../css/common.css" />
+		<link rel="stylesheet" href="../../css/style.css" />
+		<script type="text/javascript" src="../../js/common/hotcss.js" ></script>
+	</head>
+	<body ng-app="myApp" ng-controller="AppCtrl">
+		
+		<div class="orderHeader">
+			<div class="orderSearchBox fix" ng-click="goHistory()">
+				<i class="f-l"></i>
+				<input type="text" placeholder="搜索历史记录" disabled="disabled" class="f-l" />
+			</div>
+			<div class="orderNav releaseGoodNav">
+				<ul class="fix">
+					<li ng-click="changeType(0)">出场物品放行</li>
+					<li ng-click="changeType(1)">入场物品放行</li>
+				</ul>
+				<em style="{{ orderData.passType | setNavClass }}"></em>
+			</div>
+		</div>
+		
+		<div class="container m-t-40">
+			<div class="selectBox">
+				<p>携物者类别(必填):</p>
+				<div>
+					<select ng-model="orderData.takeType" ng-options="o.id as o.name for o in takeType"></select>
+				</div>
+			</div>
+			<div class="inputBox" ng-if="orderData.takeType!=0">
+				<p>需放行人姓名(必填):</p>
+				<input type="text" placeholder="请输入需放行人姓名" ng-model="orderData.needPassPersonnelName" />
+			</div>
+			<div class="inputBox" ng-if="orderData.takeType!=0">
+				<p>需放行人电话(必填):</p>
+				<input type="tel" placeholder="请输入需放行人电话" ng-model="orderData.needPassPersonnelMobile" />
+			</div>
+			<div class="inputBox" ng-if="orderData.takeType!=0">
+				<p>需放行人单位(必填):</p>
+				<input type="text" placeholder="请输入需放行人单位" ng-model="orderData.needPassPersonnelDept" />
+			</div>
+			<div class="textareaBox">
+				<p>物品名称及数量(必填):</p>
+				<textarea placeholder="请输入物品名称及数量" ng-model="orderData.goodsNumber"></textarea>
+			</div>
+			<div class="selectBox">
+				<p>物品类别(必填):</p>
+				<div>
+					<select ng-model="orderData.goodsType1" ng-options="o.id as o.name for o in goodType1"></select>
+				</div>
+			</div>
+			
+			<div class="moreTypeSelectBox">
+				<p>物品类别(必填)：</p>
+				<div class="fix">
+					<ul class="fix">
+						<li class="fellipsis" ng-click="selectType($event,item.id)" ng-repeat="item in goodTypes" data-id="{{ item.id }}" ng-bind-template="{{ item.name }}" on-finish-release-goods></li>
+					</ul>
+					<span class="f-r" ng-click="showMoreOrHideTypeList($event)" ng-if="goodTypes.length>6"></span>
+				</div>
+			</div>
+			<p class="tip m-b-40"><em></em>温馨提示：不包含工程类物品放行。</p>
+		
+			<div class="inputBox">
+				<p>放行日期(必填):</p>
+				<div class="inputBoxTime">
+					<input type="date" name="releaseTime"/>
+					<em class="calendar"></em>
+				</div>
+			</div>
+			<div class="inputBox">
+				<p>放行时间(必填):</p>
+				<div class="fix time-two allTime">
+					<div class="f-l">
+						<input type="time" name="releaseStartHour"/>
+						<em class="calendar"></em>
+					</div>
+					<i class="f-l"></i>
+					<div class="f-r">
+						<input type="time" name="releaseEndHour"/>
+						<em class="calendar"></em>
+					</div>
+				</div>
+			</div>
+			
+			<div class="inputBox selectRepairsFile">
+				<p>附件</p>
+				<ul class="fix main" id="commentPicture">
+					<!-- <li style="background: url(../../img/back/uploadImg.jpg) center no-repeat; background-size: contain;">
+						<span class="close"></span>
+					</li> -->
+					<li>
+						<form id="registration" name="registration" method="post" enctype="multipart/form-data" novalidate>
+							<input type="file" name="file" id="choose" accept="image/*" />
+						</form>
+					</li>
+				</ul>
+			</div>
+			
+			<a href="javascript:;" class="fill-btn confirm" ng-click="submitReleaseGood()">确定</a>
+		</div>
+		
+		
+		<!-- 蒙版 -->
+		<div class="masking"></div>
+		
+		<!-- 提交成功 -->
+		<div class="successfulBox t-c">
+			<div class="successHeader">
+				<div class="successIcon"></div>
+				<em class="successClose" ng-click="closeOrOpenTipBox('close')"></em>
+			</div>
+			<p class="f-s-50 f-b l-h-116 m-t-33" ng-bind-template="{{ orderState }}"></p>
+			<p class="f-s-40" ng-bind-template="{{ orderStateInfo }}"></p>
+			<div class="f-s-40">(<span class="countDown" ng-bind-template="{{ countDown }}"></span>s)请等待</div>
+		</div>		
+		
+		<script type="text/javascript" src="../../js/common/angular.js" ></script>
+		<script type="text/javascript" src="../../js/common/jquery-1.8.3.min.js" ></script>
+		<script type="text/javascript" src="../../js/common/jquery.form.js" ></script>
+		<script type="text/javascript" src="../../js/common/mobileFix.mini.js"></script>
+		<script type="text/javascript" src="../../js/common/exif.js"></script>
+		<script type="text/javascript" src="../../js/common/lrz.js"></script>
+		<script type="text/javascript" src="../../js/common/util.js" ></script>
+		<script type="text/javascript" src="../../js/releaseGoods/index.js"></script>
+		
+	</body>
+</html>

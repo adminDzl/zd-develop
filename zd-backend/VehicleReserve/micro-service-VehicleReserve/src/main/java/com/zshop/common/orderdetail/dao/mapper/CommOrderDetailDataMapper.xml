@@ -1,0 +1,344 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zshop.common.orderdetail.dao.mapper.CommOrderDetailDataMapper">
+
+<!-- **************以下映射必须与数据库一致 不要更改，除非数据库改变**************** -->
+
+	<insert id="insert"  parameterType="com.zshop.common.orderdetail.entity.CommOrderDetailData">
+				
+		insert into comm_order_detail_data
+		(
+			id,
+			park_id,
+			type1,
+			type2,
+			order_no,
+			order_id,
+			order_status,
+			remark,
+			create_by,
+			create_name,
+			create_time,
+			update_by,
+			status1,
+			status2,
+			update_time,
+			ext1,
+			ext2,
+			ext3,
+			ext4,
+			ext5,
+			ext6
+		)
+		values	
+		(	
+			#{id},
+			#{parkId},
+			#{type1},
+			#{type2},
+			#{orderNo},
+			#{orderId},
+			#{orderStatus},
+			#{remark},
+			#{createBy},
+			#{createName},
+			#{createTime},
+			#{updateBy},
+			#{status1},
+			#{status2},
+			#{updateTime},
+			#{ext1},
+			#{ext2},
+			#{ext3},
+			#{ext4},
+			#{ext5},
+			#{ext6}
+		)	
+
+	</insert>
+	
+	<delete id="deleteById" parameterType="java.lang.String">
+		delete from comm_order_detail_data 	
+		WHERE ID=#{id}
+	</delete>
+	
+	<delete id="deleteByIds" parameterType="java.util.Collection">
+     	delete from comm_order_detail_data 	
+     	WHERE ID IN
+     	<foreach collection="array" index="index" item="item" open="(" separator="," close=")"> #{item} </foreach> 
+  	 </delete>
+  	 
+  	 <delete id="logicDelete" parameterType="java.lang.String">
+		update comm_order_detail_data set status1 = '-1' 	
+		WHERE ID=#{id}
+	</delete>
+	
+	<delete id="logicDeleteByIds" parameterType="java.util.Collection">
+     	update comm_order_detail_data set status1 = '-1' 	
+     	WHERE ID IN
+     	<foreach collection="array" index="index" item="item" open="(" separator="," close=")"> #{item} </foreach> 
+  	 </delete>
+	
+	<update id="update" parameterType="com.zshop.common.orderdetail.entity.CommOrderDetailData" >
+			
+		update comm_order_detail_data 	
+		<set> 	
+			park_id=#{parkId},
+			type1=#{type1},
+			type2=#{type2},
+			order_no=#{orderNo},
+			order_id=#{orderId},
+			order_status=#{orderStatus},
+			remark=#{remark},
+			create_by=#{createBy},
+			create_name=#{createName},
+			create_time=#{createTime},
+			update_by=#{updateBy},
+			status1=#{status1},
+			status2=#{status2},
+			update_time=#{updateTime},
+			ext1=#{ext1},
+			ext2=#{ext2},
+			ext3=#{ext3},
+			ext4=#{ext4},
+			ext5=#{ext5},
+			ext6=#{ext6}
+		</set> 	
+		where 
+		ID=#{id} 	
+
+	</update>
+	
+	<update id="updateWithIf" parameterType="com.zshop.common.orderdetail.entity.CommOrderDetailData" >
+			
+		update comm_order_detail_data 	
+		<set> 	
+			<if test=" parkId!=null ">	
+				park_id=#{parkId},	
+			</if>	
+			<if test=" type1!=null ">	
+				type1=#{type1},	
+			</if>	
+			<if test=" type2!=null ">	
+				type2=#{type2},	
+			</if>	
+			<if test=" orderNo!=null ">	
+				order_no=#{orderNo},	
+			</if>	
+			<if test=" orderId!=null ">	
+				order_id=#{orderId},	
+			</if>	
+			<if test=" orderStatus!=null ">	
+				order_status=#{orderStatus},	
+			</if>	
+			<if test=" remark!=null ">	
+				remark=#{remark},	
+			</if>	
+			<if test=" createBy!=null ">	
+				create_by=#{createBy},	
+			</if>	
+			<if test=" createName!=null ">	
+				create_name=#{createName},	
+			</if>	
+			<if test=" createTime!=null ">	
+				create_time=#{createTime},	
+			</if>	
+			<if test=" updateBy!=null ">	
+				update_by=#{updateBy},	
+			</if>	
+			<if test=" status1!=null ">	
+				status1=#{status1},	
+			</if>	
+			<if test=" status2!=null ">	
+				status2=#{status2},	
+			</if>	
+			<if test=" updateTime!=null ">	
+				update_time=#{updateTime},	
+			</if>	
+			<if test=" ext1!=null ">	
+				ext1=#{ext1},	
+			</if>	
+			<if test=" ext2!=null ">	
+				ext2=#{ext2},	
+			</if>	
+			<if test=" ext3!=null ">	
+				ext3=#{ext3},	
+			</if>	
+			<if test=" ext4!=null ">	
+				ext4=#{ext4},	
+			</if>	
+			<if test=" ext5!=null ">	
+				ext5=#{ext5},	
+			</if>	
+			<if test=" ext6!=null ">	
+				ext6=#{ext6},	
+			</if>	
+		</set>	
+		where 	
+		ID=#{id} 	
+
+	</update>
+	
+	<!-- *************************************************************************** -->
+	<!-- **************以下映射根据业务做相应调整**************** -->
+	<!-- *************************************************************************** -->
+  	
+  	<delete id="deleteByMap" parameterType="java.util.Map">
+    	delete from comm_order_detail_data 	 
+    	<where>
+    		
+    	</where>
+  	</delete>
+	
+	<select id="findById" parameterType="java.lang.String" resultType="com.zshop.common.orderdetail.entity.CommOrderDetailData">
+				
+		select  	
+			a.id id,
+			a.park_id parkId,
+			a.type1 type1,
+			a.type2 type2,
+			a.order_no orderNo,
+			a.order_id orderId,
+			a.order_status orderStatus,
+			a.remark remark,
+			a.create_by createBy,
+			a.create_name createName,
+			a.create_time createTime,
+			a.update_by updateBy,
+			a.status1 status1,
+			a.status2 status2,
+			a.update_time updateTime,
+			a.ext1 ext1,
+			a.ext2 ext2,
+			a.ext3 ext3,
+			a.ext4 ext4,
+			a.ext5 ext5,
+			a.ext6 ext6
+		from comm_order_detail_data a	
+
+		where a.Id=#{id}	
+	</select>
+
+	<select id="findListByMap" parameterType="java.util.Map" resultType="com.zshop.common.orderdetail.entity.CommOrderDetailData">
+		
+				
+		select  	
+			a.id id,
+			a.park_id parkId,
+			a.type1 type1,
+			a.type2 type2,
+			a.order_no orderNo,
+			a.order_id orderId,
+			a.order_status orderStatus,
+			a.remark remark,
+			a.create_by createBy,
+			a.create_name createName,
+			a.create_time createTime,
+			a.update_by updateBy,
+			a.status1 status1,
+			a.status2 status2,
+			a.update_time updateTime,
+			a.ext1 ext1,
+			a.ext2 ext2,
+			a.ext3 ext3,
+			a.ext4 ext4,
+			a.ext5 ext5,
+			a.ext6 ext6
+		from comm_order_detail_data a	
+
+		
+		<where>
+			<if test="orderId!=null">
+				and a.order_id = #{orderId}
+			</if>
+			<if test="type1!=null">
+				and a.type1 = #{type1}
+			</if>
+			<if test="type2List!=null">
+				and a.type2 in
+				<foreach collection="type2List" index="index" item="type2List" open="(" separator="," close=")">
+					#{type2List}
+				</foreach>
+			</if>
+
+			
+		</where>
+
+	</select>
+	
+	<select id="list" parameterType="java.util.Map" resultType="com.zshop.common.orderdetail.entity.CommOrderDetailData">
+		
+		
+				
+		select  	
+			a.id id,
+			a.park_id parkId,
+			a.type1 type1,
+			a.type2 type2,
+			a.order_no orderNo,
+			a.order_id orderId,
+			a.order_status orderStatus,
+			a.remark remark,
+			a.create_by createBy,
+			a.create_name createName,
+			a.create_time createTime,
+			a.update_by updateBy,
+			a.status1 status1,
+			a.status2 status2,
+			a.update_time updateTime,
+			a.ext1 ext1,
+			a.ext2 ext2,
+			a.ext3 ext3,
+			a.ext4 ext4,
+			a.ext5 ext5,
+			a.ext6 ext6
+		from comm_order_detail_data a	
+
+		
+		<where>
+			<if test="searchKeys!= null ">
+				AND ( 1=2
+				<foreach collection="searchKeys" index="index" item="item" >
+					 OR a.id like #{item}
+				</foreach> 
+				)
+			</if>
+		</where>
+
+		
+	</select>
+	
+	<select id="findOneByMap" parameterType="java.util.Map" resultType="com.zshop.common.orderdetail.entity.CommOrderDetailData">
+				
+		select  	
+			a.id id,
+			a.park_id parkId,
+			a.type1 type1,
+			a.type2 type2,
+			a.order_no orderNo,
+			a.order_id orderId,
+			a.order_status orderStatus,
+			a.remark remark,
+			a.create_by createBy,
+			a.create_name createName,
+			a.create_time createTime,
+			a.update_by updateBy,
+			a.status1 status1,
+			a.status2 status2,
+			a.update_time updateTime,
+			a.ext1 ext1,
+			a.ext2 ext2,
+			a.ext3 ext3,
+			a.ext4 ext4,
+			a.ext5 ext5,
+			a.ext6 ext6
+		from comm_order_detail_data a	
+
+		<where>
+		
+		</where>
+		limit 1
+	</select>
+</mapper>
+	

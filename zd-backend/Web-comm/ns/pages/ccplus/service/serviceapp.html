@@ -1,0 +1,62 @@
+<crumb title="APP服务配置" head="true"></crumb>
+<div class="wrapper-md" ng-controller="ServiceAppGrid">
+<div class="row">
+			<div class="col-md-3 panel panel-default">
+				<div class="panel-body">
+					<div class="m-b-sm b-b" style="padding-bottom: 10px;">
+						<span class="text-info font-bold text-lg" ng-click="searchAll(keyword)">所有</span>
+					</div>
+					<!-- <div class="m-b-sm b-b" style="padding-bottom: 10px;">
+						<span class="text-info font-bold text-lg" ng-click="searchNoBind(keyword)">未绑定</span>
+					</div> -->
+					<abn-tree tree-data="list" tree-control="my_tree" on-select="navSelect(branch)" expand-level="2" initial-selection="Granny Smith" icon-leaf="fa fa-file-o" icon-expand="fa fa-plus" icon-collapse="fa fa-minus">
+					</abn-tree>
+				</div>
+			</div>
+			
+			
+			
+        <div class="panel-heading">
+        	<button class="btn m-b-xs btn-sm btn-info btn-addon"  ng-click="userToGroup()">
+            	<i class="fa fa-plus"></i>绑定
+            </button>
+        </div>
+        <div class="panel-heading">
+          <form class="form-inline ng-pristine ng-valid" role="form">
+            <div class="form-group">
+	          <input type="text" class="form-control" placeholder="请输入搜索内容" ng-model="keyword" ng-keypress="search(keyword,$event)"/>
+	        </div>
+	        <button type="submit" class="btn btn-info" ng-click="search(keyword)">搜索</button>
+		  </form>
+        </div>
+        <div class="table-responsive">
+        	<table class="table table-striped b-t b-b">
+        		<thead>
+	                <tr>
+	                    <th style="width:10%" class="text-center">选择</th>
+	                    <th style="width:5%" data-breakpoints="xs">ID</th>
+	                    <th style="width:10%" class="text-center">名称</th>
+	                    <th style="width:10%" class="text-center">名称（英文</th>
+						<th style="width:10%" class="text-center">APP路径</th>
+	                    <th style="width:10%" class="text-center">备注</th>
+	                    <th style="width:10%" class="text-center">排序号</th>
+	                    <th style="width:10%" class="text-center">创建时间</th>
+	                </tr>
+                </thead>
+                <tbody>
+	                <tr data-expanded="true" ng-repeat="row in rows">
+	                    <td> <input id={{row.id }}  type="checkbox"  ng-model="x"  ng-click="chkData(row.id,x)"></td>
+	                    <td > {{paginationConf.currentPage ? paginationConf.pageSize*(paginationConf.currentPage-1)+$index+1 : $index+1}}</td>
+	                    <td > {{row.name}}</td>
+	                    <td > {{row.nameEn}}</td>
+	                    <td > {{row.urlMb}}</td>
+	                    <td > {{row.remark}}</td>
+	                    <td > {{row.orderNo}}</td>
+						<td > {{row.createTime}}</td>
+	                </tr>
+                </tbody>
+        	</table>
+        	<tmpagination conf="paginationConf"></tmpagination>
+        </div>
+	 </div>
+</div>

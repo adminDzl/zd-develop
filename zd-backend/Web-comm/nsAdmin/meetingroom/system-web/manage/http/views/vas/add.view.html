@@ -1,0 +1,86 @@
+ 
+<div class="panel-body">
+    <div class="col-sm-12">
+            <h4>新增服务</h4>
+    </div>
+<form class="form-horizontal" method="get">
+     <!--flag-->
+     <div class="line line-dashed b-b line-lg pull-in"></div>
+     <div class="form-group">
+         <label class="col-sm-2 control-label">分类<i class="needred">*</i></label>
+        <div class="col-sm-10">
+            <select name="account" class="form-control m-b" ng-model="instance.vasModal.serviceTypeCode">
+                    <option value="">请选择</option>
+                    <option  ng-repeat="g in instance.serviceTypes" value="{{g.code}}">{{g.name}}</option>
+                </select>  
+        </div>
+     </div>
+    <!--flag-->
+    <div class="line line-dashed b-b line-lg pull-in"></div>
+    <div class="form-group">
+        <label class="col-sm-2 control-label">服务名称<i class="needred">*</i></label>
+            <div class="col-sm-10">
+            <input type="text" ng-model="instance.vasModal.serviceName" class="form-control">
+            </div>
+    </div>
+       <!--flag-->
+    <div class="line line-dashed b-b line-lg pull-in"></div>
+    <div class="form-group">
+        <label class="col-sm-2 control-label">价格<i class="needred">*</i></label>
+            <div class="col-sm-6">
+                <input type="text" class="form-control" ng-model="instance.vasModal.servicePrice">
+            </div>
+            <div class="col-sm-2" >
+                    <label class="radio-inline i-checks">
+                            <input type="radio" name="servicePriceType" ng-model="instance.vasModal.servicePriceType"  ng-checked="instance.vasModal.servicePriceType==1" value="1"><i></i>元/人
+                    </label>
+            </div>
+            <div class="col-sm-2" >
+                <label class="radio-inline i-checks">
+                        <input type="radio"  name="servicePriceType" ng-model="instance.vasModal.servicePriceType" ng-checked="instance.vasModal.servicePriceType==2"  value="2"><i></i>元/套
+                </label>
+        </div>
+             
+    </div>
+     <!--flag-->
+     <div class="line line-dashed b-b line-lg pull-in"></div>
+     <div class="form-group">
+       <label class="col-sm-2 control-label">附件上传</label>
+       <div class="col-sm-10">
+
+           <div class="file-loading">
+               <input    filestyle-directive multiple filetype="4" on-success="uploadSuccess(data)" type="file" class="file">
+           </div>
+           <span class="help-block m-b-none">
+               上传图片说明：
+               上传的图片最好为jpg，png，bmp等图片类型文件
+               文件大小不能超过3MB
+
+           </span>
+       </div>
+       <label  class="col-sm-2 control-label"  ng-if="instance.attach.length>0">已有图片</label>
+       <div class="col-sm-10" ng-if="instance.attachList.length>0">
+           <div class="panel panel-info"  >                    
+                
+               <div class="list-group bg-white">                      
+                <p href="" class="list-group-item"  ng-repeat="it in instance.attachList">
+                <img ng-src="{{it.storagePath}}" width="50" height="50">
+                 <a ng-click="instance.delAttachById(it)">删除</a>
+                </p>                       
+              </div>
+             </div>
+       </div>
+     </div>
+      
+    
+    <div class="line line-dashed b-b line-lg pull-in"></div>
+    <div class="form-group">
+      <div class="col-sm-4 col-sm-offset-9">
+        <button type="reset" class="btn btn-default" ng-click="cancel()"> 取消</button>
+        <button type="submit" class="btn btn-primary"  ng-click="commit()">保存</button>
+      </div>
+    </div>
+  </form>
+     
+     
+  </div>

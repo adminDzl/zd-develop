@@ -1,0 +1,28 @@
+<div class="app ">
+    <head-directive></head-directive>
+    <menu-directive></menu-directive> 
+    <div  class="app-content" role="main">
+        <div class="app-content-body ">
+            
+        <div class="wrapper-sm ">
+                <ol class="breadcrumb" style="margin-bottom:5px;">
+                    <li><a ui-sref="{{nav.url}}" ng-click="$event.stopPropagation();"  >{{nav.name}}</a></li>
+                    <li class="active" ng-if="nav1" > {{nav1.name}}</li>
+                </ol>
+                <ui-view></ui-view>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="toast"><div class="c-panel"></div></div>
+<style>
+.breadcrumb .active{color:#23b7e5}
+    
+</style>
+<form id="payform" action="/meeting-room/api/meetingroom/orderPayParams.do">
+    <input type="hidden" name="payFee"/>
+    <input type="hidden" name="payStyle" value="2"/>
+    <input type="hidden" name="orderNo"/>
+    <input type="hidden" name="desc"/>
+    <input type="hidden" name="returnUrl"/>
+    </form>

@@ -1,0 +1,401 @@
+{ "aaData": [
+	{
+		"id": "1",
+		"name": "Internet Explorer 4.0",
+		"time": "Win 95+",
+		"version": "4",
+		"grade": "X"
+	},
+	{
+		"id": "2",
+		"name": "Internet Explorer 5.0",
+		"time": "Win 95+",
+		"version": "5",
+		"grade": "C"
+	},
+	{
+		"id": "3",
+		"name": "Internet Explorer 5.5",
+		"time": "Win 95+",
+		"version": "5.5",
+		"grade": "A"
+	},
+	{
+		"id": "4",
+		"name": "Internet Explorer 6",
+		"time": "Win 98+",
+		"version": "6",
+		"grade": "A"
+	},
+	{
+		"id": "5",
+		"name": "Internet Explorer 7",
+		"time": "Win XP SP2+",
+		"version": "7",
+		"grade": "A"
+	},
+	{
+		"id": "6",
+		"name": "AOL name (AOL desktop)",
+		"time": "Win XP",
+		"version": "6",
+		"grade": "A"
+	},
+	{
+		"id": "7",
+		"name": "Firefox 1.0",
+		"time": "Win 98+ / OSX.2+",
+		"version": "1.7",
+		"grade": "A"
+	},
+	{
+		"id": "8",
+		"name": "Firefox 1.5",
+		"time": "Win 98+ / OSX.2+",
+		"version": "1.8",
+		"grade": "A"
+	},
+	{
+		"id": "9",
+		"name": "Firefox 2.0",
+		"time": "Win 98+ / OSX.2+",
+		"version": "1.8",
+		"grade": "A"
+	},
+	{
+		"id": "10",
+		"name": "Firefox 3.0",
+		"time": "Win 2k+ / OSX.3+",
+		"version": "1.9",
+		"grade": "A"
+	},
+	{
+		"id": "11",
+		"name": "Camino 1.0",
+		"time": "OSX.2+",
+		"version": "1.8",
+		"grade": "A"
+	},
+	{
+		"id": "12",
+		"name": "Camino 1.5",
+		"time": "OSX.3+",
+		"version": "1.8",
+		"grade": "A"
+	},
+	{
+		"id": "13",
+		"name": "Netscape 7.2",
+		"time": "Win 95+ / Mac OS 8.6-9.2",
+		"version": "1.7",
+		"grade": "A"
+	},
+	{
+		"id": "14",
+		"name": "Netscape name 8",
+		"time": "Win 98SE+",
+		"version": "1.7",
+		"grade": "A"
+	},
+	{
+		"id": "15",
+		"name": "Netscape Navigator 9",
+		"time": "Win 98+ / OSX.2+",
+		"version": "1.8",
+		"grade": "A"
+	},
+	{
+		"id": "16",
+		"name": "Mozilla 1.0",
+		"time": "Win 95+ / OSX.1+",
+		"version": "1",
+		"grade": "A"
+	},
+	{
+		"id": "17",
+		"name": "Mozilla 1.1",
+		"time": "Win 95+ / OSX.1+",
+		"version": "1.1",
+		"grade": "A"
+	},
+	{
+		"id": "18",
+		"name": "Mozilla 1.2",
+		"time": "Win 95+ / OSX.1+",
+		"version": "1.2",
+		"grade": "A"
+	},
+	{
+		"id": "19",
+		"name": "Mozilla 1.3",
+		"time": "Win 95+ / OSX.1+",
+		"version": "1.3",
+		"grade": "A"
+	},
+	{
+		"id": "20",
+		"name": "Mozilla 1.4",
+		"time": "Win 95+ / OSX.1+",
+		"version": "1.4",
+		"grade": "A"
+	},
+	{
+		"id": "21",
+		"name": "Mozilla 1.5",
+		"time": "Win 95+ / OSX.1+",
+		"version": "1.5",
+		"grade": "A"
+	},
+	{
+		"id": "22",
+		"name": "Mozilla 1.6",
+		"time": "Win 95+ / OSX.1+",
+		"version": "1.6",
+		"grade": "A"
+	},
+	{
+		"id": "23",
+		"name": "Mozilla 1.7",
+		"time": "Win 98+ / OSX.1+",
+		"version": "1.7",
+		"grade": "A"
+	},
+	{
+		"id": "24",
+		"name": "Mozilla 1.8",
+		"time": "Win 98+ / OSX.1+",
+		"version": "1.8",
+		"grade": "A"
+	},
+	{
+		"id": "25",
+		"name": "Seamonkey 1.1",
+		"time": "Win 98+ / OSX.2+",
+		"version": "1.8",
+		"grade": "A"
+	},
+	{
+		"id": "26",
+		"name": "Epiphany 2.20",
+		"time": "Gnome",
+		"version": "1.8",
+		"grade": "A"
+	},
+	{
+		"id": "27",
+		"name": "Safari 1.2",
+		"time": "OSX.3",
+		"version": "125.5",
+		"grade": "A"
+	},
+	{
+		"id": "28",
+		"name": "Safari 1.3",
+		"time": "OSX.3",
+		"version": "312.8",
+		"grade": "A"
+	},
+	{
+		"id": "29",
+		"name": "Safari 2.0",
+		"time": "OSX.4+",
+		"version": "419.3",
+		"grade": "A"
+	},
+	{
+		"id": "30",
+		"name": "Safari 3.0",
+		"time": "OSX.4+",
+		"version": "522.1",
+		"grade": "A"
+	},
+	{
+		"id": "31",
+		"name": "OmniWeb 5.5",
+		"time": "OSX.4+",
+		"version": "420",
+		"grade": "A"
+	},
+	{
+		"id": "32",
+		"name": "iPod Touch / iPhone",
+		"time": "iPod",
+		"version": "420.1",
+		"grade": "A"
+	},
+	{
+		"id": "33",
+		"name": "S60",
+		"time": "S60",
+		"version": "413",
+		"grade": "A"
+	},
+	{
+		"id": "34",
+		"name": "Opera 7.0",
+		"time": "Win 95+ / OSX.1+",
+		"version": "-",
+		"grade": "A"
+	},
+	{
+		"id": "35",
+		"name": "Opera 7.5",
+		"time": "Win 95+ / OSX.2+",
+		"version": "-",
+		"grade": "A"
+	},
+	{
+		"id": "36",
+		"name": "Opera 8.0",
+		"time": "Win 95+ / OSX.2+",
+		"version": "-",
+		"grade": "A"
+	},
+	{
+		"id": "37",
+		"name": "Opera 8.5",
+		"time": "Win 95+ / OSX.2+",
+		"version": "-",
+		"grade": "A"
+	},
+	{
+		"id": "38",
+		"name": "Opera 9.0",
+		"time": "Win 95+ / OSX.3+",
+		"version": "-",
+		"grade": "A"
+	},
+	{
+		"id": "39",
+		"name": "Opera 9.2",
+		"time": "Win 88+ / OSX.3+",
+		"version": "-",
+		"grade": "A"
+	},
+	{
+		"id": "40",
+		"name": "Opera 9.5",
+		"time": "Win 88+ / OSX.3+",
+		"version": "-",
+		"grade": "A"
+	},
+	{
+		"id": "41",
+		"name": "Opera for Wii",
+		"time": "Wii",
+		"version": "-",
+		"grade": "A"
+	},
+	{
+		"id": "42",
+		"name": "Nokia N800",
+		"time": "N800",
+		"version": "-",
+		"grade": "A"
+	},
+	{
+		"id": "43",
+		"name": "Nintendo DS name",
+		"time": "Nintendo DS",
+		"version": "8.5",
+		"grade": "C/A<sup>1</sup>"
+	},
+	{
+		"id": "44",
+		"name": "Konqureror 3.1",
+		"time": "KDE 3.1",
+		"version": "3.1",
+		"grade": "C"
+	},
+	{
+		"id": "45",
+		"name": "Konqureror 3.3",
+		"time": "KDE 3.3",
+		"version": "3.3",
+		"grade": "A"
+	},
+	{
+		"id": "46",
+		"name": "Konqureror 3.5",
+		"time": "KDE 3.5",
+		"version": "3.5",
+		"grade": "A"
+	},
+	{
+		"id": "47",
+		"name": "Internet Explorer 4.5",
+		"time": "Mac OS 8-9",
+		"version": "-",
+		"grade": "X"
+	},
+	{
+		"id": "48",
+		"name": "Internet Explorer 5.1",
+		"time": "Mac OS 7.6-9",
+		"version": "1",
+		"grade": "C"
+	},
+	{
+		"id": "49",
+		"name": "Internet Explorer 5.2",
+		"time": "Mac OS 8-X",
+		"version": "1",
+		"grade": "C"
+	},
+	{
+		"id": "50",
+		"name": "NetFront 3.1",
+		"time": "Embedded devices",
+		"version": "-",
+		"grade": "C"
+	},
+	{
+		"id": "51",
+		"name": "NetFront 3.4",
+		"time": "Embedded devices",
+		"version": "-",
+		"grade": "A"
+	},
+	{
+		"id": "52",
+		"name": "Dillo 0.8",
+		"time": "Embedded devices",
+		"version": "-",
+		"grade": "X"
+	},
+	{
+		"id": "53",
+		"name": "Links",
+		"time": "Text only",
+		"version": "-",
+		"grade": "X"
+	},
+	{
+		"id": "54",
+		"name": "Lynx",
+		"time": "Text only",
+		"version": "-",
+		"grade": "X"
+	},
+	{
+		"id": "55",
+		"name": "IE Mobile",
+		"time": "Windows Mobile 6",
+		"version": "-",
+		"grade": "C"
+	},
+	{
+		"id": "56",
+		"name": "PSP name",
+		"time": "PSP",
+		"version": "-",
+		"grade": "C"
+	},
+	{
+		"id": "57",
+		"name": "All others",
+		"time": "-",
+		"version": "-",
+		"grade": "U"
+	}
+] }

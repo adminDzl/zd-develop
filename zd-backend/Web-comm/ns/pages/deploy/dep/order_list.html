@@ -1,0 +1,54 @@
+<crumb title="部署订单管理" head="true"></crumb>
+<div class="wrapper-md" ng-controller="TDepOrderGrid">
+	 <div class="panel panel-default">
+	 	
+        <div class="panel-heading">
+            <button class="btn m-b-xs btn-sm btn-info btn-addon" power-key="deporder:add" ng-click="addNew()">
+            	<i class="fa fa-plus"></i>新增
+            </button>
+        </div>
+        <div class="panel-heading">
+          <form class="form-inline ng-pristine ng-valid" role="form">
+            <div class="form-group">
+	          <input type="text" class="form-control" placeholder="请输入客户名称" ng-model="keyword" ng-keypress="search(keyword,$event)"/>
+	        </div>
+	        <button type="submit" class="btn btn-info" ng-click="search(keyword)">搜索</button>
+		  </form>
+        </div>
+        <div class="table-responsive">
+        	<table class="table table-striped b-t b-b">
+        		<thead>
+	                <tr>
+	                    <th style="width:5%" data-breakpoints="xs">ID</th>
+	                    <th style="width:10%" class="text-center">客户名称</th>
+	                    <th style="width:10%" class="text-center">订单描述</th>
+	                    <th style="width:5%" class="text-center">对话</th>
+	                    <th style="width:10%" class="text-center">备注</th>
+	                    <th style="width:10%" class="text-center">创建时间</th>
+	                    <th style="width:10%" class="text-center">更新时间</th>
+	                    <th style="width:15%" class="text-center" data-breakpoints="xs" >操作</th>
+	                </tr>
+                </thead>
+                <tbody>
+	                <tr data-expanded="true" ng-repeat="row in rows">
+	                    <td > {{paginationConf.currentPage ? paginationConf.pageSize*(paginationConf.currentPage-1)+$index+1 : $index+1}}</td>
+	                    <td > {{row.custName}}</td>
+	                    <td > {{row.orderDesc}}</td>
+	                    <td > {{row.dialogue}}</td>
+	                    <td > {{row.remark}}</td>
+	                    <td > {{row.createTime}}</td>
+	                    <td > {{row.updateTime}}</td>
+	                    <td>
+	                        <div class="buttons">
+	                        	<button class="btn btn-sm btn-info"  power-key="deporder:detail"  ng-click="detail(row.id)">订单详情</button>
+	                            <button class="btn btn-sm btn-info"  power-key="deporder:update"  ng-click="update(row.id)">编辑</button>
+	                            <button class="btn btn-sm btn-danger"  power-key="deporder:delete"  ng-click="deleteById(row.id)">删除</button>
+	                        </div>
+	                    </td>
+	                </tr>
+                </tbody>
+        	</table>
+        	<tmpagination conf="paginationConf"></tmpagination>
+        </div>
+	 </div>
+</div>

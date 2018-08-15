@@ -1,0 +1,29 @@
+
+<div class="body">
+
+
+<div class="meet-top">
+    <div class="left">{{entity.showTopic}}</div>
+    <div class="right">
+        <div>
+            <ul>
+                <li>
+                    <span class="span1">{{date}}</span>
+                    <span class="span2">{{week}}</span>
+                </li>
+                <li><span class="span3"><time>{{time}}</time></span></li>
+            </ul>
+        </div>
+    </div>
+</div>
+<div class="meet-main">
+     
+        <div class="img" >
+            <div ng-repeat="it in detail" ng-show="showIndex==$index" style="text-align:center">
+                <img ng-src="{{it.picUrl}}" style="height:{{height}}px;" alt="">
+            </div>
+        </div>
+         
+    
+</div>
+</div>
