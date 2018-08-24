@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+	PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+
+    <!--这里属性的配置一定要按照循序来，否则xml会报错，尽管项目是可行的-->
+	<!-- 框架配置 -->
+	<settings>
+		<setting name="lazyLoadingEnabled" value="false" />
+		<setting name="callSettersOnNulls" value="true"/>
+	</settings>
+
+	<!-- 类别名 -->
+	<typeAliases>
+        <typeAlias alias="Integer" type="java.lang.Integer" />
+        <typeAlias alias="Long" type="java.lang.Long" />
+        <typeAlias alias="HashMap" type="java.util.HashMap" />
+        <typeAlias alias="Map" type="java.util.Map" />
+        <typeAlias alias="LinkedHashMap" type="java.util.LinkedHashMap" />
+        <typeAlias alias="ArrayList" type="java.util.ArrayList" />
+        <typeAlias alias="LinkedList" type="java.util.LinkedList" />
+    </typeAliases>
+
+    <!-- 分页助手 -->
+    <plugins>
+        <plugin interceptor="com.github.pagehelper.PageHelper">
+            <!-- 数据库方言 -->
+            <property name="dialect" value="mysql" />
+            <property name="offsetAsPageNum" value="true" />
+            <!-- 设置为true时，使用RowBounds分页会进行count查询 会去查询出总数 -->
+            <property name="rowBoundsWithCount" value="true" />
+            <property name="pageSizeZero" value="true" />
+            <property name="reasonable" value="true" />
+        </plugin>
+    </plugins>
+
+	<mappers>
+		
+	</mappers>
+
+
+	
+</configuration>

@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<meta content="yes" name="apple-mobile-web-app-capable">
+		<meta content="black" name="apple-mobile-web-app-status-bar-style">
+		<meta content="telephone=no" name="format-detection">
+		<meta content="email=no" name="format-detection">
+		<meta name="hotcss" content="max-width=640">
+		<title>公务用车</title>
+		<link rel="stylesheet" href="../../css/common.css" />
+		<link rel="stylesheet" href="../../css/style.css" />
+		<script type="text/javascript" src="../../js/common/hotcss.js" ></script>
+		<style>
+			.warn.submit {
+				border-color: #f78d8d !important;
+				outline: 0 !important;
+				-webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 8px rgb(239, 154, 154) !important;
+				box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 8px rgba(239, 154, 154) !important;
+			}
+		</style>
+	</head>
+	<body ng-app="myApp" ng-controller="AppCtrl">
+		<div class="container m-t-40">
+			<div class="inputBox">
+				<p>事由(必填):</p>
+				<input type="text" placeholder="请输入接待事由" ng-model="currentInfo.cause" class="{{ currentInfo.cause ? '' : 'warn' }}"/>
+			</div>
+			<div class="inputBox">
+				<p>领导(必填):</p>
+				<div class="inputDropdown" ng-click="clickLeader()">
+					<input type="text" class="inputDropdown {{ currentInfo.leaderName ? '' : 'warn' }}" placeholder="请选择领导" disabled="disabled" ng-model="currentInfo.leaderName" />
+					<em></em>
+				</div>
+			</div>
+			<div class="inputBox">
+				<p>用车时间(必填):</p>
+				<div class="fix time-two">
+					<input type="datetime-local" class="f-l {{ currentInfo.userTime.start ? '' : 'warn' }}" ng-model="currentInfo.userTime.start" />
+					<i class="f-l"></i>
+					<div class="f-l">
+						<input type="datetime-local" placeholder="结束时间" ng-model="currentInfo.userTime.end" class="{{ currentInfo.userTime.end ? '' : 'warn' }}" />
+						<em class="calendar"></em>
+					</div>
+				</div>
+			</div>
+			<div class="inputBox">
+				<p>出发地(必填):</p>
+				<input type="text" placeholder="请输入出发地" ng-model="currentInfo.startAddress" class="{{ currentInfo.startAddress ? '' : 'warn' }}" />
+			</div>
+			<div class="inputBox">
+				<p>目的地(必填):</p>
+				<input type="text" placeholder="请输入目的地" ng-model="currentInfo.endAddress" class="{{ currentInfo.endAddress ? '' : 'warn' }}" />
+			</div>
+			<div class="inputBoxHasRadio">
+				<div class="fix radioBox">
+					<p class="f-l f-s-40 f-c-494848">小车</p>
+					<div class="f-r radioBtn" ng-click="selectCar($event)"></div>
+				</div>
+				<input type="number" placeholder="请输入需要小车数量" ng-model="currentInfo.smallCar" />
+			</div>
+			<div class="inputBoxHasRadio">
+				<div class="fix radioBox">
+					<p class="f-l f-s-40 f-c-494848">中巴</p>
+					<div class="f-r radioBtn" ng-click="selectCar($event)"></div>
+				</div>
+				<input type="number" placeholder="请输入需要中巴数量" ng-model="currentInfo.middleCar" />
+			</div>
+			<div class="selectBox">
+				<p>用车类型(必填):</p>
+				<div>
+					<select id="select">
+						<option>正常公务</option>
+						<option>特殊情况</option>
+					</select>
+				</div>
+			</div>
+			<div class="fileBox">
+				<p>附件:</p>
+				<div class="main">
+					<div class="fix">
+						<input type="text" disabled="disabled" class="f-l" id="fileName" />
+						<div class="f-l t-c">
+							<em class="file"></em>
+							选择文件
+						</div>
+					</div>
+					<form id="registration" name="registration" method="post" enctype="multipart/form-data" novalidate>
+						<input type="file" id="choose"/>
+					</form>
+				</div>
+			</div>
+			<div class="textareaBox">
+				<p>备注:</p>
+				<textarea placeholder="请输入需要备注的信息" ng-model="currentInfo.remark"></textarea>
+			</div>
+			<div  class="fill-btn confirm" ng-click="submitBtn()">确定</div>
+		</div>
+		
+		<!-- 蒙版 -->
+		<div class="masking"></div>
+		
+		<!-- 领导选择 -->
+		<div class="selectLeaderBox">
+			<div class="selectLeader">
+				<div class="selectHeader">
+					<p>领导</p>
+					<a href="javascript:;" class="closeSelect" ng-click="operationFn('close')"></a>
+				</div>
+				<div class="selctPeopleBox border-b fix" ng-repeat="(key,value) in LeaderInfo track by $index">
+					<div class="f-l">{{key}}</div>
+					<ul class="f-l">
+						<li ng-click="selectLeader($event)" ng-repeat="item in value" data-id="{{item.id}}">{{item.leaderName}}</li>
+					</ul>
+				</div>
+				<div class="selctOthderPeopleBox fix">
+					<div class="f-l"><a href="javascript:;" ng-click="addOthderLeader()">其他</a></div>
+					<ul class="f-l"></ul>
+				</div>
+			</div>
+			
+			<div class="addOtherLeaderBox">
+				<h4>其他领导</h4>
+				<textarea placeholder="请输入领导名称+职务" ng-model="currentInfo.otherLeader"></textarea>
+				<div class="fix">
+					<a href="javascript:;" class="cancel" ng-click="operationFn('cancel')">取消</a>
+					<a href="javascript:;" class="confirm" ng-click="operationFn('confirm')">确定</a>
+				</div>
+			</div>
+		</div>
+
+		<!-- 提交成功 -->
+		<div class="successfulBox t-c">
+			<div class="successHeader">
+				<div class="successIcon"></div>
+				<em class="successClose" ng-click="closeOrOpenTipBox('close')"></em>
+			</div>
+			<p class="f-s-50 f-b l-h-116 m-t-33">提交成功</p>
+			<p class="f-s-40">订单提交成功，请在我的订单查看状态。</p>
+			<div class="f-s-40">(<span class="countDown" ng-bind-template="{{ countDown }}"></span>s)请等待</div>
+		</div>
+
+		<!-- 服务器忙 -->
+		<div class="successfulBox errorfulBox t-c">
+			<div class="successHeader">
+				<div class="successIcon"></div>
+				<em class="successClose" ng-click="closeOrOpenErrorTipBox('close')"></em>
+			</div>
+			<p class="f-s-50 f-b l-h-116 m-t-33">提示</p>
+			<p class="f-s-40">服务器繁忙</p>
+			<div class="f-s-40">(<span class="countDown" ng-bind-template="{{ countDown }}"></span>s)请等待</div>
+		</div>
+		
+		<script type="text/javascript" src="../../js/common/angular.js" ></script>
+		<script type="text/javascript" src="../../js/common/jquery-1.8.3.min.js" ></script>
+		<script type="text/javascript" src="../../js/common/jquery.form.js"></script>
+		<script type="text/javascript" src="../../js/common/mobileFix.mini.js"></script>
+		<script type="text/javascript" src="../../js/common/exif.js"></script>
+		<script type="text/javascript" src="../../js/common/lrz.js"></script>
+		<script type="text/javascript" src="../../js/common/util.js" ></script>
+		<script type="text/javascript" src="../../js/officialCars/apply.js" ></script>
+	</body>
+</html>

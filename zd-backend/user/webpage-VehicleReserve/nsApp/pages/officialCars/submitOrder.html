@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<meta content="yes" name="apple-mobile-web-app-capable">
+		<meta content="black" name="apple-mobile-web-app-status-bar-style">
+		<meta content="telephone=no" name="format-detection">
+		<meta content="email=no" name="format-detection">
+		<meta name="hotcss" content="max-width=640">
+		<title>提交订单</title>
+		<link rel="stylesheet" href="../../css/common.css" />
+		<link rel="stylesheet" href="../../css/style.css" />
+		<script type="text/javascript" src="../../js/common/hotcss.js" ></script>
+	</head>
+	<body ng-app="myApp" ng-controller="AppCtrl">
+		<div class="container m-t-40">
+			<p class="f-s-40 f-c-494848 p-l-r-40">服务订单:<span ng-bind="">787878787</span></p>
+		</div>
+		
+		<div class="container m-t-40">
+			<div class="textBox fix">
+				<p class="f-l">事由：</p>
+				<p class="f-r" ng-bind="">区领导莅临指导</p>
+			</div>
+			<div class="textBox fix">
+				<p class="f-l">领导：</p>
+				<p class="f-r" ng-bind="">阿姆斯特朗</p>
+			</div>
+			<div class="textBox fix">
+				<p class="f-l">接待时间：</p>
+				<p class="f-r" ng-bind="">2018-03-18 9:00~12:00</p>
+			</div>
+			<div class="textBox fix">
+				<p class="f-l">出发地：</p>
+				<p class="f-r" ng-bind="">区政府大院A座门口</p>
+			</div>
+			<div class="textBox fix">
+				<p class="f-l">目的地：</p>
+				<p class="f-r" ng-bind="">罗湖区政府</p>
+			</div>
+			<div class="textBox fix">
+				<p class="f-l">小车数量：</p>
+				<p class="f-r" ng-bind="">1辆</p>
+			</div>
+			<div class="textBox fix">
+				<p class="f-l">中巴数量：</p>
+				<p class="f-r" ng-bind="">1辆</p>
+			</div>
+			<div class="textBox fix">
+				<p class="f-l">用车类型：</p>
+				<p class="f-r" ng-bind="">正常公务</p>
+			</div>
+		</div>
+		
+		<div class="container m-t-40">
+			<div class="textBox fix">
+				<p class="f-l">预订人名：</p>
+				<p class="f-r" ng-bind="">许词</p>
+			</div>
+			<div class="textBox fix">
+				<p class="f-l">预订人部门：</p>
+				<p class="f-r" ng-bind="">车管科</p>
+			</div>
+			<div class="textBox fix">
+				<p class="f-l">预订人电话：</p>
+				<p class="f-r" ng-bind="">132132132115</p>
+			</div>
+		</div>
+		
+		<div class="container m-t-40">
+			<div class="textBox fix">
+				<p class="f-l">附件：</p>
+				<a href="javascript:;" class="f-r" ng-bind="">xxx.word</a>
+			</div>
+			<div class="textBox fix">
+				<p class="f-l">备注信息：</p>
+				<p class="f-r" ng-bind="">车管科车管科车管科车管科车管科车管科车管科车管科车管科车管科车管科车管科车管科车管科车管科车管科</p>
+			</div>
+		</div>
+		
+		<div class="bottomBtnTwo fix">
+			<a href="apply.html" class="cancel">返回修改</a>
+			<a href="javascript:;" class="confirm" ng-click="closeOrOpenTipBox('open')">提交</a>
+		</div>
+		
+		<!-- 蒙版 -->
+		<div class="masking"></div>
+		
+		<!-- 提交成功 -->
+		<div class="successfulBox t-c">
+			<div class="successHeader">
+				<div class="successIcon"></div>
+				<em class="successClose" ng-click="closeOrOpenTipBox('close')"></em>
+			</div>
+			<p class="f-s-50 f-b l-h-116 m-t-33">提交成功</p>
+			<p class="f-s-40">订单提交成功，请在我的订单查看状态。</p>
+			<div class="f-s-40">(<span class="countDown" ng-bind-template="{{ countDown }}"></span>s)请等待</div>
+		</div>
+		
+		
+		
+		<script type="text/javascript" src="../../js/common/angular.js" ></script>
+		<script type="text/javascript" src="../../js/common/jquery-1.8.3.min.js" ></script>
+		<script type="text/javascript" src="../../js/common/util.js" ></script>
+		<script type="text/javascript" src="../../js/officialCars/submitOrder.js" ></script>
+	</body>
+</html>

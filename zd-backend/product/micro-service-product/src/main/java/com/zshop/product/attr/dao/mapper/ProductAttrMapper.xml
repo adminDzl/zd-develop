@@ -1,0 +1,254 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zshop.product.attr.dao.mapper.ProductAttrMapper">
+
+<!-- **************以下映射必须与数据库一致 不要更改，除非数据库改变**************** -->
+
+	<insert id="insert" useGeneratedKeys="true" keyProperty="id" parameterType="com.zshop.product.attr.entity.ProductAttr">
+				
+		insert into zs_attr
+		(
+			attr_name,
+			attr_value,
+			ALIASES,
+			IS_ALI,
+			ATTR_TYPE,
+			status,
+			IS_DEL,
+			CREATE_BY,
+			CREATE_TIME,
+			UPDATE_BY,
+			UPDATE_TIME,
+			BID
+		)
+		values	
+		(	
+			#{attrName},
+			#{attrValue},
+			#{aliases},
+			#{isAli},
+			#{attrType},
+			1,
+			0,
+			#{createBy},
+			#{createTime},
+			#{updateBy},
+			#{updateTime},
+			#{bid}
+		)	
+
+	</insert>
+	
+	<delete id="deleteById" parameterType="java.lang.Integer">
+		delete from zs_attr 	
+		WHERE ID=#{id}
+	</delete>
+	
+	<delete id="deleteByIds" parameterType="java.util.Collection">
+     	delete from zs_attr 	
+     	WHERE ID IN
+     	<foreach collection="array" index="index" item="item" open="(" separator="," close=")"> #{item} </foreach> 
+  	 </delete>
+  	 
+  	 <delete id="logicDelete" parameterType="java.lang.Integer">
+		update zs_attr set IS_DEL = 1
+		WHERE ID=#{id}
+	</delete>
+	
+	<delete id="logicDeleteByIds" parameterType="java.util.Collection">
+     	update zs_attr set IS_DEL = 1
+     	WHERE ID IN
+     	<foreach collection="array" index="index" item="item" open="(" separator="," close=")"> #{item} </foreach> 
+  	 </delete>
+	
+	<update id="update" parameterType="com.zshop.product.attr.entity.ProductAttr" >
+			
+		update zs_attr 	
+		<set> 	
+			attr_name=#{attrName},
+			attr_value=#{attrValue},
+			ALIASES=#{aliases},
+			IS_ALI=#{isAli},
+			ATTR_TYPE=#{attrType},
+			status=#{status},
+			IS_DEL=#{isDel},
+			CREATE_BY=#{createBy},
+			CREATE_TIME=#{createTime},
+			UPDATE_BY=#{updateBy},
+			UPDATE_TIME=#{updateTime},
+			BID=#{bid}
+		</set> 	
+		where 
+		ID=#{id} 	
+
+	</update>
+	
+	<update id="updateWithIf" parameterType="com.zshop.product.attr.entity.ProductAttr" >
+			
+		update zs_attr 	
+		<set> 	
+			<if test=" attrName!=null ">	
+				attr_name=#{attrName},	
+			</if>	
+			<if test=" attrValue!=null ">	
+				attr_value=#{attrValue},	
+			</if>	
+			<if test=" aliases!=null ">	
+				ALIASES=#{aliases},	
+			</if>	
+			<if test=" isAli!=null ">	
+				IS_ALI=#{isAli},	
+			</if>	
+			<if test=" attrType!=null ">	
+				ATTR_TYPE=#{attrType},	
+			</if>	
+			<if test=" status!=null ">	
+				status=#{status},	
+			</if>	
+			<if test=" isDel!=null ">	
+				IS_DEL=#{isDel},	
+			</if>	
+			<if test=" createBy!=null ">	
+				CREATE_BY=#{createBy},	
+			</if>	
+			<if test=" createTime!=null ">	
+				CREATE_TIME=#{createTime},	
+			</if>	
+			<if test=" updateBy!=null ">	
+				UPDATE_BY=#{updateBy},	
+			</if>	
+			<if test=" updateTime!=null ">	
+				UPDATE_TIME=#{updateTime},	
+			</if>	
+			<if test=" bid!=null ">	
+				BID=#{bid},	
+			</if>	
+		</set>	
+		where 	
+		ID=#{id} 	
+
+	</update>
+	
+	<!-- *************************************************************************** -->
+	<!-- **************以下映射根据业务做相应调整**************** -->
+	<!-- *************************************************************************** -->
+  	
+  	<delete id="deleteByMap" parameterType="java.util.Map">
+    	delete from zs_attr 	 
+    	<where>
+    		
+    	</where>
+  	</delete>
+	
+	<select id="findById" parameterType="java.lang.Integer" resultType="com.zshop.product.attr.entity.ProductAttr">
+				
+		select  	
+			a.ID id,
+			a.attr_name attrName,
+			a.attr_value attrValue,
+			a.ALIASES aliases,
+			a.IS_ALI isAli,
+			a.ATTR_TYPE attrType,
+			a.status status,
+			a.IS_DEL isDel,
+			a.CREATE_BY createBy,
+			a.CREATE_TIME createTime,
+			a.UPDATE_BY updateBy,
+			a.UPDATE_TIME updateTime,
+			a.BID bid
+		from zs_attr a	
+
+		where a.Id=#{id}	
+	</select>
+
+	<select id="findListByMap" parameterType="java.util.Map" resultType="com.zshop.product.attr.entity.ProductAttr">
+		
+				
+		select  	
+			a.ID id,
+			a.attr_name attrName,
+			a.attr_value attrValue,
+			a.ALIASES aliases,
+			a.IS_ALI isAli,
+			a.ATTR_TYPE attrType,
+			a.status status,
+			a.IS_DEL isDel,
+			a.CREATE_BY createBy,
+			a.CREATE_TIME createTime,
+			a.UPDATE_BY updateBy,
+			a.UPDATE_TIME updateTime,
+			a.BID bid
+		from zs_attr a	
+
+		
+		<where>
+			
+		</where>
+
+	</select>
+	
+	<select id="list" parameterType="java.util.Map" resultType="com.zshop.product.attr.entity.ProductAttr">
+		select
+			a.ID id,
+			a.attr_name attrName,
+			a.attr_value attrValue,
+			a.ALIASES aliases,
+			a.IS_ALI isAli,
+			a.ATTR_TYPE attrType,
+			a.status status,
+			a.IS_DEL isDel,
+			a.CREATE_BY createBy,
+			a.CREATE_TIME createTime,
+			a.UPDATE_BY updateBy,
+			a.UPDATE_TIME updateTime,
+			a.BID bid
+		from zs_attr a	
+
+		
+		<where>
+			1=1
+			<if test="searchKeys!= null ">
+				AND ( 1=2
+				<foreach collection="searchKeys" index="index" item="item" >
+					 OR a.id like #{item}
+				</foreach> 
+				)
+			</if>
+			<if test="isDel!=null">
+				and a.IS_DEL = #{isDel}
+			</if>
+		</where>
+
+		
+	</select>
+	
+	<select id="findOneByMap" parameterType="java.util.Map" resultType="com.zshop.product.attr.entity.ProductAttr">
+				
+		select  	
+			a.ID id,
+			a.attr_name attrName,
+			a.attr_value attrValue,
+			a.ALIASES aliases,
+			a.IS_ALI isAli,
+			a.ATTR_TYPE attrType,
+			a.status status,
+			a.IS_DEL isDel,
+			a.CREATE_BY createBy,
+			a.CREATE_TIME createTime,
+			a.UPDATE_BY updateBy,
+			a.UPDATE_TIME updateTime,
+			a.BID bid
+		from zs_attr a	
+
+		<where>
+		
+		</where>
+		limit 1
+	</select>
+
+	<select id="getCount" resultType="java.lang.Integer">
+		select count(*) as count from zs_attr
+	</select>
+</mapper>
+	

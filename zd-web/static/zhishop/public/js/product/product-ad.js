@@ -58,3 +58,8 @@ function showAd() {
 
     });
 }
+function exit(){
+    layer.confirm('Are you sure？',function(){
+       location.href="http://www.zhidevelop.com/login.html";
+    });
+}

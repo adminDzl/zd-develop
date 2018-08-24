@@ -4,4 +4,5 @@
 3、删除之前以后的java代码，除了feign webapp 的java代码(feign 的接口自己看着办，不需要的也可以删除)
 4、spingboot启动类修改名字(java代码里面也要修改)
 5、config/application-dev.properties 修改服务端口和服务名称
-6、Tools代码生成配置文件修改路径：gen.properties 
+6、网关增加服务的暴露
+7、Tools代码生成配置文件修改路径：gen.properties

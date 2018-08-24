@@ -688,3 +688,17 @@ body
     color: #c00;
 }
 .formControls>* {vertical-align: middle;}
+
+.table td .link_icon {
+	font-size: 24px;
+	font-family: 'adminthemesregular';
+	color: #19a97b;
+}
+
+/*costomer*/
+.input-span{
+	width: 86px;
+}
+.dynamic-li{
+	width: 28%;
+}

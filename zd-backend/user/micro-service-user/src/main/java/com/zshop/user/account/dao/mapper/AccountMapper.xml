@@ -1,0 +1,342 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zshop.user.account.dao.mapper.AccountMapper">
+
+    <!-- **************以下映射必须与数据库一致 不要更改，除非数据库改变**************** -->
+
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id" parameterType="com.zshop.user.account.entity.Account">
+				
+		insert into zs_account
+		(
+			CREATE_BY,
+			CREATE_TIME,
+			UPDATE_BY,
+			UPDATE_TIME,
+			BID,
+			ACCOUNT,
+			PASSWORD,
+			LAST_TIME,
+			STATE,
+			TOKEN,
+			TOKEN_TIME,
+			REMARK,
+			PARAM1,
+			PARAM2,
+			PARAM3,
+			PARAM4,
+			PARAM5
+		)
+		values	
+		(	
+			#{createBy},
+			#{createTime},
+			#{updateBy},
+			#{updateTime},
+			#{bid},
+			#{account},
+			#{password},
+			#{lastTime},
+			#{state},
+			#{token},
+			#{tokenTime},
+			#{remark},
+			#{param1},
+			#{param2},
+			#{param3},
+			#{param4},
+			#{param5}
+		)	
+
+	</insert>
+
+    <delete id="deleteById" parameterType="java.lang.Integer">
+		delete from zs_account 	
+		WHERE ID=#{id}
+	</delete>
+
+    <delete id="deleteByIds" parameterType="java.util.Collection">
+        delete from zs_account
+        WHERE ID IN
+        <foreach collection="array" index="index" item="item" open="(" separator="," close=")">#{item}</foreach>
+    </delete>
+
+    <delete id="logicDelete" parameterType="java.lang.Integer">
+		update zs_account set status1 = '-1' 	
+		WHERE ID=#{id}
+	</delete>
+
+    <delete id="logicDeleteByIds" parameterType="java.util.Collection">
+        update zs_account set status1 = '-1'
+        WHERE ID IN
+        <foreach collection="array" index="index" item="item" open="(" separator="," close=")">#{item}</foreach>
+    </delete>
+
+    <update id="update" parameterType="com.zshop.user.account.entity.Account">
+
+        update zs_account
+        <set>
+            CREATE_BY=#{createBy},
+            CREATE_TIME=#{createTime},
+            UPDATE_BY=#{updateBy},
+            UPDATE_TIME=#{updateTime},
+            BID=#{bid},
+            ACCOUNT=#{account},
+            PASSWORD=#{password},
+            LAST_TIME=#{lastTime},
+            STATE=#{state},
+            TOKEN=#{token},
+            TOKEN_TIME=#{tokenTime},
+            REMARK=#{remark},
+            PARAM1=#{param1},
+            PARAM2=#{param2},
+            PARAM3=#{param3},
+            PARAM4=#{param4},
+            PARAM5=#{param5}
+        </set>
+        where
+        ID=#{id}
+
+    </update>
+
+    <update id="updateWithIf" parameterType="com.zshop.user.account.entity.Account">
+
+        update zs_account
+        <set>
+            <if test=" createBy!=null ">
+                CREATE_BY=#{createBy},
+            </if>
+            <if test=" createTime!=null ">
+                CREATE_TIME=#{createTime},
+            </if>
+            <if test=" updateBy!=null ">
+                UPDATE_BY=#{updateBy},
+            </if>
+            <if test=" updateTime!=null ">
+                UPDATE_TIME=#{updateTime},
+            </if>
+            <if test=" bid!=null ">
+                BID=#{bid},
+            </if>
+            <if test=" account!=null ">
+                ACCOUNT=#{account},
+            </if>
+            <if test=" password!=null ">
+                PASSWORD=#{password},
+            </if>
+            <if test=" lastTime!=null ">
+                LAST_TIME=#{lastTime},
+            </if>
+            <if test=" state!=null ">
+                STATE=#{state},
+            </if>
+            <if test=" token!=null ">
+                TOKEN=#{token},
+            </if>
+            <if test=" tokenTime!=null ">
+                TOKEN_TIME=#{tokenTime},
+            </if>
+            <if test=" remark!=null ">
+                REMARK=#{remark},
+            </if>
+            <if test=" param1!=null ">
+                PARAM1=#{param1},
+            </if>
+            <if test=" param2!=null ">
+                PARAM2=#{param2},
+            </if>
+            <if test=" param3!=null ">
+                PARAM3=#{param3},
+            </if>
+            <if test=" param4!=null ">
+                PARAM4=#{param4},
+            </if>
+            <if test=" param5!=null ">
+                PARAM5=#{param5},
+            </if>
+        </set>
+        where
+        ID=#{id}
+
+    </update>
+
+    <!-- *************************************************************************** -->
+    <!-- **************以下映射根据业务做相应调整**************** -->
+    <!-- *************************************************************************** -->
+
+    <delete id="deleteByMap" parameterType="java.util.Map">
+        delete from zs_account
+        <where>
+
+        </where>
+    </delete>
+
+    <select id="findById" parameterType="java.lang.Integer" resultType="com.zshop.user.account.entity.Account">
+				
+		select  	
+			a.ID id,
+			a.CREATE_BY createBy,
+			a.CREATE_TIME createTime,
+			a.UPDATE_BY updateBy,
+			a.UPDATE_TIME updateTime,
+			a.BID bid,
+			a.ACCOUNT account,
+			a.PASSWORD password,
+			a.LAST_TIME lastTime,
+			a.STATE state,
+			a.TOKEN token,
+			a.TOKEN_TIME tokenTime,
+			a.REMARK remark,
+			a.PARAM1 param1,
+			a.PARAM2 param2,
+			a.PARAM3 param3,
+			a.PARAM4 param4,
+			a.PARAM5 param5
+		from zs_account a	
+
+		where a.Id=#{id}	
+	</select>
+
+    <select id="findListByMap" parameterType="java.util.Map" resultType="com.zshop.user.account.entity.Account">
+
+
+        select
+        a.ID id,
+        a.CREATE_BY createBy,
+        a.CREATE_TIME createTime,
+        a.UPDATE_BY updateBy,
+        a.UPDATE_TIME updateTime,
+        a.BID bid,
+        a.ACCOUNT account,
+        a.PASSWORD password,
+        a.LAST_TIME lastTime,
+        a.STATE state,
+        a.TOKEN token,
+        a.TOKEN_TIME tokenTime,
+        a.REMARK remark,
+        a.PARAM1 param1,
+        a.PARAM2 param2,
+        a.PARAM3 param3,
+        a.PARAM4 param4,
+        a.PARAM5 param5
+        from zs_account a
+
+
+        <where>
+
+        </where>
+
+    </select>
+
+    <select id="list" parameterType="java.util.Map" resultType="com.zshop.user.account.entity.Account">
+
+
+        select
+        a.ID id,
+        a.CREATE_BY createBy,
+        a.CREATE_TIME createTime,
+        a.UPDATE_BY updateBy,
+        a.UPDATE_TIME updateTime,
+        a.BID bid,
+        a.ACCOUNT account,
+        a.PASSWORD password,
+        a.LAST_TIME lastTime,
+        a.STATE state,
+        a.TOKEN token,
+        a.TOKEN_TIME tokenTime,
+        a.REMARK remark,
+        a.PARAM1 param1,
+        a.PARAM2 param2,
+        a.PARAM3 param3,
+        a.PARAM4 param4,
+        a.PARAM5 param5
+        from zs_account a
+
+
+        <where>
+            <if test="searchKeys!= null ">
+                AND ( 1=2
+                <foreach collection="searchKeys" index="index" item="item">
+                    OR a.id like #{item}
+                </foreach>
+                )
+            </if>
+        </where>
+
+
+    </select>
+
+    <select id="findOneByMap" parameterType="java.util.Map" resultType="com.zshop.user.account.entity.Account">
+
+        select
+        a.ID id,
+        a.CREATE_BY createBy,
+        a.CREATE_TIME createTime,
+        a.UPDATE_BY updateBy,
+        a.UPDATE_TIME updateTime,
+        a.BID bid,
+        a.ACCOUNT account,
+        a.PASSWORD password,
+        a.LAST_TIME lastTime,
+        a.STATE state,
+        a.TOKEN token,
+        a.TOKEN_TIME tokenTime,
+        a.REMARK remark,
+        a.PARAM1 param1,
+        a.PARAM2 param2,
+        a.PARAM3 param3,
+        a.PARAM4 param4,
+        a.PARAM5 param5
+        from zs_account a
+
+        <where>
+            and a.ACCOUNT = 1
+            <if test="account!=null">
+                and a.account = #{account}
+            </if>
+            <if test="password!=null">
+                and a.password = #{password}
+            </if>
+        </where>
+        limit 1
+    </select>
+
+    <select id="findAccountByAccountAndPassword" parameterType="java.util.Map"
+            resultType="com.zshop.user.account.entity.Account">
+
+        select
+        a.ID id,
+        a.CREATE_BY createBy,
+        a.CREATE_TIME createTime,
+        a.UPDATE_BY updateBy,
+        a.UPDATE_TIME updateTime,
+        a.BID bid,
+        a.ACCOUNT account,
+        a.PASSWORD password,
+        a.LAST_TIME lastTime,
+        a.STATE state,
+        a.TOKEN token,
+        a.TOKEN_TIME tokenTime,
+        a.REMARK remark,
+        a.PARAM1 param1,
+        a.PARAM2 param2,
+        a.PARAM3 param3,
+        a.PARAM4 param4,
+        a.PARAM5 param5
+        from zs_account a
+
+        <where>
+            1=1
+            <if test="account!=null">
+                and a.account = #{account}
+            </if>
+            <if test="password!=null">
+                and a.password = #{password}
+            </if>
+        </where>
+        limit 1
+    </select>
+
+
+</mapper>
+	

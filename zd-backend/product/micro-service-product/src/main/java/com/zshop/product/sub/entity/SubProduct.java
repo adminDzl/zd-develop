@@ -2,6 +2,9 @@ package com.zshop.product.sub.entity;
 
 import java.util.Date;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import lombok.Getter;
+import lombok.Setter;
+
 import java.io.Serializable;
 
 
@@ -10,6 +13,8 @@ import java.io.Serializable;
  * @author: Enzo
  * @date: 2018-08-14 20:25:22
  */
+@Setter
+@Getter
 public class SubProduct implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
@@ -323,103 +328,6 @@ public class SubProduct implements Serializable{
  	public String getUpdateBy(){	
  		return this.updateBy;	
  	}	
- 
- 	public void setUpdateTime(Date updateTime){	
- 		this.updateTime=updateTime;	
- 	}	
- 
- 	public Date getUpdateTime(){	
- 		return this.updateTime;	
- 	}	
- 
- 	public void setBid(Integer bid){	
- 		this.bid=bid;	
- 	}	
- 
- 	public Integer getBid(){	
- 		return this.bid;	
- 	}	
- 
- 	public void setSort(Integer sort){	
- 		this.sort=sort;	
- 	}	
- 
- 	public Integer getSort(){	
- 		return this.sort;	
- 	}	
- 
- 	public void setIsMainSku(Integer isMainSku){	
- 		this.isMainSku=isMainSku;	
- 	}	
- 
- 	public Integer getIsMainSku(){	
- 		return this.isMainSku;	
- 	}	
- 
- 	public void setParam1(String param1){	
- 		this.param1=param1;	
- 	}	
- 
- 	public String getParam1(){	
- 		return this.param1;	
- 	}	
- 
- 	public void setParam2(String param2){	
- 		this.param2=param2;	
- 	}	
- 
- 	public String getParam2(){	
- 		return this.param2;	
- 	}	
- 
- 	public void setParam3(String param3){	
- 		this.param3=param3;	
- 	}	
- 
- 	public String getParam3(){	
- 		return this.param3;	
- 	}	
- 
- 	public void setParam4(String param4){	
- 		this.param4=param4;	
- 	}	
- 
- 	public String getParam4(){	
- 		return this.param4;	
- 	}	
- 
- 	public void setParam5(String param5){	
- 		this.param5=param5;	
- 	}	
- 
- 	public String getParam5(){	
- 		return this.param5;	
- 	}	
- 
- 	public void setAreaMask(String areaMask){	
- 		this.areaMask=areaMask;	
- 	}	
- 
- 	public String getAreaMask(){	
- 		return this.areaMask;	
- 	}	
- 
- 	public void setBusinessMask(String businessMask){	
- 		this.businessMask=businessMask;	
- 	}	
- 
- 	public String getBusinessMask(){	
- 		return this.businessMask;	
- 	}	
- 
- 	public void setLevelMask(String levelMask){	
- 		this.levelMask=levelMask;	
- 	}	
- 
- 	public String getLevelMask(){	
- 		return this.levelMask;	
- 	}	
- 
 
 }
 

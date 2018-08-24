@@ -110,7 +110,7 @@ public class CCStringUtils {
 	 */
 	public static Integer[] splitToInteger(String str,String split) {
 
-		if(null == str || !str.isEmpty()){
+		if(null == str || str.isEmpty()){
 			return null;
 		}
 		List<Integer> idls = new ArrayList<Integer>();

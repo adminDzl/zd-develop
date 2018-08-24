@@ -17,16 +17,16 @@ public class Main {
 
 		GeneratorConfig config = new GeneratorConfig();
 		//数据表名
-		config.tableName="zs_sub_product";
+		config.tableName="zs_attr";
 
 		//类描述
-		config.description="子商品表";
+		config.description="商品规格";
 
 		//包路径
-		config.packageUrl="com.zshop.product.sub";
+		config.packageUrl="com.zshop.product.demo";
 
 		//类名称
-		config.className="SubProduct";
+		config.className="ProductAttr";
 
 
 
