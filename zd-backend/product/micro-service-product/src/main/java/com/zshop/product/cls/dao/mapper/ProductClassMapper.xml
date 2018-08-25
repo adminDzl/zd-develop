@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zshop.product.cls.dao.mapper.ProductClassMapper">
+
+<!-- **************以下映射必须与数据库一致 不要更改，除非数据库改变**************** -->
+
+	<insert id="insert" useGeneratedKeys="true" keyProperty="id" parameterType="com.zshop.product.cls.entity.ProductClass">
+				
+		insert into zs_class
+		(
+			CLASS_CODE,
+			NAME,
+			DESCRIPTION,
+			CLASS_LOGO,
+			PARENTID,
+			SORT,
+			IS_RECOMMEND,
+			status,
+			IS_DEL,
+			CREATE_BY,
+			CREATE_TIME,
+			UPDATE_BY,
+			UPDATE_TIME,
+			BID
+		)
+		values	
+		(	
+			#{classCode},
+			#{name},
+			#{description},
+			#{classLogo},
+			#{parentId},
+			#{sort},
+			#{isRecommend},
+			1,
+			0,
+			#{createBy},
+			#{createTime},
+			#{updateBy},
+			#{updateTime},
+			#{bid}
+		)	
+
+	</insert>
+	
+	<delete id="deleteById" parameterType="java.lang.Integer">
+		delete from zs_class 	
+		WHERE ID=#{id}
+	</delete>
+	
+	<delete id="deleteByIds" parameterType="java.util.Collection">
+     	delete from zs_class 	
+     	WHERE ID IN
+     	<foreach collection="array" index="index" item="item" open="(" separator="," close=")"> #{item} </foreach> 
+  	 </delete>
+  	 
+  	 <delete id="logicDelete" parameterType="java.lang.Integer">
+		update zs_class set IS_DEL = '1'
+		WHERE ID=#{id}
+	</delete>
+	
+	<delete id="logicDeleteByIds" parameterType="java.util.Collection">
+     	update zs_class set IS_DEL = '1'
+     	WHERE ID IN
+     	<foreach collection="array" index="index" item="item" open="(" separator="," close=")"> #{item} </foreach> 
+  	 </delete>
+	
+	<update id="update" parameterType="com.zshop.product.cls.entity.ProductClass" >
+			
+		update zs_class 	
+		<set> 	
+			CLASS_CODE=#{classCode},
+			NAME=#{name},
+			DESCRIPTION=#{description},
+			CLASS_LOGO=#{classLogo},
+			PARENTID=#{parentId},
+			SORT=#{sort},
+			IS_RECOMMEND=#{isRecommend},
+			status=#{status},
+			IS_DEL=#{isDel},
+			CREATE_BY=#{createBy},
+			CREATE_TIME=#{createTime},
+			UPDATE_BY=#{updateBy},
+			UPDATE_TIME=#{updateTime},
+			BID=#{bid}
+		</set> 	
+		where 
+		ID=#{id} 	
+
+	</update>
+	
+	<update id="updateWithIf" parameterType="com.zshop.product.cls.entity.ProductClass" >
+			
+		update zs_class 	
+		<set> 	
+			<if test=" classCode!=null ">	
+				CLASS_CODE=#{classCode},	
+			</if>	
+			<if test=" name!=null ">	
+				NAME=#{name},	
+			</if>	
+			<if test=" description!=null ">	
+				DESCRIPTION=#{description},	
+			</if>	
+			<if test=" classLogo!=null ">	
+				CLASS_LOGO=#{classLogo},	
+			</if>	
+			<if test=" parentId!=null ">	
+				PARENTID=#{parentId},	
+			</if>	
+			<if test=" sort!=null ">	
+				SORT=#{sort},	
+			</if>	
+			<if test=" isRecommend!=null ">	
+				IS_RECOMMEND=#{isRecommend},	
+			</if>	
+			<if test=" status!=null ">	
+				status=#{status},	
+			</if>	
+			<if test=" isDel!=null ">	
+				IS_DEL=#{isDel},	
+			</if>	
+			<if test=" createBy!=null ">	
+				CREATE_BY=#{createBy},	
+			</if>	
+			<if test=" createTime!=null ">	
+				CREATE_TIME=#{createTime},	
+			</if>	
+			<if test=" updateBy!=null ">	
+				UPDATE_BY=#{updateBy},	
+			</if>	
+			<if test=" updateTime!=null ">	
+				UPDATE_TIME=#{updateTime},	
+			</if>	
+			<if test=" bid!=null ">	
+				BID=#{bid},	
+			</if>	
+		</set>	
+		where 	
+		ID=#{id} 	
+
+	</update>
+	
+	<!-- *************************************************************************** -->
+	<!-- **************以下映射根据业务做相应调整**************** -->
+	<!-- *************************************************************************** -->
+  	
+  	<delete id="deleteByMap" parameterType="java.util.Map">
+    	delete from zs_class 	 
+    	<where>
+    		
+    	</where>
+  	</delete>
+	
+	<select id="findById" parameterType="java.lang.Integer" resultType="com.zshop.product.cls.entity.ProductClass">
+				
+		select  	
+			a.ID id,
+			a.CLASS_CODE classCode,
+			a.NAME name,
+			a.DESCRIPTION description,
+			a.CLASS_LOGO classLogo,
+			a.PARENTID parentId,
+			a.SORT sort,
+			a.IS_RECOMMEND isRecommend,
+			a.status status,
+			a.IS_DEL isDel,
+			a.CREATE_BY createBy,
+			a.CREATE_TIME createTime,
+			a.UPDATE_BY updateBy,
+			a.UPDATE_TIME updateTime,
+			a.BID bid
+		from zs_class a	
+
+		where a.Id=#{id}	
+	</select>
+
+	<select id="findListByMap" parameterType="java.util.Map" resultType="com.zshop.product.cls.entity.ProductClass">
+		
+				
+		select  	
+			a.ID id,
+			a.CLASS_CODE classCode,
+			a.NAME name,
+			a.DESCRIPTION description,
+			a.CLASS_LOGO classLogo,
+			a.PARENTID parentId,
+			a.SORT sort,
+			a.IS_RECOMMEND isRecommend,
+			a.status status,
+			a.IS_DEL isDel,
+			a.CREATE_BY createBy,
+			a.CREATE_TIME createTime,
+			a.UPDATE_BY updateBy,
+			a.UPDATE_TIME updateTime,
+			a.BID bid
+		from zs_class a	
+
+		
+		<where>
+			
+		</where>
+
+	</select>
+	
+	<select id="list" parameterType="java.util.Map" resultType="com.zshop.product.cls.entity.ProductClass">
+		
+		
+				
+		select  	
+			a.ID id,
+			a.CLASS_CODE classCode,
+			a.NAME name,
+			a.DESCRIPTION description,
+			a.CLASS_LOGO classLogo,
+			a.PARENTID parentId,
+			a.SORT sort,
+			a.IS_RECOMMEND isRecommend,
+			a.status status,
+			a.IS_DEL isDel,
+			a.CREATE_BY createBy,
+			a.CREATE_TIME createTime,
+			a.UPDATE_BY updateBy,
+			a.UPDATE_TIME updateTime,
+			a.BID bid
+		from zs_class a	
+
+		
+		<where>
+			1=1
+			<if test="searchKeys!= null ">
+				AND ( 1=2
+				<foreach collection="searchKeys" index="index" item="item" >
+					 OR a.id like #{item}
+				</foreach> 
+				)
+			</if>
+			<if test="isDel!=null">
+				and a.IS_DEL = #{isDel}
+			</if>
+		</where>
+
+		
+	</select>
+	
+	<select id="findOneByMap" parameterType="java.util.Map" resultType="com.zshop.product.cls.entity.ProductClass">
+				
+		select  	
+			a.ID id,
+			a.CLASS_CODE classCode,
+			a.NAME name,
+			a.DESCRIPTION description,
+			a.CLASS_LOGO classLogo,
+			a.PARENTID parentId,
+			a.SORT sort,
+			a.IS_RECOMMEND isRecommend,
+			a.status status,
+			a.IS_DEL isDel,
+			a.CREATE_BY createBy,
+			a.CREATE_TIME createTime,
+			a.UPDATE_BY updateBy,
+			a.UPDATE_TIME updateTime,
+			a.BID bid
+		from zs_class a	
+
+		<where>
+		
+		</where>
+		limit 1
+	</select>
+	<select id="getCount" resultType="java.lang.Integer">
+		select count(*) as count from zs_class;
+	</select>
+</mapper>
+	

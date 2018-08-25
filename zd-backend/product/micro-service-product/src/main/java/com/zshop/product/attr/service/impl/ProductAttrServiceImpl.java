@@ -56,7 +56,7 @@ public class ProductAttrServiceImpl extends BaseServiceImpl<ProductAttr, Integer
 	 */
 	@Override
 	public void list(ResultData result,Page<ProductAttr> page,String searchKeys){
-		Map<String, Object> mapSql=new HashMap<>();
+		Map<String, Object> mapSql=new HashMap<>(5);
 		mapSql.put("searchKeys", CCStringUtils.searchKeys(searchKeys));
 		mapSql.put("isDel",0);
 		page.setPageSize(productAttrMapper.getCount());

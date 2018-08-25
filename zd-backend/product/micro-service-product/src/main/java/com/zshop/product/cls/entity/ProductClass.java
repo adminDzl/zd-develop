@@ -1,51 +1,59 @@
-package com.zshop.product.attr.entity;
+package com.zshop.product.cls.entity;
 
+import java.util.Date;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Getter;
 import lombok.Setter;
 
 import java.io.Serializable;
-import java.util.Date;
 
 
 /**
- * @Description: 商品规格
+ * @Description: 商品类别
  * @author: Enzo
- * @date: 2018-08-24 10:16:59
+ * @date: 2018-08-25 11:03:17
  */
 @Setter
 @Getter
-public class ProductAttr implements Serializable{
+public class ProductClass implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
 	
 		
 	/**
-	 * 属性项ID
+	 * 分类ID
 	 */
 	private Integer id;	
 	/**
-	 * 属性名称
+	 * 分类编号
 	 */
-	private String attrName;	
+	private String classCode;	
 	/**
-	 * 属性值
+	 * 分类名称
 	 */
-	private String attrValue;	
+	private String name;	
 	/**
-	 * 属性别名
+	 * 分类描述
 	 */
-	private String aliases;	
+	private String description;	
 	/**
-	 * 是否显示别名（1、是  0、否）
+	 * 分类LOGO
 	 */
-	private Integer isAli;	
+	private String classLogo;	
 	/**
-	 * 属性类型（0：SKU属性   1：扩展属性）
+	 * 分类父ID
 	 */
-	private Integer attrType;	
+	private Integer parentId;
 	/**
-	 * 状态,0:未启用，1：启用
+	 * 排序
+	 */
+	private Integer sort;	
+	/**
+	 * 
+	 */
+	private Integer isRecommend;	
+	/**
+	 * 状态：1启用，0未启用
 	 */
 	private Integer status;	
 	/**
@@ -74,7 +82,6 @@ public class ProductAttr implements Serializable{
 	 * 所对应的kz_business主键
 	 */
 	private Integer bid;	
-
 
 
 }
